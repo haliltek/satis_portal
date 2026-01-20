@@ -1,8 +1,7 @@
-FROM php:8.2-apache-bullseye
+FROM php:8.2-apache
 
 # 1️⃣ System dependencies
-# 1️⃣ System dependencies
-RUN (apt-get update || (sleep 5; apt-get update) || (sleep 5; apt-get update)) && apt-get install -y \
+RUN apt-get update && apt-get install -y \
     gnupg2 \
     ca-certificates \
     apt-transport-https \
