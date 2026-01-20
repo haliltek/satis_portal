@@ -57,7 +57,20 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 # 10️⃣ Workdir
 WORKDIR /var/www/html
 
-# 11️⃣ Copy ONLY application files
+# 11️⃣ Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# 12️⃣ Copy composer files first (for better caching)
+COPY composer.json composer.lock ./
+
+# 13️⃣ Install dependencies
+# --no-dev: Exclude dev dependencies
+# --optimize-autoloader: Optimize for production
+# --no-scripts: Skip scripts to avoid errors if context isn't fully ready
+# --no-progress: Reduce log noise
+RUN composer install --no-dev --optimize-autoloader --no-scripts --no-progress
+
+# 14️⃣ Copy ONLY application files
 COPY . .
 
 # 12️⃣ Permissions
