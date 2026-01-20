@@ -1,6 +1,44 @@
 <?php
 include "fonk.php";
 
+// --- DEBUGGING START ---
+if (isset($_GET['debug_mode'])) {
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    echo "<div style='background:white; padding:20px; border:2px solid red; margin:20px; z-index:9999; position:relative;'>";
+    echo "<h3>DEBUG MODE ACTIVE</h3>";
+    
+    // DB Check
+    if (!$db) {
+        echo "<h2 style='color:red'>Database Connection Failed!</h2>" . mysqli_connect_error();
+    } else {
+        echo "<h2 style='color:green'>Database Connection Successful</h2>";
+        $res = mysqli_query($db, "SELECT DATABASE()");
+        $row = mysqli_fetch_row($res);
+        echo "Connected DB: " . $row[0] . "<br>";
+    }
+
+    // Tables Check
+    echo "<h4>Tables:</h4><ul>";
+    $tables = mysqli_query($db, "SHOW TABLES");
+    while ($t = mysqli_fetch_array($tables)) { echo "<li>" . $t[0] . "</li>"; }
+    echo "</ul>";
+
+    // Admin User Check
+    echo "<h4>Yonetici Users:</h4>";
+    $admins = mysqli_query($db, "SELECT * FROM yonetici");
+    if (mysqli_num_rows($admins) > 0) {
+        while ($a = mysqli_fetch_assoc($admins)) {
+            echo "ID: " . $a['yonetici_id'] . " | Email: " . $a['eposta'] . "<br>";
+        }
+    } else {
+        echo "No admins found in 'yonetici' table.<br>";
+    }
+
+    echo "</div>";
+}
+// --- DEBUGGING END ---
+
 // Oturum başlamamışsa başlatıyoruz
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
