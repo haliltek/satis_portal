@@ -1,0 +1,10 @@
+/vendor/
+/.env
+
+vendor/
+.env
+debug.log
+error.log
+.DS_Store
+log.txt
+mail_log.txt

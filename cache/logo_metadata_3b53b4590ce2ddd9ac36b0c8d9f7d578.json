@@ -1,0 +1,116 @@
+[
+    {
+        "LOGICALREF": "1",
+        "CODE": "001",
+        "DEFINITION_": "0",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "2",
+        "CODE": "0105",
+        "DEFINITION_": "105",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3",
+        "CODE": "0135",
+        "DEFINITION_": "135",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4",
+        "CODE": "015",
+        "DEFINITION_": "15",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "5",
+        "CODE": "030",
+        "DEFINITION_": "30",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "6",
+        "CODE": "040",
+        "DEFINITION_": "40",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7",
+        "CODE": "045",
+        "DEFINITION_": "45",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "8",
+        "CODE": "060",
+        "DEFINITION_": "60",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "9",
+        "CODE": "070",
+        "DEFINITION_": "70",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "10",
+        "CODE": "075",
+        "DEFINITION_": "75",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "11",
+        "CODE": "090",
+        "DEFINITION_": "90",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "12",
+        "CODE": "105",
+        "DEFINITION_": "105",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "13",
+        "CODE": "120",
+        "DEFINITION_": "120",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "14",
+        "CODE": "180",
+        "DEFINITION_": "180",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "15",
+        "CODE": "130",
+        "DEFINITION_": "130",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "16",
+        "CODE": "002",
+        "DEFINITION_": "10",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "17",
+        "CODE": "108.02.014",
+        "DEFINITION_": "Kredi Kartı",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "18",
+        "CODE": "150",
+        "DEFINITION_": "150",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "19",
+        "CODE": "PEŞİN",
+        "DEFINITION_": "PEŞİN",
+        "FIRMNR": "565"
+    }
+]

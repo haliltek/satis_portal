@@ -1,0 +1,437 @@
+/* assets/css/custom.css */
+
+/* Remove default link underlines */
+a {
+  text-decoration: none;
+}
+
+/* Custom classes */
+.numa {
+  background-color: lightgray;
+  font-size: 16px;
+  line-height: 40px;
+}
+
+.numa2 {
+  background-color: red;
+  font-size: 16px;
+  color: white;
+}
+
+/* Modal fieldset styling */
+.modal-fieldset {
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f8f9fa;
+}
+
+.modal-fieldset legend {
+  font-size: 1rem;
+  font-weight: bold;
+  width: auto;
+  padding: 0 0.5rem;
+}
+
+/* Fiyat Güncelleme Onay Modalı için özel stiller */
+#priceUpdateModal .modal-content {
+  border-radius: 0.5rem;
+}
+
+#priceUpdateModal .modal-header {
+  border-bottom: none;
+}
+
+#priceUpdateModal .modal-body p {
+  font-size: 1rem;
+}
+
+#priceUpdateModal .modal-body .border {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  text-align: center;
+}
+
+#priceUpdateModal .card-header {
+  border-bottom: 1px solid #e9ecef;
+  padding: 0.75rem 1.25rem;
+}
+
+#priceUpdateModal .card-body {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+#priceUpdateModal .card-footer {
+  background-color: #f1f3f5;
+  padding: 0.75rem 1.25rem;
+}
+
+/* Genel sıfırlamalar */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ana içerik (main) alanı */
+main#content {
+  padding: 20px 0;
+}
+
+/* Ana içerik genişliği için */
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Tablo stilleri */
+.demo {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+.demo th,
+.demo td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.numa {
+  background-color: lightgray;
+  font-size: 16px;
+  line-height: 40px;
+}
+
+.numa2 {
+  background-color: red;
+  font-size: 16px;
+  color: white;
+}
+
+.footer-wrapper {
+  width: 100%;
+  background: #f1f1f1;
+  padding: 20px 0;
+  margin-top: 20px;
+}
+/* DataTable UI improvements */
+table.dataTable thead th {
+  background-color: #f8f9fa;
+  vertical-align: middle;
+}
+table.dataTable tbody td {
+  vertical-align: middle;
+}
+table.dataTable tbody tr:hover {
+  background-color: #eef4fb;
+}
+#datatable tfoot input {
+  width: 100%;
+  padding: 0.25rem;
+  box-sizing: border-box;
+}
+
+/* Daraltılmış Stok Adı sütunu ve güncelleme bilgileri */
+#example {
+  table-layout: fixed;
+}
+#example td:nth-child(2),
+#example th:nth-child(2) {
+  width: 30%;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.stock-col {
+  width: 30%;
+}
+
+.update-info span {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* Pastel status badge colors */
+.badge-status-success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.badge-status-danger {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+.badge-status-warning {
+  background-color: #fff3cd;
+  color: #664d03;
+}
+
+.badge-status-info {
+  background-color: #cff4fc;
+  color: #055160;
+}
+
+.badge-status-secondary {
+  background-color: #e2e3e5;
+  color: #41464b;
+}
+
+/* DataTable spacing improvements */
+.table-custom th,
+.table-custom td {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.table-custom th {
+  font-size: 16px;
+  background-color: #f8f9fa;
+}
+
+.table-custom tbody tr:nth-child(odd) {
+  background-color: #fafafa;
+}
+
+/* Nav pill styling */
+#statusTabs .nav-link {
+  margin: 2px;
+  font-size: 14px;
+}
+
+/* Status dropdown styles */
+.status-dropdown .dropdown-menu {
+  min-width: 220px;
+}
+
+.status-btn {
+  padding: 4px 8px;
+  border: none;
+  font-size: 13px;
+  min-width: 100px;
+}
+
+/* Assigned dropdown styles */
+.assigned-dropdown .dropdown-menu {
+  min-width: 180px;
+}
+
+.assigned-btn {
+  padding: 4px 8px;
+  border: none;
+  font-size: 13px;
+  min-width: 100px;
+}
+
+/* Ensure dropdowns are not clipped inside tables */
+.status-dropdown,
+.assigned-dropdown {
+  position: relative;
+  overflow: visible !important;
+  z-index: 1000;
+}
+
+.table-responsive {
+  overflow: visible !important;
+}
+/* Allow dropdowns to escape DataTables scroll */
+.dataTables_scrollBody {
+  overflow: visible !important;
+}
+
+/* Ensure dropdown menus appear above surrounding content */
+.dropdown-menu {
+  z-index: 2050 !important;
+}
+
+/* Boost hovered row so dropdown toggles stay on top */
+#datatable tbody tr:hover {
+  position: relative;
+  z-index: 1100;
+}
+/* Animation for revision status */
+@keyframes revizePulse {
+  0%, 100% { background-color: #fff3cd; }
+  50% { background-color: #ffe8a1; }
+}
+.status-revision {
+  animation: revizePulse 1s infinite;
+}
+
+/* Search box styling */
+.dataTables_filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.dataTables_filter label {
+  flex-grow: 1;
+  position: relative;
+}
+.dataTables_filter label .fa-search {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+}
+.dataTables_filter input {
+  padding-left: 1.8rem;
+}
+
+/* Filter modal tweaks */
+#filterModal .modal-header,
+#filterModal .modal-footer {
+  background-color: #f8f9fa;
+}
+#filterModal .modal-title {
+  font-weight: 600;
+}
+
+/* Ensure modals appear above other content */
+.modal {
+  z-index: 2000;
+}
+.modal-backdrop {
+  z-index: 1500;
+}
+
+/* Geliştirilmiş modal görünümü */
+.custom-modal .modal-dialog {
+  max-width: 720px;
+}
+
+.custom-modal .modal-content {
+  border-radius: 0.5rem;
+}
+
+.custom-modal .list-group-item {
+  padding: 0.4rem 1rem;
+  border: none;
+}
+
+/* Price summary table */
+.price-summary-table th {
+  background:#f8f9fa;
+  font-weight:600;
+  font-size:14px;
+}
+.price-summary-table td,
+.price-summary-table th {
+  padding:0.4rem 0.75rem;
+  font-size:14px;
+  line-height:1.4;
+}
+.price-summary-table .status-icon {
+  font-weight:bold;
+  margin-right:4px;
+}
+
+/* Zebra rows for price summary table */
+.price-summary-table tbody tr:nth-of-type(odd) {
+  background-color: #f7f8fa;
+}
+
+/* Status badge styles */
+.status-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+.status-badge.success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+.status-badge.warning {
+  background-color: #fff3cd;
+  color: #664d03;
+}
+.status-badge.error {
+  background-color: #f8d7da;
+  color: #842029;
+}
+.status-badge.same {
+  background-color: #e2e3e5;
+  color: #41464b;
+}
+
+/* Progress bar gradient */
+.progress-summary .progress-bar-success {
+  background-image: linear-gradient(45deg, #198754, #28a745);
+}
+
+/* Action buttons at top of company list */
+.top-buttons .btn {
+  min-width: 12rem;
+}
+
+/* Narrow width for company title column */
+table.company-table td.company-title,
+table.company-table th.company-title {
+  width: 8rem;
+  max-width: 8rem;
+  white-space: normal;
+  word-break: break-word;
+}
+
+table.company-table td.payplan-code,
+table.company-table th.payplan-code {
+  max-width: 6rem;
+  white-space: normal;
+  word-break: break-word;
+}
+
+table.company-table td.payplan-def,
+table.company-table th.payplan-def {
+  max-width: 10rem;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Dealer orders table */
+.dealer-orders-table {
+  border-collapse: collapse;
+}
+.dealer-orders-table th,
+.dealer-orders-table td {
+  padding: 0.5rem;
+  vertical-align: middle;
+  border: 1px solid #dee2e6;
+}
+.dealer-orders-table td span.badge {
+  min-width: 6rem;
+}
+.dealer-orders-table td:last-child a.btn {
+  padding: 0.25rem 0.5rem;
+}
+@media (max-width: 768px) {
+  .dealer-orders-table th:nth-child(3),
+  .dealer-orders-table td:nth-child(3) {
+    display: none;
+  }
+}
+
+/* Row highlight for action-required statuses */
+@keyframes salesBlink {
+  0%, 100% { background-color: #fff3cd; }
+  50% { background-color: #ffe8a1; }
+}
+
+.row-sales-action {
+  animation: salesBlink 1.5s infinite;
+}
+
+.row-client-action {
+  background-color: #cff4fc;
+}
+
+.total-range-input {
+  min-width: 100px;
+}

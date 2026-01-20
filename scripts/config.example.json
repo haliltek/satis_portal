@@ -1,0 +1,36 @@
+{
+  "source": {
+    "driver": "ODBC Driver 17 for SQL Server",
+    "server": "YOUR_SQLSERVER_HOST",
+    "port": 1433,
+    "database": "GEMAS_DYS",
+    "schema": "dbo",
+    "user": "readonly_user",
+    "password": "YOUR_PASSWORD",
+    "application_intent": "ReadOnly"
+  },
+  "target": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "database": "gemas_dys_local",
+    "user": "root",
+    "password": "YOUR_LOCAL_PASSWORD",
+    "charset": "utf8mb4"
+  },
+  "options": {
+    "batch_size": 2000,
+    "overwrite": false,
+    "engine": "InnoDB",
+    "charset": "utf8mb4",
+    "collation": null
+  },
+  "tables": [
+    "CariEtiketTanimi",
+    "StokOzellikleri",
+    "UniqueSerialNumber",
+    "UniqueUretimEmriNo",
+    "UretimEmriMaster",
+    "UretimEmriSatirlari"
+  ]
+}
+

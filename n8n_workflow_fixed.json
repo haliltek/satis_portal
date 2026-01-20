@@ -1,0 +1,519 @@
+{
+    "name": "Gemas_Poll_SelectedOptions_FINAL_FIXED",
+    "nodes": [
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict",
+                        "version": 2
+                    },
+                    "conditions": [
+                        {
+                            "id": "eea1a527-13e4-41e0-9ce7-2b1cb4e3398c",
+                            "leftValue": "={{ $json.body.data.message.pollUpdateMessage.vote.selectedOptions?.[0] }}\n\n",
+                            "rightValue": "✔️ Onayla",
+                            "operator": {
+                                "type": "string",
+                                "operation": "contains"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.2,
+            "position": [
+                -288,
+                16
+            ],
+            "id": "95b6e160-8076-4c9d-9480-7d40e7c656c0",
+            "name": "KARAR"
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict",
+                        "version": 2
+                    },
+                    "conditions": [
+                        {
+                            "id": "4beb0e7a-7f83-42ed-8dd3-5dfa168d8760",
+                            "leftValue": "={{ $json.body.data.pollUpdates.length > 0 }}",
+                            "rightValue": "",
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "true",
+                                "singleValue": true
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.2,
+            "position": [
+                -576,
+                -16
+            ],
+            "id": "54f80693-4d66-4efb-80ee-a4ddeb99c9eb",
+            "name": "If"
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "http://evo-a4csoc0wwwc84k440wo0cg8s.207.154.252.89.sslip.io/message/sendText/Gemas",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "C7C3B7267F39-4A30-8899-2DBBFA4554C8"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"{{ $json.yonetici_tel }}@s.whatsapp.net\",\n  \"text\": \"📌 *Özel Teklif Reddi*\\n\\nDurum: ❌ SİSTEME REDDEDİLDİ OLARAK İŞLENMİŞTİR.\\nTarih: {{ $now.setLocale('tr').format('DD HH:mm') }}\\n\\nLütfen detayları kontrol ediniz.\"\n}",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                320,
+                112
+            ],
+            "id": "a03ff38c-fd5b-4dcc-93fc-70f10e8dd4dd",
+            "name": "Red Mesajı"
+        },
+        {
+            "parameters": {
+                "assignments": {
+                    "assignments": [
+                        {
+                            "id": "d115a4ad-9b59-4cd2-87d8-98bcb43e1686",
+                            "name": "durum",
+                            "value": "RED",
+                            "type": "string"
+                        },
+                        {
+                            "id": "adad3ad3-d077-465b-aca1-7f50d0a400a2",
+                            "name": "yonetici",
+                            "value": "={{ $json.body.sender }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "667cbca4-f412-4710-b72a-d072ff8e43c0",
+                            "name": "yonetici_tel",
+                            "value": "={{ $json.body.sender.replace('@s.whatsapp.net','') }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "768107c9-f848-4e5d-8ab2-5ebe9c871967",
+                            "name": "tarih",
+                            "value": "={{ $now.format('DD.MM.YYYY HH:mm') }}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.set",
+            "typeVersion": 3.4,
+            "position": [
+                96,
+                112
+            ],
+            "id": "88f28534-befc-43de-9fc2-5c4f8e90a618",
+            "name": "RED"
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "http://evo-a4csoc0wwwc84k440wo0cg8s.207.154.252.89.sslip.io/message/sendPoll/Gemas",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        },
+                        {
+                            "name": "apikey",
+                            "value": "C7C3B7267F39-4A30-8899-2DBBFA4554C8"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "=json",
+                "bodyParameters": {
+                    "parameters": [
+                        {}
+                    ]
+                },
+                "jsonBody": "={\n  \"number\": \"{{ $json.body.yonetici_tel }}@s.whatsapp.net\",\n  \"name\": \"Yeni bir teklif onayı gerekiyor.\\n\\nCari: {{ $json.body.cari }}\\nTutar: {{ $json.body.toplam }} TL\\nSatış Temsilcisi: {{ $json.body.temsilci }}\\nTeklif ID: {{ $json.body.teklif_id }}\\n\\nLütfen bir seçim yazın:\\n1 - ✔️ Onayla\\n2 - ❌ Reddet\",\n  \"selectableCount\": 1,\n  \"values\": [\n    \"✔️ Onayla\",\n    \"❌ Reddet\"\n  ]\n}\n",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                -352,
+                288
+            ],
+            "id": "1edc5128-3d82-4064-8c09-f29bf5392efb",
+            "name": "HTTP Request"
+        },
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "teklifOnayCevap",
+                "responseMode": "responseNode",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 2.1,
+            "position": [
+                -784,
+                -16
+            ],
+            "id": "c60089f4-0605-4f40-a509-b9bef860b80d",
+            "name": "teklifOnayCevap",
+            "webhookId": "5227d55d-b60f-48f4-a00c-c2d773f3c421"
+        },
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "teklifOnay",
+                "responseMode": "responseNode",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 2.1,
+            "position": [
+                -624,
+                176
+            ],
+            "id": "2846015b-e20d-4385-8489-d3f907ba97bf",
+            "name": "teklifOnay",
+            "webhookId": "8861d134-4013-4e78-9434-e47d4d4010f1"
+        },
+        {
+            "parameters": {
+                "respondWith": "json",
+                "responseBody": "{\n  \"status\": \"ok\"\n}\n",
+                "options": {
+                    "responseCode": 200
+                }
+            },
+            "type": "n8n-nodes-base.respondToWebhook",
+            "typeVersion": 1.4,
+            "position": [
+                512,
+                -16
+            ],
+            "id": "52857511-4753-49b1-9156-de39f1844905",
+            "name": "Respond to Webhook"
+        },
+        {
+            "parameters": {
+                "assignments": {
+                    "assignments": [
+                        {
+                            "id": "d115a4ad-9b59-4cd2-87d8-98bcb43e1686",
+                            "name": "durum",
+                            "value": "ONAY",
+                            "type": "string"
+                        },
+                        {
+                            "id": "adad3ad3-d077-465b-aca1-7f50d0a400a2",
+                            "name": "yonetici",
+                            "value": "={{ $json.body.sender }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "667cbca4-f412-4710-b72a-d072ff8e43c0",
+                            "name": "yonetici_tel",
+                            "value": "={{ $json.body.sender.replace('@s.whatsapp.net','') }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "768107c9-f848-4e5d-8ab2-5ebe9c871967",
+                            "name": "tarih",
+                            "value": "={{ $now.format('DD.MM.YYYY HH:mm') }}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.set",
+            "typeVersion": 3.4,
+            "position": [
+                96,
+                -96
+            ],
+            "id": "56a7fc15-53a0-474d-bb99-430e666dd066",
+            "name": "ONAYLANDI",
+            "retryOnFail": false
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "http://evo-a4csoc0wwwc84k440wo0cg8s.207.154.252.89.sslip.io/message/sendText/Gemas",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "C7C3B7267F39-4A30-8899-2DBBFA4554C8"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"{{ $json.yonetici_tel }}@s.whatsapp.net\",\n  \"text\": \"📌 *Özel Teklif Onayı*\\n\\nDurum: ✔️ SİSTEME ONAYLANDI OLARAK İŞLENMİŞTİR.\\nTarih: {{ $now.setLocale('tr').format('DD HH:mm') }}\\n\\nBilginize sunulur.\"\n}\n",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                320,
+                -96
+            ],
+            "id": "ad9457cb-513a-478e-bc1d-c1bdd31a464d",
+            "name": "OnayMesajı"
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "loose",
+                        "version": 2
+                    },
+                    "conditions": [
+                        {
+                            "id": "e25dde27-dabb-4a52-8af8-baa39bbb6b48",
+                            "leftValue": "=={{ \n  ($json.body.pollUpdates || $json.body.data.message.pollUpdates)\n  ?.some(x => x.name.toLowerCase().includes('reddet') && x.voters.length > 0) \n}}",
+                            "rightValue": 0,
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "true",
+                                "singleValue": true
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "looseTypeValidation": true,
+                "options": {}
+            },
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.2,
+            "position": [
+                -336,
+                -160
+            ],
+            "id": "697c1931-ca38-49a9-a8b2-72a6b84fe333",
+            "name": "SERVER API"
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://463469e838a1.ngrok-free.app/b2b-gemas-project-main/api/teklif/n8n_callback.php",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"key_id\": \"{{ $('teklifOnayCevap').item.json.body.data.keyId }}\",\n  \"action\": \"approve\",\n  \"token\": \"gemas_secret_n8n_token_2025\",\n  \"manager_phone\": \"{{ $('teklifOnayCevap').item.json.body.sender }}\"\n}",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                576,
+                -240
+            ],
+            "id": "7d8f4346-d664-4114-a6bf-5915023e04aa",
+            "name": "SİSTEM ONAYI"
+        },
+        {
+            "parameters": {
+                "respondWith": "json",
+                "responseBody": "={{ $json }}",
+                "options": {
+                    "responseCode": 200
+                }
+            },
+            "type": "n8n-nodes-base.respondToWebhook",
+            "typeVersion": 1.4,
+            "position": [
+                -100,
+                288
+            ],
+            "id": "d05bd86b-new-respond-node",
+            "name": "Respond to Trigger"
+        }
+    ],
+    "pinData": {},
+    "connections": {
+        "If": {
+            "main": [
+                [
+                    {
+                        "node": "KARAR",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "KARAR": {
+            "main": [
+                [
+                    {
+                        "node": "ONAYLANDI",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "RED",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "RED": {
+            "main": [
+                [
+                    {
+                        "node": "Red Mesajı",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "teklifOnayCevap": {
+            "main": [
+                [
+                    {
+                        "node": "If",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "teklifOnay": {
+            "main": [
+                [
+                    {
+                        "node": "HTTP Request",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Red Mesajı": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Webhook",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "ONAYLANDI": {
+            "main": [
+                [
+                    {
+                        "node": "OnayMesajı",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "OnayMesajı": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Webhook",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "SİSTEM ONAYI",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "SİSTEM ONAYI": {
+            "main": [
+                []
+            ]
+        },
+        "HTTP Request": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Trigger",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "active": true,
+    "settings": {
+        "executionOrder": "v1"
+    },
+    "versionId": "ff50d496-144e-4a54-b335-2f396c45627b-fixed",
+    "meta": {
+        "instanceId": "6cdf545db13729b614abff9976008067964f26282e71e7492301811469744532"
+    },
+    "id": "7ekVfsPxBNH3aeFu",
+    "tags": [
+        {
+            "updatedAt": "2025-12-11T09:52:22.187Z",
+            "createdAt": "2025-12-11T09:52:22.187Z",
+            "id": "SrAeaLqISIGEyHWs",
+            "name": "data"
+        }
+    ]
+}

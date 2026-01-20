@@ -1,0 +1,30 @@
+16/04/2025
+
+Sipariş oluşturma sayfasında şirketlerin SARP kodu bilgisi eklenecek; iskonto bilgileri girilirken “0” silinmiyor, bu nedenle kullanıcı deneyimi açısından ilgili alanda güncelleme yapılması gerekiyor.
+
+Sipariş oluşturma alanında ürün eklenirken satıcının not girebileceği bir bölüm bulunacaktır.
+Proformaya ekstra bilgi eklenmek istendiğinde ilgili alan aktif hale gelecek; termin süresi sipariş onayından itibaren beş hafta, onay sonrası %50 ön ödeme şartı bulunmaktadır.
+Bu bilgilerin girileceği metin alanı ve peşin not bölümü oluşturularak müşteri onayına sunulan proformaya dahil edilecektir. Mevcut örnek şablon, satış ekibindeki proforma üzerinden alınabilir.
+Proformada müşterinin hangi hesaba ödeme yapabileceğine dair bilgilerin de girilebilmesi için geniş kapsamlı bir not alanı kullanılabilir.
+
+Fatura ile irsaliye arasında hangi döviz kurunun kullanılacağı konusu tartışmalı olup, bu karar tarafıma ait değildir.
+
+Teklifi onayla aşamasına gelindiğinde, kontrol adımında döviz kuru her gün saat 09:00’da Garanti Bankası’ndan otomatik olarak çekilecek; satıcıya ise talep edildiğinde anlık kur bilgisi gösterilebilecektir.
+
+Kontrol aşamasında değerler hem TL hem de EUR cinsinden sunulmalı; müşteriye gösterilen asıl değer EUR üzerinden hesaplanmalıdır. Ayıca, baz olarak TL USD uzerinden gösterilebilir ama ana para birimi EUR olmalıdır.
+
+%x’in üzerindeki ilk iskontodan sonra müşteri, isterse ikinci ve üçüncü iskonto hakkını ayrıca kullanarak toplamda en fazla altı iskonto ekleyebilmelidir. Logoda karşılığı bulunan bu ek indirim alanı aktif olarak sunulacaktır.
+
+Özel kodlar logodan otomatik elde edilecek; yetki kodu için GMP gibi seçenekler bulunmamakta, kullanıcı bu kodları seçebileceği gibi manuel olarak da girebilmelidir.
+
+Ambar bilgisi kullanıcının konumuna göre otomatik atanacak, ancak gerektiğinde kullanıcı tarafından değiştirilebilecektir.
+
+Belge numarası, müşteri sipariş numarası ve diğer açıklamalar serbest metin alanlarında elle girilebilecek; detaylar bölümünde her türlü bilgi kaydedilebilecektir.
+
+Şirketlerin vade süreleri (örn. “060”) logodan otomatik alınmalı; bu bilginin SQL üzerinden mi yoksa manuel girişle mi sağlanacağı belirlenecektir.
+
+Sipariş ve teklif üzerinde yapılan tüm işlemler sistemde loglanacak, kullanıcı geçmiş kayıtları inceleyerek gerekli güncellemeleri yapabilecektir.
+
+Alıcı yabancı ise teklif otomatik olarak İngilizce formatında müşteriye gönderilecektir.
+
+Mail atılırken ürün ismi bilgisinin de olması gerekiyor.

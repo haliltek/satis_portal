@@ -1,0 +1,2 @@
+[2020-11-24T14:14:09.578239+00:00] my_logger.INFO: My logger is now ready [] []
+[2020-11-24T14:16:44.579538+00:00] my_logger.INFO: Kullanıcı ürünü sepete ekledi {"kullanıcı":91,"ürün":"44901"} []

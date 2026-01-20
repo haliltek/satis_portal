@@ -1,0 +1,1 @@
+<?php   $url = 'http://satis.gemas.com.tr'; ?>

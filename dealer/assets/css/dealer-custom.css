@@ -1,0 +1,432 @@
+/* GEMAS B2B Dealer Panel - Kurumsal Stil */
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --info-color: #3498db;
+    --light-bg: #ecf0f1;
+    --card-bg: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --border-color: #dce4ec;
+}
+
+/* Genel Body */
+body {
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-primary);
+}
+
+/* Header */
+#page-topbar {
+    background-color: var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-header {
+    background-color: var(--primary-color);
+}
+
+.navbar-brand-box {
+    background-color: var(--primary-color);
+}
+
+/* Menü */
+.topnav {
+    background: var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.topnav .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    padding: 1.2rem 1.5rem;
+    transition: all 0.3s;
+}
+
+.topnav .navbar-nav .nav-link:hover,
+.topnav .navbar-nav .nav-link.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+/* Page Header */
+.page-header {
+    background: var(--primary-color);
+    border-radius: 8px;
+    padding: 30px;
+    color: white;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Kartlar */
+.stat-card,
+.info-card,
+.filter-card,
+.table-card,
+.order-card,
+.detail-card,
+.balance-card,
+.discount-card,
+.profile-card,
+.support-card,
+.cart-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
+    transition: box-shadow 0.3s;
+}
+
+.stat-card:hover,
+.discount-card:hover,
+.support-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* İstatistik Kartları */
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 10px 0 5px;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Butonlar */
+.btn-primary,
+.btn-login,
+.add-to-cart-btn,
+.btn-filter {
+    background: var(--accent-color);
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover,
+.btn-login:hover,
+.add-to-cart-btn:hover,
+.btn-filter:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+}
+
+.btn-success {
+    background: var(--success-color);
+    border: none;
+}
+
+.btn-success:hover {
+    background: #229954;
+    transform: translateY(-1px);
+}
+
+/* Badge'ler */
+.badge {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.badge-primary,
+.bg-primary {
+    background-color: var(--accent-color) !important;
+}
+
+.badge-success,
+.bg-success {
+    background-color: var(--success-color) !important;
+}
+
+.badge-warning,
+.bg-warning {
+    background-color: var(--warning-color) !important;
+}
+
+.badge-danger,
+.bg-danger {
+    background-color: var(--danger-color) !important;
+}
+
+.badge-info,
+.bg-info {
+    background-color: var(--info-color) !important;
+}
+
+.badge-secondary,
+.bg-secondary {
+    background-color: #95a5a6 !important;
+}
+
+/* Form Elemanları */
+.form-control,
+.form-select {
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 10px 16px;
+    transition: all 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.15);
+}
+
+/* Tablo */
+.table {
+    border-color: var(--border-color);
+}
+
+.table thead th {
+    background-color: var(--light-bg);
+    color: var(--text-primary);
+    font-weight: 600;
+    border-color: var(--border-color);
+    padding: 12px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+/* Login Sayfası */
+.login-container {
+    background: transparent;
+}
+
+.login-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.login-header {
+    background: var(--primary-color);
+    padding: 40px 30px;
+    text-align: center;
+    color: white;
+}
+
+.login-icon {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 40px;
+    color: var(--accent-color);
+}
+
+/* Welcome Banner */
+.welcome-banner {
+    background: var(--primary-color);
+    border-radius: 8px;
+    padding: 30px;
+    color: white;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Quick Action Buttons */
+.quick-action-btn {
+    border-radius: 6px;
+    padding: 15px 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.quick-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Alert */
+.alert {
+    border-radius: 6px;
+    border: none;
+    padding: 15px 20px;
+}
+
+.alert-success {
+    background-color: rgba(39, 174, 96, 0.1);
+    color: var(--success-color);
+    border-left: 4px solid var(--success-color);
+}
+
+.alert-danger {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--danger-color);
+    border-left: 4px solid var(--danger-color);
+}
+
+.alert-warning {
+    background-color: rgba(243, 156, 18, 0.1);
+    color: var(--warning-color);
+    border-left: 4px solid var(--warning-color);
+}
+
+.alert-info {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--info-color);
+    border-left: 4px solid var(--info-color);
+}
+
+/* Summary Card */
+.summary-card {
+    background: var(--light-bg);
+    border-radius: 8px;
+    padding: 25px;
+    position: sticky;
+    top: 20px;
+    border: 1px solid var(--border-color);
+}
+
+/* Price Tag */
+.price-tag {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--success-color);
+}
+
+/* Info Row */
+.info-row {
+    display: flex;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 200px;
+}
+
+.info-value {
+    color: var(--text-secondary);
+    flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stat-card,
+    .info-card {
+        margin-bottom: 15px;
+    }
+    
+    .page-header {
+        padding: 20px;
+    }
+}
+
+/* Footer */
+.footer {
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 20px 0;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--accent-color);
+}
+
+/* Card Title */
+h5 {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Text Colors */
+.text-primary {
+    color: var(--accent-color) !important;
+}
+
+.text-success {
+    color: var(--success-color) !important;
+}
+
+.text-danger {
+    color: var(--danger-color) !important;
+}
+
+.text-warning {
+    color: var(--warning-color) !important;
+}
+
+.text-muted {
+    color: var(--text-secondary) !important;
+}
+
+/* Arka plan gölgeleri - daha minimal */
+.shadow-sm {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* İkon düzeltmesi için */
+.mdi::before {
+    font-family: 'Material Design Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: inherit;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+}
+

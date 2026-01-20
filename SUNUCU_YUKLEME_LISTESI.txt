@@ -1,0 +1,101 @@
+===========================================
+SUNUCUYA YÜKLENMESİ GEREKEN DOSYALAR
+===========================================
+
+Bu dosyalar local ortamda yapılan düzeltmeleri içerir.
+Sunucuya yüklerken dikkat edilmesi gerekenler:
+
+1. VERİTABANI AYARLARI:
+   - include/vt.php dosyasındaki şifre sunucudaki MySQL şifresiyle değiştirilmeli
+   - include/fonksiyon.php dosyasındaki şifre sunucudaki MySQL şifresiyle değiştirilmeli
+
+2. .env DOSYASI:
+   - Sunucuda .env dosyası oluşturulmalı (proje kök dizininde)
+   - İçeriği sunucu ayarlarına göre düzenlenmeli
+
+===========================================
+YÜKLENMESİ GEREKEN DOSYALAR:
+===========================================
+
+1. include/fonksiyon.php
+   - Session başlatma kontrolü eklendi
+   - Veritabanı şifresi local için düzeltildi (sunucuda değiştirilmeli)
+
+2. include/vt.php
+   - Veritabanı şifresi local için düzeltildi (sunucuda değiştirilmeli)
+
+3. config/config.php
+   - .env dosyası kontrolü eklendi
+   - Varsayılan değerler eklendi
+   - .env yoksa bile çalışır
+
+4. offer_detail.php
+   - env() fonksiyonu yerine $_ENV kullanımı
+   - $dbManager kontrolü eklendi
+   - $url değişkeni kontrolü eklendi
+   - Hata gösterimi açıldı (production'da kapatılmalı)
+
+5. urun_fiyat_log_revert.php
+   - Session başlatma kontrolü eklendi
+
+6. uruncekdatatable.php
+   - Session başlatma kontrolü eklendi
+
+7. urun_fiyat_log_revert_last.php
+   - Session başlatma kontrolü eklendi
+
+8. urun_fiyat_log_changes.php
+   - Session başlatma kontrolü eklendi
+
+===========================================
+ÖNEMLİ NOTLAR:
+===========================================
+
+1. VERİTABANI ŞİFRELERİ:
+   Sunucuya yüklemeden ÖNCE şu dosyalardaki şifreleri sunucu ayarlarına göre değiştirin:
+   - include/fonksiyon.php (satır 34: $db_password)
+   - include/vt.php (satır 5: 'pass')
+
+2. .env DOSYASI:
+   Sunucuda proje kök dizininde .env dosyası oluşturun:
+   
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_USER=root
+   DB_PASS=sunucu_mysql_sifresi
+   DB_NAME=b2bgemascom_teklif
+   
+   CLIENT_ID=
+   CLIENT_SECRET=
+   TOKEN_URL=
+   API_BASE_URL=
+   PASSWORD=
+   GEMPA_FIRM_NR=
+   
+   LOGO_HOST=
+   LOGO_USER=
+   LOGO_PASS=
+   LOGO_DB=
+
+3. PRODUCTION AYARLARI:
+   offer_detail.php dosyasında hata gösterimi açık, production'da kapatın:
+   ini_set('display_errors', 0);
+
+4. YEDEK ALMA:
+   Sunucuya yüklemeden ÖNCE mevcut dosyaların yedeğini alın!
+
+===========================================
+YÜKLEME ADIMLARI:
+===========================================
+
+1. Sunucuya FTP/SFTP ile bağlanın
+2. Mevcut dosyaların yedeğini alın
+3. Yukarıdaki dosyaları yükleyin
+4. Veritabanı şifrelerini düzenleyin
+5. .env dosyasını oluşturun ve düzenleyin
+6. Sayfayı test edin
+
+===========================================
+
+
+

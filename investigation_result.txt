@@ -1,0 +1,13 @@
+--- Table Schema for 'sirket' ---
+
+--- Sample Non-Zero Data ---
+ID: 26631 | Code: 320.01.A23 | Raw acikhesap: '0.0'
+   -> Logic Result: 0
+ID: 26642 | Code: 120.01.B193 | Raw acikhesap: '-1989.3599999999999'
+   -> Logic Result: -1989.36
+ID: 26664 | Code: 320.01.E06 | Raw acikhesap: '694383.0'
+   -> Logic Result: 694383
+ID: 26667 | Code: 320.01.E10 | Raw acikhesap: '-23400.0'
+   -> Logic Result: -23400
+ID: 26669 | Code: 120.01.E331 | Raw acikhesap: '5745.4799999999996'
+   -> Logic Result: 5745.48

@@ -1,0 +1,27 @@
+.env
+.env
+
+debug.log
+error.log
+.DS_Store
+log.txt
+logs/log.txt
+logs/yenisirketkaydi.log
+mail_log.txt
+
+# Large SQL dumps
+*.sql
+!sql/*.sql
+
+# Executables
+*.exe
+wkhtmltopdf
+ngrok.exe
+
+# Large log files
+debug.log
+error.log
+
+# B2B GEMAS folder with large files
+B2B GEMAS/
+

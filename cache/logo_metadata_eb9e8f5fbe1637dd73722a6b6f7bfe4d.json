@@ -1,0 +1,26 @@
+[
+    {
+        "LOGICALREF": 118,
+        "FIRMNR": 997,
+        "NR": 3,
+        "NAME": "Antalya"
+    },
+    {
+        "LOGICALREF": 119,
+        "FIRMNR": 997,
+        "NR": 4,
+        "NAME": "Bodrum"
+    },
+    {
+        "LOGICALREF": 117,
+        "FIRMNR": 997,
+        "NR": 2,
+        "NAME": "Cendere"
+    },
+    {
+        "LOGICALREF": 116,
+        "FIRMNR": 997,
+        "NR": 0,
+        "NAME": "ITOB"
+    }
+]

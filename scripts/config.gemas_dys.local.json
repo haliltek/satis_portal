@@ -1,0 +1,35 @@
+{
+  "source": {
+    "driver": "ODBC Driver 18 for SQL Server",
+    "server": "192.168.5.253",
+    "port": 1433,
+    "database": "GEMAS_DYS",
+    "schema": "dbo",
+    "user": "halil",
+    "password": "12621262",
+    "application_intent": "ReadOnly"
+  },
+  "target": {
+    "host": "localhost",
+    "port": 3310,
+    "database": "b2bgemascom_teklif",
+    "user": "root",
+    "password": "",
+    "charset": "utf8mb4"
+  },
+  "options": {
+    "batch_size": 2000,
+    "overwrite": false,
+    "engine": "InnoDB",
+    "charset": "utf8mb4",
+    "collation": null
+  },
+  "tables": [
+    "CariEtiketTanimi",
+    "StokOzellikleri",
+    "UniqueSerialNumber",
+    "UniqueUretimEmriNo",
+    "UretimEmriMaster",
+    "UretimEmriSatirlari"
+  ]
+}

@@ -1,0 +1,69 @@
+Log Start
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"message":"Workflow was started"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"key":{"remoteJid":"905525287286@s.whatsapp.net","fromMe":true,"id":"3EB0E946FEA8747EB88132"},"pushName":"Voc\u00ea","status":"PENDING","message":{"messageContextInfo":{"messageSecret":{"0":28,"1":51,"2":224,"3":22,"4":229,"5":70,"6":185,"7":10,"8":134,"9":200,"10":14,"11":159,"12":56,"13":79,"14":110,"15":82,"16":147,"17":164,"18":188,"19":154,"20":129,"21":214,"22":239,"23":197,"24":121,"25":77,"26":116,"27":179,"28":235,"29":164,"30":144,"31":213},"contextInfo":{"mentionedJid":[],"groupMentions":[],"ephemeralSettingTimestamp":{"low":1765377956,"high":0,"unsigned":false},"disappearingMode":{"initiator":0}}},"pollCreationMessageV3":{"name":"Yeni bir teklif onay\u0131 gerekiyor.\n\nCari: ERTEK YAPI VE MAK.END.EK\u0130PMANLARI SAN.T\u0130C.LTD.\u015eT\u0130.\nTutar: 8970.61 TL\nSat\u0131\u015f Temsilcisi: gemas_admin\nTeklif ID: 88\n\nL\u00fctfen bir se\u00e7im yaz\u0131n:\n1 - \u2714\ufe0f Onayla\n2 - \u274c Reddet","selectableOptionsCount":1,"options":[{"optionName":"\u2714\ufe0f Onayla"},{"optionName":"\u274c Reddet"}]}},"messageType":"pollCreationMessageV3","messageTimestamp":1765550756,"instanceId":"9cd8f62c-2acc-4a69-961d-cb94b3566ef4","source":"web"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":null}
+API Resp: {"status":"sent","http_code":200,"n8n_response":null}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":null}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":404,"n8n_response":{"code":404,"message":"The requested webhook \"POST teklifOnay\" is not registered.","hint":"The workflow must be active for a production URL to run successfully. You can activate the workflow using the toggle in the top-right of the editor. Note that unlike test URL calls, production URL calls aren't shown on the canvas (only in the executions list)"}}
+API Resp: {"status":"sent","http_code":404,"n8n_response":{"code":404,"message":"The requested webhook \"POST teklifOnay\" is not registered.","hint":"The workflow must be active for a production URL to run successfully. You can activate the workflow using the toggle in the top-right of the editor. Note that unlike test URL calls, production URL calls aren't shown on the canvas (only in the executions list)"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":null}
+API Resp: {"status":"sent","http_code":200,"n8n_response":null}
+API Resp: {"status":"sent","http_code":200,"n8n_response":null}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"data":"<html lang=\"en\" xml:lang=\"en\" xmlns=\"http:\/\/www.w3.org\/1999\/xhtml\">\n<head>\n   <title>Connection denied by Geolocation<\/title>\n   <style type=\"text\/css\">\n     body {\n      font-family: Arial, Helvetica, Verdana, Sans-Serif;\n      font-size: small;\n      font-weight: normal;\n      color: #000000;\n    }\n    div {\n      margin-left: auto;\n      margin-right: auto;\n      text-align: center;\n    }\n    .box {\n      width: 601px;\n      background-color: #F2F2F2;\n      border-left: solid 1px #C2C2C2;\n      border-right: solid 1px #C2C2C2;\n     vertical-align: middle;\n     padding: 20px 10px 20px 10px;\n   }\n   p {\n     text-align: left;\n   }\n   .red {\n     font-weight: bold;\n     color: Red;\n     text-align: center;\n   }\n   .band {\n     height: 20px;\n     color: White;\n     background: #333333;\n     width: 600px;\n     border-left: solid 1px #333333;\n      border-right: solid 1px #333333;\n      padding: 3px 10px 0px 10px;\n    }\n    div#wrap {\n      margin-top: 50px;\n    }\n   <\/style>\n<\/head>\n <body>\n   <div id=\"wrap\">\n     <div class=\"band\"><\/div>\n     <div class=\"box\" style=\"word-wrap:break-word;\">\n       <p class=\"red\">Connection denied by Geolocation Setting.<\/p>\n       <p><b> Reason: <\/b> Blocked country: <font color=\"red\"> Germany <\/font> <\/p>\n       <p>The connection was denied because this country is blocked in the Geolocation settings.<\/p>\n       <p>Please contact your administrator for assistance.<\/p>\n     <\/div>\n     <div class=\"band\">WatchGuard Technologies, Inc.<\/div>\n   <\/div>\n <\/body>\n<\/html>\n"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"No changes made (ID might be same or Offer not found)"}}

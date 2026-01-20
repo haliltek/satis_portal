@@ -1,0 +1,524 @@
+[
+    {
+        "LOGICALREF": 847,
+        "CODE": "NERGİS",
+        "DEFINITION_": "",
+        "ACTIVE": 1,
+        "USERID": 20,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 848,
+        "CODE": "SONGÜL",
+        "DEFINITION_": "",
+        "ACTIVE": 1,
+        "USERID": 10,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 849,
+        "CODE": "FATİH AYDOĞAN",
+        "DEFINITION_": "CENDERE SATIŞ TEMSİLCİSİ",
+        "ACTIVE": 0,
+        "USERID": 34,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 850,
+        "CODE": "MEHMET AKARDERE",
+        "DEFINITION_": "ANTALYA ŞUBE SORUMLUSU",
+        "ACTIVE": 0,
+        "USERID": 27,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 851,
+        "CODE": "EGE",
+        "DEFINITION_": "RxMediaPharma -İzmir",
+        "ACTIVE": 0,
+        "USERID": 110,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 852,
+        "CODE": "MURAT",
+        "DEFINITION_": "",
+        "ACTIVE": 1,
+        "USERID": 4,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 853,
+        "CODE": "MÜRSEL AKGÖZ",
+        "DEFINITION_": "İZMİR GIDA ŞUBE SORUMLUSU",
+        "ACTIVE": 0,
+        "USERID": 8,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 854,
+        "CODE": "YUNUS",
+        "DEFINITION_": "ANTALYA",
+        "ACTIVE": 1,
+        "USERID": 27,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 855,
+        "CODE": "DENİZ",
+        "DEFINITION_": "",
+        "ACTIVE": 1,
+        "USERID": 35,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 856,
+        "CODE": "ERSAN",
+        "DEFINITION_": "Sancaktepe",
+        "ACTIVE": 1,
+        "USERID": 10,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 857,
+        "CODE": "MURAT KALPAKCI",
+        "DEFINITION_": "İSTANBUL",
+        "ACTIVE": 1,
+        "USERID": 20,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 858,
+        "CODE": "İBRAHİM TOSUN",
+        "DEFINITION_": "İSTANBUL PAZARLAMA VE MÜŞTERİ GELİŞTİRME",
+        "ACTIVE": 0,
+        "USERID": 30,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 859,
+        "CODE": "MEHMET ÇOBANOĞLU",
+        "DEFINITION_": "İSTANBUL",
+        "ACTIVE": 1,
+        "USERID": 23,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 860,
+        "CODE": "İLKNUR ŞEN",
+        "DEFINITION_": "İZMİR SATIŞ TEMSİLCİSİ",
+        "ACTIVE": 0,
+        "USERID": 151,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 861,
+        "CODE": "CAN",
+        "DEFINITION_": "RxMediaPharma -İzmir",
+        "ACTIVE": 0,
+        "USERID": 117,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 862,
+        "CODE": "ONUR ERKAN",
+        "DEFINITION_": "Cendere Satış",
+        "ACTIVE": 1,
+        "USERID": 116,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 863,
+        "CODE": "NAZLI",
+        "DEFINITION_": "Cendere Satış",
+        "ACTIVE": 1,
+        "USERID": 117,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 864,
+        "CODE": "HAMİT DEYMENCİ",
+        "DEFINITION_": "İZMİR DEPO SORUMLUSU",
+        "ACTIVE": 0,
+        "USERID": 119,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 865,
+        "CODE": "ALİ GÖZLEK",
+        "DEFINITION_": "ANTALYA SATIŞ TEMSİLCİSİ",
+        "ACTIVE": 0,
+        "USERID": 27,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 866,
+        "CODE": "HÜSEYİN ALKAN",
+        "DEFINITION_": "MUHASEBE MD.",
+        "ACTIVE": 0,
+        "USERID": 2,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 867,
+        "CODE": "SENEM KANAT",
+        "DEFINITION_": "İSTANBUL ÖN MUHASEBE",
+        "ACTIVE": 0,
+        "USERID": 14,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 868,
+        "CODE": "MUSTAFA BARIŞÇI",
+        "DEFINITION_": "İZMİR LOJİSTİK MD.",
+        "ACTIVE": 0,
+        "USERID": 29,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 869,
+        "CODE": "MUSTAFA KÖMÜRCÜ",
+        "DEFINITION_": "İSTANBUL İNSAN KAYNAKLARI",
+        "ACTIVE": 0,
+        "USERID": 100,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 870,
+        "CODE": "ÖMER KARDOĞAN",
+        "DEFINITION_": "İZMİR LOJİSTİK PERS",
+        "ACTIVE": 0,
+        "USERID": 102,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 871,
+        "CODE": "F.ŞİMŞEK",
+        "DEFINITION_": "İZMİR MUH. SORUMLUSU",
+        "ACTIVE": 0,
+        "USERID": 104,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 872,
+        "CODE": "KEMAL BARIŞCI",
+        "DEFINITION_": "İSTANBUL CENDERE FAB. MÜD.",
+        "ACTIVE": 0,
+        "USERID": 108,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 873,
+        "CODE": "HULİSİ ŞENSES",
+        "DEFINITION_": "İSTANBUL GENEL MUHASEBE SORUMLUSU",
+        "ACTIVE": 0,
+        "USERID": 111,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 874,
+        "CODE": "KEMAL ŞEN",
+        "DEFINITION_": "İSTANBUL CENDERE SATINALMA SOR.",
+        "ACTIVE": 0,
+        "USERID": 112,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 875,
+        "CODE": "AYTEKİN COŞKUN",
+        "DEFINITION_": "İSTANBUL CENDERE PAZARLAMA SOR.",
+        "ACTIVE": 0,
+        "USERID": 114,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 876,
+        "CODE": "NEBAHAT KAMÇICI",
+        "DEFINITION_": "İZMİR MUHASEBE SORUMLUSU",
+        "ACTIVE": 0,
+        "USERID": 115,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 877,
+        "CODE": "K.BARIŞÇI",
+        "DEFINITION_": "İSTANBUL CENDERE FAB. MÜD.",
+        "ACTIVE": 1,
+        "USERID": 116,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 878,
+        "CODE": "ESRA KÜTÜK",
+        "DEFINITION_": "ÖN MUHASEBE SORUMLUSU",
+        "ACTIVE": 0,
+        "USERID": 118,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 879,
+        "CODE": "BİLGE SAYLAN",
+        "DEFINITION_": "İZMİR SATIŞ TEMSİLCİSİ",
+        "ACTIVE": 0,
+        "USERID": 122,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 880,
+        "CODE": "BARIŞ",
+        "DEFINITION_": "CENDERE SATIŞ TEMSİLCİSİ",
+        "ACTIVE": 0,
+        "USERID": 108,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 881,
+        "CODE": "GÜL YILDIZ",
+        "DEFINITION_": "GÜL YILDIZ - BODRUM SATIŞ",
+        "ACTIVE": 0,
+        "USERID": 128,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 882,
+        "CODE": "MUTLU KANAT",
+        "DEFINITION_": "CENDERE SATIŞ TEMSİLCİSİ",
+        "ACTIVE": 0,
+        "USERID": 130,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 883,
+        "CODE": "MERVE ŞİMŞEK",
+        "DEFINITION_": "İZMİR SATIŞ SORUMLUSU",
+        "ACTIVE": 0,
+        "USERID": 129,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 884,
+        "CODE": "CİHAN UZUN",
+        "DEFINITION_": "İZMİR ÖN MUHASEBE SORUMLUSU",
+        "ACTIVE": 0,
+        "USERID": 127,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 885,
+        "CODE": "ÖZKAN KÜTÜK",
+        "DEFINITION_": "",
+        "ACTIVE": 0,
+        "USERID": 153,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 886,
+        "CODE": "FİLİZ HARMANTEPE",
+        "DEFINITION_": "BODRUM SATIŞ TEMSİLCİSİ",
+        "ACTIVE": 0,
+        "USERID": 136,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 887,
+        "CODE": "ŞERİFE OKUMUŞ",
+        "DEFINITION_": "İZMİR SATIŞ SORUMLUSU",
+        "ACTIVE": 0,
+        "USERID": 138,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 888,
+        "CODE": "YÜCEL ERDEM",
+        "DEFINITION_": "CENDERE SATIŞ TEMSİLCİSİ",
+        "ACTIVE": 0,
+        "USERID": 135,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 889,
+        "CODE": "BEHAT ŞENTÜRK",
+        "DEFINITION_": "CENDERE SATIŞ TEMSİLCİSİ",
+        "ACTIVE": 0,
+        "USERID": 139,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 890,
+        "CODE": "ONUR SIRRI GÖNÜL",
+        "DEFINITION_": "İzmir Lojistik Pers",
+        "ACTIVE": 0,
+        "USERID": 142,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 891,
+        "CODE": "TUĞBA AKPAK",
+        "DEFINITION_": "tuğba akpak",
+        "ACTIVE": 0,
+        "USERID": 144,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 892,
+        "CODE": "EDA TİŞİK",
+        "DEFINITION_": "EDA TİŞİK",
+        "ACTIVE": 0,
+        "USERID": 143,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 893,
+        "CODE": "MERVE USLU",
+        "DEFINITION_": "MERVE USLU",
+        "ACTIVE": 0,
+        "USERID": 145,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 894,
+        "CODE": "DAMLA ÜSTÜNES",
+        "DEFINITION_": "DAMLA ÜSTÜNES",
+        "ACTIVE": 0,
+        "USERID": 131,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 895,
+        "CODE": "MELİH ŞENERLER",
+        "DEFINITION_": "İZMİR SATIŞ TEMSİLCİSİ",
+        "ACTIVE": 0,
+        "USERID": 129,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 896,
+        "CODE": "MEHMET DEMİR",
+        "DEFINITION_": "İHRACAT SORUMLUSU",
+        "ACTIVE": 0,
+        "USERID": 124,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 897,
+        "CODE": "KUBRA KAPLAN",
+        "DEFINITION_": "izmir lojistik",
+        "ACTIVE": 0,
+        "USERID": 142,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 898,
+        "CODE": "DAMLA DOGAN",
+        "DEFINITION_": "bodrum satış",
+        "ACTIVE": 0,
+        "USERID": 148,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 899,
+        "CODE": "EMEL İNAL",
+        "DEFINITION_": "BODRUM SATIŞ",
+        "ACTIVE": 0,
+        "USERID": 166,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 900,
+        "CODE": "GAMZE BACA",
+        "DEFINITION_": "İZMİR SATIŞ TEMSİLCİSİ",
+        "ACTIVE": 0,
+        "USERID": 168,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 901,
+        "CODE": "ZELİHA DURAN",
+        "DEFINITION_": "DIŞ TİCARET",
+        "ACTIVE": 0,
+        "USERID": 174,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 902,
+        "CODE": "MELİS HEPUYSAL",
+        "DEFINITION_": "İZMİR SATIŞ TEMSİLCİSİ ",
+        "ACTIVE": 0,
+        "USERID": 183,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 903,
+        "CODE": "TAHİR AKTARAKÇI",
+        "DEFINITION_": "İZMİR DIŞ TİCARET",
+        "ACTIVE": 0,
+        "USERID": 179,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    },
+    {
+        "LOGICALREF": 904,
+        "CODE": "DT",
+        "DEFINITION_": "DIŞ TİCARET",
+        "ACTIVE": 0,
+        "USERID": 143,
+        "FIRMNR": 997,
+        "POSITION_": ""
+    }
+]

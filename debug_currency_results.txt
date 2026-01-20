@@ -1,0 +1,10 @@
+=== ORDER HEADER DATA (28, 29, 31) ===
+ID: 28 | Code: TEST-001 | Curr: 'EUR' | EUR: '50.55' | USD: '1' | Status: Aktarıldı | Ref: 18936
+Durum Column: Logo Aktarımı Başarısız: {"status":false,"message":"The request is invalid.
+--------------------------------------------------
+ID: 29 | Code: 174118404B77-2026 | Curr: 'TL' | EUR: '51.03' | USD: '44.02' | Status: Hata | Ref: 
+Durum Column: Logo Aktarımı Başarısız: {"status":false,"message":"The request is invalid.
+--------------------------------------------------
+ID: 31 | Code: 606515405B77-2026 | Curr: 'TL' | EUR: '51.03' | USD: '44.02' | Status: Beklemede | Ref: 
+Durum Column: Sipariş Onaylandı / Logoya Aktarım Bekliyor
+--------------------------------------------------

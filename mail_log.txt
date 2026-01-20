@@ -1,0 +1,16 @@
+[2025-04-15 13:23:27] Script çalıştırıldı. Mail gönderim işlemi başlatılıyor.
+[2025-04-15 13:23:27] PHPMailer nesnesi oluşturuldu.
+[2025-04-15 13:23:27] SMTP modu etkinleştirildi.
+[2025-04-15 13:23:27] SMTP host ayarlandı: mail.gemas.com.tr
+[2025-04-15 13:23:27] SMTP port ayarlandı: 465
+[2025-04-15 13:23:27] SMTP secure protokolü ayarlandı: ssl
+[2025-04-15 13:23:27] SMTP kimlik doğrulaması etkinleştirildi.
+[2025-04-15 13:23:27] SMTP kullanıcı adı ayarlandı: fiyat@gemas.com.tr
+[2025-04-15 13:23:27] SMTP şifresi ayarlandı.
+[2025-04-15 13:23:27] Gönderen bilgileri ayarlandı: fiyat@gemas.com.tr, 'Fiyat Güncelleme'
+[2025-04-15 13:23:27] Alıcı eklendi: orhan.ozan351@gmail.com
+[2025-04-15 13:23:27] Alıcı eklendi: ozanyildiz@gemas.com.tr
+[2025-04-15 13:23:27] Mail konusu ayarlandı: Fiyat Güncelleme Bildirimi
+[2025-04-15 13:23:27] Mail içeriği ayarlandı.
+[2025-04-15 13:23:27] Mail gönderimi deneniyor...
+[2025-04-15 13:23:29] Mail başarıyla gönderildi.

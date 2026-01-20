@@ -1,0 +1,34 @@
+[
+    {
+        "LOGICALREF": "8650",
+        "CODETYPE": "1",
+        "SPECODETYPE": "2",
+        "SPECODE": "İzmir",
+        "DEFINITION_": "İzmir",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "8705",
+        "CODETYPE": "1",
+        "SPECODETYPE": "2",
+        "SPECODE": "antalya",
+        "DEFINITION_": "antalya",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "8781",
+        "CODETYPE": "1",
+        "SPECODETYPE": "2",
+        "SPECODE": "bodrum",
+        "DEFINITION_": "bodrum",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "8789",
+        "CODETYPE": "1",
+        "SPECODETYPE": "2",
+        "SPECODE": "istanbul",
+        "DEFINITION_": "ist",
+        "FIRMNR": "565"
+    }
+]

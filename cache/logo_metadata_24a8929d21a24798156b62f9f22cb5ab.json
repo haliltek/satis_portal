@@ -1,0 +1,956 @@
+[
+    {
+        "LOGICALREF": "9849",
+        "CODE": "OSMANİYE",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7381",
+        "CODE": "AFYON",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "1303",
+        "CODE": "KIBRIS",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "10940",
+        "CODE": "TUNUS",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "291",
+        "CODE": "MARMARA 01",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "2913",
+        "CODE": "ÇİN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7760",
+        "CODE": "EGE 04",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3893",
+        "CODE": "ALMANYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4751",
+        "CODE": "YALAVO",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7208",
+        "CODE": "İSKENDERUN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "10109",
+        "CODE": "EDİRNE",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3960",
+        "CODE": "GD.ANAD 08",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "2865",
+        "CODE": "AĞRI",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4746",
+        "CODE": "ADANA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4434",
+        "CODE": "D.ANAD 06",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "9415",
+        "CODE": "MAL ALIMI",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "10113",
+        "CODE": "AZERBAYCAN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "10203",
+        "CODE": "RUSYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "10274",
+        "CODE": "ROMANİA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "2139",
+        "CODE": "K.DENİZ 05",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3780",
+        "CODE": "YUNANİSTAN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3924",
+        "CODE": "ÇEKOSLAVAK",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "9453",
+        "CODE": "B.A.M",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "446",
+        "CODE": "İÇ ANAD 07",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "12071",
+        "CODE": "LİTVANYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "15463",
+        "CODE": "TAYLAND",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4800",
+        "CODE": "DÜZCE",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4000",
+        "CODE": "ITALYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "8346",
+        "CODE": "ESKİŞEHİR",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4255",
+        "CODE": "D.ANAD 09",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3688",
+        "CODE": "HONK KONG",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4574",
+        "CODE": "TEKİRDAĞ",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "17309",
+        "CODE": "AKSARAY",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "5512",
+        "CODE": "RONAMYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "10173",
+        "CODE": "K.DENİZ 11",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7130",
+        "CODE": "MERSİN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "16715",
+        "CODE": "PORTEKİZ",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "10195",
+        "CODE": "K.DENİZ 06",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4354",
+        "CODE": "MARMARA 04",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "12401",
+        "CODE": "EGE 01",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3582",
+        "CODE": "SAKARYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3989",
+        "CODE": "KOCAELİ",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "8363",
+        "CODE": "ROMANYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "16365",
+        "CODE": "SUUDİ ARAB",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "345",
+        "CODE": "MARMARA 03",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "317",
+        "CODE": "EGE 02",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4018",
+        "CODE": "D.ANAD 11",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "8200",
+        "CODE": "SLOVAKYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "11056",
+        "CODE": "AKDENİZ08",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "9756",
+        "CODE": "STANBUL",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "1352",
+        "CODE": "ROMANIA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4490",
+        "CODE": "GAİANTEP",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "1385",
+        "CODE": "KAZAKİSTAN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3686",
+        "CODE": "İSTABNUL",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4257",
+        "CODE": "D.ANAD 01",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "17138",
+        "CODE": "HOLLANDA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "2627",
+        "CODE": "G.DANAD 03",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3865",
+        "CODE": "SURİYE",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "9863",
+        "CODE": "BOSNAHERSE",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "12139",
+        "CODE": "SIRBİSTAN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "325",
+        "CODE": "MARMARA 08",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7669",
+        "CODE": "MARDİN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7941",
+        "CODE": "MACARİSTAN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3534",
+        "CODE": "ITALY",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7551",
+        "CODE": "İÇ ANAD 09",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "17223",
+        "CODE": "İSVİÇRE",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "12078",
+        "CODE": "UKRANIA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "12234",
+        "CODE": "İRAN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4954",
+        "CODE": "KONYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4436",
+        "CODE": "İSPANYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "5266",
+        "CODE": "BOLU",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4683",
+        "CODE": "K.MARAŞ",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7845",
+        "CODE": "ÇANAKKALE",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "2780",
+        "CODE": "BULGARİSTA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "59",
+        "CODE": "MARMARA 07",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "205",
+        "CODE": "İÇ ANAD 02",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "5459",
+        "CODE": "İSTANUL",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "9953",
+        "CODE": "MOLDOVA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4211",
+        "CODE": "AVUSTURYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "12112",
+        "CODE": "EGE",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4006",
+        "CODE": "MALATYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "5171",
+        "CODE": "FRANSA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "2052",
+        "CODE": "HIRVATİSTA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4697",
+        "CODE": "AA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "364",
+        "CODE": "İÇ ANAD 10",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4",
+        "CODE": "İZMİR",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4657",
+        "CODE": "K.DENİZ 14",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7397",
+        "CODE": "KAYSERİ",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "9885",
+        "CODE": "BALIKESİR",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4715",
+        "CODE": "KIRIKKALE",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "8",
+        "CODE": "AKDENİZ02",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3346",
+        "CODE": "EGE 03",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "1429",
+        "CODE": "İSRAİL",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "9528",
+        "CODE": "G.DANAD 01",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "10703",
+        "CODE": "İRLANDA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "803",
+        "CODE": "FRANCE",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7894",
+        "CODE": "TRABZON",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "9754",
+        "CODE": "ARNAVUTLUK",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3615",
+        "CODE": "ISRAEL",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3952",
+        "CODE": "DİYARBAKIR",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4702",
+        "CODE": "İTALYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4383",
+        "CODE": "GD.ANAD 06",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "9462",
+        "CODE": "BAM",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "6921",
+        "CODE": "BURSA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4932",
+        "CODE": "YALOVA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "75",
+        "CODE": "K.DENİZ 17",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4335",
+        "CODE": "G.DANAD 02",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4186",
+        "CODE": "AKDENİZ06",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "796",
+        "CODE": "GREMANY",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "1498",
+        "CODE": "MARMARA 10",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "11917",
+        "CODE": "KATAR",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "1568",
+        "CODE": "GD.ANAD 04",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7333",
+        "CODE": "UKRAYNA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7810",
+        "CODE": "INTERNET",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3823",
+        "CODE": "MARMARA 05",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "17014",
+        "CODE": "AFGANİSTAN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4687",
+        "CODE": "K.DENİZ 10",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3581",
+        "CODE": "ANTALYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "9818",
+        "CODE": "BELÇİKA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "10437",
+        "CODE": "IRAK",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "10029",
+        "CODE": "ÖZBEKISTAN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3913",
+        "CODE": "D.ANAD 05",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7955",
+        "CODE": "GÜRCİSTAN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "358",
+        "CODE": "EGE 06",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "426",
+        "CODE": "MARMARA 09",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "9924",
+        "CODE": "ORDU",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "11172",
+        "CODE": "FAS",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "12097",
+        "CODE": "TACİKİSTAN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "8258",
+        "CODE": "İÇ ANAD 11",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4274",
+        "CODE": "ÇORUM",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3864",
+        "CODE": "K.DENİZ 13",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "18446",
+        "CODE": "MAKEDONYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "2469",
+        "CODE": "MISIR",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3839",
+        "CODE": "ADAPAZARI",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "10287",
+        "CODE": "DUBAI",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "11916",
+        "CODE": "KIRGİZİSTA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "609",
+        "CODE": "ÜRDÜN",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "1482",
+        "CODE": "POLONYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7926",
+        "CODE": "MARMARA 06",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "8232",
+        "CODE": "K.DENİZ 02",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "10520",
+        "CODE": "D.ANAD 13",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "2",
+        "CODE": "İSTANBUL",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "66",
+        "CODE": "AKDENİZ01",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "8224",
+        "CODE": "D.ANAD 04",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "3997",
+        "CODE": "İHRACAT",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7948",
+        "CODE": "IĞDIR",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4495",
+        "CODE": "K.DENİZ 15",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4347",
+        "CODE": "AKDENİZ04",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4190",
+        "CODE": "ANKARA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "4543",
+        "CODE": "İÇ ANAD 05",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "14860",
+        "CODE": "İZİMİR",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "16913",
+        "CODE": "EGE 05",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "8162",
+        "CODE": "MANİSA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "7117",
+        "CODE": "MUĞLA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "15080",
+        "CODE": "ISPARTA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "14964",
+        "CODE": "TANZANYA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "17339",
+        "CODE": "MOSKOVA",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "8023",
+        "CODE": "BODRUM",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    },
+    {
+        "LOGICALREF": "330",
+        "CODE": "AKDENİZ07",
+        "DEFINITION_": "",
+        "FIRMNR": "565"
+    }
+]

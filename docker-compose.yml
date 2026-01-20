@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: gemas_portal_app
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - DB_HOST=db
+      - DB_NAME=${DB_NAME:-gemas_portal}
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-root}
+      - REDIS_HOST=redis
+    depends_on:
+      - db
+      - redis
+    networks:
+      - gemas_portal_network
+
+  db:
+    image: mariadb:10.6
+    container_name: gemas_portal_db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-root}
+      - MYSQL_DATABASE=${DB_NAME:-gemas_portal}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - gemas_portal_network
+
+  redis:
+    image: redis:alpine
+    container_name: gemas_portal_redis
+    restart: always
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - gemas_portal_network
+
+volumes:
+  mysql_data:
+  redis_data:
+
+
+networks:
+  gemas_portal_network:
+    driver: bridge

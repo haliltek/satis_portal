@@ -1,0 +1,214 @@
+[2025-08-05 14:40:06] Server error: `GET https://customers.garantibbva.com.tr/internet/digitalpublic/currency-convertor-public/v1/currency-convertor/currency-list-detail` resulted in a `500 Internal Server Error` response:
+{
+                        "result":{
+                        "returnCode":"500",
+                        "reasonCode":"0 (truncated...)
+ | Response: {
+                        "result":{
+                        "returnCode":"500",
+                        "reasonCode":"0",
+                        "messageText":"Internal Server Error"
+                        }
+                        }
+#0 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\Middleware.php(72): GuzzleHttp\Exception\RequestException::create()
+#1 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(209): GuzzleHttp\Middleware::GuzzleHttp\{closure}()
+#2 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(158): GuzzleHttp\Promise\Promise::callHandler()
+#3 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\TaskQueue.php(52): GuzzleHttp\Promise\Promise::GuzzleHttp\Promise\{closure}()
+#4 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(251): GuzzleHttp\Promise\TaskQueue->run()
+#5 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(227): GuzzleHttp\Promise\Promise->invokeWaitFn()
+#6 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(272): GuzzleHttp\Promise\Promise->waitIfPending()
+#7 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(229): GuzzleHttp\Promise\Promise->invokeWaitList()
+#8 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(69): GuzzleHttp\Promise\Promise->waitIfPending()
+#9 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\Client.php(189): GuzzleHttp\Promise\Promise->wait()
+#10 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\ClientTrait.php(44): GuzzleHttp\Client->request()
+#11 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\ahmeti\bank-exchange-rates\src\Garanti.php(53): GuzzleHttp\Client->get()
+#12 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\ahmeti\bank-exchange-rates\src\Service.php(39): Ahmeti\BankExchangeRates\Garanti->get()
+#13 C:\inetpub\wwwroot\b2b-gemas-project-main\dovizguncelleme.php(129): Ahmeti\BankExchangeRates\Service->get()
+#14 {main}
+[2025-08-05 14:40:14] Server error: `GET https://customers.garantibbva.com.tr/internet/digitalpublic/currency-convertor-public/v1/currency-convertor/currency-list-detail` resulted in a `500 Internal Server Error` response:
+{
+                        "result":{
+                        "returnCode":"500",
+                        "reasonCode":"0 (truncated...)
+ | Response: {
+                        "result":{
+                        "returnCode":"500",
+                        "reasonCode":"0",
+                        "messageText":"Internal Server Error"
+                        }
+                        }
+#0 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\Middleware.php(72): GuzzleHttp\Exception\RequestException::create()
+#1 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(209): GuzzleHttp\Middleware::GuzzleHttp\{closure}()
+#2 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(158): GuzzleHttp\Promise\Promise::callHandler()
+#3 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\TaskQueue.php(52): GuzzleHttp\Promise\Promise::GuzzleHttp\Promise\{closure}()
+#4 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(251): GuzzleHttp\Promise\TaskQueue->run()
+#5 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(227): GuzzleHttp\Promise\Promise->invokeWaitFn()
+#6 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(272): GuzzleHttp\Promise\Promise->waitIfPending()
+#7 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(229): GuzzleHttp\Promise\Promise->invokeWaitList()
+#8 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(69): GuzzleHttp\Promise\Promise->waitIfPending()
+#9 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\Client.php(189): GuzzleHttp\Promise\Promise->wait()
+#10 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\ClientTrait.php(44): GuzzleHttp\Client->request()
+#11 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\ahmeti\bank-exchange-rates\src\Garanti.php(53): GuzzleHttp\Client->get()
+#12 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\ahmeti\bank-exchange-rates\src\Service.php(39): Ahmeti\BankExchangeRates\Garanti->get()
+#13 C:\inetpub\wwwroot\b2b-gemas-project-main\dovizguncelleme.php(27): Ahmeti\BankExchangeRates\Service->get()
+#14 {main}
+[2025-08-05 14:40:14] Server error: `GET https://customers.garantibbva.com.tr/internet/digitalpublic/currency-convertor-public/v1/currency-convertor/currency-list-detail` resulted in a `500 Internal Server Error` response:
+{
+                        "result":{
+                        "returnCode":"500",
+                        "reasonCode":"0 (truncated...)
+ | Response: {
+                        "result":{
+                        "returnCode":"500",
+                        "reasonCode":"0",
+                        "messageText":"Internal Server Error"
+                        }
+                        }
+#0 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\Middleware.php(72): GuzzleHttp\Exception\RequestException::create()
+#1 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(209): GuzzleHttp\Middleware::GuzzleHttp\{closure}()
+#2 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(158): GuzzleHttp\Promise\Promise::callHandler()
+#3 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\TaskQueue.php(52): GuzzleHttp\Promise\Promise::GuzzleHttp\Promise\{closure}()
+#4 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(251): GuzzleHttp\Promise\TaskQueue->run()
+#5 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(227): GuzzleHttp\Promise\Promise->invokeWaitFn()
+#6 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(272): GuzzleHttp\Promise\Promise->waitIfPending()
+#7 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(229): GuzzleHttp\Promise\Promise->invokeWaitList()
+#8 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(69): GuzzleHttp\Promise\Promise->waitIfPending()
+#9 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\Client.php(189): GuzzleHttp\Promise\Promise->wait()
+#10 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\ClientTrait.php(44): GuzzleHttp\Client->request()
+#11 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\ahmeti\bank-exchange-rates\src\Garanti.php(53): GuzzleHttp\Client->get()
+#12 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\ahmeti\bank-exchange-rates\src\Service.php(39): Ahmeti\BankExchangeRates\Garanti->get()
+#13 C:\inetpub\wwwroot\b2b-gemas-project-main\dovizguncelleme.php(129): Ahmeti\BankExchangeRates\Service->get()
+#14 {main}
+[2025-09-25 11:27:25] Server error: `GET https://customers.garantibbva.com.tr/internet/digitalpublic/currency-convertor-public/v1/currency-convertor/currency-list-detail` resulted in a `500 Internal Server Error` response:
+{
+                        "result":{
+                        "returnCode":"500",
+                        "reasonCode":"0 (truncated...)
+ | Response: {
+                        "result":{
+                        "returnCode":"500",
+                        "reasonCode":"0",
+                        "messageText":"Internal Server Error"
+                        }
+                        }
+#0 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\Middleware.php(72): GuzzleHttp\Exception\RequestException::create()
+#1 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(209): GuzzleHttp\Middleware::GuzzleHttp\{closure}()
+#2 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(158): GuzzleHttp\Promise\Promise::callHandler()
+#3 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\TaskQueue.php(52): GuzzleHttp\Promise\Promise::GuzzleHttp\Promise\{closure}()
+#4 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(251): GuzzleHttp\Promise\TaskQueue->run()
+#5 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(227): GuzzleHttp\Promise\Promise->invokeWaitFn()
+#6 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(272): GuzzleHttp\Promise\Promise->waitIfPending()
+#7 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(229): GuzzleHttp\Promise\Promise->invokeWaitList()
+#8 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(69): GuzzleHttp\Promise\Promise->waitIfPending()
+#9 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\Client.php(189): GuzzleHttp\Promise\Promise->wait()
+#10 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\ClientTrait.php(44): GuzzleHttp\Client->request()
+#11 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\ahmeti\bank-exchange-rates\src\Garanti.php(53): GuzzleHttp\Client->get()
+#12 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\ahmeti\bank-exchange-rates\src\Service.php(39): Ahmeti\BankExchangeRates\Garanti->get()
+#13 C:\inetpub\wwwroot\b2b-gemas-project-main\dovizguncelleme.php(129): Ahmeti\BankExchangeRates\Service->get()
+#14 {main}
+[2025-11-12 15:17:49] Server error: `GET https://customers.garantibbva.com.tr/internet/digitalpublic/currency-convertor-public/v1/currency-convertor/currency-list-detail` resulted in a `500 Internal Server Error` response:
+{
+                        "result":{
+                        "returnCode":"500",
+                        "reasonCode":"0 (truncated...)
+ | Response: {
+                        "result":{
+                        "returnCode":"500",
+                        "reasonCode":"0",
+                        "messageText":"Internal Server Error"
+                        }
+                        }
+#0 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\Middleware.php(72): GuzzleHttp\Exception\RequestException::create()
+#1 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(209): GuzzleHttp\Middleware::GuzzleHttp\{closure}()
+#2 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(158): GuzzleHttp\Promise\Promise::callHandler()
+#3 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\TaskQueue.php(52): GuzzleHttp\Promise\Promise::GuzzleHttp\Promise\{closure}()
+#4 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(251): GuzzleHttp\Promise\TaskQueue->run()
+#5 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(227): GuzzleHttp\Promise\Promise->invokeWaitFn()
+#6 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(272): GuzzleHttp\Promise\Promise->waitIfPending()
+#7 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(229): GuzzleHttp\Promise\Promise->invokeWaitList()
+#8 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(69): GuzzleHttp\Promise\Promise->waitIfPending()
+#9 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\Client.php(189): GuzzleHttp\Promise\Promise->wait()
+#10 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\ClientTrait.php(44): GuzzleHttp\Client->request()
+#11 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\ahmeti\bank-exchange-rates\src\Garanti.php(53): GuzzleHttp\Client->get()
+#12 C:\inetpub\wwwroot\b2b-gemas-project-main\vendor\ahmeti\bank-exchange-rates\src\Service.php(39): Ahmeti\BankExchangeRates\Garanti->get()
+#13 C:\inetpub\wwwroot\b2b-gemas-project-main\dovizguncelleme.php(129): Ahmeti\BankExchangeRates\Service->get()
+#14 {main}
+[2025-12-02 08:37:23] Server error: `GET https://customers.garantibbva.com.tr/internet/digitalpublic/currency-convertor-public/v1/currency-convertor/currency-list-detail` resulted in a `500 Internal Server Error` response:
+{
+                        "result":{
+                        "returnCode":"500",
+                        "reasonCode":"0 (truncated...)
+ | Response: {
+                        "result":{
+                        "returnCode":"500",
+                        "reasonCode":"0",
+                        "messageText":"Internal Server Error"
+                        }
+                        }
+#0 C:\xampp\htdocs\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\Middleware.php(72): GuzzleHttp\Exception\RequestException::create(Object(GuzzleHttp\Psr7\Request), Object(GuzzleHttp\Psr7\Response), NULL, Array, NULL)
+#1 C:\xampp\htdocs\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(209): GuzzleHttp\Middleware::GuzzleHttp\{closure}(Object(GuzzleHttp\Psr7\Response))
+#2 C:\xampp\htdocs\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(158): GuzzleHttp\Promise\Promise::callHandler(1, Object(GuzzleHttp\Psr7\Response), NULL)
+#3 C:\xampp\htdocs\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\TaskQueue.php(52): GuzzleHttp\Promise\Promise::GuzzleHttp\Promise\{closure}()
+#4 C:\xampp\htdocs\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(251): GuzzleHttp\Promise\TaskQueue->run(true)
+#5 C:\xampp\htdocs\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(227): GuzzleHttp\Promise\Promise->invokeWaitFn()
+#6 C:\xampp\htdocs\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(272): GuzzleHttp\Promise\Promise->waitIfPending()
+#7 C:\xampp\htdocs\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(229): GuzzleHttp\Promise\Promise->invokeWaitList()
+#8 C:\xampp\htdocs\b2b-gemas-project-main\vendor\guzzlehttp\promises\src\Promise.php(69): GuzzleHttp\Promise\Promise->waitIfPending()
+#9 C:\xampp\htdocs\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\Client.php(189): GuzzleHttp\Promise\Promise->wait()
+#10 C:\xampp\htdocs\b2b-gemas-project-main\vendor\guzzlehttp\guzzle\src\ClientTrait.php(44): GuzzleHttp\Client->request('GET', 'https://custome...', Array)
+#11 C:\xampp\htdocs\b2b-gemas-project-main\vendor\ahmeti\bank-exchange-rates\src\Garanti.php(53): GuzzleHttp\Client->get('https://custome...', Array)
+#12 C:\xampp\htdocs\b2b-gemas-project-main\vendor\ahmeti\bank-exchange-rates\src\Service.php(39): Ahmeti\BankExchangeRates\Garanti->get()
+#13 C:\xampp\htdocs\b2b-gemas-project-main\dovizguncelleme.php(129): Ahmeti\BankExchangeRates\Service->get()
+#14 {main}
+[2025-12-02 09:08:19] Token yanıtı geçersiz.
+#0 {main}
+[2025-12-02 10:41:09] SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'L_CAPIRATE'.
+#0 C:\xampp\htdocs\b2b-gemas-project-main\dovizguncelleme.php(178): PDOStatement->execute()
+#1 {main}
+[2025-12-02 10:42:12] SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'L_CAPIRATE_565'.
+#0 C:\xampp\htdocs\b2b-gemas-project-main\dovizguncelleme.php(183): PDOStatement->execute()
+#1 {main}
+[2025-12-02 10:42:32] SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'L_CAPIRATE_565'.
+#0 C:\xampp\htdocs\b2b-gemas-project-main\dovizguncelleme.php(183): PDOStatement->execute()
+#1 {main}
+[2025-12-02 10:44:33] SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'L_CAPIRATE_565'.
+#0 C:\xampp\htdocs\b2b-gemas-project-main\dovizguncelleme.php(181): PDOStatement->execute()
+#1 {main}
+[2025-12-02 10:44:34] SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'L_CAPIRATE_565'.
+#0 C:\xampp\htdocs\b2b-gemas-project-main\dovizguncelleme.php(181): PDOStatement->execute()
+#1 {main}
+[2025-12-02 10:44:37] SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'L_CAPIRATE_565'.
+#0 C:\xampp\htdocs\b2b-gemas-project-main\dovizguncelleme.php(181): PDOStatement->execute()
+#1 {main}
+[2025-12-02 10:44:52] SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'L_TRRATE'.
+#0 C:\xampp\htdocs\b2b-gemas-project-main\dovizguncelleme.php(180): PDOStatement->execute()
+#1 {main}
+[2025-12-02 10:48:17] SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_565_TRRATE'.
+#0 C:\xampp\htdocs\b2b-gemas-project-main\dovizguncelleme.php(179): PDOStatement->execute()
+#1 {main}
+[2025-12-02 10:48:58] SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_565_TRRATE'.
+#0 C:\xampp\htdocs\b2b-gemas-project-main\dovizguncelleme.php(179): PDOStatement->execute()
+#1 {main}
+[2025-12-02 10:54:56] Logo'dan USD veya EUR kurları eksik.
+#0 {main}
+[2025-12-02 10:56:04] Logo'dan USD veya EUR kurları eksik. Gelen veri: [{"DATE_":"132713474","CRTYPE":"20","RATES1":null,"RATES2":"49.756999999999998"},{"DATE_":"132713474","CRTYPE":"1","RATES1":null,"RATES2":"42.853999999999999"},{"DATE_":"132713473","CRTYPE":"20","RATES1":null,"RATES2":"49.753"},{"DATE_":"132713473","CRTYPE":"1","RATES1":null,"RATES2":"42.895000000000003"},{"DATE_":"132713246","CRTYPE":"20","RATES1":null,"RATES2":"50.174999999999997"},{"DATE_":"132713246","CRTYPE":"1","RATES1":null,"RATES2":"43.268999999999998"},{"DATE_":"132713245","CRTYPE":"20","RATES1":null,"RATES2":"50.174999999999997"},{"DATE_":"132713245","CRTYPE":"1","RATES1":null,"RATES2":"43.268999999999998"},{"DATE_":"132713244","CRTYPE":"20","RATES1":null,"RATES2":"49.637999999999998"},{"DATE_":"132713244","CRTYPE":"1","RATES1":null,"RATES2":"42.838999999999999"}]
+#0 {main}
+[2025-12-02 11:04:27] Logo'dan gelen kurlar: [{"DATE_":"132713474","CRTYPE":"20","RATES1":null,"RATES2":"49.756999999999998","RATES3":null,"RATES4":"49.756999999999998"},{"DATE_":"132713474","CRTYPE":"1","RATES1":null,"RATES2":"42.853999999999999","RATES3":null,"RATES4":"42.853999999999999"},{"DATE_":"132713473","CRTYPE":"20","RATES1":null,"RATES2":"49.753","RATES3":null,"RATES4":"49.753"},{"DATE_":"132713473","CRTYPE":"1","RATES1":null,"RATES2":"42.895000000000003","RATES3":null,"RATES4":"42.895000000000003"},{"DATE_":"132713246","CRTYPE":"20","RATES1":null,"RATES2":"50.174999999999997","RATES3":null,"RATES4":"50.174999999999997"},{"DATE_":"132713246","CRTYPE":"1","RATES1":null,"RATES2":"43.268999999999998","RATES3":null,"RATES4":"43.268999999999998"},{"DATE_":"132713245","CRTYPE":"20","RATES1":null,"RATES2":"50.174999999999997","RATES3":null,"RATES4":"50.174999999999997"},{"DATE_":"132713245","CRTYPE":"1","RATES1":null,"RATES2":"43.268999999999998","RATES3":null,"RATES4":"43.268999999999998"},{"DATE_":"132713244","CRTYPE":"20","RATES1":null,"RATES2":"49.637999999999998","RATES3":null,"RATES4":"49.637999999999998"},{"DATE_":"132713244","CRTYPE":"1","RATES1":null,"RATES2":"42.838999999999999","RATES3":null,"RATES4":"42.838999999999999"}]
+[2025-12-03 14:14:07] Logo'dan gelen kurlar: [{"DATE_":"132713475","CRTYPE":"20","RATES1":null,"RATES2":"49.887999999999998","RATES3":null,"RATES4":"49.887999999999998"},{"DATE_":"132713475","CRTYPE":"1","RATES1":null,"RATES2":"42.851999999999997","RATES3":null,"RATES4":"42.851999999999997"},{"DATE_":"132713474","CRTYPE":"20","RATES1":null,"RATES2":"49.756999999999998","RATES3":null,"RATES4":"49.756999999999998"},{"DATE_":"132713474","CRTYPE":"1","RATES1":null,"RATES2":"42.853999999999999","RATES3":null,"RATES4":"42.853999999999999"},{"DATE_":"132713473","CRTYPE":"20","RATES1":null,"RATES2":"49.753","RATES3":null,"RATES4":"49.753"},{"DATE_":"132713473","CRTYPE":"1","RATES1":null,"RATES2":"42.895000000000003","RATES3":null,"RATES4":"42.895000000000003"},{"DATE_":"132713246","CRTYPE":"20","RATES1":null,"RATES2":"50.174999999999997","RATES3":null,"RATES4":"50.174999999999997"},{"DATE_":"132713246","CRTYPE":"1","RATES1":null,"RATES2":"43.268999999999998","RATES3":null,"RATES4":"43.268999999999998"},{"DATE_":"132713245","CRTYPE":"20","RATES1":null,"RATES2":"50.174999999999997","RATES3":null,"RATES4":"50.174999999999997"},{"DATE_":"132713245","CRTYPE":"1","RATES1":null,"RATES2":"43.268999999999998","RATES3":null,"RATES4":"43.268999999999998"}]
+[2025-12-10 15:48:12] Logo'dan gelen kurlar: [{"DATE_":"132713482","CRTYPE":"20","RATES1":null,"RATES2":"49.978000000000002","RATES3":null,"RATES4":"49.978000000000002"},{"DATE_":"132713482","CRTYPE":"1","RATES1":null,"RATES2":"42.972999999999999","RATES3":null,"RATES4":"42.972999999999999"},{"DATE_":"132713481","CRTYPE":"20","RATES1":null,"RATES2":"50.039000000000001","RATES3":null,"RATES4":"50.039000000000001"},{"DATE_":"132713481","CRTYPE":"1","RATES1":null,"RATES2":"42.954000000000001","RATES3":null,"RATES4":"42.954000000000001"},{"DATE_":"132713480","CRTYPE":"20","RATES1":null,"RATES2":"50.060000000000002","RATES3":null,"RATES4":"50.060000000000002"},{"DATE_":"132713480","CRTYPE":"1","RATES1":null,"RATES2":"42.951000000000001","RATES3":null,"RATES4":"42.951000000000001"},{"DATE_":"132713479","CRTYPE":"20","RATES1":null,"RATES2":"50.412999999999997","RATES3":null,"RATES4":"50.412999999999997"},{"DATE_":"132713479","CRTYPE":"1","RATES1":null,"RATES2":"43.283000000000001","RATES3":null,"RATES4":"43.283000000000001"},{"DATE_":"132713478","CRTYPE":"20","RATES1":null,"RATES2":"50.412999999999997","RATES3":null,"RATES4":"50.412999999999997"},{"DATE_":"132713478","CRTYPE":"1","RATES1":null,"RATES2":"43.283000000000001","RATES3":null,"RATES4":"43.283000000000001"}]
+[2025-12-15 13:38:45] Logo'dan gelen kurlar: [{"DATE_":"132713487","CRTYPE":"20","RATES1":null,"RATES2":"50.548000000000002","RATES3":null,"RATES4":"50.548000000000002"},{"DATE_":"132713487","CRTYPE":"1","RATES1":null,"RATES2":"43.079999999999998","RATES3":null,"RATES4":"43.079999999999998"},{"DATE_":"132713486","CRTYPE":"20","RATES1":null,"RATES2":"51.07","RATES3":null,"RATES4":"51.07"},{"DATE_":"132713486","CRTYPE":"1","RATES1":null,"RATES2":"43.475000000000001","RATES3":null,"RATES4":"43.475000000000001"},{"DATE_":"132713485","CRTYPE":"20","RATES1":null,"RATES2":"51.07","RATES3":null,"RATES4":"51.07"},{"DATE_":"132713485","CRTYPE":"1","RATES1":null,"RATES2":"43.475000000000001","RATES3":null,"RATES4":"43.475000000000001"},{"DATE_":"132713484","CRTYPE":"20","RATES1":null,"RATES2":"50.429000000000002","RATES3":null,"RATES4":"50.429000000000002"},{"DATE_":"132713484","CRTYPE":"1","RATES1":null,"RATES2":"42.960999999999999","RATES3":null,"RATES4":"42.960999999999999"},{"DATE_":"132713483","CRTYPE":"20","RATES1":null,"RATES2":"50.250999999999998","RATES3":null,"RATES4":"50.250999999999998"},{"DATE_":"132713483","CRTYPE":"1","RATES1":null,"RATES2":"42.999000000000002","RATES3":null,"RATES4":"42.999000000000002"}]
+[2025-12-16 11:07:55] Logo'dan gelen kurlar: [{"DATE_":"132713488","CRTYPE":"20","RATES1":null,"RATES2":"50.631","RATES3":null,"RATES4":"50.631"},{"DATE_":"132713488","CRTYPE":"1","RATES1":null,"RATES2":"43.085000000000001","RATES3":null,"RATES4":"43.085000000000001"},{"DATE_":"132713487","CRTYPE":"20","RATES1":null,"RATES2":"50.548000000000002","RATES3":null,"RATES4":"50.548000000000002"},{"DATE_":"132713487","CRTYPE":"1","RATES1":null,"RATES2":"43.079999999999998","RATES3":null,"RATES4":"43.079999999999998"},{"DATE_":"132713486","CRTYPE":"20","RATES1":null,"RATES2":"51.07","RATES3":null,"RATES4":"51.07"},{"DATE_":"132713486","CRTYPE":"1","RATES1":null,"RATES2":"43.475000000000001","RATES3":null,"RATES4":"43.475000000000001"},{"DATE_":"132713485","CRTYPE":"20","RATES1":null,"RATES2":"51.07","RATES3":null,"RATES4":"51.07"},{"DATE_":"132713485","CRTYPE":"1","RATES1":null,"RATES2":"43.475000000000001","RATES3":null,"RATES4":"43.475000000000001"},{"DATE_":"132713484","CRTYPE":"20","RATES1":null,"RATES2":"50.429000000000002","RATES3":null,"RATES4":"50.429000000000002"},{"DATE_":"132713484","CRTYPE":"1","RATES1":null,"RATES2":"42.960999999999999","RATES3":null,"RATES4":"42.960999999999999"}]
+[2025-12-17 13:52:39] Logo'dan gelen kurlar: [{"DATE_":"132713489","CRTYPE":"20","RATES1":null,"RATES2":"50.543999999999997","RATES3":null,"RATES4":"50.543999999999997"},{"DATE_":"132713489","CRTYPE":"1","RATES1":null,"RATES2":"43.103999999999999","RATES3":null,"RATES4":"43.103999999999999"},{"DATE_":"132713488","CRTYPE":"20","RATES1":null,"RATES2":"50.631","RATES3":null,"RATES4":"50.631"},{"DATE_":"132713488","CRTYPE":"1","RATES1":null,"RATES2":"43.085000000000001","RATES3":null,"RATES4":"43.085000000000001"},{"DATE_":"132713487","CRTYPE":"20","RATES1":null,"RATES2":"50.548000000000002","RATES3":null,"RATES4":"50.548000000000002"},{"DATE_":"132713487","CRTYPE":"1","RATES1":null,"RATES2":"43.079999999999998","RATES3":null,"RATES4":"43.079999999999998"},{"DATE_":"132713486","CRTYPE":"20","RATES1":null,"RATES2":"51.07","RATES3":null,"RATES4":"51.07"},{"DATE_":"132713486","CRTYPE":"1","RATES1":null,"RATES2":"43.475000000000001","RATES3":null,"RATES4":"43.475000000000001"},{"DATE_":"132713485","CRTYPE":"20","RATES1":null,"RATES2":"51.07","RATES3":null,"RATES4":"51.07"},{"DATE_":"132713485","CRTYPE":"1","RATES1":null,"RATES2":"43.475000000000001","RATES3":null,"RATES4":"43.475000000000001"}]
+[2025-12-23 17:30:06] Logo'dan gelen kurlar: [{"DATE_":"132713495","CRTYPE":"20","RATES1":null,"RATES2":"50.883000000000003","RATES3":null,"RATES4":"50.883000000000003"},{"DATE_":"132713495","CRTYPE":"1","RATES1":null,"RATES2":"43.213000000000001","RATES3":null,"RATES4":"43.213000000000001"},{"DATE_":"132713494","CRTYPE":"20","RATES1":null,"RATES2":"50.618000000000002","RATES3":null,"RATES4":"50.618000000000002"},{"DATE_":"132713494","CRTYPE":"1","RATES1":null,"RATES2":"43.201000000000001","RATES3":null,"RATES4":"43.201000000000001"},{"DATE_":"132713493","CRTYPE":"20","RATES1":null,"RATES2":"51.091999999999999","RATES3":null,"RATES4":"51.091999999999999"},{"DATE_":"132713493","CRTYPE":"1","RATES1":null,"RATES2":"43.57","RATES3":null,"RATES4":"43.57"},{"DATE_":"132713492","CRTYPE":"20","RATES1":null,"RATES2":"51.091999999999999","RATES3":null,"RATES4":"51.091999999999999"},{"DATE_":"132713492","CRTYPE":"1","RATES1":null,"RATES2":"43.57","RATES3":null,"RATES4":"43.57"},{"DATE_":"132713491","CRTYPE":"20","RATES1":null,"RATES2":"50.530999999999999","RATES3":null,"RATES4":"50.530999999999999"},{"DATE_":"132713491","CRTYPE":"1","RATES1":null,"RATES2":"43.115000000000002","RATES3":null,"RATES4":"43.115000000000002"}]
+[2025-12-29 10:42:53] Logo'dan gelen kurlar: [{"DATE_":"132713501","CRTYPE":"20","RATES1":null,"RATES2":"50.935000000000002","RATES3":null,"RATES4":"50.935000000000002"},{"DATE_":"132713501","CRTYPE":"1","RATES1":null,"RATES2":"43.317999999999998","RATES3":null,"RATES4":"43.317999999999998"},{"DATE_":"132713500","CRTYPE":"20","RATES1":null,"RATES2":"51.445999999999998","RATES3":null,"RATES4":"51.445999999999998"},{"DATE_":"132713500","CRTYPE":"1","RATES1":null,"RATES2":"43.701999999999998","RATES3":null,"RATES4":"43.701999999999998"},{"DATE_":"132713499","CRTYPE":"20","RATES1":null,"RATES2":"51.445999999999998","RATES3":null,"RATES4":"51.445999999999998"},{"DATE_":"132713499","CRTYPE":"1","RATES1":null,"RATES2":"43.701999999999998","RATES3":null,"RATES4":"43.701999999999998"},{"DATE_":"132713498","CRTYPE":"20","RATES1":null,"RATES2":"50.936","RATES3":null,"RATES4":"50.936"},{"DATE_":"132713498","CRTYPE":"1","RATES1":null,"RATES2":"43.213999999999999","RATES3":null,"RATES4":"43.213999999999999"},{"DATE_":"132713497","CRTYPE":"20","RATES1":null,"RATES2":"50.896000000000001","RATES3":null,"RATES4":"50.896000000000001"},{"DATE_":"132713497","CRTYPE":"1","RATES1":null,"RATES2":"43.210999999999999","RATES3":null,"RATES4":"43.210999999999999"}]
+[2026-01-05 09:03:10] Logo'dan gelen kurlar: [{"DATE_":"132776194","CRTYPE":"20","RATES1":null,"RATES2":"50.932000000000002","RATES3":null,"RATES4":"50.932000000000002"},{"DATE_":"132776194","CRTYPE":"1","RATES1":null,"RATES2":"43.334000000000003","RATES3":null,"RATES4":"43.334000000000003"},{"DATE_":"132776193","CRTYPE":"20","RATES1":null,"RATES2":"51.420000000000002","RATES3":null,"RATES4":"51.420000000000002"},{"DATE_":"132776193","CRTYPE":"1","RATES1":null,"RATES2":"43.774999999999999","RATES3":null,"RATES4":"43.774999999999999"},{"DATE_":"132713503","CRTYPE":"20","RATES1":null,"RATES2":"50.841000000000001","RATES3":null,"RATES4":"50.841000000000001"},{"DATE_":"132713503","CRTYPE":"1","RATES1":null,"RATES2":"43.310000000000002","RATES3":null,"RATES4":"43.310000000000002"},{"DATE_":"132713502","CRTYPE":"20","RATES1":null,"RATES2":"51.017000000000003","RATES3":null,"RATES4":"51.017000000000003"},{"DATE_":"132713502","CRTYPE":"1","RATES1":null,"RATES2":"43.326999999999998","RATES3":null,"RATES4":"43.326999999999998"},{"DATE_":"132713501","CRTYPE":"20","RATES1":null,"RATES2":"50.935000000000002","RATES3":null,"RATES4":"50.935000000000002"},{"DATE_":"132713501","CRTYPE":"1","RATES1":null,"RATES2":"43.317999999999998","RATES3":null,"RATES4":"43.317999999999998"}]
+[2026-01-08 10:44:31] SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_EXCHANGE_565'.
+#0 C:\xampp\htdocs\b2b-gemas-project-main\dovizguncelleme.php(196): PDOStatement->execute()
+#1 {main}
+[2026-01-08 10:49:13] Logo'dan gelen kurlar: [{"DATE_":"132776200","CRTYPE":"20","RATES1":null,"RATES2":"50.734000000000002","RATES3":null,"RATES4":"50.734000000000002"},{"DATE_":"132776200","CRTYPE":"1","RATES1":null,"RATES2":"43.427","RATES3":null,"RATES4":"43.427"},{"DATE_":"132776199","CRTYPE":"20","RATES1":null,"RATES2":"50.795000000000002","RATES3":null,"RATES4":"50.795000000000002"},{"DATE_":"132776199","CRTYPE":"1","RATES1":null,"RATES2":"43.436999999999998","RATES3":null,"RATES4":"43.436999999999998"},{"DATE_":"132776198","CRTYPE":"20","RATES1":null,"RATES2":"50.933999999999997","RATES3":null,"RATES4":"50.933999999999997"},{"DATE_":"132776198","CRTYPE":"1","RATES1":null,"RATES2":"43.427999999999997","RATES3":null,"RATES4":"43.427999999999997"},{"DATE_":"132776197","CRTYPE":"20","RATES1":null,"RATES2":"50.768999999999998","RATES3":null,"RATES4":"50.768999999999998"},{"DATE_":"132776197","CRTYPE":"1","RATES1":null,"RATES2":"43.427","RATES3":null,"RATES4":"43.427"},{"DATE_":"132776195","CRTYPE":"20","RATES1":"0.0","RATES2":"0.0","RATES3":"0.0","RATES4":"51.341000000000001"},{"DATE_":"132776195","CRTYPE":"1","RATES1":"0.0","RATES2":"0.0","RATES3":"0.0","RATES4":"43.802999999999997"}]
+[2026-01-14 00:10:32] Logo'dan gelen kurlar: [{"DATE_":"132776205","CRTYPE":"20","RATES1":null,"RATES2":"50.783000000000001","RATES3":null,"RATES4":"50.783000000000001"},{"DATE_":"132776205","CRTYPE":"1","RATES1":null,"RATES2":"43.543999999999997","RATES3":null,"RATES4":"43.543999999999997"},{"DATE_":"132776204","CRTYPE":"20","RATES1":null,"RATES2":"50.777000000000001","RATES3":null,"RATES4":"50.777000000000001"},{"DATE_":"132776204","CRTYPE":"1","RATES1":null,"RATES2":"43.524000000000001","RATES3":null,"RATES4":"43.524000000000001"},{"DATE_":"132776203","CRTYPE":"20","RATES1":null,"RATES2":"51.091999999999999","RATES3":null,"RATES4":"51.091999999999999"},{"DATE_":"132776203","CRTYPE":"1","RATES1":null,"RATES2":"43.917000000000002","RATES3":null,"RATES4":"43.917000000000002"},{"DATE_":"132776202","CRTYPE":"20","RATES1":null,"RATES2":"51.091999999999999","RATES3":null,"RATES4":"51.091999999999999"},{"DATE_":"132776202","CRTYPE":"1","RATES1":null,"RATES2":"43.917000000000002","RATES3":null,"RATES4":"43.917000000000002"},{"DATE_":"132776201","CRTYPE":"20","RATES1":null,"RATES2":"50.722999999999999","RATES3":null,"RATES4":"50.722999999999999"},{"DATE_":"132776201","CRTYPE":"1","RATES1":null,"RATES2":"43.537999999999997","RATES3":null,"RATES4":"43.537999999999997"}]
+[2026-01-14 11:44:46] Logo'dan gelen kurlar: [{"DATE_":"132776206","CRTYPE":"20","RATES1":null,"RATES2":"50.709000000000003","RATES3":null,"RATES4":"50.709000000000003"},{"DATE_":"132776206","CRTYPE":"1","RATES1":null,"RATES2":"43.557000000000002","RATES3":null,"RATES4":"43.557000000000002"},{"DATE_":"132776205","CRTYPE":"20","RATES1":null,"RATES2":"50.783000000000001","RATES3":null,"RATES4":"50.783000000000001"},{"DATE_":"132776205","CRTYPE":"1","RATES1":null,"RATES2":"43.543999999999997","RATES3":null,"RATES4":"43.543999999999997"},{"DATE_":"132776204","CRTYPE":"20","RATES1":null,"RATES2":"50.777000000000001","RATES3":null,"RATES4":"50.777000000000001"},{"DATE_":"132776204","CRTYPE":"1","RATES1":null,"RATES2":"43.524000000000001","RATES3":null,"RATES4":"43.524000000000001"},{"DATE_":"132776203","CRTYPE":"20","RATES1":null,"RATES2":"51.091999999999999","RATES3":null,"RATES4":"51.091999999999999"},{"DATE_":"132776203","CRTYPE":"1","RATES1":null,"RATES2":"43.917000000000002","RATES3":null,"RATES4":"43.917000000000002"},{"DATE_":"132776202","CRTYPE":"20","RATES1":null,"RATES2":"51.091999999999999","RATES3":null,"RATES4":"51.091999999999999"},{"DATE_":"132776202","CRTYPE":"1","RATES1":null,"RATES2":"43.917000000000002","RATES3":null,"RATES4":"43.917000000000002"}]
+[2026-01-15 09:00:33] Logo'dan gelen kurlar: [{"DATE_":"132776207","CRTYPE":"20","RATES1":null,"RATES2":"50.712000000000003","RATES3":null,"RATES4":"50.712000000000003"},{"DATE_":"132776207","CRTYPE":"1","RATES1":null,"RATES2":"43.578000000000003","RATES3":null,"RATES4":"43.578000000000003"},{"DATE_":"132776206","CRTYPE":"20","RATES1":null,"RATES2":"50.709000000000003","RATES3":null,"RATES4":"50.709000000000003"},{"DATE_":"132776206","CRTYPE":"1","RATES1":null,"RATES2":"43.557000000000002","RATES3":null,"RATES4":"43.557000000000002"},{"DATE_":"132776205","CRTYPE":"20","RATES1":null,"RATES2":"50.783000000000001","RATES3":null,"RATES4":"50.783000000000001"},{"DATE_":"132776205","CRTYPE":"1","RATES1":null,"RATES2":"43.543999999999997","RATES3":null,"RATES4":"43.543999999999997"},{"DATE_":"132776204","CRTYPE":"20","RATES1":null,"RATES2":"50.777000000000001","RATES3":null,"RATES4":"50.777000000000001"},{"DATE_":"132776204","CRTYPE":"1","RATES1":null,"RATES2":"43.524000000000001","RATES3":null,"RATES4":"43.524000000000001"},{"DATE_":"132776203","CRTYPE":"20","RATES1":null,"RATES2":"51.091999999999999","RATES3":null,"RATES4":"51.091999999999999"},{"DATE_":"132776203","CRTYPE":"1","RATES1":null,"RATES2":"43.917000000000002","RATES3":null,"RATES4":"43.917000000000002"}]
+[2026-01-18 12:24:33] Logo'dan gelen kurlar: [{"DATE_":"132776210","CRTYPE":"20","RATES1":null,"RATES2":"51.039000000000001","RATES3":null,"RATES4":"51.039000000000001"},{"DATE_":"132776210","CRTYPE":"1","RATES1":null,"RATES2":"44.026000000000003","RATES3":null,"RATES4":"44.026000000000003"},{"DATE_":"132776209","CRTYPE":"20","RATES1":null,"RATES2":"51.039000000000001","RATES3":null,"RATES4":"51.039000000000001"},{"DATE_":"132776209","CRTYPE":"1","RATES1":null,"RATES2":"44.026000000000003","RATES3":null,"RATES4":"44.026000000000003"},{"DATE_":"132776208","CRTYPE":"20","RATES1":null,"RATES2":"50.549999999999997","RATES3":null,"RATES4":"50.549999999999997"},{"DATE_":"132776208","CRTYPE":"1","RATES1":null,"RATES2":"43.552999999999997","RATES3":null,"RATES4":"43.552999999999997"},{"DATE_":"132776207","CRTYPE":"20","RATES1":null,"RATES2":"50.712000000000003","RATES3":null,"RATES4":"50.712000000000003"},{"DATE_":"132776207","CRTYPE":"1","RATES1":null,"RATES2":"43.578000000000003","RATES3":null,"RATES4":"43.578000000000003"},{"DATE_":"132776206","CRTYPE":"20","RATES1":null,"RATES2":"50.709000000000003","RATES3":null,"RATES4":"50.709000000000003"},{"DATE_":"132776206","CRTYPE":"1","RATES1":null,"RATES2":"43.557000000000002","RATES3":null,"RATES4":"43.557000000000002"}]
+[2026-01-19 08:31:07] Logo'dan gelen kurlar: [{"DATE_":"132776210","CRTYPE":"20","RATES1":null,"RATES2":"51.039000000000001","RATES3":null,"RATES4":"51.039000000000001"},{"DATE_":"132776210","CRTYPE":"1","RATES1":null,"RATES2":"44.026000000000003","RATES3":null,"RATES4":"44.026000000000003"},{"DATE_":"132776209","CRTYPE":"20","RATES1":null,"RATES2":"51.039000000000001","RATES3":null,"RATES4":"51.039000000000001"},{"DATE_":"132776209","CRTYPE":"1","RATES1":null,"RATES2":"44.026000000000003","RATES3":null,"RATES4":"44.026000000000003"},{"DATE_":"132776208","CRTYPE":"20","RATES1":null,"RATES2":"50.549999999999997","RATES3":null,"RATES4":"50.549999999999997"},{"DATE_":"132776208","CRTYPE":"1","RATES1":null,"RATES2":"43.552999999999997","RATES3":null,"RATES4":"43.552999999999997"},{"DATE_":"132776207","CRTYPE":"20","RATES1":null,"RATES2":"50.712000000000003","RATES3":null,"RATES4":"50.712000000000003"},{"DATE_":"132776207","CRTYPE":"1","RATES1":null,"RATES2":"43.578000000000003","RATES3":null,"RATES4":"43.578000000000003"},{"DATE_":"132776206","CRTYPE":"20","RATES1":null,"RATES2":"50.709000000000003","RATES3":null,"RATES4":"50.709000000000003"},{"DATE_":"132776206","CRTYPE":"1","RATES1":null,"RATES2":"43.557000000000002","RATES3":null,"RATES4":"43.557000000000002"}]
+[2026-01-19 15:22:46] Logo'dan gelen kurlar: [{"DATE_":"132776211","CRTYPE":"20","RATES1":null,"RATES2":"50.764000000000003","RATES3":null,"RATES4":"50.764000000000003"},{"DATE_":"132776211","CRTYPE":"1","RATES1":null,"RATES2":"43.658000000000001","RATES3":null,"RATES4":"43.658000000000001"},{"DATE_":"132776210","CRTYPE":"20","RATES1":null,"RATES2":"51.039000000000001","RATES3":null,"RATES4":"51.039000000000001"},{"DATE_":"132776210","CRTYPE":"1","RATES1":null,"RATES2":"44.026000000000003","RATES3":null,"RATES4":"44.026000000000003"},{"DATE_":"132776209","CRTYPE":"20","RATES1":null,"RATES2":"51.039000000000001","RATES3":null,"RATES4":"51.039000000000001"},{"DATE_":"132776209","CRTYPE":"1","RATES1":null,"RATES2":"44.026000000000003","RATES3":null,"RATES4":"44.026000000000003"},{"DATE_":"132776208","CRTYPE":"20","RATES1":null,"RATES2":"50.549999999999997","RATES3":null,"RATES4":"50.549999999999997"},{"DATE_":"132776208","CRTYPE":"1","RATES1":null,"RATES2":"43.552999999999997","RATES3":null,"RATES4":"43.552999999999997"},{"DATE_":"132776207","CRTYPE":"20","RATES1":null,"RATES2":"50.712000000000003","RATES3":null,"RATES4":"50.712000000000003"},{"DATE_":"132776207","CRTYPE":"1","RATES1":null,"RATES2":"43.578000000000003","RATES3":null,"RATES4":"43.578000000000003"}]

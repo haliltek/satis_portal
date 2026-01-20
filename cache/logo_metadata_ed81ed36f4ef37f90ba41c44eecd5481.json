@@ -1,0 +1,37 @@
+[
+    {
+        "LOGICALREF": 1,
+        "GCODE": "YD",
+        "GDEF": "Yurt Dışı"
+    },
+    {
+        "LOGICALREF": 2,
+        "GCODE": "001",
+        "GDEF": "STOPAJLI"
+    },
+    {
+        "LOGICALREF": 3,
+        "GCODE": "YTM",
+        "GDEF": "YATIRIM TEŞVİKLİ SATIŞ"
+    },
+    {
+        "LOGICALREF": 4,
+        "GCODE": "TKF",
+        "GDEF": "TEVKİFATLI"
+    },
+    {
+        "LOGICALREF": 5,
+        "GCODE": "IST",
+        "GDEF": "İSTİSNA KDV UYGULANMAYACAK"
+    },
+    {
+        "LOGICALREF": 6,
+        "GCODE": "TKFY",
+        "GDEF": "TEVKIFAT YOK"
+    },
+    {
+        "LOGICALREF": 7,
+        "GCODE": "01",
+        "GDEF": "BEDELSİZ İHRACAT FATURASI"
+    }
+]

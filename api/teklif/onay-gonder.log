@@ -1,0 +1,2 @@
+2026-01-19 08:15:36 - Request Data: {"yonetici_tel":"905525287286","cari":"ERTEK YAPI VE MAK.END.EK\u0130PMANLARI SAN.T\u0130C.LTD.\u015eT\u0130.","toplam":"916090.56","teklif_id":43,"temsilci":"gemas_admin","urunler":[{"ad":"0111STRN-300T 3 HP Trifaze \u00c7evirme Kapak","adet":100,"fiyat":14960}]}
+2026-01-19 08:15:38 - Response Code: 200, Error: , Response: {"status":"success","message":"No changes made (ID might be same or Offer not found)"}

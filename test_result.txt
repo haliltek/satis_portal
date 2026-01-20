@@ -1,0 +1,67 @@
+Array
+(
+    [success] => 1
+    [discounts] => Array
+        (
+            [0211211S] => 53
+            [021131] => 55
+            [02400] => 50
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+            [021131] => FILTRE GRUBU
+            [02400] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 4
+            [1] => 2 adet aktif kampanya yüklendi.
+            [2] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => Ürün: 0211211S - V1 Sonuç: 1
+            [5] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [6] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [8] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [9] => Ürün: 0211211S - V1 Sonuç: 1
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [11] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU)
+            [13] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [14] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021131'
+            [15] => Ürün: 021131 - V1 Sonuç: 1
+            [16] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021131'
+            [17] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021131'
+            [18] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [19] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021131'
+            [20] => Ürün: 021131 - V1 Sonuç: 1
+            [21] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021131'
+            [22] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021131'
+            [23] => Ürün: 021131 -> %55 İskonto (FILTRE GRUBU)
+            [24] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [25] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='02400'
+            [26] => Ürün: 02400 - V1 Sonuç: 1
+            [27] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='02400'
+            [28] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='02400'
+            [29] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [30] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='02400'
+            [31] => Ürün: 02400 - V1 Sonuç: 1
+            [32] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='02400'
+            [33] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='02400'
+            [34] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [35] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='02400'
+            [36] => Ürün: 02400 - V1 Sonuç: 1
+            [37] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='02400'
+            [38] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='02400'
+            [39] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [40] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='02400'
+            [41] => Ürün: 02400 - V1 Sonuç: 1
+            [42] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='02400'
+            [43] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='02400'
+            [44] => Ürün: 02400 -> %50 İskonto (FILTRE GRUBU)
+        )
+
+)

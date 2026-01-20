@@ -1,0 +1,46 @@
+{
+  "info": {
+    "name": "Garanti Currency API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get currency list detail",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Accept-Language", "value": "tr-TR,tr;q=0.9" },
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "User-Agent", "value": "Mozilla/5.0" },
+          { "key": "channel", "value": "Public" },
+          { "key": "client-type", "value": "ArkClient" },
+          { "key": "dialect", "value": "TR" },
+          { "key": "guid", "value": "{{guid}}" },
+          { "key": "ip", "value": "127.0.0.1" },
+          { "key": "tenant-company-id", "value": "GAR" }
+        ],
+        "url": {
+          "raw": "https://customers.garantibbva.com.tr/internet/digitalpublic/currency-convertor-public/v1/currency-convertor/currency-list-detail",
+          "protocol": "https",
+          "host": [
+            "customers",
+            "garantibbva",
+            "com",
+            "tr"
+          ],
+          "path": [
+            "internet",
+            "digitalpublic",
+            "currency-convertor-public",
+            "v1",
+            "currency-convertor",
+            "currency-list-detail"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
+

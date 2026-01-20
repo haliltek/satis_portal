@@ -1,0 +1,215 @@
+Connected successfully
+Tables:
+Array
+(
+    [0] => Sayfa1
+    [1] => annotations
+    [2] => annotationsss
+    [3] => announcements
+    [4] => bayi
+    [5] => camera_settings
+    [6] => categories
+    [7] => chat_messages
+    [8] => countries
+    [9] => dealers
+    [10] => detayli
+    [11] => device_data
+    [12] => devices
+    [13] => distributors
+    [14] => dokuman
+    [15] => dokuman_kategori
+    [16] => dokuman_kategori_translations
+    [17] => dokuman_malzeme
+    [18] => dokuman_translations
+    [19] => dolphin_servis
+    [20] => duyuru
+    [21] => duyuru_translations
+    [22] => failed_jobs
+    [23] => firma
+    [24] => haber
+    [25] => il
+    [26] => ilce
+    [27] => instagram
+    [28] => kalite
+    [29] => kalite_translations
+    [30] => kategori
+    [31] => kategori_translations
+    [32] => kategori_urun
+    [33] => kurumsal
+    [34] => kurumsal_translations
+    [35] => logofiyat
+    [36] => malzeme
+    [37] => malzeme_translations
+    [38] => malzeme_translations323
+    [39] => malzeme_translationsHALİL
+    [40] => malzeme_translationsMEHMET
+    [41] => malzeme_translationsSSS
+    [42] => malzeme_translationsorj
+    [43] => malzeme_translationsorj2
+    [44] => malzeme_translationsorj3
+    [45] => malzeme_translationsson
+    [46] => malzeme_translationstest2
+    [47] => malzeme_urun
+    [48] => malzeme_view
+    [49] => malzeme_view2
+    [50] => malzeme_viewEN
+    [51] => malzeme_viewEN2
+    [52] => malzeme_viewENson
+    [53] => malzeme_viewson
+    [54] => malzemess
+    [55] => malzemeviews
+    [56] => malzemeviewsen
+    [57] => malzemeviewyeni
+    [58] => marka
+    [59] => migrations
+    [60] => models
+    [61] => mw
+    [62] => oauth_access_tokens
+    [63] => oauth_auth_codes
+    [64] => oauth_clients
+    [65] => oauth_personal_access_clients
+    [66] => oauth_refresh_tokens
+    [67] => orders
+    [68] => password_resets
+    [69] => portal_urunler
+    [70] => products
+    [71] => rol
+    [72] => rol_user
+    [73] => rol_yetki
+    [74] => slider
+    [75] => slider_translations
+    [76] => sube
+    [77] => sube_translations
+    [78] => suggested_items
+    [79] => testlogo
+    [80] => testlogoexport
+    [81] => urun
+    [82] => urun_detayli_gorunum
+    [83] => urun_foto
+    [84] => urun_translations
+    [85] => urun_video
+    [86] => urundetay
+    [87] => urunler_full_view
+    [88] => users
+    [89] => v_ana_mamul_yari_mamul
+    [90] => video
+    [91] => web_chat
+    [92] => yedek_parca_ana_mamul
+    [93] => yedek_parca_yari_mamul
+    [94] => yedekparca
+    [95] => yedekparcaentr
+    [96] => yedekparcaguncel
+    [97] => yedekparcaguncelen
+    [98] => yenifiyat
+    [99] => yenifiyatAB
+    [100] => yenifiyaten
+    [101] => yeniliste
+    [102] => yetki
+)
+Found potential product table: kategori_urun
+Found potential product table: malzeme_urun
+Found potential product table: portal_urunler
+Found potential product table: products
+Found potential product table: urun
+Found potential product table: urun_detayli_gorunum
+Found potential product table: urun_foto
+Found potential product table: urun_translations
+Found potential product table: urun_video
+Found potential product table: urundetay
+Found potential product table: urunler_full_view
+Columns in urunler_full_view:
+Array
+(
+    [0] => Array
+        (
+            [Field] => ana_kategori
+            [Type] => varchar(191)
+            [Null] => YES
+            [Key] => 
+            [Default] => 
+            [Extra] => 
+        )
+
+    [1] => Array
+        (
+            [Field] => alt_kategori
+            [Type] => varchar(191)
+            [Null] => NO
+            [Key] => 
+            [Default] => 
+            [Extra] => 
+        )
+
+    [2] => Array
+        (
+            [Field] => urun_adi
+            [Type] => varchar(191)
+            [Null] => NO
+            [Key] => 
+            [Default] => 
+            [Extra] => 
+        )
+
+    [3] => Array
+        (
+            [Field] => urun_aciklama
+            [Type] => text
+            [Null] => YES
+            [Key] => 
+            [Default] => 
+            [Extra] => 
+        )
+
+    [4] => Array
+        (
+            [Field] => stok_kodu
+            [Type] => varchar(191)
+            [Null] => NO
+            [Key] => 
+            [Default] => 
+            [Extra] => 
+        )
+
+    [5] => Array
+        (
+            [Field] => malzeme_aciklama
+            [Type] => varchar(167)
+            [Null] => YES
+            [Key] => 
+            [Default] => 
+            [Extra] => 
+        )
+
+    [6] => Array
+        (
+            [Field] => fiyat
+            [Type] => varchar(9)
+            [Null] => YES
+            [Key] => 
+            [Default] => 
+            [Extra] => 
+        )
+
+    [7] => Array
+        (
+            [Field] => urun_gorseli
+            [Type] => varchar(191)
+            [Null] => YES
+            [Key] => 
+            [Default] => 
+            [Extra] => 
+        )
+
+)
+Sample row from urunler_full_view:
+Array
+(
+    [ana_kategori] => 
+    [alt_kategori] => Havuz Pompaları
+    [urun_adi] => GEMAŞ "STREAMER 2010"
+    [urun_aciklama] => <p>Kendinden emişli, monoblok &ouml;n filtreli, termoplastik g&ouml;vdeli havuz &nbsp;pompası. Emme ve basma ağızları kendinden rakorlu; 1 1/2 HP ve &uuml;st&uuml; kapasitelerde &nbsp;2&rdquo;(&Oslash;63 mm), k&uuml;&ccedil;&uuml;k kapasitelerde 1 1/2&rdquo; (&Oslash;50 mm). Pompa mili paslanmaz &ccedil;elik. 40&deg;&rsquo;lik &nbsp;d&ouml;nd&uuml;rme hareketi ile kolay a&ccedil;ılıp kapanan kapak. &Ccedil;atlamalara karşı kimyasal dayanımı y&uuml;ksek &nbsp;şeffaf &ldquo;Xylex&rdquo; kapak se&ccedil;eneği. Benzerlerinden &ccedil;ok daha geniş 4,5 l &ouml;nfiltre sepeti. IP55 motor. &nbsp;Pompa bağlantı rakorları &Oslash;50 mm Gemaş K&uuml;resel Vana Sapı yardımıyla sıkılıp, a&ccedil;ılabilir.</p>
+    [stok_kodu] => 0111STRN50M
+    [malzeme_aciklama] => 0111STRN-50M 1/2 HP Monofaze
+    [fiyat] => 330
+    [urun_gorseli] => uploads/images/malzeme/01/0111STRN50M.jpg
+)
