@@ -21,9 +21,9 @@ use PHPMailer\PHPMailer\Exception;
 
 // Hata raporlamasını yapılandırma
 ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/error.log'); // __DIR__ kullanarak aynı dizin altındaki error.log'a yazıyoruz.
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 0);
+ini_set('error_log', __DIR__ . '/error.log');
+ini_set('display_errors', 1); // Debugging enabled
+ini_set('display_startup_errors', 1); // Debugging enabled
 error_reporting(E_ALL);
 
 /**

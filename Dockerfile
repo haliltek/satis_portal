@@ -1,7 +1,7 @@
 FROM php:8.2-apache
 
 # 1️⃣ System dependencies
-RUN apt-get update && apt-get install -y \
+RUN rm -rf /var/lib/apt/lists/* && apt-get update && apt-get install -y \
     gnupg2 \
     ca-certificates \
     apt-transport-https \

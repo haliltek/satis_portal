@@ -3,6 +3,7 @@
 
 $redis_host = 'redis'; // Docker compose service name
 $redis_port = 6379;
+$pass = getenv('REDIS_PASSWORD');
 
 echo "<h1>Redis Connectivity Check</h1>";
 

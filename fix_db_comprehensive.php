@@ -27,16 +27,33 @@ if (!$found_payplan) {
 echo "<h2>2. Standardizing Collations (utf8mb4_unicode_ci)</h2>";
 $tables = ['urun_fiyat_log', 'yonetici', 'urunler', 'sirket', 'ogteklif2', 'ogteklifurun2'];
 
+// Disable strict mode to avoid "Invalid default value" errors during conversion
+$db->query("SET SESSION sql_mode = ''");
+
 foreach ($tables as $table) {
     echo "Converting table <b>$table</b>... ";
     
-    // First convert table default
+    // Special handling for yonetici table causing "Invalid default value"
+    if ($table === 'yonetici') {
+        // 1. Drop default and relax to TEXT
+        $db->query("ALTER TABLE yonetici ALTER COLUMN satis_tipi DROP DEFAULT");
+        $db->query("ALTER TABLE yonetici MODIFY satis_tipi TEXT");
+    }
+
+    // Convert table
     $sql1 = "ALTER TABLE $table CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
     
     if ($db->query($sql1)) {
         echo "<span style='color:green'>OK</span><br>";
     } else {
         echo "<span style='color:red'>FAILED: " . $db->error . "</span><br>";
+    }
+
+    // Restore yonetici structure
+    if ($table === 'yonetici') {
+        // Restore ENUM and Default
+        $db->query("UPDATE yonetici SET satis_tipi = 'Yurt İçi' WHERE satis_tipi IS NULL OR satis_tipi = ''");
+        $db->query("ALTER TABLE yonetici MODIFY satis_tipi ENUM('Yurt İçi','Yurt Dışı') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Yurt İçi'");
     }
 }
 

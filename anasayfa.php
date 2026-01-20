@@ -329,6 +329,21 @@ $hasMonthlyData = count($monthly) > 0;
         </a>
     </div>
 
+    <!-- 8.5 Logo Satış Siparişleri (GEMPA) -->
+    <div class="col-md-3 col-sm-6 mb-3">
+        <a href="logo_orders.php" class="text-decoration-none">
+            <div class="card shadow-sm h-100 shortcut-btn" style="transition: transform 0.3s;">
+                <div class="card-body text-center p-3">
+                    <div class="mb-2">
+                        <i class="bx bx-cart fs-1 text-danger"></i>
+                    </div>
+                    <h6 class="mb-1 fw-semibold text-dark">Logo Siparişleri (GEMPA)</h6>
+                    <p class="mb-0 small text-muted">Gempa satış siparişleri listesi</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
     <!-- 8. Satış Performansı -->
     <div class="col-md-3 col-sm-6 mb-3">
         <a href="satis-performans.php" class="text-decoration-none">

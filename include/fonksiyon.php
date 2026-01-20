@@ -9,11 +9,11 @@ if (session_status() === PHP_SESSION_NONE) {
 function gemas_web_database(): void
 {
 	global $gemas_web_db;
-	$hostname = "89.43.31.214";
-	$username = "gemas_mehmet";
-	$password = "2261686Me!";
-	$dbname = "gemas_pool_technology";
-	$port = 3306;
+	$hostname = getenv('GEMAS_WEB_HOST') ?: "89.43.31.214";
+	$username = getenv('GEMAS_WEB_USER') ?: "gemas_mehmet";
+	$password = getenv('GEMAS_WEB_PASS') ?: "2261686Me!";
+	$dbname   = getenv('GEMAS_WEB_DB')   ?: "gemas_pool_technology";
+	$port     = (int)(getenv('GEMAS_WEB_PORT') ?: 3306);
 
 	try {
 		// Switch to mysqli_init + real_connect to handle timeouts
