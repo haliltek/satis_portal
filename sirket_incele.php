@@ -6,7 +6,7 @@ $password = '12621262';
 
 try {
     // PDO bağlantısı kuruluyor
-    $dsn = "sqlsrv:Server=$hostname;Database=$dbname";
+    $dsn = "sqlsrv:Server=$hostname;Database=$dbname;Encrypt=no;TrustServerCertificate=yes";
     $baglanti = new PDO($dsn, $username, $password, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::SQLSRV_ATTR_ENCODING => PDO::SQLSRV_ENCODING_UTF8 // UTF-8 encoding kullanımı
