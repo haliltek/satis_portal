@@ -61,6 +61,8 @@ if ($_POST) {
         echo "MD5 Verify: " . ($md5 ? "<font color=green>TRUE</font>" : "<font color=red>FALSE</font>") . "<br>";
         
         echo "Calculated MD5: " . md5($input_pass) . "<br>";
+        echo "Input Hex: " . bin2hex($input_pass) . "<br>";
+        echo "User ID: " . $user['yonetici_id'] . "<br>";
     } else {
         echo "User NOT found in 'yonetici'<br>";
     }

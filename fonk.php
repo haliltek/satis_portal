@@ -55,4 +55,12 @@ $logoService = new LogoService(
     logDebugFile: __DIR__ . '/debug.log'
 );
 
+// Force UTF-8 for all connections
+if (isset($db)) {
+    mysqli_set_charset($db, "utf8mb4");
+}
+if (isset($gemas_web_db)) {
+    mysqli_set_charset($gemas_web_db, "utf8mb4");
+}
+
 ?>
