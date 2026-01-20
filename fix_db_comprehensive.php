@@ -40,8 +40,6 @@ foreach ($tables as $table) {
     }
 }
 
-}
-
 // 3. Ensure 'fiyat_onerileri' table exists
 echo "<h2>3. Verifying 'fiyat_onerileri' Table</h2>";
 $sql = "CREATE TABLE IF NOT EXISTS fiyat_onerileri (

@@ -1,6 +1,8 @@
-<?php
 $genelayar_sorgulama = mysqli_query($db, "SELECT * FROM  ayarlar");
 $ayarim = mysqli_fetch_array($genelayar_sorgulama);
+if (!$ayarim) {
+    $ayarim = ["resim" => "logo.png", "unvan" => "Gemas"];
+}
 $userType = $_SESSION['user_type'] ?? '';
 ?>
 <header id="page-topbar">
