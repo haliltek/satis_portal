@@ -5,16 +5,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: gemas_portal_app
     restart: unless-stopped
-    ports:
-      - "80:80"
     environment:
-      - DB_HOST=db
-      - DB_NAME=${DB_NAME:-gemas_portal}
-      - DB_USER=${DB_USER:-root}
-      - DB_PASSWORD=${DB_PASSWORD:-root}
-      - REDIS_HOST=redis
+      DB_HOST: db
+      DB_NAME: ${DB_NAME:-gemas_portal}
+      DB_USER: ${DB_USER:-gemas_user}
+      DB_PASSWORD: ${DB_PASSWORD:-strongpass}
+      REDIS_HOST: redis
     depends_on:
       - db
       - redis
@@ -23,11 +20,12 @@ services:
 
   db:
     image: mariadb:10.6
-    container_name: gemas_portal_db
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-root}
-      - MYSQL_DATABASE=${DB_NAME:-gemas_portal}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpass}
+      MYSQL_DATABASE: ${DB_NAME:-gemas_portal}
+      MYSQL_USER: ${DB_USER:-gemas_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-strongpass}
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
@@ -35,7 +33,6 @@ services:
 
   redis:
     image: redis:alpine
-    container_name: gemas_portal_redis
     restart: unless-stopped
     command: redis-server --appendonly yes
     volumes:

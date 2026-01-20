@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Install all system dependencies and MSSQL drivers in one layer
+# 1️⃣ System dependencies
 RUN apt-get update && apt-get install -y \
     gnupg2 \
     ca-certificates \
@@ -14,45 +14,60 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     wget \
-    # Add Microsoft repository and install MSSQL drivers
-    && wget -qO- https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    && wget -qO /etc/apt/sources.list.d/mssql-release.list https://packages.microsoft.com/config/debian/11/prod.list \
-    && apt-get update \
-    && ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18 \
-    && echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc \
     && rm -rf /var/lib/apt/lists/*
 
-# 3. Install PHP Extensions
-# Core: mysqli (for App), pdo_mysql (for App), gd, zip, intl, soap
-RUN docker-php-ext-install mysqli pdo_mysql gd zip intl soap opcache
+# 2️⃣ Microsoft GPG key (NEW WAY)
+RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc \
+    | gpg --dearmor \
+    | tee /usr/share/keyrings/microsoft.gpg > /dev/null
 
-# 4. Install PECL Extensions
-# Redis & SQL Server
+# 3️⃣ Microsoft repo
+RUN echo "deb [signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/debian/11/prod bullseye main" \
+    > /etc/apt/sources.list.d/mssql-release.list
+
+# 4️⃣ Install MSSQL ODBC drivers
+RUN apt-get update && ACCEPT_EULA=Y apt-get install -y \
+    msodbcsql18 \
+    mssql-tools18 \
+    && rm -rf /var/lib/apt/lists/*
+
+# 5️⃣ PATH for mssql-tools
+ENV PATH="/opt/mssql-tools18/bin:${PATH}"
+
+# 6️⃣ PHP core extensions
+RUN docker-php-ext-install \
+    mysqli \
+    pdo_mysql \
+    gd \
+    zip \
+    intl \
+    soap \
+    opcache
+
+# 7️⃣ PECL extensions
 RUN pecl install redis sqlsrv pdo_sqlsrv \
     && docker-php-ext-enable redis sqlsrv pdo_sqlsrv
 
-# 5. Enable Apache Modules
+# 8️⃣ Apache modules
 RUN a2enmod rewrite headers
 
-# 6. Configure PHP
-# Use the default production configuration
+# 9️⃣ PHP config
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-# Set working directory
+# 10️⃣ Workdir
 WORKDIR /var/www/html
 
-# 7. Copy Application Code
-COPY . /var/www/html
+# 11️⃣ Copy ONLY application files
+COPY . .
 
-# 8. Permissions
+# 12️⃣ Permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# Create upload directory if needed
-RUN mkdir -p /var/www/html/upload && chmod -R 777 /var/www/html/upload
+# Upload dir (runtime needed)
+RUN mkdir -p /var/www/html/upload \
+    && chown -R www-data:www-data /var/www/html/upload \
+    && chmod -R 775 /var/www/html/upload
 
-# Expose Port
 EXPOSE 80
-
-# Start Apache directly
 CMD ["apache2-foreground"]
