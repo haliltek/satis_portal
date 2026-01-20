@@ -3,6 +3,8 @@ FROM php:8.2-apache
 # 1. System Dependencies & Microsoft ODBC Driver Prerequisites
 RUN apt-get update && apt-get install -y \
     gnupg2 \
+    ca-certificates \
+    apt-transport-https \
     unixodbc-dev \
     libpng-dev \
     libzip-dev \
@@ -11,11 +13,12 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 
 # 2. Add Microsoft Repo for SQL Server Drivers
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    && curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && wget -qO /etc/apt/sources.list.d/mssql-release.list https://packages.microsoft.com/config/debian/11/prod.list \
     && apt-get update \
     && ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18 \
     && echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc \
