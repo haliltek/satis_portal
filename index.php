@@ -155,7 +155,16 @@ if (!$genelayar_sorgulama) {
 
                                     if ($durum) {
                                         // Veritabanındaki hash ile gelen düz şifreyi karşılaştırıyoruz
-                                        if (password_verify($parola, $durum['parola'])) {
+                                        // Hem yeni (bcrypt) hem eski (md5) şifreleri kabul et
+                                        if (password_verify($parola, $durum['parola']) || md5($parola) === $durum['parola']) {
+                                            
+                                            // Güvenlik güncellemesi: Eğer şifre MD5 ise, onu yeni sisteme (bcrypt) çevir
+                                            if (md5($parola) === $durum['parola']) {
+                                                $newHash = password_hash($parola, PASSWORD_DEFAULT);
+                                                $uid = $durum['yonetici_id'];
+                                                $db->query("UPDATE yonetici SET parola='$newHash' WHERE yonetici_id='$uid'");
+                                            }
+
                                             date_default_timezone_set('Etc/GMT-3');
                                             $tarih = date("d.m.Y");
                                             $saat = date("H:i");
@@ -213,7 +222,15 @@ if (!$genelayar_sorgulama) {
                                         }
                                         // ---------------------
 
-                                        if ($dealer && password_verify($parola, $dealer['password'])) {
+                                        if ($dealer && (password_verify($parola, $dealer['password']) || md5($parola) === $dealer['password'])) {
+                                            
+                                            // Güvenlik güncellemesi (Bayi)
+                                            if (md5($parola) === $dealer['password']) {
+                                                $newHash = password_hash($parola, PASSWORD_DEFAULT);
+                                                $uid = $dealer['id'];
+                                                $db->query("UPDATE b2b_users SET password='$newHash' WHERE id='$uid'");
+                                            }
+
                                             date_default_timezone_set('Etc/GMT-3');
                                             $tarih = date("d.m.Y");
                                             $saat = date("H:i");
