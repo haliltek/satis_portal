@@ -42,6 +42,21 @@ services:
     networks:
       - gemas_portal_network
 
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: unless-stopped
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: ${DB_ROOT_PASSWORD:-rootpass}
+    depends_on:
+      - db
+    networks:
+      - gemas_portal_network
+
 volumes:
   mysql_data:
   redis_data:
