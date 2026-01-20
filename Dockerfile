@@ -83,8 +83,8 @@ RUN mkdir -p /var/lib/php/sessions \
     && chmod -R 700 /var/lib/php/sessions
 
 # 14️⃣ Configure PHP session path
-RUN echo "session.save_handler = redis" > /usr/local/etc/php/conf.d/session.ini \
-    && echo "session.save_path = \"tcp://redis:6379?auth=GEMAS_REDIS_SECURE_2026\"" >> /usr/local/etc/php/conf.d/session.ini
+RUN echo "session.save_handler = files" > /usr/local/etc/php/conf.d/session.ini \
+    && echo "session.save_path = \"/var/lib/php/sessions\"" >> /usr/local/etc/php/conf.d/session.ini
 
 # Upload dir (runtime needed)
 RUN mkdir -p /var/www/html/upload \
