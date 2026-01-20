@@ -235,9 +235,15 @@ $hasMonthlyData = count($monthly) > 0;
 
     <!-- 3. Bekleyen Fiyat Talepleri (Yeni) -->
     <?php 
-    $countPriceRequests = getRowCount($db, "SELECT * FROM fiyat_onerileri WHERE durum='Beklemede'");
-    $prColor = $countPriceRequests > 0 ? 'text-warning' : 'text-secondary';
-    $prBadge = $countPriceRequests > 0 ? '<span class="badge bg-warning ms-2">' . $countPriceRequests . '</span>' : '';
+    $countPriceRequests = 0;
+    try {
+        $countPriceRequests = getRowCount($db, "SELECT * FROM fiyat_onerileri WHERE durum='Beklemede'");
+        $prColor = $countPriceRequests > 0 ? 'text-warning' : 'text-secondary';
+        $prBadge = $countPriceRequests > 0 ? '<span class="badge bg-warning ms-2">' . $countPriceRequests . '</span>' : '';
+    } catch (mysqli_sql_exception $e) {
+        $prColor = 'text-danger';
+        $prBadge = '<span class="badge bg-danger ms-2" title="Tablo Eksik!">!</span>';
+    }
     ?>
     <div class="col-md-3 col-sm-6 mb-3">
         <a href="fiyat_talepleri.php" class="text-decoration-none">

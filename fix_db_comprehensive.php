@@ -40,5 +40,29 @@ foreach ($tables as $table) {
     }
 }
 
+}
+
+// 3. Ensure 'fiyat_onerileri' table exists
+echo "<h2>3. Verifying 'fiyat_onerileri' Table</h2>";
+$sql = "CREATE TABLE IF NOT EXISTS fiyat_onerileri (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    stok_kodu VARCHAR(100),
+    urun_id INT,
+    mevcut_fiyat_yurtici DECIMAL(15, 2),
+    mevcut_fiyat_export DECIMAL(15, 2),
+    oneri_fiyat_yurtici DECIMAL(15, 2),
+    oneri_fiyat_export DECIMAL(15, 2),
+    oneri_not TEXT,
+    yonetici_id INT,
+    tarih DATETIME DEFAULT CURRENT_TIMESTAMP,
+    durum ENUM('Beklemede', 'Onaylandı', 'Reddedildi') DEFAULT 'Beklemede'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+
+if ($db->query($sql)) {
+    echo "<span style='color:green'>Table 'fiyat_onerileri' verified/created!</span><br>";
+} else {
+    echo "<span style='color:red'>Table creation FAILED: " . $db->error . "</span><br>";
+}
+
 echo "<h2>Done.</h2>";
 ?>
