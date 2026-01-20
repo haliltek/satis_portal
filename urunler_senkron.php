@@ -30,11 +30,12 @@ function parseEnvFile(string $path): array
 $env = parseEnvFile(__DIR__ . '/.env');
 
 // MySQL bağlantı bilgileri
-$mysqlHost = $env['DB_HOST']   ?? 'localhost';
-$mysqlUser = $env['DB_USER']   ?? 'root';
-$mysqlPass = $env['DB_PASS']   ?? '';
-$mysqlDB   = $env['DB_NAME']   ?? '';
-$mysqlPort = $env['DB_PORT']   ?? '3306';
+// MySQL bağlantı bilgileri
+$mysqlHost = getenv('DB_HOST') ?: ($env['DB_HOST'] ?? 'localhost');
+$mysqlUser = getenv('DB_USER') ?: ($env['DB_USER'] ?? 'root');
+$mysqlPass = getenv('DB_PASSWORD') ?: ($env['DB_PASS'] ?? '');
+$mysqlDB   = getenv('DB_NAME') ?: ($env['DB_NAME'] ?? '');
+$mysqlPort = getenv('DB_PORT') ?: ($env['DB_PORT'] ?? '3306');
 
 // MSSQL bağlantı bilgileri
 $mssqlHost = '192.168.5.253,1433';

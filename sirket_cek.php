@@ -38,10 +38,10 @@ $mssql_dbname_gemas  = $env['GEMAS_LOGO_DB'] ?? '';
 $mssql_username      = $env['GEMPA_LOGO_USER'] ?? '';
 $mssql_password      = $env['GEMPA_LOGO_PASS'] ?? '';
 
-$mysql_host     = $env['DB_HOST'] ?? 'localhost';
-$mysql_dbname   = $env['DB_NAME'] ?? '';
-$mysql_username = $env['DB_USER'] ?? 'root';
-$mysql_password = $env['DB_PASS'] ?? '';
+$mysql_host     = getenv('DB_HOST') ?: ($env['DB_HOST'] ?? 'localhost');
+$mysql_dbname   = getenv('DB_NAME') ?: ($env['DB_NAME'] ?? '');
+$mysql_username = getenv('DB_USER') ?: ($env['DB_USER'] ?? 'root');
+$mysql_password = getenv('DB_PASSWORD') ?: ($env['DB_PASS'] ?? '');
 
 try {
     $mssql_dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname;Encrypt=no;TrustServerCertificate=yes";
