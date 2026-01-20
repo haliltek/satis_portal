@@ -20,8 +20,14 @@ function gemas_web_database(): void
 		$gemas_web_db = mysqli_init();
 		$gemas_web_db->options(MYSQLI_OPT_CONNECT_TIMEOUT, 2); // 2 second timeout
 		
-		if (!@$gemas_web_db->real_connect($hostname, $username, $password, $dbname, $port)) {
-			error_log("Uzak veritabanı bağlantı hatası: " . mysqli_connect_error());
+		try {
+			if (!@$gemas_web_db->real_connect($hostname, $username, $password, $dbname, $port)) {
+				error_log("Uzak veritabanı bağlantı hatası: " . mysqli_connect_error());
+				$gemas_web_db = null;
+				return;
+			}
+		} catch (Throwable $t) {
+			error_log("Uzak veritabanı fatal hatası: " . $t->getMessage());
 			$gemas_web_db = null;
 			return;
 		}

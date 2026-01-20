@@ -42,7 +42,7 @@ if ($mysqli->connect_error) {
         if ($check && $check->num_rows > 0) {
              echo "Table '$tbl': <span class='ok'>EXISTS</span><br>";
         } else {
-             echo "Table '$tbl': <span class='fail'>MISSING</span><br>";
+             echo "Table '$tbl': <span class='fail'>MISSING</span> - <a href='fix_schema.php'>[FIX NOW]</a><br>";
         }
     }
 }
@@ -56,11 +56,16 @@ $r_pass = "2261686Me!";
 echo "Connecting to $r_host...<br>";
 $remote = @mysqli_init();
 $remote->options(MYSQLI_OPT_CONNECT_TIMEOUT, 3);
-if (@$remote->real_connect($r_host, $r_user, $r_pass, "gemas_pool_technology")) {
-    echo "Result: <span class='ok'>CONNECTED &#10004;</span><br>";
-} else {
-    echo "Result: <span class='fail'>FAILED: " . mysqli_connect_error() . "</span><br>";
-}
+    try {
+        if (@$remote->real_connect($r_host, $r_user, $r_pass, "gemas_pool_technology")) {
+            echo "Result: <span class='ok'>CONNECTED &#10004;</span><br>";
+        } else {
+            echo "Result: <span class='fail'>FAILED: " . mysqli_connect_error() . "</span><br>";
+        }
+    } catch (Throwable $e) {
+        echo "Result: <span class='fail'>CRASHED: " . $e->getMessage() . "</span><br>";
+        echo "<small>Check firewall or remote server allow-list.</small><br>";
+    }
 echo "</div>";
 
 // 4. MSSQL Connection (Logo)
