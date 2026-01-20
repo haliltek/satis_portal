@@ -37,6 +37,8 @@ foreach ($tables as $table) {
         echo "<span style='color:green'>OK</span><br>";
     } else {
         echo "<span style='color:red'>FAILED: " . $db->error . "</span><br>";
+    }
+}
 
 // 3. Ensure 'fiyat_onerileri' table exists
 echo "<h2>3. Verifying 'fiyat_onerileri' Table</h2>";
