@@ -144,7 +144,8 @@ if (!$genelayar_sorgulama) {
                                             echo "Hash Length: " . strlen($durum['parola']) . "<br>";
                                             $check = password_verify($parola, $durum['parola']);
                                             echo "password_verify() Result: " . ($check ? '<span style="color:green">TRUE</span>' : '<span style="color:red">FALSE</span>') . "<br>";
-                                            echo "Generated Hash for Input: " . password_hash($parola, PASSWORD_DEFAULT) . "<br>";
+                                            echo "MD5 Check: " . (md5($parola) === $durum['parola'] ? '<span style="color:green">MATCHES (Legacy MD5)</span>' : 'No match') . "<br>";
+                                            echo "Generated Hash (bcrypt): " . password_hash($parola, PASSWORD_DEFAULT) . "<br>";
                                         } else {
                                             echo "User NOT found in 'yonetici' table.<br>";
                                         }
@@ -182,6 +183,10 @@ if (!$genelayar_sorgulama) {
                                         } else {
                                             writeLog("Login failed for $kullanici: wrong password");
                                             $error = 'E-Posta veya parola hatalı. Lütfen tekrar deneyin.';
+                                            
+                                            if (isset($_GET['debug_mode'])) {
+                                                echo "<br><b>MD5 Check:</b> " . (md5($parola) === $durum['parola'] ? '<span style="color:green">MATCHES (Legacy MD5)</span>' : 'No match') . "<br>";
+                                            }
                                         }
                                     } else {
                                         // Yönetici bulunamadıysa bayi tablosunda ara
@@ -246,7 +251,7 @@ if (!$genelayar_sorgulama) {
                                 <?php if (!empty($error)): ?>
                                     <div class="alert alert-danger" role="alert"><?php echo $error; ?></div>
                                 <?php endif; ?>
-                                <form action="index.php" method="post">
+                                <form action="" method="post">
                                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
                                     <div class="mb-3">
                                         <label class="form-label" for="username">E-Posta Adresiniz</label>
