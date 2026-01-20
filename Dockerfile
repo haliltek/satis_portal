@@ -25,8 +25,9 @@ RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc \
 RUN echo "deb [signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/debian/11/prod bullseye main" \
     > /etc/apt/sources.list.d/mssql-release.list
 
-# 3.5️⃣ Fix OpenSSL 3 issue with legacy SQL Servers (SECLEVEL=0)
-RUN sed -i 's/SECLEVEL=2/SECLEVEL=0/' /etc/ssl/openssl.cnf
+# 3.5️⃣ Fix OpenSSL 3 issue with legacy SQL Servers (Force SECLEVEL=0)
+# 3.5️⃣ Fix OpenSSL 3 issue with legacy SQL Servers (Copy custom config)
+COPY openssl.cnf /etc/ssl/openssl.cnf
 
 # 4️⃣ Install MSSQL ODBC drivers
 RUN apt-get update && ACCEPT_EULA=Y apt-get install -y \
