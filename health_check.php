@@ -79,7 +79,8 @@ if (!extension_loaded('pdo_sqlsrv')) {
     echo "<span class='fail'>pdo_sqlsrv extension missing! Drivers not installed?</span>";
 } else {
     try {
-        $conn = new PDO("sqlsrv:Server=$ms_server;Database=GEMAS2026;LoginTimeout=3", $ms_user, $ms_pass);
+        // msodbcsql18 requires TrustServerCertificate for self-signed certs
+        $conn = new PDO("sqlsrv:Server=$ms_server;Database=GEMAS2026;LoginTimeout=3;TrustServerCertificate=yes", $ms_user, $ms_pass);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         echo "Result: <span class='ok'>CONNECTED &#10004;</span><br>";
     } catch (Exception $e) {

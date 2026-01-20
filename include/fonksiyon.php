@@ -71,7 +71,8 @@ function gemas_logo_veritabani()
 	$mssql_password = "12621262";
 
 	try {
-		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname";
+        // msodbcsql18 requires TrustServerCertificate for self-signed certs
+		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname;TrustServerCertificate=yes";
 		// Add timeout
 		$options = [
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -97,7 +98,8 @@ function gempa_logo_veritabani()
 	$mssql_password = "12621262";
 
 	try {
-		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname";
+        // msodbcsql18 requires TrustServerCertificate for self-signed certs
+		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname;TrustServerCertificate=yes";
 		// Add timeout
 		$options = [
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -123,7 +125,8 @@ function merve2_veritabani()
 	$mssql_password = "12621262";
 
 	try {
-		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname";
+        // msodbcsql18 requires TrustServerCertificate for self-signed certs
+		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname;TrustServerCertificate=yes";
 		// Add timeout
 		$options = [
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
