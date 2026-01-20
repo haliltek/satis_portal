@@ -13,7 +13,10 @@ try {
 
     $redis = new Redis();
     $connected = $redis->connect($redis_host, $redis_port, 2.5); // 2.5 sec timeout
-    $redis->auth('GEMAS_REDIS_SECURE_2026');
+    $pass = getenv('REDIS_PASSWORD');
+    if ($pass) {
+        $redis->auth($pass);
+    }
 
     if ($connected) {
         echo "<h2 style='color:green'>Redis Connection SUCCESSFUL!</h2>";
