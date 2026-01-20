@@ -44,7 +44,7 @@ $mysql_username = $env['DB_USER'] ?? 'root';
 $mysql_password = $env['DB_PASS'] ?? '';
 
 try {
-    $mssql_dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname";
+    $mssql_dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname;Encrypt=no;TrustServerCertificate=yes";
     $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
     if (defined('PDO::SQLSRV_ATTR_ENCODING') && defined('PDO::SQLSRV_ENCODING_UTF8')) {
         $options[PDO::SQLSRV_ATTR_ENCODING] = PDO::SQLSRV_ENCODING_UTF8;
@@ -52,7 +52,7 @@ try {
     $mssql_baglanti = new PDO($mssql_dsn, $mssql_username, $mssql_password, $options);
 
     // GEMAS veritabanı bağlantısı
-    $mssql_dsn_gemas = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname_gemas";
+    $mssql_dsn_gemas = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname_gemas;Encrypt=no;TrustServerCertificate=yes";
     $mssql_baglanti_gemas = new PDO($mssql_dsn_gemas, $mssql_username, $mssql_password, $options);
 } catch (PDOException $e) {
     die('MSSQL bağlantısı başarısız: ' . htmlspecialchars($e->getMessage()));
