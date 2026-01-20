@@ -41,17 +41,17 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 WORKDIR /var/www/html
 
 # 7. Copy Application Code
-# Note: In development/Coolify, this might be overridden by volume mounts or git pulls
 COPY . /var/www/html
 
 # 8. Permissions
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html \
-    && sed -i 's/\r$//' entrypoint.sh \
-    && chmod +x entrypoint.sh
+    && chmod -R 755 /var/www/html
+
+# Create upload directory if needed
+RUN mkdir -p /var/www/html/upload && chmod -R 777 /var/www/html/upload
 
 # Expose Port
 EXPOSE 80
 
-# Start Apache
-ENTRYPOINT ["./entrypoint.sh"]
+# Start Apache directly
+CMD ["apache2-foreground"]
