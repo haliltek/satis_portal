@@ -10,7 +10,7 @@ services:
       - "80"
     labels:
       - traefik.enable=true
-      - traefik.http.routers.gemas_portal.rule=Host(`tcooooco804swwwsg4o0s0gk.195.175.85.186.sslip.io`)
+      - traefik.http.routers.gemas_portal.rule=Host(`hs0cg04ccs0wk00kkss8gwso.195.175.85.186.sslip.io`)
       - traefik.http.routers.gemas_portal.entrypoints=http
       - traefik.http.services.gemas_portal.loadbalancer.server.port=80
     depends_on:
