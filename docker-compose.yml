@@ -55,9 +55,9 @@ services:
       PMA_PORT: 3306
       PMA_USER: root
       PMA_PASSWORD: ${DB_ROOT_PASSWORD:-rootpass}
-      UPLOAD_LIMIT: 256M
-      MEMORY_LIMIT: 512M
-      MAX_EXECUTION_TIME: 600
+      UPLOAD_LIMIT: 1G
+      MEMORY_LIMIT: 2G
+      MAX_EXECUTION_TIME: 3600
     depends_on:
       - db
     networks:
