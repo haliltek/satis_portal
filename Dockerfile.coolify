@@ -1,0 +1,51 @@
+FROM php:8.2-apache
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gnupg2 \
+    unixodbc-dev \
+    libpng-dev \
+    libzip-dev \
+    libicu-dev \
+    libxml2-dev \
+    unzip \
+    git \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Add Microsoft Repo for SQL Server Drivers
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+    && apt-get update \
+    && ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18 \
+    && echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install PHP Extensions
+RUN docker-php-ext-install mysqli pdo_mysql gd zip intl soap opcache
+
+# Install PECL Extensions (Redis & SQL Server)
+RUN pecl install redis sqlsrv pdo_sqlsrv \
+    && docker-php-ext-enable redis sqlsrv pdo_sqlsrv
+
+# Enable Apache Modules
+RUN a2enmod rewrite headers
+
+# Configure PHP
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy application code
+COPY . /var/www/html
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
+
+# Expose port
+EXPOSE 80
+
+# Start Apache directly (no entrypoint script)
+CMD ["apache2-foreground"]

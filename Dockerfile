@@ -64,6 +64,14 @@ COPY . .
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
+# 13️⃣ Create PHP session directory
+RUN mkdir -p /var/lib/php/sessions \
+    && chown -R www-data:www-data /var/lib/php/sessions \
+    && chmod -R 700 /var/lib/php/sessions
+
+# 14️⃣ Configure PHP session path
+RUN echo "session.save_path = \"/var/lib/php/sessions\"" > /usr/local/etc/php/conf.d/session.ini
+
 # Upload dir (runtime needed)
 RUN mkdir -p /var/www/html/upload \
     && chown -R www-data:www-data /var/www/html/upload \

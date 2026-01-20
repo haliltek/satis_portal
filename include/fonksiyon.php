@@ -39,11 +39,12 @@ function gemas_web_database(): void
 function local_database(): void
 {
 	global $db;
-	$db_host = "localhost";
-	$db_user = "root";
-	$db_password = ""; // XAMPP varsayılan şifresi boş
-	$db_name = "b2bgemascom_teklif";
-	$db_port = 3306;
+	// Docker ortamında environment variable'ları kullan
+	$db_host = getenv('DB_HOST') ?: 'localhost';
+	$db_user = getenv('DB_USER') ?: 'root';
+	$db_password = getenv('DB_PASSWORD') ?: '';
+	$db_name = getenv('DB_NAME') ?: 'b2bgemascom_teklif';
+	$db_port = (int)(getenv('DB_PORT') ?: 3306);
 
 	// Bağlantıyı port numarası ile yapıyoruz.
 	$db =  mysqli_connect($db_host, $db_user, $db_password, $db_name, $db_port);
@@ -53,6 +54,7 @@ function local_database(): void
 	}
 	$db->set_charset("utf8");
 }
+
 
 function gemas_logo_veritabani()
 {
