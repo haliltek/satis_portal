@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "80"
+      - "8080:80"
     labels:
       - traefik.enable=true
       - traefik.http.routers.gemas_portal.rule=Host(`hs0cg04ccs0wk00kkss8gwso.195.175.85.186.sslip.io`)
