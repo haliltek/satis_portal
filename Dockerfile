@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# 1. System Dependencies & Microsoft ODBC Driver Prerequisites
+# Install all system dependencies and MSSQL drivers in one layer
 RUN apt-get update && apt-get install -y \
     gnupg2 \
     ca-certificates \
@@ -14,10 +14,8 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     wget \
-    && rm -rf /var/lib/apt/lists/*
-
-# 2. Add Microsoft Repo for SQL Server Drivers
-RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    # Add Microsoft repository and install MSSQL drivers
+    && wget -qO- https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && wget -qO /etc/apt/sources.list.d/mssql-release.list https://packages.microsoft.com/config/debian/11/prod.list \
     && apt-get update \
     && ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18 \
