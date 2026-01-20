@@ -93,11 +93,11 @@ try {
 
 // Portal (remote) MySQL connection
 try {
-  $portalHost = $_ENV['GEMAS_WEB_HOST'];
-  $portalUser = $_ENV['GEMAS_WEB_USER'];
-  $portalPass = $_ENV['GEMAS_WEB_PASS'];
-  $portalDb   = $_ENV['GEMAS_WEB_DB'];
-  $portalPort = $_ENV['GEMAS_WEB_PORT'] ?? '3306';
+  $portalHost = getenv('GEMAS_WEB_HOST') ?: ($env['GEMAS_WEB_HOST'] ?? '');
+  $portalUser = getenv('GEMAS_WEB_USER') ?: ($env['GEMAS_WEB_USER'] ?? '');
+  $portalPass = getenv('GEMAS_WEB_PASS') ?: ($env['GEMAS_WEB_PASS'] ?? '');
+  $portalDb   = getenv('GEMAS_WEB_DB') ?: ($env['GEMAS_WEB_DB'] ?? '');
+  $portalPort = getenv('GEMAS_WEB_PORT') ?: ($env['GEMAS_WEB_PORT'] ?? '3306');
   $dsnPortal  = "mysql:host={$portalHost};port={$portalPort};dbname={$portalDb};charset=utf8";
   $baglantiPortal = new PDO($dsnPortal, $portalUser, $portalPass, $optionsMySQL);
   $portalCols = $baglantiPortal->query('SHOW COLUMNS FROM portal_urunler')->fetchAll(PDO::FETCH_COLUMN);
