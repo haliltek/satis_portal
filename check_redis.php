@@ -15,7 +15,15 @@ try {
     $connected = $redis->connect($redis_host, $redis_port, 2.5); // 2.5 sec timeout
     $pass = getenv('REDIS_PASSWORD');
     if ($pass) {
+        // Debugging info (Masked)
+        $len = strlen($pass);
+        $first = $len > 0 ? $pass[0] : '?';
+        $last = $len > 0 ? $pass[$len-1] : '?';
+        echo "Using Password from ENV: Length=$len, Starts='$first', Ends='$last'<br>";
+        
         $redis->auth($pass);
+    } else {
+        echo "No REDIS_PASSWORD found in environment!<br>";
     }
 
     if ($connected) {
