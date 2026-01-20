@@ -1,0 +1,17 @@
+.git
+.idea
+.vscode
+node_modules
+vendor
+sql/
+*.sql
+*.log
+*.zip
+*.tar
+*.gz
+*.rar
+*.bak
+temp_files/
+docker-compose.yml
+Dockerfile
+README.md
