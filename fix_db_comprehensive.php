@@ -1,0 +1,44 @@
+<?php
+include "fonk.php";
+
+echo "<h1>Comprehensive Database Fixer</h1>";
+
+// 1. Fix Missing Columns in 'sirket'
+echo "<h2>1. Checking 'sirket' table columns...</h2>";
+$cols = $db->query("SHOW COLUMNS FROM sirket");
+$found_payplan = false;
+while($row = $cols->fetch_assoc()) {
+    if($row['Field'] == 'payplan_code') $found_payplan = true;
+}
+
+if (!$found_payplan) {
+    echo "Adding payplan columns... ";
+    $sql = "ALTER TABLE sirket ADD COLUMN payplan_code VARCHAR(50) DEFAULT NULL, ADD COLUMN payplan_def VARCHAR(255) DEFAULT NULL";
+    if ($db->query($sql)) {
+        echo "<span style='color:green'>SUCCESS</span><br>";
+    } else {
+        echo "<span style='color:red'>FAILED: " . $db->error . "</span><br>";
+    }
+} else {
+    echo "<span style='color:green'>Columns already exist.</span><br>";
+}
+
+// 2. Fix Collation Mismatch
+echo "<h2>2. Standardizing Collations (utf8mb4_unicode_ci)</h2>";
+$tables = ['urun_fiyat_log', 'yonetici', 'urunler', 'sirket', 'ogteklif2', 'ogteklifurun2'];
+
+foreach ($tables as $table) {
+    echo "Converting table <b>$table</b>... ";
+    
+    // First convert table default
+    $sql1 = "ALTER TABLE $table CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
+    
+    if ($db->query($sql1)) {
+        echo "<span style='color:green'>OK</span><br>";
+    } else {
+        echo "<span style='color:red'>FAILED: " . $db->error . "</span><br>";
+    }
+}
+
+echo "<h2>Done.</h2>";
+?>
