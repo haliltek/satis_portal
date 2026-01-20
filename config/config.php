@@ -22,11 +22,11 @@ return [
     'firmNr' => $_ENV['GEMPA_FIRM_NR'] ?? '0',
 
     'db' => [
-        'host' => $_ENV['DB_HOST'] ?? 'localhost',
-        'port' => $_ENV['DB_PORT'] ?? '3306',
-        'user' => $_ENV['DB_USER'] ?? 'root',
-        'pass' => $_ENV['DB_PASS'] ?? '',
-        'name' => $_ENV['DB_NAME'] ?? 'b2bgemascom_teklif',
+        'host' => getenv('DB_HOST') ?: ($_ENV['DB_HOST'] ?? 'localhost'),
+        'port' => getenv('DB_PORT') ?: ($_ENV['DB_PORT'] ?? '3306'),
+        'user' => getenv('DB_USER') ?: ($_ENV['DB_USER'] ?? 'root'),
+        'pass' => getenv('DB_PASSWORD') ?: ($_ENV['DB_PASSWORD'] ?? $_ENV['DB_PASS'] ?? ''),
+        'name' => getenv('DB_NAME') ?: ($_ENV['DB_NAME'] ?? 'gemas_portal'),
     ],
 
     'logo' => [
