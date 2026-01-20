@@ -18,11 +18,11 @@ $mysqlPass = $config['db']['pass'];
 $mysqlDB   = $config['db']['name'];
 $mysqlPort = $config['db']['port'] ?? '3306';
 
-$portalHost = $_ENV['GEMAS_WEB_HOST'];
-$portalUser = $_ENV['GEMAS_WEB_USER'];
-$portalPass = $_ENV['GEMAS_WEB_PASS'];
-$portalDb   = $_ENV['GEMAS_WEB_DB'];
-$portalPort = $_ENV['GEMAS_WEB_PORT'] ?? '3306';
+$portalHost = getenv('GEMAS_WEB_HOST') ?: ($_ENV['GEMAS_WEB_HOST'] ?? '');
+$portalUser = getenv('GEMAS_WEB_USER') ?: ($_ENV['GEMAS_WEB_USER'] ?? '');
+$portalPass = getenv('GEMAS_WEB_PASS') ?: ($_ENV['GEMAS_WEB_PASS'] ?? '');
+$portalDb   = getenv('GEMAS_WEB_DB') ?: ($_ENV['GEMAS_WEB_DB'] ?? '');
+$portalPort = getenv('GEMAS_WEB_PORT') ?: ($_ENV['GEMAS_WEB_PORT'] ?? '3306');
 
 $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
