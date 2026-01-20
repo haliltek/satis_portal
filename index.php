@@ -133,6 +133,25 @@ if (!$genelayar_sorgulama) {
                                     }
                                     $durum = $result->fetch_array(MYSQLI_ASSOC);
 
+                                    // --- DEBUG LOGGING ---
+                                    if (isset($_GET['debug_mode'])) {
+                                        echo "<div style='background:#fff3cd; color:#856404; padding:10px; margin-bottom:10px; border:1px solid #ffeeba;'>";
+                                        echo "<strong>Debug Login:</strong><br>";
+                                        echo "Email: " . htmlspecialchars($kullanici) . "<br>";
+                                        if ($durum) {
+                                            echo "User FOUND in 'yonetici' table.<br>";
+                                            echo "Stored Password Hash: " . htmlspecialchars($durum['parola']) . "<br>";
+                                            echo "Hash Length: " . strlen($durum['parola']) . "<br>";
+                                            $check = password_verify($parola, $durum['parola']);
+                                            echo "password_verify() Result: " . ($check ? '<span style="color:green">TRUE</span>' : '<span style="color:red">FALSE</span>') . "<br>";
+                                            echo "Generated Hash for Input: " . password_hash($parola, PASSWORD_DEFAULT) . "<br>";
+                                        } else {
+                                            echo "User NOT found in 'yonetici' table.<br>";
+                                        }
+                                        echo "</div>";
+                                    }
+                                    // ---------------------
+
                                     if ($durum) {
                                         // Veritabanındaki hash ile gelen düz şifreyi karşılaştırıyoruz
                                         if (password_verify($parola, $durum['parola'])) {
@@ -172,6 +191,22 @@ if (!$genelayar_sorgulama) {
                                         $dealerRes = $dealerStmt->get_result();
                                         $dealer = $dealerRes ? $dealerRes->fetch_array(MYSQLI_ASSOC) : null;
                                         $dealerStmt->close();
+
+                                        // --- DEBUG LOGGING ---
+                                        if (isset($_GET['debug_mode'])) {
+                                            echo "<div style='background:#d1ecf1; color:#0c5460; padding:10px; margin-bottom:10px; border:1px solid #bee5eb;'>";
+                                            echo "<strong>Debug Dealer Search:</strong><br>";
+                                            if ($dealer) {
+                                                echo "User FOUND in 'b2b_users' table.<br>";
+                                                echo "Stored Password Hash: " . htmlspecialchars($dealer['password']) . "<br>";
+                                                 $check = password_verify($parola, $dealer['password']);
+                                                echo "password_verify() Result: " . ($check ? '<span style="color:green">TRUE</span>' : '<span style="color:red">FALSE</span>') . "<br>";
+                                            } else {
+                                                echo "User NOT found in 'b2b_users' table.<br>";
+                                            }
+                                            echo "</div>";
+                                        }
+                                        // ---------------------
 
                                         if ($dealer && password_verify($parola, $dealer['password'])) {
                                             date_default_timezone_set('Etc/GMT-3');
