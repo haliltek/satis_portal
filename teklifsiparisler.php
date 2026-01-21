@@ -261,31 +261,29 @@ function gonderEposta($db, $icerikid, $eposta, $metin, $notu, $url)
     $hazirlayan = (int)($row['hazirlayanid'] ?? 0);
     $sorgu->close();
 
-    $yoneticiMail = '';
+
+    // Teklif maiллeri için özel satis@gemas.com.tr kullan
+    // Diğer işlemler için veritabanındaki fiyat@gemas.com.tr kullanılmaya devam edecek
+    $yoneticiAd = 'Gemas Satış Ekibi';
+    $yoneticiMail = 'satis@gemas.com.tr';
+    $yoneticiSmtp = 'mail.gemas.com.tr';
+    $yoneticiPort = 465;
+    $yoneticiPass = 'Halil12621262.';
+    
+    // Hazırlayan kişi bilgilerini ek bilgi için alalım
     $yoneticiUnvan = '';
-    $yon = $db->prepare("SELECT adsoyad, mailposta, mailsmtp, mailport, mailparola, unvan, telefon FROM yonetici WHERE yonetici_id=?");
+    $yoneticiTel = '';
+    $yon = $db->prepare("SELECT unvan, telefon FROM yonetici WHERE yonetici_id=?");
     if ($yon) {
         $yon->bind_param('i', $hazirlayan);
         $yon->execute();
         $resYon = $yon->get_result();
         $yRow = $resYon->fetch_assoc();
-        $yoneticiAd = $yRow['adsoyad'] ?? '';
-        $yoneticiMail = $yRow['mailposta'] ?? '';
-        $yoneticiSmtp = $yRow['mailsmtp'] ?? 'satis.gemas.com.tr';
-        $yoneticiPort = $yRow['mailport'] ?? 465;
-        $yoneticiPass = $yRow['mailparola'] ?? 'Asdas123456!';
         $yoneticiUnvan = $yRow['unvan'] ?? '';
         $yoneticiTel = $yRow['telefon'] ?? '';
         $yon->close();
-    } else {
-        $yoneticiAd = '';
-        $yoneticiMail = '';
-        $yoneticiSmtp = 'satis.gemas.com.tr';
-        $yoneticiPort = 465;
-        $yoneticiPass = 'Asdas123456!';
-        $yoneticiUnvan = '';
-        $yoneticiTel = '';
     }
+
 
 
     $template = file_get_contents("mail_templates/mail_template.html");
@@ -310,7 +308,7 @@ function gonderEposta($db, $icerikid, $eposta, $metin, $notu, $url)
         $mail->Username = $yoneticiMail;
         $mail->Password = $yoneticiPass;
 
-        $mail->SMTPDebug = 0; // Hata ayıklama kapalı
+        $mail->SMTPDebug = 2; // Debug modu açık - detaylı hata göster
         $mail->SMTPAutoTLS = true;
         $mail->SMTPSecure = 'ssl';
 

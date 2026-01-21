@@ -109,7 +109,13 @@ try {
   $updatePortalStmt = $baglantiPortal->prepare($updatePortalSql);
   $checkPortalStmt = $baglantiPortal->prepare('SELECT 1 FROM portal_urunler WHERE stokkodu=? LIMIT 1');
 } catch (PDOException $e) {
-  die("Portal DB bağlantı hatası: " . htmlspecialchars($e->getMessage()));
+} catch (PDOException $e) {
+  // Portal DB hatası oluşursa, siteyi kilitleme. Sadece logla ve null yap.
+  error_log("Portal DB bağlantı hatası (Atlandı): " . $e->getMessage());
+  $baglantiPortal = null;
+  $insertPortalStmt = null;
+  $updatePortalStmt = null;
+  $checkPortalStmt  = null;
 }
 
 /**
@@ -165,26 +171,29 @@ if (isset($_GET['do']) && in_array($_GET['do'], ['insert', 'update'])) {
       ]);
       $logger->log("Insert success for $stokKodu");
 
-      $checkPortalStmt->execute([$stokKodu]);
-      if ($checkPortalStmt->fetchColumn()) {
-        $valuesUp = [];
-        foreach ($portalUpdateCols as $col) {
-          $valuesUp[] = $data[$col] ?? null;
-        }
-        $valuesUp[] = $stokKodu;
-        $updatePortalStmt->execute($valuesUp);
-      } else {
-        $valuesIns = [];
-        foreach ($portalInsertCols as $col) {
-          if ($col === 'durum') {
-            $valuesIns[] = 0;
-          } elseif ($col === 'last_updated') {
-            $valuesIns[] = null;
-          } else {
-            $valuesIns[] = $data[$col] ?? null;
+
+      if ($baglantiPortal && $checkPortalStmt && $updatePortalStmt && $insertPortalStmt) {
+        $checkPortalStmt->execute([$stokKodu]);
+        if ($checkPortalStmt->fetchColumn()) {
+          $valuesUp = [];
+          foreach ($portalUpdateCols as $col) {
+            $valuesUp[] = $data[$col] ?? null;
           }
+          $valuesUp[] = $stokKodu;
+          $updatePortalStmt->execute($valuesUp);
+        } else {
+          $valuesIns = [];
+          foreach ($portalInsertCols as $col) {
+            if ($col === 'durum') {
+              $valuesIns[] = 0;
+            } elseif ($col === 'last_updated') {
+              $valuesIns[] = null;
+            } else {
+              $valuesIns[] = $data[$col] ?? null;
+            }
+          }
+          $insertPortalStmt->execute($valuesIns);
         }
-        $insertPortalStmt->execute($valuesIns);
       }
 
       echo json_encode(['success' => true]);
@@ -229,26 +238,29 @@ if (isset($_GET['do']) && in_array($_GET['do'], ['insert', 'update'])) {
       ]);
       $logger->log("Update success for $stokKodu");
 
-      $checkPortalStmt->execute([$stokKodu]);
-      if ($checkPortalStmt->fetchColumn()) {
-        $valuesUp = [];
-        foreach ($portalUpdateCols as $col) {
-          $valuesUp[] = $data[$col] ?? null;
-        }
-        $valuesUp[] = $stokKodu;
-        $updatePortalStmt->execute($valuesUp);
-      } else {
-        $valuesIns = [];
-        foreach ($portalInsertCols as $col) {
-          if ($col === 'durum') {
-            $valuesIns[] = 0;
-          } elseif ($col === 'last_updated') {
-            $valuesIns[] = null;
-          } else {
-            $valuesIns[] = $data[$col] ?? null;
+
+      if ($baglantiPortal && $checkPortalStmt && $updatePortalStmt && $insertPortalStmt) {
+        $checkPortalStmt->execute([$stokKodu]);
+        if ($checkPortalStmt->fetchColumn()) {
+          $valuesUp = [];
+          foreach ($portalUpdateCols as $col) {
+            $valuesUp[] = $data[$col] ?? null;
           }
+          $valuesUp[] = $stokKodu;
+          $updatePortalStmt->execute($valuesUp);
+        } else {
+          $valuesIns = [];
+          foreach ($portalInsertCols as $col) {
+            if ($col === 'durum') {
+              $valuesIns[] = 0;
+            } elseif ($col === 'last_updated') {
+              $valuesIns[] = null;
+            } else {
+              $valuesIns[] = $data[$col] ?? null;
+            }
+          }
+          $insertPortalStmt->execute($valuesIns);
         }
-        $insertPortalStmt->execute($valuesIns);
       }
 
       echo json_encode(['success' => true]);

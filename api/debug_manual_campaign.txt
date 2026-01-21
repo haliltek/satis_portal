@@ -18888,3 +18888,2591 @@ RESPONSE: Array
 
 )
 
+--- 2026-01-20 22:35:22 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 021611
+                    [quantity] => 500
+                    [price] => 302
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [021611] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 50
+                            [1] => 5
+                        )
+
+                    [display] => 50,00-5,00
+                    [total] => 52.5
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 500
+            [6] => → Toplam tutar: 151000 €
+            [7] => → Ürün 021611: 50,00-5,00 (Toplam: %52.5)
+            [8] => Kampanya: Ertek - Çok Yollu Vana
+            [9] => → Eşleşen ürün yok
+            [10] => Kampanya: Ertek - LED & Ekipman
+            [11] => → Eşleşen ürün yok
+            [12] => Kampanya: Ertek - Boru & PVC
+            [13] => → Eşleşen ürün yok
+            [14] => Kampanya: Ertek - Kenar Ekipman
+            [15] => → Eşleşen ürün yok
+            [16] => Kampanya: Ertek - Kuvars & Cam Medya
+            [17] => → Eşleşen ürün yok
+        )
+
+)
+
+--- 2026-01-21 00:06:34 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 04212BFW
+                    [quantity] => 5000
+                    [price] => 102
+                )
+
+            [1] => Array
+                (
+                    [code] => 0311114
+                    [quantity] => 1500
+                    [price] => 216
+                )
+
+            [2] => Array
+                (
+                    [code] => 021133TA
+                    [quantity] => 1000
+                    [price] => 365
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [04212BFW] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 59.8
+                            [1] => 5
+                        )
+
+                    [display] => 59,80-5,00
+                    [total] => 61.81
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - LED & Ekipman
+                            [1] => Fiş Toplamı ≥ 5.000€
+                        )
+
+                )
+
+            [0311114] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya (Fallback)
+                        )
+
+                )
+
+            [021133TA] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 52.88
+                            [1] => 5
+                        )
+
+                    [display] => 52,88-5,00
+                    [total] => 55.24
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+            [1] => Ertek - LED & Ekipman
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 3
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 3
+            [5] => → Toplam miktar: 7500
+            [6] => → Toplam tutar: 1199000 €
+            [7] => → Ürün 04212BFW: 59,80-5,00 (Toplam: %61.81)
+            [8] => → Ürün 0311114: 47,69-5,00 (Toplam: %50.31)
+            [9] => → Ürün 021133TA: 52,88-5,00 (Toplam: %55.24)
+            [10] => Kampanya: Ertek - Çok Yollu Vana
+            [11] => → Eşleşen ürün yok
+            [12] => Kampanya: Ertek - LED & Ekipman
+            [13] => → Eşleşen ürün sayısı: 1
+            [14] => → Toplam miktar: 5000
+            [15] => → Toplam tutar: 510000 €
+            [16] => → Ürün 04212BFW: 59,80-5,00 (Toplam: %61.81)
+            [17] => Kampanya: Ertek - Boru & PVC
+            [18] => → Eşleşen ürün yok
+            [19] => Kampanya: Ertek - Kenar Ekipman
+            [20] => → Eşleşen ürün yok
+            [21] => Kampanya: Ertek - Kuvars & Cam Medya
+            [22] => → Eşleşen ürün sayısı: 1
+            [23] => → Toplam miktar: 1500
+            [24] => → Toplam tutar: 324000 €
+            [25] => → Min miktar sağlanmadı (5000)
+            [26] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+        )
+
+)
+
+--- 2026-01-21 00:10:29 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 04212BFW
+                    [quantity] => 5000
+                    [price] => 102
+                )
+
+            [1] => Array
+                (
+                    [code] => 0311114
+                    [quantity] => 1500
+                    [price] => 216
+                )
+
+            [2] => Array
+                (
+                    [code] => 021133TA
+                    [quantity] => 1000
+                    [price] => 365
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [04212BFW] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 59.8
+                            [1] => 5
+                        )
+
+                    [display] => 59,80-5,00
+                    [total] => 61.81
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - LED & Ekipman
+                            [1] => Fiş Toplamı ≥ 5.000€
+                        )
+
+                )
+
+            [0311114] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya (Fallback)
+                        )
+
+                )
+
+            [021133TA] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 52.88
+                            [1] => 5
+                        )
+
+                    [display] => 52,88-5,00
+                    [total] => 55.24
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+            [1] => Ertek - LED & Ekipman
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 3
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 3
+            [5] => → Toplam miktar: 7500
+            [6] => → Toplam tutar: 1199000 €
+            [7] => → Ürün 04212BFW: 59,80-5,00 (Toplam: %61.81)
+            [8] => → Ürün 0311114: 47,69-5,00 (Toplam: %50.31)
+            [9] => → Ürün 021133TA: 52,88-5,00 (Toplam: %55.24)
+            [10] => Kampanya: Ertek - Çok Yollu Vana
+            [11] => → Eşleşen ürün yok
+            [12] => Kampanya: Ertek - LED & Ekipman
+            [13] => → Eşleşen ürün sayısı: 1
+            [14] => → Toplam miktar: 5000
+            [15] => → Toplam tutar: 510000 €
+            [16] => → Ürün 04212BFW: 59,80-5,00 (Toplam: %61.81)
+            [17] => Kampanya: Ertek - Boru & PVC
+            [18] => → Eşleşen ürün yok
+            [19] => Kampanya: Ertek - Kenar Ekipman
+            [20] => → Eşleşen ürün yok
+            [21] => Kampanya: Ertek - Kuvars & Cam Medya
+            [22] => → Eşleşen ürün sayısı: 1
+            [23] => → Toplam miktar: 1500
+            [24] => → Toplam tutar: 324000 €
+            [25] => → Min miktar sağlanmadı (5000)
+            [26] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+        )
+
+)
+
+--- 2026-01-21 00:11:56 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 021133TA
+                    [quantity] => 1000
+                    [price] => 365
+                )
+
+            [1] => Array
+                (
+                    [code] => 0311114
+                    [quantity] => 1000
+                    [price] => 216
+                )
+
+            [2] => Array
+                (
+                    [code] => 021715S
+                    [quantity] => 1500
+                    [price] => 530
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [021133TA] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 52.88
+                            [1] => 5
+                        )
+
+                    [display] => 52,88-5,00
+                    [total] => 55.24
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+            [0311114] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya (Fallback)
+                        )
+
+                )
+
+            [021715S] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 50
+                            [1] => 5
+                        )
+
+                    [display] => 50,00-5,00
+                    [total] => 52.5
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 3
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 3
+            [5] => → Toplam miktar: 3500
+            [6] => → Toplam tutar: 1376000 €
+            [7] => → Ürün 021133TA: 52,88-5,00 (Toplam: %55.24)
+            [8] => → Ürün 0311114: 47,69-5,00 (Toplam: %50.31)
+            [9] => → Ürün 021715S: 50,00-5,00 (Toplam: %52.5)
+            [10] => Kampanya: Ertek - Çok Yollu Vana
+            [11] => → Eşleşen ürün yok
+            [12] => Kampanya: Ertek - LED & Ekipman
+            [13] => → Eşleşen ürün yok
+            [14] => Kampanya: Ertek - Boru & PVC
+            [15] => → Eşleşen ürün yok
+            [16] => Kampanya: Ertek - Kenar Ekipman
+            [17] => → Eşleşen ürün yok
+            [18] => Kampanya: Ertek - Kuvars & Cam Medya
+            [19] => → Eşleşen ürün sayısı: 1
+            [20] => → Toplam miktar: 1000
+            [21] => → Toplam tutar: 216000 €
+            [22] => → Min miktar sağlanmadı (5000)
+            [23] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+        )
+
+)
+
+--- 2026-01-21 00:14:25 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 021133TA
+                    [quantity] => 1000
+                    [price] => 365
+                )
+
+            [1] => Array
+                (
+                    [code] => 0311114
+                    [quantity] => 1000
+                    [price] => 216
+                )
+
+            [2] => Array
+                (
+                    [code] => 021715S
+                    [quantity] => 1500
+                    [price] => 530
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [021133TA] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 52.88
+                            [1] => 5
+                        )
+
+                    [display] => 52,88-5,00
+                    [total] => 55.24
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+            [0311114] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 47.69
+                            [1] => 5
+                        )
+
+                    [display] => 47,69-5,00
+                    [total] => 50.31
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+            [021715S] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 50
+                            [1] => 5
+                        )
+
+                    [display] => 50,00-5,00
+                    [total] => 52.5
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 3
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 3
+            [5] => → Toplam miktar: 3500
+            [6] => → Toplam tutar: 1376000 €
+            [7] => → Ürün 021133TA: 52,88-5,00 (Toplam: %55.24)
+            [8] => → Ürün 0311114: 47,69-5,00 (Toplam: %50.31)
+            [9] => → Ürün 021715S: 50,00-5,00 (Toplam: %52.5)
+            [10] => Kampanya: Ertek - Çok Yollu Vana
+            [11] => → Eşleşen ürün yok
+            [12] => Kampanya: Ertek - LED & Ekipman
+            [13] => → Eşleşen ürün yok
+            [14] => Kampanya: Ertek - Boru & PVC
+            [15] => → Eşleşen ürün yok
+            [16] => Kampanya: Ertek - Kenar Ekipman
+            [17] => → Eşleşen ürün yok
+            [18] => Kampanya: Ertek - Kuvars & Cam Medya
+            [19] => → Eşleşen ürün yok
+        )
+
+)
+
+--- 2026-01-21 00:20:26 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 02213027
+                    [quantity] => 500
+                    [price] => 70
+                )
+
+            [1] => Array
+                (
+                    [code] => 023413
+                    [quantity] => 500
+                    [price] => 0.76
+                )
+
+            [2] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 500
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [02213027] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 54.29
+                            [1] => 5
+                        )
+
+                    [display] => 54,29-5,00
+                    [total] => 56.58
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Çok Yollu Vana
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+            [023413] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya (Fallback)
+                        )
+
+                )
+
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya (Fallback)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+            [1] => Ertek - Çok Yollu Vana
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 3
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 3
+            [5] => → Toplam miktar: 1500
+            [6] => → Toplam tutar: 161880 €
+            [7] => → Ürün 02213027: 54,29-5,00 (Toplam: %56.58)
+            [8] => → Ürün 023413: 64,81-5,00 (Toplam: %66.57)
+            [9] => → Ürün 0312113: 47,83-5,00 (Toplam: %50.44)
+            [10] => Kampanya: Ertek - Çok Yollu Vana
+            [11] => → Eşleşen ürün sayısı: 1
+            [12] => → Toplam miktar: 500
+            [13] => → Toplam tutar: 35000 €
+            [14] => → Ürün 02213027: 54,29-5,00 (Toplam: %56.58)
+            [15] => Kampanya: Ertek - LED & Ekipman
+            [16] => → Eşleşen ürün yok
+            [17] => Kampanya: Ertek - Boru & PVC
+            [18] => → Eşleşen ürün yok
+            [19] => Kampanya: Ertek - Kenar Ekipman
+            [20] => → Eşleşen ürün yok
+            [21] => Kampanya: Ertek - Kuvars & Cam Medya
+            [22] => → Eşleşen ürün sayısı: 2
+            [23] => → Toplam miktar: 1000
+            [24] => → Toplam tutar: 126880 €
+            [25] => → Min miktar sağlanmadı (5000)
+            [26] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+        )
+
+)
+
+--- 2026-01-21 00:20:47 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 02213027
+                    [quantity] => 500
+                    [price] => 70
+                )
+
+            [1] => Array
+                (
+                    [code] => 023413
+                    [quantity] => 5000
+                    [price] => 0.76
+                )
+
+            [2] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 5000
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [02213027] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 54.29
+                            [1] => 5
+                        )
+
+                    [display] => 54,29-5,00
+                    [total] => 56.58
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Çok Yollu Vana
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+            [023413] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 49.93
+                        )
+
+                    [display] => 49,93
+                    [total] => 49.93
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya
+                        )
+
+                )
+
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 47.75
+                        )
+
+                    [display] => 47,75
+                    [total] => 47.75
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+            [1] => Ertek - Çok Yollu Vana
+            [2] => Ertek - Kuvars & Cam Medya
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 3
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 3
+            [5] => → Toplam miktar: 10500
+            [6] => → Toplam tutar: 1303800 €
+            [7] => → Ürün 02213027: 54,29-5,00 (Toplam: %56.58)
+            [8] => → Ürün 023413: 64,81-5,00 (Toplam: %66.57)
+            [9] => → Ürün 0312113: 47,83-5,00 (Toplam: %50.44)
+            [10] => Kampanya: Ertek - Çok Yollu Vana
+            [11] => → Eşleşen ürün sayısı: 1
+            [12] => → Toplam miktar: 500
+            [13] => → Toplam tutar: 35000 €
+            [14] => → Ürün 02213027: 54,29-5,00 (Toplam: %56.58)
+            [15] => Kampanya: Ertek - LED & Ekipman
+            [16] => → Eşleşen ürün yok
+            [17] => Kampanya: Ertek - Boru & PVC
+            [18] => → Eşleşen ürün yok
+            [19] => Kampanya: Ertek - Kenar Ekipman
+            [20] => → Eşleşen ürün yok
+            [21] => Kampanya: Ertek - Kuvars & Cam Medya
+            [22] => → Eşleşen ürün sayısı: 2
+            [23] => → Toplam miktar: 10000
+            [24] => → Toplam tutar: 1268800 €
+            [25] => → Ürün 023413: 49,93 (Toplam: %49.93)
+            [26] => → Ürün 0312113: 47,75 (Toplam: %47.75)
+        )
+
+)
+
+--- 2026-01-21 00:21:01 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 02213027
+                    [quantity] => 500
+                    [price] => 70
+                )
+
+            [1] => Array
+                (
+                    [code] => 023413
+                    [quantity] => 25000
+                    [price] => 0.76
+                )
+
+            [2] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 5000
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [02213027] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 54.29
+                            [1] => 5
+                        )
+
+                    [display] => 54,29-5,00
+                    [total] => 56.58
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Çok Yollu Vana
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+            [023413] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 49.93
+                            [1] => 5
+                        )
+
+                    [display] => 49,93-5,00
+                    [total] => 52.43
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya
+                            [1] => Ana Bayi Ek İskonto (≥20.000 kg)
+                        )
+
+                )
+
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 47.75
+                            [1] => 5
+                        )
+
+                    [display] => 47,75-5,00
+                    [total] => 50.36
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya
+                            [1] => Ana Bayi Ek İskonto (≥20.000 kg)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+            [1] => Ertek - Çok Yollu Vana
+            [2] => Ertek - Kuvars & Cam Medya
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 3
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 3
+            [5] => → Toplam miktar: 30500
+            [6] => → Toplam tutar: 1319000 €
+            [7] => → Ürün 02213027: 54,29-5,00 (Toplam: %56.58)
+            [8] => → Ürün 023413: 64,81-5,00 (Toplam: %66.57)
+            [9] => → Ürün 0312113: 47,83-5,00 (Toplam: %50.44)
+            [10] => Kampanya: Ertek - Çok Yollu Vana
+            [11] => → Eşleşen ürün sayısı: 1
+            [12] => → Toplam miktar: 500
+            [13] => → Toplam tutar: 35000 €
+            [14] => → Ürün 02213027: 54,29-5,00 (Toplam: %56.58)
+            [15] => Kampanya: Ertek - LED & Ekipman
+            [16] => → Eşleşen ürün yok
+            [17] => Kampanya: Ertek - Boru & PVC
+            [18] => → Eşleşen ürün yok
+            [19] => Kampanya: Ertek - Kenar Ekipman
+            [20] => → Eşleşen ürün yok
+            [21] => Kampanya: Ertek - Kuvars & Cam Medya
+            [22] => → Eşleşen ürün sayısı: 2
+            [23] => → Toplam miktar: 30000
+            [24] => → Toplam tutar: 1284000 €
+            [25] => → Ürün 023413: 49,93-5,00 (Toplam: %52.43)
+            [26] => → Ürün 0312113: 47,75-5,00 (Toplam: %50.36)
+        )
+
+)
+
+--- 2026-01-21 00:21:42 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 02213027
+                    [quantity] => 500
+                    [price] => 70
+                )
+
+            [1] => Array
+                (
+                    [code] => 023413
+                    [quantity] => 25000
+                    [price] => 0.76
+                )
+
+            [2] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 50
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [02213027] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 54.29
+                            [1] => 5
+                        )
+
+                    [display] => 54,29-5,00
+                    [total] => 56.58
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Çok Yollu Vana
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+            [023413] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 49.93
+                            [1] => 5
+                        )
+
+                    [display] => 49,93-5,00
+                    [total] => 52.43
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya
+                            [1] => Ana Bayi Ek İskonto (≥20.000 kg)
+                        )
+
+                )
+
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 47.75
+                            [1] => 5
+                        )
+
+                    [display] => 47,75-5,00
+                    [total] => 50.36
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya
+                            [1] => Ana Bayi Ek İskonto (≥20.000 kg)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+            [1] => Ertek - Çok Yollu Vana
+            [2] => Ertek - Kuvars & Cam Medya
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 3
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 3
+            [5] => → Toplam miktar: 25550
+            [6] => → Toplam tutar: 66650 €
+            [7] => → Ürün 02213027: 54,29-5,00 (Toplam: %56.58)
+            [8] => → Ürün 023413: 64,81-5,00 (Toplam: %66.57)
+            [9] => → Ürün 0312113: 47,83-5,00 (Toplam: %50.44)
+            [10] => Kampanya: Ertek - Çok Yollu Vana
+            [11] => → Eşleşen ürün sayısı: 1
+            [12] => → Toplam miktar: 500
+            [13] => → Toplam tutar: 35000 €
+            [14] => → Ürün 02213027: 54,29-5,00 (Toplam: %56.58)
+            [15] => Kampanya: Ertek - LED & Ekipman
+            [16] => → Eşleşen ürün yok
+            [17] => Kampanya: Ertek - Boru & PVC
+            [18] => → Eşleşen ürün yok
+            [19] => Kampanya: Ertek - Kenar Ekipman
+            [20] => → Eşleşen ürün yok
+            [21] => Kampanya: Ertek - Kuvars & Cam Medya
+            [22] => → Eşleşen ürün sayısı: 2
+            [23] => → Toplam miktar: 25050
+            [24] => → Toplam tutar: 31650 €
+            [25] => → Ürün 023413: 49,93-5,00 (Toplam: %52.43)
+            [26] => → Ürün 0312113: 47,75-5,00 (Toplam: %50.36)
+        )
+
+)
+
+--- 2026-01-21 00:26:16 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 49
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 47.83
+                            [1] => 5
+                        )
+
+                    [display] => 47,83-5,00
+                    [total] => 50.44
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 49
+            [6] => → Toplam tutar: 12397 €
+            [7] => → Ürün 0312113: 47,83-5,00 (Toplam: %50.44)
+            [8] => Kampanya: Ertek - Çok Yollu Vana
+            [9] => → Eşleşen ürün yok
+            [10] => Kampanya: Ertek - LED & Ekipman
+            [11] => → Eşleşen ürün yok
+            [12] => Kampanya: Ertek - Boru & PVC
+            [13] => → Eşleşen ürün yok
+            [14] => Kampanya: Ertek - Kenar Ekipman
+            [15] => → Eşleşen ürün yok
+            [16] => Kampanya: Ertek - Kuvars & Cam Medya
+            [17] => → Eşleşen ürün yok
+        )
+
+)
+
+--- 2026-01-21 00:26:41 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 2
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler (Fallback)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 2
+            [6] => → Toplam tutar: 506 €
+            [7] => → Min miktar sağlanmadı (10)
+            [8] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+            [9] => Kampanya: Ertek - Çok Yollu Vana
+            [10] => → Eşleşen ürün yok
+            [11] => Kampanya: Ertek - LED & Ekipman
+            [12] => → Eşleşen ürün yok
+            [13] => Kampanya: Ertek - Boru & PVC
+            [14] => → Eşleşen ürün yok
+            [15] => Kampanya: Ertek - Kenar Ekipman
+            [16] => → Eşleşen ürün yok
+            [17] => Kampanya: Ertek - Kuvars & Cam Medya
+            [18] => → Eşleşen ürün yok
+        )
+
+)
+
+--- 2026-01-21 00:26:52 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 10
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 47.83
+                        )
+
+                    [display] => 47,83
+                    [total] => 47.83
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 10
+            [6] => → Toplam tutar: 2530 €
+            [7] => → Ürün 0312113: 47,83 (Toplam: %47.83)
+            [8] => Kampanya: Ertek - Çok Yollu Vana
+            [9] => → Eşleşen ürün yok
+            [10] => Kampanya: Ertek - LED & Ekipman
+            [11] => → Eşleşen ürün yok
+            [12] => Kampanya: Ertek - Boru & PVC
+            [13] => → Eşleşen ürün yok
+            [14] => Kampanya: Ertek - Kenar Ekipman
+            [15] => → Eşleşen ürün yok
+            [16] => Kampanya: Ertek - Kuvars & Cam Medya
+            [17] => → Eşleşen ürün yok
+        )
+
+)
+
+--- 2026-01-21 00:27:02 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 45
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 47.83
+                            [1] => 5
+                        )
+
+                    [display] => 47,83-5,00
+                    [total] => 50.44
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 45
+            [6] => → Toplam tutar: 11385 €
+            [7] => → Ürün 0312113: 47,83-5,00 (Toplam: %50.44)
+            [8] => Kampanya: Ertek - Çok Yollu Vana
+            [9] => → Eşleşen ürün yok
+            [10] => Kampanya: Ertek - LED & Ekipman
+            [11] => → Eşleşen ürün yok
+            [12] => Kampanya: Ertek - Boru & PVC
+            [13] => → Eşleşen ürün yok
+            [14] => Kampanya: Ertek - Kenar Ekipman
+            [15] => → Eşleşen ürün yok
+            [16] => Kampanya: Ertek - Kuvars & Cam Medya
+            [17] => → Eşleşen ürün yok
+        )
+
+)
+
+--- 2026-01-21 00:27:58 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 11
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 47.83
+                        )
+
+                    [display] => 47,83
+                    [total] => 47.83
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 11
+            [6] => → Toplam tutar: 2783 €
+            [7] => → Ürün 0312113: 47,83 (Toplam: %47.83)
+            [8] => Kampanya: Ertek - Çok Yollu Vana
+            [9] => → Eşleşen ürün yok
+            [10] => Kampanya: Ertek - LED & Ekipman
+            [11] => → Eşleşen ürün yok
+            [12] => Kampanya: Ertek - Boru & PVC
+            [13] => → Eşleşen ürün yok
+            [14] => Kampanya: Ertek - Kenar Ekipman
+            [15] => → Eşleşen ürün yok
+            [16] => Kampanya: Ertek - Kuvars & Cam Medya
+            [17] => → Eşleşen ürün yok
+        )
+
+)
+
+--- 2026-01-21 00:29:25 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 2
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler (Fallback)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 2
+            [6] => → Toplam tutar: 506 €
+            [7] => → Min miktar sağlanmadı (10)
+            [8] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+            [9] => Kampanya: Ertek - Çok Yollu Vana
+            [10] => → Eşleşen ürün yok
+            [11] => Kampanya: Ertek - LED & Ekipman
+            [12] => → Eşleşen ürün yok
+            [13] => Kampanya: Ertek - Boru & PVC
+            [14] => → Eşleşen ürün yok
+            [15] => Kampanya: Ertek - Kenar Ekipman
+            [16] => → Eşleşen ürün yok
+            [17] => Kampanya: Ertek - Kuvars & Cam Medya
+            [18] => → Eşleşen ürün yok
+        )
+
+)
+
+--- 2026-01-21 00:29:32 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 11
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 47.83
+                        )
+
+                    [display] => 47,83
+                    [total] => 47.83
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 6
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 11
+            [6] => → Toplam tutar: 2783 €
+            [7] => → Ürün 0312113: 47,83 (Toplam: %47.83)
+            [8] => Kampanya: Ertek - Çok Yollu Vana
+            [9] => → Eşleşen ürün yok
+            [10] => Kampanya: Ertek - LED & Ekipman
+            [11] => → Eşleşen ürün yok
+            [12] => Kampanya: Ertek - Boru & PVC
+            [13] => → Eşleşen ürün yok
+            [14] => Kampanya: Ertek - Kenar Ekipman
+            [15] => → Eşleşen ürün yok
+            [16] => Kampanya: Ertek - Kuvars & Cam Medya
+            [17] => → Eşleşen ürün yok
+        )
+
+)
+
+--- 2026-01-21 00:32:57 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 8
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Anabayi - Merdiven (Fallback)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 7
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 8
+            [6] => → Toplam tutar: 2024 €
+            [7] => → Min miktar sağlanmadı (10)
+            [8] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+            [9] => Kampanya: Anabayi - Merdiven
+            [10] => → Eşleşen ürün sayısı: 1
+            [11] => → Toplam miktar: 8
+            [12] => → Toplam tutar: 2024 €
+            [13] => → Min miktar sağlanmadı (50)
+            [14] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+            [15] => Kampanya: Ertek - Çok Yollu Vana
+            [16] => → Eşleşen ürün yok
+            [17] => Kampanya: Ertek - LED & Ekipman
+            [18] => → Eşleşen ürün yok
+            [19] => Kampanya: Ertek - Boru & PVC
+            [20] => → Eşleşen ürün yok
+            [21] => Kampanya: Ertek - Kenar Ekipman
+            [22] => → Eşleşen ürün yok
+            [23] => Kampanya: Ertek - Kuvars & Cam Medya
+            [24] => → Eşleşen ürün yok
+        )
+
+)
+
+--- 2026-01-21 00:33:06 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 15
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Anabayi - Merdiven (Fallback)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 7
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 15
+            [6] => → Toplam tutar: 3795 €
+            [7] => → Ürün 0312113: 47,83 (Toplam: %47.83)
+            [8] => Kampanya: Anabayi - Merdiven
+            [9] => → Eşleşen ürün sayısı: 1
+            [10] => → Toplam miktar: 15
+            [11] => → Toplam tutar: 3795 €
+            [12] => → Min miktar sağlanmadı (50)
+            [13] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+            [14] => Kampanya: Ertek - Çok Yollu Vana
+            [15] => → Eşleşen ürün yok
+            [16] => Kampanya: Ertek - LED & Ekipman
+            [17] => → Eşleşen ürün yok
+            [18] => Kampanya: Ertek - Boru & PVC
+            [19] => → Eşleşen ürün yok
+            [20] => Kampanya: Ertek - Kenar Ekipman
+            [21] => → Eşleşen ürün yok
+            [22] => Kampanya: Ertek - Kuvars & Cam Medya
+            [23] => → Eşleşen ürün yok
+        )
+
+)
+
+--- 2026-01-21 00:33:14 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 51
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 5
+                        )
+
+                    [display] => 5,00
+                    [total] => 5
+                    [campaigns] => Array
+                        (
+                            [0] => Anabayi - Merdiven
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+            [1] => Anabayi - Merdiven
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 7
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 51
+            [6] => → Toplam tutar: 12903 €
+            [7] => → Ürün 0312113: 47,83-5,00 (Toplam: %50.44)
+            [8] => Kampanya: Anabayi - Merdiven
+            [9] => → Eşleşen ürün sayısı: 1
+            [10] => → Toplam miktar: 51
+            [11] => → Toplam tutar: 12903 €
+            [12] => → Ürün 0312113: 5,00 (Toplam: %5)
+            [13] => Kampanya: Ertek - Çok Yollu Vana
+            [14] => → Eşleşen ürün yok
+            [15] => Kampanya: Ertek - LED & Ekipman
+            [16] => → Eşleşen ürün yok
+            [17] => Kampanya: Ertek - Boru & PVC
+            [18] => → Eşleşen ürün yok
+            [19] => Kampanya: Ertek - Kenar Ekipman
+            [20] => → Eşleşen ürün yok
+            [21] => Kampanya: Ertek - Kuvars & Cam Medya
+            [22] => → Eşleşen ürün yok
+        )
+
+)
+
+--- 2026-01-21 00:37:17 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312113
+                    [quantity] => 10
+                    [price] => 253
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312113] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Anabayi - Merdiven (Fallback)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 7
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 10
+            [6] => → Toplam tutar: 2530 €
+            [7] => → Ürün 0312113: 47,83 (Toplam: %47.83)
+            [8] => Kampanya: Anabayi - Merdiven
+            [9] => → Eşleşen ürün sayısı: 1
+            [10] => → Toplam miktar: 10
+            [11] => → Toplam tutar: 2530 €
+            [12] => → Min miktar sağlanmadı (50)
+            [13] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+            [14] => Kampanya: Ertek - Çok Yollu Vana
+            [15] => → Eşleşen ürün yok
+            [16] => Kampanya: Ertek - LED & Ekipman
+            [17] => → Eşleşen ürün yok
+            [18] => Kampanya: Ertek - Boru & PVC
+            [19] => → Eşleşen ürün yok
+            [20] => Kampanya: Ertek - Kenar Ekipman
+            [21] => → Eşleşen ürün yok
+            [22] => Kampanya: Ertek - Kuvars & Cam Medya
+            [23] => → Eşleşen ürün yok
+        )
+
+)
+
+--- 2026-01-21 00:42:23 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312114
+                    [quantity] => 15
+                    [price] => 283
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312114] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya (Fallback)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 7
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 15
+            [6] => → Toplam tutar: 4245 €
+            [7] => → Ürün 0312114: 47,70 (Toplam: %47.7)
+            [8] => Kampanya: Anabayi - Merdiven
+            [9] => → Eşleşen ürün yok
+            [10] => Kampanya: Ertek - Çok Yollu Vana
+            [11] => → Eşleşen ürün yok
+            [12] => Kampanya: Ertek - LED & Ekipman
+            [13] => → Eşleşen ürün yok
+            [14] => Kampanya: Ertek - Boru & PVC
+            [15] => → Eşleşen ürün yok
+            [16] => Kampanya: Ertek - Kenar Ekipman
+            [17] => → Eşleşen ürün yok
+            [18] => Kampanya: Ertek - Kuvars & Cam Medya
+            [19] => → Eşleşen ürün sayısı: 1
+            [20] => → Toplam miktar: 15
+            [21] => → Toplam tutar: 4245 €
+            [22] => → Min miktar sağlanmadı (5000)
+            [23] => → Fallback iskonto uygulanıyor: %45.00 (Ödeme planı: )
+        )
+
+)
+
+--- 2026-01-21 00:42:36 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312114
+                    [quantity] => 50
+                    [price] => 283
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312114] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya (Fallback)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 7
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 50
+            [6] => → Toplam tutar: 14150 €
+            [7] => → Ürün 0312114: 47,70-5,00 (Toplam: %50.32)
+            [8] => Kampanya: Anabayi - Merdiven
+            [9] => → Eşleşen ürün yok
+            [10] => Kampanya: Ertek - Çok Yollu Vana
+            [11] => → Eşleşen ürün yok
+            [12] => Kampanya: Ertek - LED & Ekipman
+            [13] => → Eşleşen ürün yok
+            [14] => Kampanya: Ertek - Boru & PVC
+            [15] => → Eşleşen ürün yok
+            [16] => Kampanya: Ertek - Kenar Ekipman
+            [17] => → Eşleşen ürün yok
+            [18] => Kampanya: Ertek - Kuvars & Cam Medya
+            [19] => → Eşleşen ürün sayısı: 1
+            [20] => → Toplam miktar: 50
+            [21] => → Toplam tutar: 14150 €
+            [22] => → Min miktar sağlanmadı (5000)
+            [23] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+        )
+
+)
+
+--- 2026-01-21 00:42:47 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312114
+                    [quantity] => 500
+                    [price] => 283
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312114] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya (Fallback)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 1
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 7
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 1
+            [5] => → Toplam miktar: 500
+            [6] => → Toplam tutar: 141500 €
+            [7] => → Ürün 0312114: 47,70-5,00 (Toplam: %50.32)
+            [8] => Kampanya: Anabayi - Merdiven
+            [9] => → Eşleşen ürün yok
+            [10] => Kampanya: Ertek - Çok Yollu Vana
+            [11] => → Eşleşen ürün yok
+            [12] => Kampanya: Ertek - LED & Ekipman
+            [13] => → Eşleşen ürün yok
+            [14] => Kampanya: Ertek - Boru & PVC
+            [15] => → Eşleşen ürün yok
+            [16] => Kampanya: Ertek - Kenar Ekipman
+            [17] => → Eşleşen ürün yok
+            [18] => Kampanya: Ertek - Kuvars & Cam Medya
+            [19] => → Eşleşen ürün sayısı: 1
+            [20] => → Toplam miktar: 500
+            [21] => → Toplam tutar: 141500 €
+            [22] => → Min miktar sağlanmadı (5000)
+            [23] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+        )
+
+)
+
+--- 2026-01-21 00:51:42 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312114
+                    [quantity] => 500
+                    [price] => 283
+                )
+
+            [1] => Array
+                (
+                    [code] => 021714
+                    [quantity] => 9
+                    [price] => 436
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312114] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya (Fallback)
+                        )
+
+                )
+
+            [021714] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 50
+                            [1] => 5
+                        )
+
+                    [display] => 50,00-5,00
+                    [total] => 52.5
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 2
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 7
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 2
+            [5] => → Toplam miktar: 509
+            [6] => → Toplam tutar: 145424 €
+            [7] => → Ürün 0312114: 47,70-5,00 (Toplam: %50.32)
+            [8] => → Ürün 021714: 50,00-5,00 (Toplam: %52.5)
+            [9] => Kampanya: Anabayi - Merdiven
+            [10] => → Eşleşen ürün yok
+            [11] => Kampanya: Ertek - Çok Yollu Vana
+            [12] => → Eşleşen ürün yok
+            [13] => Kampanya: Ertek - LED & Ekipman
+            [14] => → Eşleşen ürün yok
+            [15] => Kampanya: Ertek - Boru & PVC
+            [16] => → Eşleşen ürün yok
+            [17] => Kampanya: Ertek - Kenar Ekipman
+            [18] => → Eşleşen ürün yok
+            [19] => Kampanya: Ertek - Kuvars & Cam Medya
+            [20] => → Eşleşen ürün sayısı: 1
+            [21] => → Toplam miktar: 500
+            [22] => → Toplam tutar: 141500 €
+            [23] => → Min miktar sağlanmadı (5000)
+            [24] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+        )
+
+)
+
+--- 2026-01-21 00:56:58 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312114
+                    [quantity] => 1
+                    [price] => 283
+                )
+
+            [1] => Array
+                (
+                    [code] => 021714
+                    [quantity] => 1
+                    [price] => 436
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312114] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya (Fallback)
+                        )
+
+                )
+
+            [021714] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler (Fallback)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 2
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 7
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 2
+            [5] => → Toplam miktar: 2
+            [6] => → Toplam tutar: 719 €
+            [7] => → Min miktar sağlanmadı (10)
+            [8] => → Fallback iskonto uygulanıyor: %45.00 (Ödeme planı: )
+            [9] => Kampanya: Anabayi - Merdiven
+            [10] => → Eşleşen ürün yok
+            [11] => Kampanya: Ertek - Çok Yollu Vana
+            [12] => → Eşleşen ürün yok
+            [13] => Kampanya: Ertek - LED & Ekipman
+            [14] => → Eşleşen ürün yok
+            [15] => Kampanya: Ertek - Boru & PVC
+            [16] => → Eşleşen ürün yok
+            [17] => Kampanya: Ertek - Kenar Ekipman
+            [18] => → Eşleşen ürün yok
+            [19] => Kampanya: Ertek - Kuvars & Cam Medya
+            [20] => → Eşleşen ürün sayısı: 1
+            [21] => → Toplam miktar: 1
+            [22] => → Toplam tutar: 283 €
+            [23] => → Min miktar sağlanmadı (5000)
+            [24] => → Fallback iskonto uygulanıyor: %45.00 (Ödeme planı: )
+        )
+
+)
+
+--- 2026-01-21 00:57:06 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312114
+                    [quantity] => 11
+                    [price] => 283
+                )
+
+            [1] => Array
+                (
+                    [code] => 021714
+                    [quantity] => 1
+                    [price] => 436
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312114] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya (Fallback)
+                        )
+
+                )
+
+            [021714] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 50
+                        )
+
+                    [display] => 50,00
+                    [total] => 50
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 2
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 7
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 2
+            [5] => → Toplam miktar: 12
+            [6] => → Toplam tutar: 3549 €
+            [7] => → Ürün 0312114: 47,70 (Toplam: %47.7)
+            [8] => → Ürün 021714: 50,00 (Toplam: %50)
+            [9] => Kampanya: Anabayi - Merdiven
+            [10] => → Eşleşen ürün yok
+            [11] => Kampanya: Ertek - Çok Yollu Vana
+            [12] => → Eşleşen ürün yok
+            [13] => Kampanya: Ertek - LED & Ekipman
+            [14] => → Eşleşen ürün yok
+            [15] => Kampanya: Ertek - Boru & PVC
+            [16] => → Eşleşen ürün yok
+            [17] => Kampanya: Ertek - Kenar Ekipman
+            [18] => → Eşleşen ürün yok
+            [19] => Kampanya: Ertek - Kuvars & Cam Medya
+            [20] => → Eşleşen ürün sayısı: 1
+            [21] => → Toplam miktar: 11
+            [22] => → Toplam tutar: 3113 €
+            [23] => → Min miktar sağlanmadı (5000)
+            [24] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+        )
+
+)
+
+--- 2026-01-21 00:57:25 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0312114
+                    [quantity] => 50
+                    [price] => 283
+                )
+
+            [1] => Array
+                (
+                    [code] => 021714
+                    [quantity] => 1
+                    [price] => 436
+                )
+
+        )
+
+    [customerCode] => 120.01.E04
+    [isCashPayment] => 
+    [paymentPlan] => 060
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0312114] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 45
+                        )
+
+                    [display] => 45,00
+                    [total] => 45
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Kuvars & Cam Medya (Fallback)
+                        )
+
+                )
+
+            [021714] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 50
+                            [1] => 5
+                        )
+
+                    [display] => 50,00-5,00
+                    [total] => 52.5
+                    [campaigns] => Array
+                        (
+                            [0] => Ertek - Filtreler
+                            [1] => Ana Bayi Ek İskonto (≥10.000€)
+                        )
+
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0] => Ertek - Filtreler
+        )
+
+    [logs] => Array
+        (
+            [0] => İşlem başladı - Cari: 120.01.E04, Ürün sayısı: 2
+            [1] => Müşteri: 120.01.E04
+            [2] => Bulunan kampanya sayısı: 7
+            [3] => Kampanya: Ertek - Filtreler
+            [4] => → Eşleşen ürün sayısı: 2
+            [5] => → Toplam miktar: 51
+            [6] => → Toplam tutar: 14586 €
+            [7] => → Ürün 0312114: 47,70-5,00 (Toplam: %50.32)
+            [8] => → Ürün 021714: 50,00-5,00 (Toplam: %52.5)
+            [9] => Kampanya: Anabayi - Merdiven
+            [10] => → Eşleşen ürün yok
+            [11] => Kampanya: Ertek - Çok Yollu Vana
+            [12] => → Eşleşen ürün yok
+            [13] => Kampanya: Ertek - LED & Ekipman
+            [14] => → Eşleşen ürün yok
+            [15] => Kampanya: Ertek - Boru & PVC
+            [16] => → Eşleşen ürün yok
+            [17] => Kampanya: Ertek - Kenar Ekipman
+            [18] => → Eşleşen ürün yok
+            [19] => Kampanya: Ertek - Kuvars & Cam Medya
+            [20] => → Eşleşen ürün sayısı: 1
+            [21] => → Toplam miktar: 50
+            [22] => → Toplam tutar: 14150 €
+            [23] => → Min miktar sağlanmadı (5000)
+            [24] => → Fallback iskonto uygulanıyor: %45 (Ödeme planı: 060)
+        )
+
+)
+
