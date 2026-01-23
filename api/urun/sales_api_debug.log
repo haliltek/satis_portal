@@ -1,0 +1,60 @@
+
+2026-01-23 08:06:22 - NEW REQUEST for code: 153.01.03.045
+Years to query: 2024, 2025, 2026
+Checking GEMAS2024 -> [dbo].[LV_524_SALES_ITEMS]
+Checking GEMPA2024 -> [dbo].[LV_564_SALES_ITEMS]
+Checking GEMAS2025 -> [dbo].[LV_525_SALES_ITEMS]
+Checking GEMPA2025 -> [dbo].[LV_565_SALES_ITEMS]
+Checking GEMAS2026 -> [dbo].[LV_526_SALES_ITEMS]
+Checking GEMPA2026 -> [dbo].[LV_566_SALES_ITEMS]
+
+2026-01-23 09:23:41 - NEW REQUEST for code: 0111STRM50M
+Years to query: 2024, 2025, 2026
+Checking GEMAS2024 -> [dbo].[LV_524_SALES_ITEMS]
+  => Found: 1151 in GEMAS2024
+Checking GEMPA2024 -> [dbo].[LV_564_SALES_ITEMS]
+  => Found: 989 in GEMPA2024
+Checking GEMAS2025 -> [dbo].[LV_525_SALES_ITEMS]
+  => Found: 722 in GEMAS2025
+Checking GEMPA2025 -> [dbo].[LV_565_SALES_ITEMS]
+  => Found: 521 in GEMPA2025
+Checking GEMAS2026 -> [dbo].[LV_526_SALES_ITEMS]
+  => Found: 131 in GEMAS2026
+Checking GEMPA2026 -> [dbo].[LV_566_SALES_ITEMS]
+  => Found: 121 in GEMPA2026
+
+2026-01-23 09:25:40 - NEW REQUEST for code: 0111STRM50M
+Years to query: 2024, 2025, 2026
+Checking GEMPA2024 -> [dbo].[LV_564_SALES_ITEMS]
+  => Found: 989 in GEMPA2024
+Checking GEMPA2025 -> [dbo].[LV_565_SALES_ITEMS]
+  => Found: 521 in GEMPA2025
+Checking GEMPA2026 -> [dbo].[LV_566_SALES_ITEMS]
+  => Found: 121 in GEMPA2026
+
+2026-01-23 10:25:11 - NEW REQUEST for code: 0111STRM50M
+Years to query: 2024, 2025, 2026
+Checking GEMPA2024 -> [dbo].[LG_564_01_STLINE]
+  => Found: 597 in GEMPA2024
+Checking GEMPA2025 -> [dbo].[LG_565_01_STLINE]
+  => Found: 259 in GEMPA2025
+Checking GEMPA2026 -> [dbo].[LG_566_01_STLINE]
+  => Found: 16 in GEMPA2026
+
+2026-01-23 10:28:19 - NEW REQUEST for code: 0111STRM50M
+Years to query: 2024, 2025, 2026
+Checking GEMPA2024 -> [dbo].[LG_564_01_STLINE]
+  => Found: 597 (Invoices: 71) in GEMPA2024
+Checking GEMPA2025 -> [dbo].[LG_565_01_STLINE]
+  => Found: 259 (Invoices: 66) in GEMPA2025
+Checking GEMPA2026 -> [dbo].[LG_566_01_STLINE]
+  => Found: 16 (Invoices: 2) in GEMPA2026
+
+2026-01-23 10:28:45 - NEW REQUEST for code: 0111STRM50M
+Years to query: 2024, 2025, 2026
+Checking GEMPA2024 -> [dbo].[LG_564_01_STLINE]
+  => Found: 597 (Invoices: 71) in GEMPA2024
+Checking GEMPA2025 -> [dbo].[LG_565_01_STLINE]
+  => Found: 259 (Invoices: 66) in GEMPA2025
+Checking GEMPA2026 -> [dbo].[LG_566_01_STLINE]
+  => Found: 16 (Invoices: 2) in GEMPA2026

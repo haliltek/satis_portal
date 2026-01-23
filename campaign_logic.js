@@ -171,6 +171,21 @@ $(document).ready(function () {
 
         // Hesaplamayı tetikle
         $row.find('.quantity-input').trigger('input');
+
+        // --- GRUP İPTALİ (CASCADE DELETE) ---
+        // Eğer bu satır bir gruba dahilse, gruptaki diğer ürünleri de iptal et
+        var batchId = $row.attr('data-campaign-batch-id');
+        if (batchId) {
+            console.log('Batch iptal ediliyor:', batchId);
+            // Sonsuz döngüyü engellemek için önce bu satırın ID'sini siliyoruz
+            $row.removeAttr('data-campaign-batch-id');
+
+            // Aynı ID'ye sahip diğer satırları bul
+            $('tr[data-campaign-batch-id="' + batchId + '"]').each(function () {
+                console.log('Gruptaki diğer ürün iptal ediliyor...');
+                removeSpecialPriceFromRow($(this));
+            });
+        }
     }
 
     $(document).on('click', '.remove-btn', function () {
@@ -217,12 +232,28 @@ $(document).ready(function () {
                 html += '<p class="mb-0"><strong>Uygulanacak Ürünler:</strong> ' + camp.products.length + ' adet</p>';
                 html += '</div>';
 
+                // Ek İskonto butonu için başlangıç kontrolü
+                var isDisabled = '';
+                var tooltip = '';
+
+                if (isExtra) {
+                    var hasSpecialPrice = $('.row-has-special-price').length > 0;
+                    if (!hasSpecialPrice) {
+                        isDisabled = 'disabled';
+                        tooltip = 'title="Lütfen önce yukarıdaki Özel Fiyat kampanyasını uygulayınız!" data-bs-toggle="tooltip"';
+                        btnText = 'Önce Özel Fiyat!';
+                        btnClass = 'btn-secondary'; // Gri renk
+                    }
+                }
+
                 // Tekil Uygulama Butonu
                 html += '<button type="button" class="' + btnClass + ' apply-single-campaign-btn" ' +
                     'data-products=\'' + JSON.stringify(camp.products) + '\' ' +
                     'data-campaign-name="' + camp.name + '" ' +
                     'data-is-extra="' + isExtra + '" ' +
-                    'data-discount-rate="' + (camp.discount_rate || 0) + '">' +
+                    'data-discount-rate="' + (camp.discount_rate || 0) + '" ' +
+                    'data-min-amount="' + (camp.campaign_meta ? camp.campaign_meta.min_amount : 0) + '" ' +
+                    isDisabled + ' ' + tooltip + '>' +
                     '<i class="bi bi-check2-circle"></i> ' + btnText + '</button>';
 
                 html += '</div></div></div>'; // card body, card
@@ -264,6 +295,21 @@ $(document).ready(function () {
         $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Uygulanıyor...');
 
         if (isExtra) {
+            // KONTROL: Önce özel fiyat uygulanmış mı?
+            var hasSpecialPrice = $('.row-has-special-price').length > 0;
+
+            if (!hasSpecialPrice) {
+                // Özel fiyat yoksa uygulama ve uyar
+                $btn.prop('disabled', false).html(originalHtml); // Butonu eski haline getir
+
+                if (typeof toastr !== 'undefined') {
+                    toastr.error('Lütfen önce "Özel Fiyat" kampanyasını uygulayınız!', 'Sıralama Hatası');
+                } else {
+                    alert('Lütfen önce "Özel Fiyat" kampanyasını uygulayınız!');
+                }
+                return; // İşlemi durdur
+            }
+
             // Ana Bayi Ek İskonto: İskonto alanına yaz
             applyExtraDiscountToTable(products, discountRate);
             $btn.removeClass('btn-warning').addClass('btn-success')
@@ -279,6 +325,26 @@ $(document).ready(function () {
                     applyPricesToTable(prices);
                     $btn.removeClass('btn-primary').addClass('btn-success')
                         .html('<i class="bi bi-check-circle-fill"></i> Uygulandı');
+
+                    // --- DİNAMİK GÜNCELLEME ---
+                    // Eğer bu bir Özel Fiyat uygulamasıysa, pasif durumdaki Ek İskonto butonlarını aç
+                    var $modal = $btn.closest('.modal-content');
+                    var $disabledExtraBtns = $modal.find('.apply-single-campaign-btn[disabled][data-is-extra="true"]');
+
+                    if ($disabledExtraBtns.length > 0) {
+                        $disabledExtraBtns.each(function () {
+                            var $extraBtn = $(this);
+                            $extraBtn.prop('disabled', false)
+                                .removeClass('btn-secondary').addClass('btn-warning')
+                                .html('<i class="bi bi-check2-circle"></i> Ek İskonto Uygula')
+                                .removeAttr('title')
+                                .removeAttr('data-bs-toggle')
+                                .tooltip('dispose'); // Varsa tooltip'i yok et
+
+                            // Animasyon efekti
+                            $extraBtn.fadeOut(100).fadeIn(300);
+                        });
+                    }
                 },
                 error: function () {
                     $btn.prop('disabled', false).html(originalHtml);
@@ -303,10 +369,15 @@ $(document).ready(function () {
                 // Sadece özel fiyat uygulanmış satırlara iskonto ekle
                 // (iskonto alanı readonly ise özel fiyat uygulanmış demektir)
                 if ($discountInput.prop('readonly')) {
-                    // İskonto alanını unlock et ve %5 yaz
+                    var formattedRate = parseFloat(discountRate).toFixed(2).replace('.', ',');
+
+                    // İskonto alanını unlock et ve %5,00 yaz
                     $discountInput.prop('readonly', false)
                         .attr('placeholder', '')
-                        .val(discountRate);
+                        .val(formattedRate);
+
+                    // Log to console for debugging
+                    console.log('Ek iskonto uygulandı:', formattedRate);
 
                     // Yeşil renk KORUNUR (özel fiyat hala geçerli)
                     // Hesaplamayı tetikle
@@ -330,6 +401,9 @@ $(document).ready(function () {
 
     // --- YARDIMCI FONKSİYON: FİYAT UYGULAMA ---
     function applyPricesToTable(prices) {
+        // Batch ID oluştur (Grup iptali için)
+        var batchId = 'batch_' + new Date().getTime();
+
         $('.editable-product-code').each(function () {
             var $input = $(this);
             var code = $input.val().trim();
@@ -372,6 +446,7 @@ $(document).ready(function () {
                 $priceInput.addClass('special-price-applied').css('color', 'green');
                 $row.addClass('table-success');
                 $row.addClass('row-has-special-price');
+                $row.attr('data-campaign-batch-id', batchId); // Batch ID ata
                 $td.addClass('special-price-applied');
 
                 // DOM STATE: Bu ürüne özel fiyat uygulandığını tabloya kaydet
@@ -389,9 +464,57 @@ $(document).ready(function () {
                 window.isApplyingCampaign = true;
                 $row.find('.quantity-input').trigger('input');
                 // Trigger senkron çalışırsa hemen false yapabiliriz, ama emin olmak için timeout
+                // Trigger senkron çalışırsa hemen false yapabiliriz, ama emin olmak için timeout
                 setTimeout(function () { window.isApplyingCampaign = false; }, 100);
             }
         });
+
+        // --- ANA BAYİ BUTON KONTROLÜ (SMART LOGIC) ---
+        var totalSpecialAmount = 0;
+
+        // Tablodaki özel fiyatlı ürünleri topla
+        $('.editable-product-code').each(function () {
+            var $row = $(this).closest('tr');
+            if ($row.hasClass('row-has-special-price')) {
+                // Fiyatı al (TR formatını parse et)
+                var priceStr = $row.find('input[name^="fiyatsi"]').val();
+                if (priceStr) {
+                    var price = parseFloat(priceStr.replace('.', '').replace(',', '.')) || 0; // 1.000,50 -> 1000.50
+                    var qty = parseFloat($row.find('.quantity-input').val()) || 0;
+                    totalSpecialAmount += (price * qty);
+                }
+            }
+        });
+
+        console.log('Toplam Özel Fiyat Tutarı:', totalSpecialAmount);
+
+        var $dealerBtn = $('#applyDealerDiscountBtn');
+        var $dealerStatus = $('#dealerDiscountStatus');
+        var $dealerInfo = $('#dealerDiscountInfo');
+
+        if ($dealerBtn.length > 0) {
+            // Hedef tutar (Şimdilik sabit veya API'den sonra çekilebilir)
+            var targetAmount = 50000;
+
+            if (totalSpecialAmount >= targetAmount) {
+                // KOŞUL SAĞLANDI
+                $dealerBtn.prop('disabled', false).removeClass('btn-secondary').addClass('btn-primary');
+                $dealerStatus.removeClass('bg-secondary text-white').addClass('bg-success text-white').text('Koşul Sağlandı');
+                $dealerInfo.html('<span class="text-success fw-bold">Toplam: ' +
+                    totalSpecialAmount.toLocaleString('tr-TR', { minimumFractionDigits: 2 }) +
+                    ' €</span> (Min: ' + targetAmount.toLocaleString('tr-TR') + ' €)');
+            } else {
+                // KOŞUL SAĞLANMADI
+                $dealerBtn.prop('disabled', true).addClass('btn-secondary').removeClass('btn-primary');
+                $dealerStatus.removeClass('bg-success text-white').addClass('bg-secondary text-white').text('Min. Tutar Bekleniyor');
+
+                var remaining = targetAmount - totalSpecialAmount;
+                $dealerInfo.html('<span class="text-danger">Mevcut: ' +
+                    totalSpecialAmount.toLocaleString('tr-TR', { minimumFractionDigits: 2 }) +
+                    ' €</span> <br> Kalan: ' +
+                    remaining.toLocaleString('tr-TR', { minimumFractionDigits: 2 }) + ' €');
+            }
+        }
 
         // Ana butonu güncelle (görsel olarak)
         $('#applyCampaignsBtn')

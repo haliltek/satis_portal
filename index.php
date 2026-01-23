@@ -50,7 +50,7 @@ if (!$genelayar_sorgulama) {
     <link href="assets_login/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     <style type="text/css">
         body {
-            background-image: url('images/bg.jpg');
+            background-color: #f4f7f6; /* Gri arka plan */
             background-size: cover;
             opacity: 1;
         }

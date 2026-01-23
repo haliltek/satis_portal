@@ -85,7 +85,8 @@ try {
     // ============================================
     // 4. AKTİF KAMPANYALARI ÇEK
     // ============================================
-    $sql = "SELECT * FROM custom_campaigns WHERE active = 1 AND customer_type = 'ana_bayi' ORDER BY priority DESC";
+    // min_amount alanını da çekiyoruz
+    $sql = "SELECT *, min_amount as min_purchase_amount FROM custom_campaigns WHERE active = 1 AND customer_type = 'ana_bayi' ORDER BY priority DESC";
     $campaigns = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
     
     apiLog("Bulunan kampanya sayısı: " . count($campaigns));
@@ -178,11 +179,21 @@ try {
         apiLog("━━━ {$categoryName} ━━━");
         apiLog("  Ürün sayısı: " . count($items) . ", Toplam miktar: {$totalQty}, Toplam tutar: " . number_format($totalAmount, 2) . "€");
         
-        // Minimum miktar kontrolü
+        // Minimum miktar ve tutar kontrolü
         $minQty = intval($campaign['min_quantity']);
-        $conditionsMet = ($totalQty >= $minQty);
+        $minAmount = floatval($campaign['min_purchase_amount']); // Önceden çektiğimiz as min_purchase_amount
         
-        apiLog("  Min miktar: {$minQty} / Durum: " . ($conditionsMet ? '✓ SAĞLANDI' : '✗ SAĞLANMADI'));
+        $qtyCondition = ($minQty > 0) ? ($totalQty >= $minQty) : true;
+        $amountCondition = ($minAmount > 0) ? ($totalAmount >= $minAmount) : true;
+        
+        // İkisi de 0 ise (koşulsuz) -> true
+        if ($minQty == 0 && $minAmount == 0) {
+            $conditionsMet = true;
+        } else {
+            $conditionsMet = ($qtyCondition && $amountCondition);
+        }
+        
+        apiLog("  Min miktar: {$minQty}, Min tutar: {$minAmount} / Durum: " . ($conditionsMet ? '✓ SAĞLANDI' : '✗ SAĞLANMADI'));
         
         if (!$conditionsMet) {
             // FALLBACK
@@ -278,6 +289,28 @@ try {
         }
         
         $response['applied_campaigns'][] = $campaign['name'];
+        
+        // Kampanya meta bilgilerini ekle (Frontend kontrolü için)
+        if (!isset($response['campaign_meta'])) {
+            $response['campaign_meta'] = [];
+        }
+        
+        // Dinamik koşul metni oluştur
+        $conditionText = "";
+        if ($minAmount > 0) {
+            $conditionText = "Min " . number_format($minAmount, 0, ',', '.') . " € alım";
+            if ($minQty > 0) {
+                $conditionText .= " ve Min $minQty adet";
+            }
+        } else {
+            $conditionText = "Min $minQty adet alım";
+        }
+
+        $response['campaign_meta'][$campaign['name']] = [
+            'min_amount' => floatval($campaign['min_purchase_amount']),
+            'condition_text' => $conditionText, // Frontend bunu kullanabilir
+            'category' => $categoryName
+        ];
     }
     
     // ============================================

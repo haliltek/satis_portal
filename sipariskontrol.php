@@ -475,6 +475,10 @@ $turum = 'urun';
 
                                     // Yönetici Onayına Gönder (Eğer Özel Teklif Seçildiyse)
                                     if ($isSpecialOffer) {
+                                        // Debug log - Özel teklif bloğuna girildiğini kaydet
+                                        $debugLogFile = __DIR__ . '/approval_debug.log';
+                                        file_put_contents($debugLogFile, date('Y-m-d H:i:s') . " - ÖZEL TEKLİF BLOGU TETIKLENDİ - Teklif ID: $teklifsonkayitid\n", FILE_APPEND);
+                                        
                                         // Temsilci (Hazırlayan) ismini belirle
                                         $temsilciAdi = $yoneticisorgula["adsoyad"] ?? ($personelprofil["adsoyad"] ?? "Bilinmeyen Temsilci");
 
@@ -487,11 +491,22 @@ $turum = 'urun';
                                             "urunler"      => $approvalProducts
                                         ];
 
-                                        // URL dinamik belirlensin veya sabit
+                                        // URL oluşturma - IIS için düzeltilmiş
                                         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
                                         $domainName = $_SERVER['HTTP_HOST'];
-                                        $baseDir = dirname($_SERVER['PHP_SELF']); // /b2b-gemas-project-main
+                                        
+                                        // Windows backslash'leri forward slash'e çevir
+                                        $baseDir = dirname($_SERVER['PHP_SELF']);
+                                        $baseDir = str_replace('\\', '/', $baseDir);
+                                        
+                                        // API URL'i oluştur - duplicate slash'leri temizle
                                         $apiUrl = $protocol . $domainName . $baseDir . "/api/teklif/onay-gonder.php";
+                                        $apiUrl = preg_replace('#/+#', '/', $apiUrl); // Duplicate slashes fix
+                                        $apiUrl = str_replace(':/', '://', $apiUrl); // Protocol'u geri düzelt
+                                        
+                                        // Debug log - API URL'i kaydet
+                                        file_put_contents($debugLogFile, date('Y-m-d H:i:s') . " - API URL (normalized): $apiUrl\n", FILE_APPEND);
+                                        file_put_contents($debugLogFile, date('Y-m-d H:i:s') . " - Approval Data: " . json_encode($approvalData) . "\n", FILE_APPEND);
 
                                         $ch = curl_init($apiUrl);
                                         curl_setopt($ch, CURLOPT_POST, 1);
@@ -503,6 +518,14 @@ $turum = 'urun';
                                         
                                         $apiResponse = curl_exec($ch);
                                         file_put_contents('n8n_capture.txt', "API Resp: " . $apiResponse . "\n", FILE_APPEND);
+                                        
+                                        // Debug log - cURL result
+                                        $curlError = curl_error($ch);
+                                        $curlErrno = curl_errno($ch);
+                                        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                                        file_put_contents($debugLogFile, date('Y-m-d H:i:s') . " - cURL Result: HTTP $httpCode, Error: $curlErrno, Message: $curlError\n", FILE_APPEND);
+                                        file_put_contents($debugLogFile, date('Y-m-d H:i:s') . " - API Response: " . substr($apiResponse, 0, 500) . "\n", FILE_APPEND);
+                                        
                                         if (curl_errno($ch)) {
                                             writeLog("Approval API cURL Error: " . curl_error($ch));
                                         } else {

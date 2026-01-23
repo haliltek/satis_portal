@@ -12,6 +12,7 @@ mail_log.txt
 # Large SQL dumps
 *.sql
 !sql/*.sql
+*.zip
 
 # Executables
 *.exe

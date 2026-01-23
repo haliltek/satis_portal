@@ -1,0 +1,72 @@
+Database: GEMAS2026, View: [dbo].[LV_526_SALES_ITEMS]
+Date: 2026-01-23 09:24:22
+
+AGGREGATE TOTALS:
+Array
+(
+    [TotalOutput] => 131.0
+    [TotalInput] => 36.0
+    [TotalCount] => 8
+)
+
+BREAKDOWN BY TRCODE:
+Array
+(
+    [STLINE_TRCODE] => 8
+    [STLINE_IOCODE] => 4
+    [STFICHE_TRCODE] => 8
+    [CAPIWHOUSE_NR] => 0
+    [OutputQty] => 10.0
+    [InputQty] => 0.0
+    [TotalCount] => 1
+)
+Array
+(
+    [STLINE_TRCODE] => 8
+    [STLINE_IOCODE] => 4
+    [STFICHE_TRCODE] => 8
+    [CAPIWHOUSE_NR] => 70
+    [OutputQty] => 1.0
+    [InputQty] => 0.0
+    [TotalCount] => 1
+)
+Array
+(
+    [STLINE_TRCODE] => 9
+    [STLINE_IOCODE] => 4
+    [STFICHE_TRCODE] => 9
+    [CAPIWHOUSE_NR] => 0
+    [OutputQty] => 104.0
+    [InputQty] => 0.0
+    [TotalCount] => 1
+)
+Array
+(
+    [STLINE_TRCODE] => 14
+    [STLINE_IOCODE] => 1
+    [STFICHE_TRCODE] => 14
+    [CAPIWHOUSE_NR] => 70
+    [OutputQty] => 0.0
+    [InputQty] => 20.0
+    [TotalCount] => 1
+)
+Array
+(
+    [STLINE_TRCODE] => 25
+    [STLINE_IOCODE] => 3
+    [STFICHE_TRCODE] => 25
+    [CAPIWHOUSE_NR] => 0
+    [OutputQty] => 16.0
+    [InputQty] => 0.0
+    [TotalCount] => 2
+)
+Array
+(
+    [STLINE_TRCODE] => 25
+    [STLINE_IOCODE] => 2
+    [STFICHE_TRCODE] => 25
+    [CAPIWHOUSE_NR] => 0
+    [OutputQty] => 0.0
+    [InputQty] => 16.0
+    [TotalCount] => 2
+)

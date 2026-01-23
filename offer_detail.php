@@ -117,6 +117,10 @@ if (!empty($sirketArp)) {
         $isForeignCustomer = (strpos($tradingGrp, 'yd') !== false);
     }
 }
+// URL parametresi ile dil zorlama
+if (isset($_GET['lang']) && $_GET['lang'] === 'en') {
+    $isForeignCustomer = true;
+}
 
 // Tahsilat planı görüntü bilgisi
 $payPlanDisplay = '-';
@@ -396,6 +400,25 @@ function t($key, $isForeign = false) {
             'terms' => 'Teklif Şartları',
             'yes' => 'EVET',
             'no' => 'HAYIR',
+            'action_options' => 'İşlem Seçenekleri',
+            'current_status' => 'Mevcut Durum',
+            'approve' => 'Onayla',
+            'reject' => 'Reddet',
+            'revise' => 'Revize Et',
+            'revise_process' => 'Revize Süreci',
+            'revise_note' => 'Revize Notunuz',
+            'revise_placeholder' => 'Revize işlemi ile ilgili not ekleyin',
+            'revise_update' => 'Revize Güncelle',
+            'status_history' => 'Durum Geçmişi',
+            'date' => 'Tarih',
+            'old_status' => 'Eski Durum',
+            'new_status' => 'Yeni Durum',
+            'changed_by' => 'Değişikliği Yapan',
+            'notes' => 'Notlar',
+            'no_change_allowed' => 'Bu teklif üzerinde değişiklik yapılamaz.',
+            'revise_right_exceeded' => 'Revize Hakkınız Doldu',
+            'revise_tooltip' => 'Revize etmek için tıklayın.',
+            'revise_complete_tooltip' => 'Revize işlemini tamamlamak için tıklayın.',
         ],
         'en' => [
             'offer_details' => 'Offer Details',
@@ -428,6 +451,25 @@ function t($key, $isForeign = false) {
             'terms' => 'Terms and Conditions',
             'yes' => 'YES',
             'no' => 'NO',
+            'action_options' => 'Action Options',
+            'current_status' => 'Current Status',
+            'approve' => 'Approve',
+            'reject' => 'Reject',
+            'revise' => 'Revise',
+            'revise_process' => 'Revision Process',
+            'revise_note' => 'Revision Note',
+            'revise_placeholder' => 'Add notes regarding the revision',
+            'revise_update' => 'Update Revision',
+            'status_history' => 'Status History',
+            'date' => 'Date',
+            'old_status' => 'Old Status',
+            'new_status' => 'New Status',
+            'changed_by' => 'Changed By',
+            'notes' => 'Notes',
+            'no_change_allowed' => 'No changes can be made to this offer.',
+            'revise_right_exceeded' => 'Revision Rights Exceeded',
+            'revise_tooltip' => 'Click to revise.',
+            'revise_complete_tooltip' => 'Click to complete the revision process.',
         ]
     ];
     $lang = $isForeign ? 'en' : 'tr';
@@ -1207,23 +1249,23 @@ function t($key, $isForeign = false) {
                             <?php if ($isEditable): ?>
                                 <div class="card mt-3">
                                     <div class="card-header bg-light">
-                                        <h5 class="mb-1">İşlem Seçenekleri</h5>
-                                        <p class="mb-0">Mevcut Durum: <strong><?= htmlspecialchars($currentDurum); ?></strong></p>
+                                        <h5 class="mb-1"><?= t('action_options', $isForeignCustomer); ?></h5>
+                                        <p class="mb-0"><?= t('current_status', $isForeignCustomer); ?>: <strong><?= htmlspecialchars($currentDurum); ?></strong></p>
                                     </div>
                                     <div class="card-body">
                                         <div class="d-flex justify-content-end align-items-center gap-2">
                                             <form action="offer_detail.php?te=<?= urlencode($teklifId); ?>&sta=<?= urlencode($siparisStatu); ?>" method="POST" data-parsley-validate class="d-inline">
                                                 <input type="hidden" name="durum" value="Onayla">
-                                                <button type="submit" class="btn btn-success" data-bs-toggle="tooltip" title="<?= htmlspecialchars($onayTooltip); ?>">Onayla</button>
+                                                <button type="submit" class="btn btn-success" data-bs-toggle="tooltip" title="<?= htmlspecialchars($onayTooltip); ?>"><?= t('approve', $isForeignCustomer); ?></button>
                                             </form>
                                             <form action="offer_detail.php?te=<?= urlencode($teklifId); ?>&sta=<?= urlencode($siparisStatu); ?>" method="POST" data-parsley-validate class="d-inline">
                                                 <input type="hidden" name="durum" value="Reddet">
-                                                <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" title="<?= htmlspecialchars($redTooltip); ?>">Reddet</button>
+                                                <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" title="<?= htmlspecialchars($redTooltip); ?>"><?= t('reject', $isForeignCustomer); ?></button>
                                             </form>
                                             <?php if ($canRevise): ?>
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="tooltip" title="Revize etmek için tıklayın." onclick="switchTabToDurum()">Revize Et</button>
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="tooltip" title="<?= t('revise_tooltip', $isForeignCustomer); ?>" onclick="switchTabToDurum()"><?= t('revise', $isForeignCustomer); ?></button>
                                             <?php else: ?>
-                                                <button type="button" class="btn btn-warning" disabled data-bs-toggle="tooltip" title="Revize hakkınız doldu.">Revize Hakkınız Doldu</button>
+                                                <button type="button" class="btn btn-warning" disabled data-bs-toggle="tooltip" title="<?= t('revise_right_exceeded', $isForeignCustomer); ?>"><?= t('revise_right_exceeded', $isForeignCustomer); ?></button>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -1231,7 +1273,7 @@ function t($key, $isForeign = false) {
                             <?php else: ?>
                                 <div class="card mt-3">
                                     <div class="card-body">
-                                        <p class="mb-0">Bu teklif üzerinde değişiklik yapılamaz. Mevcut Durum: <strong><?= htmlspecialchars($currentDurum); ?></strong></p>
+                                        <p class="mb-0"><?= t('no_change_allowed', $isForeignCustomer); ?> <?= t('current_status', $isForeignCustomer); ?>: <strong><?= htmlspecialchars($currentDurum); ?></strong></p>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -1243,38 +1285,38 @@ function t($key, $isForeign = false) {
                             <div class="card mt-3">
 
                                 <div class="card-header">
-                                    <h5>Revize Süreci</h5>
+                                    <h5><?= t('revise_process', $isForeignCustomer); ?></h5>
                                 </div>
                                 <div class="card-body">
                                     <form action="offer_detail.php?te=<?= urlencode($teklifId); ?>&sta=<?= urlencode($siparisStatu); ?>" method="POST" data-parsley-validate>
                                         <input type="hidden" name="durum" value="Revize Et">
                                         <div class="mb-3">
-                                            <label for="notlar" class="form-label">Revize Notunuz:</label>
+                                            <label for="notlar" class="form-label"><?= t('revise_note', $isForeignCustomer); ?>:</label>
                                             <textarea class="form-control" id="notlar" name="notlar" rows="4"
-                                                placeholder="Revize işlemi ile ilgili not ekleyin"
+                                                placeholder="<?= t('revise_placeholder', $isForeignCustomer); ?>"
                                                 data-parsley-minlength="10"
                                                 data-parsley-maxlength="300"
                                                 data-parsley-trigger="change"></textarea>
                                         </div>
                                         <div class="text-end">
-                                            <button type="submit" class="btn btn-warning" data-bs-toggle="tooltip" title="Revize işlemini tamamlamak için tıklayın.">Revize Güncelle</button>
+                                            <button type="submit" class="btn btn-warning" data-bs-toggle="tooltip" title="<?= t('revise_complete_tooltip', $isForeignCustomer); ?>"><?= t('revise_update', $isForeignCustomer); ?></button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                             <div class="card mt-3">
                                 <div class="card-header">
-                                    <h5>Durum Geçmişi</h5>
+                                    <h5><?= t('status_history', $isForeignCustomer); ?></h5>
                                 </div>
                                 <div class="card-body table-responsive">
                                     <table class="table table-bordered table-striped">
                                         <thead class="table-dark">
                                             <tr>
-                                                <th>Tarih</th>
-                                                <th>Eski Durum</th>
-                                                <th>Yeni Durum</th>
-                                                <th>Değişikliği Yapan</th>
-                                                <th>Notlar</th>
+                                                <th><?= t('date', $isForeignCustomer); ?></th>
+                                                <th><?= t('old_status', $isForeignCustomer); ?></th>
+                                                <th><?= t('new_status', $isForeignCustomer); ?></th>
+                                                <th><?= t('changed_by', $isForeignCustomer); ?></th>
+                                                <th><?= t('notes', $isForeignCustomer); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>

@@ -9,12 +9,17 @@ if (isset($_GET['datatable']) || isset($_POST['datatable'])) {
     exit;
 }
 
-// Sadece Yönetici
+// Kullanıcı tipi kontrolü
 $userType = $_SESSION['user_type'] ?? '';
-if ($userType !== 'Yönetici') {
+$yonetici_id = $_SESSION['yonetici_id'] ?? 0;
+
+// Yönetici veya Personel olmalı
+if (!in_array($userType, ['Yönetici', 'Personel'])) {
     header('Location: anasayfa.php');
     exit;
 }
+
+$isYonetici = ($userType === 'Yönetici');
 
 ?>
 <!doctype html>
@@ -43,15 +48,21 @@ if ($userType !== 'Yönetici') {
                     <div class="col-12">
                         <div class="card shadow-sm">
                             <div class="card-header bg-warning text-dark">
-                                <h4 class="mb-0">Bekleyen Fiyat Talepleri</h4>
+                                <h4 class="mb-0">
+                                    <?php if ($isYonetici): ?>
+                                        Bekleyen Fiyat Talepleri (Tüm Talepler)
+                                    <?php else: ?>
+                                        Fiyat Taleplerim
+                                    <?php endif; ?>
+                                </h4>
                             </div>
                             <div class="card-body">
                                 <div class="row mb-3">
                                     <div class="col-md-3">
                                         <select id="status_filter" class="form-select">
-                                            <option value="Beklemede" selected>Beklemede</option>
-                                            <option value="Onaylandı">Onaylandı</option>
-                                            <option value="Reddedildi">Reddedildi</option>
+                                            <option value="beklemede" selected>Beklemede</option>
+                                            <option value="onaylandi">Onaylandı</option>
+                                            <option value="reddedildi">Reddedildi</option>
                                             <option value="">Tümü</option>
                                         </select>
                                     </div>
@@ -62,13 +73,8 @@ if ($userType !== 'Yönetici') {
                                             <th>ID</th>
                                             <th>Stok Kodu</th>
                                             <th>Ürün Adı</th>
-                                            <th>Personel</th>
+                                            <th>Talep Eden</th>
                                             <th>Tarih</th>
-                                            <th>Mevcut (TL)</th>
-                                            <th>Mevcut (Exp)</th>
-                                            <th>Döviz</th>
-                                            <th>Stok</th>
-                                            <th>Aktif</th>
                                             <th>Talep Notu</th>
                                             <th>Durum</th>
                                             <th>İşlem</th>
@@ -176,6 +182,9 @@ if ($userType !== 'Yönetici') {
 <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 <script>
+var isYonetici = <?php echo $isYonetici ? 'true' : 'false'; ?>;
+var currentUserId = <?php echo $yonetici_id; ?>;
+
 $(document).ready(function(){
     var table = $('#requestTable').DataTable({
         serverSide: true,
@@ -190,30 +199,43 @@ $(document).ready(function(){
             }
         },
         columns: [
-            { data: 'id' },
-            { data: 'stok_kodu' },
-            { data: 'urun_adi' },
-            { data: 'adsoyad' },
-            { data: 'tarih' },
-            { data: 'mevcut_fiyat_yurtici', render: function(data){ return parseFloat(data).toFixed(2); }},
-            { data: 'mevcut_fiyat_export', render: function(data){ return parseFloat(data).toFixed(2); }},
-            { data: 'doviz' },
-            { data: 'miktar' },
-            { data: 'logo_active', render: function(data){
-                return data == 1 ? '<span class="badge bg-success">Aktif</span>' : '<span class="badge bg-secondary">Pasif</span>';
+            { data: 'talep_id' },
+            { data: 'stokkodu' },
+            { data: 'stokadi' },
+            { data: 'talep_eden_adi' },
+            { data: 'talep_tarihi', render: function(data){
+                if(!data) return '-';
+                var d = new Date(data);
+                return d.toLocaleDateString('tr-TR') + ' ' + d.toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'});
             }},
-            { data: 'oneri_not' },
+            { data: 'talep_notu', render: function(data){
+                if(!data) return '-';
+                return data.length > 50 ? data.substring(0, 50) + '...' : data;
+            }},
             { data: 'durum', render: function(data){
-                if(data=='Beklemede') return '<span class="badge bg-warning text-dark">Beklemede</span>';
-                if(data=='Onaylandı') return '<span class="badge bg-success">Onaylandı</span>';
-                if(data=='Reddedildi') return '<span class="badge bg-danger">Reddedildi</span>';
+                if(data=='beklemede') return '<span class="badge bg-warning text-dark">Beklemede</span>';
+                if(data=='onaylandi') return '<span class="badge bg-success">Onaylandı</span>';
+                if(data=='reddedildi') return '<span class="badge bg-danger">Reddedildi</span>';
                 return data;
             }},
-            { data: 'id', orderable: false, render: function(data, type, row){
-                if(row.durum !== 'Beklemede') return '-';
+            { data: 'talep_id', orderable: false, render: function(data, type, row){
+                // Personel ise sadece durum göster
+                if (!isYonetici) {
+                    if(row.durum == 'beklemede') {
+                        return '<span class="badge bg-info">İşleniyor...</span>';
+                    } else if(row.durum == 'onaylandi') {
+                        return '<span class="badge bg-success"><i class="bx bx-check"></i> Tamamlandı</span>';
+                    } else if(row.durum == 'reddedildi') {
+                        return '<span class="badge bg-danger"><i class="bx bx-x"></i> Reddedildi</span>';
+                    }
+                    return '-';
+                }
+                
+                // Yönetici ise işlem butonları
+                if(row.durum !== 'beklemede') return '-';
                 return '<div class="d-flex gap-1">' +
-                       '<button class="btn btn-sm btn-primary btn-update-price" data-stokkodu="'+row.stok_kodu+'" title="Fiyat Güncelle"><i class="bx bx-edit"></i></button>' + 
-                       '<button class="btn btn-sm btn-success btn-approve" data-id="'+data+'" title="Tamamlandı Olarak İşaretle"><i class="bx bx-check"></i></button>' +
+                       '<button class="btn btn-sm btn-primary btn-update-price" data-talepid="'+data+'" data-stokkodu="'+row.stokkodu+'" title="Fiyat Güncelle"><i class="bx bx-edit"></i></button>' + 
+                       '<button class="btn btn-sm btn-success btn-approve" data-id="'+data+'" title="Onayla"><i class="bx bx-check"></i></button>' +
                        '<button class="btn btn-sm btn-danger btn-reject" data-id="'+data+'" title="Reddet"><i class="bx bx-x"></i></button>' +
                        '</div>';
             }}
@@ -313,8 +335,8 @@ $(document).ready(function(){
         });
     }
 
-    // Modal Form Gönderimi
-    $('#priceUpdateForm').on('submit', function(e) {
+    // Modal Form Gönderimi (Zengin UI - Event Delegation)
+    $(document).on('submit', '#priceUpdateForm', function(e) {
         e.preventDefault();
         
         // Form verilerini al
@@ -325,16 +347,7 @@ $(document).ready(function(){
         $('.mail-checkbox:checked').each(function() {
             selectedMailIds.push($(this).val());
         });
-        // formData.push({name: 'selected_mail_ids', value: selectedMailIds.join(',')});  // urunlerlogo.php bu formatı bekliyor mu emin olalım.
-        // urunlerlogo JS'inde: formData.push({ name: 'selected_mail_ids', value: selectedMailIds.join(',') });
-        // Evet, string olarak bekliyor.
         
-        // Ama serializeArray() zaten selected_mail_ids[] olarak alabilir, onu string'e çevirip değiştirelim veya ekleyelim.
-        // En temiz yöntem manuel eklemek.
-        // Form'daki `action` hidden field `updatePriceWithMail` olarak ayarlı. URL `urunlerlogo.php` olmalı.
-        
-        // Düzeltme: formData'yı manipüle et
-        // Checkboxları çıkarıp string olarak ekleyelim
         var newFormData = $.grep(formData, function(item){ 
             return item.name !== 'selected_mail_ids[]'; 
         });
@@ -346,24 +359,180 @@ $(document).ready(function(){
             data: newFormData,
             dataType: 'json',
             beforeSend: function() {
-                $('#priceUpdateModal .modal-body').append('<div id="loadingIndicator" class="alert alert-info mt-2">İşlem yapılıyor, lütfen bekleyiniz...</div>');
+                $('#priceUpdateModal .modal-body').append('<div id="loadingIndicator" class="alert alert-info mt-2"><i class="bx bx-loader-alt bx-spin"></i> İşlem yapılıyor, lütfen bekleyiniz...</div>');
+                $('#priceUpdateModal button[type="submit"]').prop('disabled', true);
             },
             success: function(response) {
-                $('#loadingIndicator').remove();
-                if (response.status === 'success' || response.status === 'partial') {
-                    alert('İşlem Başarılı: ' + response.message);
-                    $('#priceUpdateModal').modal('hide');
-                    table.draw();
+                const $modal = $('#priceUpdateModal');
+                const $body = $modal.find('.modal-body');
+                const $footer = $modal.find('.modal-footer'); // Footer varsa
+
+                // 1) spinner’ı temizle
+                $modal.find('#loadingIndicator').remove();
+                // Butonları gizle (veya footer'ı)
+                $modal.find('button[type="submit"]').hide();
+                $modal.find('button.btn-secondary').hide(); // Vazgeç butonu
+
+                // 2) gövdedeki form alanlarını temizle
+                $body.empty();
+
+                // 3) ignored-error kontrolü
+                const ignoredExportError = response.platforms?.logo_gemas?.export?.ignored_error;
+
+                // 4) ikon ve başlık belirle
+                let iconClass, titleText;
+                if (response.status === 'success' || ignoredExportError) {
+                    iconClass = 'bx bx-check-circle text-success';
+                    titleText = ignoredExportError ? 'Güncelleme Kısmen Başarılı' : 'Güncelleme Başarılı';
+                } else if (response.status === 'partial' || response.status === 'warning') {
+                    iconClass = 'bx bx-error text-warning';
+                    titleText = 'Güncelleme Kısmen Başarılı';
                 } else {
-                    alert('Hata: ' + response.message);
+                    iconClass = 'bx bx-x-circle text-danger';
+                    titleText = 'Güncelleme Başarısız';
                 }
+
+                // 5) Başlık ve mesaj
+                $body.append(`
+                    <div class="text-center p-3">
+                        <i class="${iconClass}" style="font-size: 3rem;"></i>
+                        <h5 class="mt-3">${titleText}</h5>
+                        <p>${response.message}</p>
+                    </div>
+                `);
+
+                // 5.1) Progress bar
+                if (response.platforms) {
+                    const counts = { success: 0, skip: 0, fail: 0 };
+                    $.each(response.platforms, (pk, res) => {
+                        ['domestic', 'export'].forEach(type => {
+                            const entry = res[type];
+                            const ignored = pk === 'logo_gemas' && type === 'export' && entry.ignored_error;
+                            if (entry.success === true || ignored) {
+                                if (entry.error !== 'No change') counts.success++;
+                            } else if (entry.success === null) {
+                                counts.skip++;
+                            } else if (entry.success === false) {
+                                counts.fail++;
+                            }
+                        });
+                    });
+                    const total = counts.success + counts.skip + counts.fail;
+                    const successPct = total ? (counts.success / total) * 100 : 0;
+                    const skipPct = total ? (counts.skip / total) * 100 : 0;
+                    const failPct = total ? (counts.fail / total) * 100 : 0;
+                    
+                    $body.append(`
+                        <div class="progress mb-2" style="height:18px;">
+                            ${counts.success ? `<div class="progress-bar bg-success" style="width:${successPct}%"></div>` : ''}
+                            ${counts.skip ? `<div class="progress-bar bg-warning text-dark" style="width:${skipPct}%"></div>` : ''}
+                            ${counts.fail ? `<div class="progress-bar bg-danger" style="width:${failPct}%"></div>` : ''}
+                        </div>
+                        <div class="text-center mb-3 small">${counts.success} Başarılı • ${counts.skip} Atlandı • ${counts.fail} Hata</div>
+                    `);
+                }
+
+                // 6) Platform detaylarını göster (tablo)
+                if (response.platforms) {
+                    const labels = {
+                        mysql: '<i class="bx bx-data text-primary me-1"></i>Satış Web DB',
+                        logo_gempa: '<i class="bx bxs-factory text-danger me-1"></i>Logo GEMPAS',
+                        logo_gemas: '<i class="bx bxs-factory text-danger me-1"></i>Logo GEMAS',
+                        web: '<i class="bx bx-globe text-info me-1"></i>Gemas Web/App'
+                    };
+                    const rows = [];
+                    $.each(response.platforms, (platformKey, results) => {
+                        let rowHtml = `<tr><th>${labels[platformKey]}</th>`;
+                        ['domestic', 'export'].forEach(type => {
+                            const entry = results[type];
+                            const isIgnored = platformKey === 'logo_gemas' && type === 'export' && entry.ignored_error;
+                            const isSkipped = entry.success === null;
+                            const isSuccess = entry.success === true || isIgnored;
+                            let badgeClass, text, iconHtml;
+                            
+                            if (isSkipped) {
+                                badgeClass = 'badge bg-warning text-dark';
+                                iconHtml = '<i class="bx bx-fast-forward me-1"></i>';
+                                text = 'Atlandı';
+                            } else if (isSuccess) {
+                                const noChange = entry.error === 'No change';
+                                badgeClass = noChange ? 'badge bg-secondary' : 'badge bg-success';
+                                iconHtml = noChange ? '<i class="bx bx-minus-circle me-1"></i>' : '<i class="bx bx-check-circle me-1"></i>';
+                                text = noChange ? 'Değişmedi' : 'Başarılı';
+                            } else {
+                                badgeClass = 'badge bg-danger';
+                                iconHtml = '<i class="bx bx-x-circle me-1"></i>';
+                                text = 'Hata';
+                            }
+                            
+                            let detailMsg = '';
+                            if (isSkipped || (!isSuccess && entry.error !== 'No change')) {
+                                detailMsg = entry.error;
+                            } else if (isIgnored) {
+                                detailMsg = entry.ignored_error;
+                            }
+                            
+                            const tooltipAttr = detailMsg ? ' title="'+detailMsg+'"' : ''; // Basit title attribute
+                            rowHtml += `<td><span class="${badgeClass}"${tooltipAttr}>${iconHtml}${text}</span></td>`;
+                        });
+                        rowHtml += '</tr>';
+                        rows.push(rowHtml);
+                    });
+
+                    $body.append(`
+                        <table class="table table-sm table-striped">
+                            <thead>
+                                <tr><th>Platform</th><th>Yurtiçi</th><th>İhracat</th></tr>
+                            </thead>
+                            <tbody>${rows.join('')}</tbody>
+                        </table>
+                    `);
+                }
+
+                // 7) Mail durumu
+                if (response.mailTotal > 0) {
+                    $body.append(`
+                        <div class="alert alert-light border mt-3">
+                            <h6 class="mb-1"><i class="bx bx-envelope me-1"></i>Mail Durumu</h6>
+                            <p class="mb-0 small">Gönderilen: <strong>${response.mailSent}</strong> / ${response.mailTotal}</p>
+                            ${response.mailFailed.length ? `<p class="mb-0 small text-danger">Hatalı: ${response.mailFailed.join(', ')}</p>` : ''}
+                        </div>
+                    `);
+                }
+
+                // 8) Kapat düğmesi
+                $body.append(`
+                    <div class="text-center mt-3">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kapat</button>
+                    </div>
+                `);
+
+                // Tabloyu yenile (Fiyatlar değişmiş olabilir)
+                if (table) table.draw();
+                
             },
             error: function(xhr) {
                 $('#loadingIndicator').remove();
-                alert('Sunucu hatası: ' + xhr.responseText);
+                $('#priceUpdateModal .modal-body').append(`
+                    <div class="alert alert-danger text-center mt-3">
+                        <h5>Sunucu Hatası</h5>
+                        <p>${xhr.responseText}</p>
+                        <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">Kapat</button>
+                    </div>
+                `);
             }
         });
     });
+
+    // Modal kapanınca içeriği sıfırla (Çünkü body dynamic değişiyor)
+    var originalModalBody = $('#priceUpdateModal .modal-body').html();
+    $('#priceUpdateModal').on('hidden.bs.modal', function () {
+       $(this).find('.modal-body').html(originalModalBody);
+       $('#priceUpdateForm')[0].reset();
+       $('#priceUpdateModal button[type="submit"]').prop('disabled', false).show();
+       $('#priceUpdateModal button.btn-secondary').show();
+    });
+
 });
 </script>
 </body>

@@ -1234,7 +1234,7 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                             </div>
                                         </div>
                                         <div class="table-responsive mt-3">
-                                            <table id="cartTable" class="table table-bordered">
+                                            <table id="cartTable" class="table table-bordered" style="table-layout: fixed; width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th style="width: 120px;">Stok Kodu</th>
@@ -1242,12 +1242,13 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                         <th>Açıklama</th>
                                                         <th style="width: 60px;">Miktar</th>
                                                         <th style="width: 120px;">Liste Fiyatı</th>
-                                                        <th style="width: 70px;">İskonto (%)</th>
+                                                        <th style="width: 80px;">İskonto (%)</th>
                                                         <th style="width: 120px;">İskontolu Birim Fiyat</th>
                                                         <th style="width: 120px;">İskontolu Toplam</th>
-                                                        <th style="width: 80px;">Birim</th>
-                                                        <th style="width: 60px;">KDV (%)</th>
-                                                        <th style="width: 80px;">İşlem</th>
+                                                        <th style="width: 60px;">Birim</th>
+                                                        <th style="width: 30px;">KDV (%)</th>
+                                                        <th style="width: 75px;">Satış Marjı (%)</th>
+                                                        <th style="width: 60px;">İşlem</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="cartTableBody">
@@ -1405,6 +1406,13 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                             <td style="text-align: center; padding: 2px 4px; font-size: 13px; line-height: 28px;">
                                                                 20
                                                             </td>
+                                                            <td style="padding: 0;">
+                                                                <input type="text"
+                                                                    name="satis_marji[<?= $row['urun_id'] ?>]"
+                                                                    value="0,00"
+                                                                    class="form-control satis-marji-input"
+                                                                    style="text-align: right; width: 100%; border: 1px solid #ccc; padding: 2px 4px; height: 28px; font-size: 13px;">
+                                                            </td>
 
                                                             <td style="text-align: center; padding: 2px;">
                                                                 <button type="button" class="btn btn-danger btn-sm remove-btn" data-id="<?= $row['urun_id'] ?>" style="padding: 0 6px; font-size: 11px; height: 24px; line-height: 22px;">Kaldır</button>
@@ -1415,14 +1423,14 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                 </tbody>
                                                 <tfoot id="cartTableFooter" style="display: none;">
                                                     <tr style="background: #f0f0f0; font-weight: bold;">
-                                                        <td colspan="5" style="text-align: right; padding: 8px 4px;">ARA TOPLAM:</td>
+                                                        <td colspan="7" style="text-align: right; padding: 8px 4px;">ARA TOPLAM:</td>
                                                         <td style="text-align: right; padding: 8px 4px; font-size: 12px;">
                                                             <span id="subTotalAmount">0,00</span>
                                                         </td>
                                                         <td colspan="4"></td>
                                                     </tr>
                                                     <tr style="background: #ffffff;">
-                                                        <td colspan="5" style="text-align: right; padding: 8px 4px; vertical-align: middle;">GENEL İSKONTO (%):</td>
+                                                        <td colspan="7" style="text-align: right; padding: 8px 4px; vertical-align: middle;">GENEL İSKONTO (%):</td>
                                                         <td style="text-align: right; padding: 4px;">
                                                             <div class="input-group input-group-sm justify-content-end" style="width: 120px; float: right;">
                                                                 <input type="text" id="genelIskonto" name="genel_iskonto" class="form-control" value="<?php echo number_format($genel_iskonto, 2, ',', '.'); ?>" style="text-align: right;">
@@ -1432,7 +1440,7 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                         <td colspan="4"></td>
                                                     </tr>
                                                     <tr style="background: #e9ecef; font-weight: bold; border-top: 2px solid #dee2e6;">
-                                                        <td colspan="5" style="text-align: right; padding: 8px 4px;">NET TOPLAM:</td>
+                                                        <td colspan="7" style="text-align: right; padding: 8px 4px;">NET TOPLAM:</td>
                                                         <td style="text-align: right; padding: 8px 4px; font-size: 12px;">
                                                             <span id="totalAmount">0,00</span>
                                                             <br>
@@ -1441,7 +1449,7 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                         <td colspan="4"></td>
                                                     </tr>
                                                     <tr style="background: #f9f9f9;">
-                                                        <td colspan="5" style="text-align: right; padding: 4px; font-size: 10px; color: #666;">TL Karşılığı:</td>
+                                                        <td colspan="7" style="text-align: right; padding: 4px; font-size: 10px; color: #666;">TL Karşılığı:</td>
                                                         <td style="text-align: right; padding: 4px; font-size: 10px; color: #666;">
                                                             <span id="totalAmountTL">0,00 ₺</span>
                                                             <br>
@@ -4135,6 +4143,7 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                         '<td style="text-align: right; padding: 2px 4px;"><span class="total-price-display" style="font-size: 13px; line-height: 28px;">0,00</span></td>'+
                         '<td style="white-space: nowrap; text-align: center; padding: 2px 4px; font-size: 13px; line-height: 28px;"><span id="newProductUnit">-</span></td>'+
                         '<td style="text-align: center; padding: 2px 4px; font-size: 13px; line-height: 28px;"><span class="kdv-display">-</span></td>'+
+                        '<td style="padding: 0;"><input type="text" id="newProductMargin" class="form-control satis-marji-input" value="0,00" style="text-align: right; width: 100%; border: 1px solid #ccc; padding: 2px 4px; height: 28px; font-size: 13px;"></td>'+
                         '<td style="text-align: center; padding: 2px;"><button type="button" class="btn btn-danger btn-sm remove-new-row-btn" style="padding: 0 6px; font-size: 11px; height: 24px; line-height: 22px; display: none;">Kaldır</button></td>'+
                     '</tr>';
                 } else {
@@ -4164,6 +4173,7 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                         '<td style="text-align: right; padding: 2px 4px;"><span class="total-price-display" style="font-size: 13px; line-height: 28px;">0,00</span></td>'+
                         '<td style="white-space: nowrap; text-align: center; padding: 2px 4px; font-size: 13px; line-height: 28px;"><span class="new-product-unit">-</span></td>'+
                         '<td style="text-align: center; padding: 2px 4px; font-size: 13px; line-height: 28px;"><span class="kdv-display">-</span></td>'+
+                        '<td style="padding: 0;"><input type="text" class="form-control satis-marji-input new-product-margin" value="0,00" style="text-align: right; width: 100%; border: 1px solid #ccc; padding: 2px 4px; height: 28px; font-size: 13px;"></td>'+
                         '<td style="text-align: center; padding: 2px;"><button type="button" class="btn btn-danger btn-sm remove-new-row-btn" style="padding: 0 6px; font-size: 11px; height: 24px; line-height: 22px; display: none;">Kaldır</button></td>'+
                     '</tr>';
                 }
@@ -4223,6 +4233,7 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                 $row.find('#newProductQty, .new-product-qty').first().val(1);
                 $row.find('#newProductDiscount, .new-product-discount').first().val('0,00');
                 $row.find('#newProductPrice, .new-product-price').first().val('0,00');
+                $row.find('#newProductMargin, .new-product-margin').first().val('0,00');
                 $row.find('#newProductUnit, .new-product-unit').first().text('-');
                 $row.find('.kdv-display').first().text('-');
                 $row.find('#newProductListPrice, .new-product-list-price').first().html('0,00');
