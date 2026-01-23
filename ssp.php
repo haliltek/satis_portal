@@ -13,11 +13,7 @@
  *
  * @license MIT - http://datatables.net/license_mit
  */
-// Please Remove below 4 lines as this is use in Datatatables test environment for your local or live environment please remove it or else it will not work
-$file = $_SERVER['DOCUMENT_ROOT'] . '/datatables/pdo.php';
-if (is_file($file)) {
-	include($file);
-}
+// Test environment code removed - not needed for production
 class SSP
 {
 	/**

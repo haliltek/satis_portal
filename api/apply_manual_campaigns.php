@@ -1,8 +1,19 @@
 <?php
 /**
- * API: Manuel Kampanya Uygulama
- * Input: {items: [{code, quantity}], customerCode, isCashPayment}
- * Output: {discounts: {productCode: {rates, display, total, campaigns}}}
+ * API: Kategori Bazlı Manuel Kampanya Uygulama
+ * Tarih: 2026-01-21
+ * 
+ * Input: {
+ *   items: [{code, quantity, price}], 
+ *   customerCode, 
+ *   isCashPayment
+ * }
+ * 
+ * Output: {
+ *   success, 
+ *   discounts: {productCode: {rates[], display, total, campaigns[]}},
+ *   applied_campaigns[]
+ * }
  */
 
 header('Content-Type: application/json; charset=utf-8');
@@ -18,11 +29,13 @@ $response = [
 
 function apiLog($msg) {
     global $response;
-    $response['logs'][] = $msg;
+    $response['logs'][] = date('H:i:s') . ' | ' . $msg;
 }
 
 try {
-    // Input
+    // ============================================
+    // 1. INPUT VALIDATION
+    // ============================================
     $inputJSON = file_get_contents('php://input');
     $input = json_decode($inputJSON, true);
     
@@ -35,171 +48,221 @@ try {
     $isCashPayment = $input['isCashPayment'] ?? false;
     
     if (empty($customerCode) || empty($cartItems)) {
-        throw new Exception("Eksik parametreler");
+        throw new Exception("Eksik parametreler (customerCode veya items)");
     }
     
-    apiLog("İşlem başladı - Cari: $customerCode, Ürün sayısı: " . count($cartItems));
+    apiLog("İşlem başladı - Cari: $customerCode, Ürün sayısı: " . count($cartItems) . ", Peşin: " . ($isCashPayment ? 'EVET' : 'HAYIR'));
     
-    // DB bağlantısı
+    // ============================================
+    // 2. DATABASE CONNECTION
+    // ============================================
     $config = require __DIR__ . '/../config/config.php';
     $db = $config['db'];
     $conn = new mysqli($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
-    // Veritabanı tablosu latin1 (veya varsayılan) olduğu halde UTF-8 verisi içerdiği için
-    // utf8 bağlantısında "double encoding" oluşuyor (örn: Ä°).
-    // latin1 bağlantısı ile ham baytları (UTF-8) çekip JSON olarak göndereceğiz.
-    $conn->set_charset("latin1");
+    $conn->set_charset("utf8mb4");
     
-    // Müşteri ID'sini belirle
-    // customerCode burada sirket ID'si olabilir veya cari kodu
-    // Şimdilik basitleştirelim: kampanyalar customer_type='specific' ve customer_code ile eşleşir
-    $isMainDealer = true; // Şimdilik tüm müşterilere izin ver, kampanya kendi kontrol edecek
+    if ($conn->connect_error) {
+        throw new Exception("Veritabanı bağlantı hatası: " . $conn->connect_error);
+    }
     
-    apiLog("Müşteri: $customerCode");
+    // ============================================
+    // 3. ANA BAYİ KONTROLÜ
+    // ============================================
+    $stmtCustomer = $conn->prepare("SELECT customer_type, active FROM custom_campaign_customers WHERE customer_code = ? LIMIT 1");
+    $stmtCustomer->bind_param("s", $customerCode);
+    $stmtCustomer->execute();
+    $customerResult = $stmtCustomer->get_result()->fetch_assoc();
+    $stmtCustomer->close();
     
-    // Uygun kampanyaları bul
-    $sql = "SELECT * FROM custom_campaigns 
-            WHERE active = 1 
-            AND (
-                customer_type = 'tum' 
-                OR (customer_type = 'specific' AND customer_code = ?)
-            )
-            ORDER BY priority DESC";
+    if (!$customerResult || $customerResult['active'] != 1) {
+        apiLog("Müşteri kampanya kapsamında değil");
+        throw new Exception("Bu müşteri için kampanya bulunmuyor");
+    }
     
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $customerCode);
-    $stmt->execute();
-    $campaigns = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $isMainDealer = ($customerResult['customer_type'] === 'ana_bayi');
+    apiLog("Müşteri tipi: " . $customerResult['customer_type'] . ($isMainDealer ? ' (ANA BAYİ)' : ''));
+    
+    // ============================================
+    // 4. AKTİF KAMPANYALARI ÇEK
+    // ============================================
+    // min_amount alanını da çekiyoruz
+    $sql = "SELECT *, min_amount as min_purchase_amount FROM custom_campaigns WHERE active = 1 AND customer_type = 'ana_bayi' ORDER BY priority DESC";
+    $campaigns = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
     
     apiLog("Bulunan kampanya sayısı: " . count($campaigns));
     
+    if (empty($campaigns)) {
+        throw new Exception("Aktif kampanya bulunamadı");
+    }
+    
+    // ============================================
+    // 5. KAMPANYA ÜRÜN LİSTESİNİ HAZIRLA
+    // ============================================
+    $campaignProductMap = []; // [product_code => campaign_info]
+    
     foreach ($campaigns as $campaign) {
-        apiLog("Kampanya: " . $campaign['name']);
-        
-        // Kampanya ürünlerini çek
-        $stmtProducts = $conn->prepare("SELECT * FROM custom_campaign_products WHERE campaign_id = ?");
+        $stmtProducts = $conn->prepare("SELECT product_code, discount_rate FROM custom_campaign_products WHERE campaign_id = ?");
         $stmtProducts->bind_param("i", $campaign['id']);
         $stmtProducts->execute();
-        $campaignProducts = $stmtProducts->get_result()->fetch_all(MYSQLI_ASSOC);
+        $products = $stmtProducts->get_result()->fetch_all(MYSQLI_ASSOC);
+        $stmtProducts->close();
         
-        // Eşleşen ürünleri bul
-        $matchedItems = [];
-        $totalQuantity = 0;
+        foreach ($products as $product) {
+            $campaignProductMap[$product['product_code']] = [
+                'campaign' => $campaign,
+                'discount_rate' => floatval($product['discount_rate'])
+            ];
+        }
+        
+        apiLog("Kampanya: {$campaign['name']} - {$campaign['category_name']} (" . count($products) . " ürün)");
+    }
+    
+    // ============================================
+    // 6. KATEGORİ BAZLI GRUPLAMA
+    // ============================================
+    $categoryGroups = []; // [category_name => [items]]
+    $otherProducts = [];
+    
+    foreach ($cartItems as $item) {
+        $productCode = $item['code'] ?? '';
+        $quantity = floatval($item['quantity'] ?? 0);
+        $price = floatval($item['price'] ?? 0);
+        
+        if (!$productCode || $quantity <= 0) {
+            continue;
+        }
+        
+        $itemData = [
+            'code' => $productCode,
+            'quantity' => $quantity,
+            'price' => $price
+        ];
+        
+        if (isset($campaignProductMap[$productCode])) {
+            // Bu ürün bir kampanyada var
+            $campaignInfo = $campaignProductMap[$productCode];
+            $category = $campaignInfo['campaign']['category_name'];
+            
+            if (!isset($categoryGroups[$category])) {
+                $categoryGroups[$category] = [
+                    'campaign' => $campaignInfo['campaign'],
+                    'items' => []
+                ];
+            }
+            
+            $itemData['campaign_discount'] = $campaignInfo['discount_rate'];
+            $categoryGroups[$category]['items'][] = $itemData;
+        } else {
+            // Bu ürün kampanyada yok
+            $otherProducts[] = $itemData;
+        }
+    }
+    
+    apiLog("Kategori grupları: " . count($categoryGroups) . ", Diğer ürünler: " . count($otherProducts));
+    
+    // ============================================
+    // 7. HER KATEGORİ İÇİN KAMPANYA UYGULA
+    // ============================================
+    foreach ($categoryGroups as $categoryName => $group) {
+        $campaign = $group['campaign'];
+        $items = $group['items'];
+        
+        // Kategori toplamları (SADECE bu kategorideki ürünler)
+        $totalQty = 0;
         $totalAmount = 0;
         
-        foreach ($cartItems as $item) {
-            $productCode = $item['code'] ?? '';
-            $quantity = floatval($item['quantity'] ?? 0);
-            
-            // Bu ürün kampanyada var mı?
-            $campaignProduct = null;
-            foreach ($campaignProducts as $cp) {
-                if ($cp['product_code'] === $productCode) {
-                    $campaignProduct = $cp;
-                    break;
-                }
-            }
-            
-            if ($campaignProduct) {
-                $matchedItems[] = [
-                    'code' => $productCode,
-                    'quantity' => $quantity,
-                    'discount_rate' => $campaignProduct['discount_rate']
-                ];
-                $totalQuantity += $quantity;
-                
-                // Tutar hesapla (basit: liste fiyatı * miktar - burası geliştirilebilir)
-                $price = floatval($item['price'] ?? 100);  // Varsayılan fiyat
-                $totalAmount += ($price * $quantity);
-            }
+        foreach ($items as $item) {
+            $totalQty += $item['quantity'];
+            $totalAmount += ($item['price'] * $item['quantity']);
         }
         
-        if (empty($matchedItems)) {
-            apiLog("→ Eşleşen ürün yok");
-            continue;
+        apiLog("━━━ {$categoryName} ━━━");
+        apiLog("  Ürün sayısı: " . count($items) . ", Toplam miktar: {$totalQty}, Toplam tutar: " . number_format($totalAmount, 2) . "€");
+        
+        // Minimum miktar ve tutar kontrolü
+        $minQty = intval($campaign['min_quantity']);
+        $minAmount = floatval($campaign['min_purchase_amount']); // Önceden çektiğimiz as min_purchase_amount
+        
+        $qtyCondition = ($minQty > 0) ? ($totalQty >= $minQty) : true;
+        $amountCondition = ($minAmount > 0) ? ($totalAmount >= $minAmount) : true;
+        
+        // İkisi de 0 ise (koşulsuz) -> true
+        if ($minQty == 0 && $minAmount == 0) {
+            $conditionsMet = true;
+        } else {
+            $conditionsMet = ($qtyCondition && $amountCondition);
         }
         
-        apiLog("→ Eşleşen ürün sayısı: " . count($matchedItems));
-        apiLog("→ Toplam miktar: $totalQuantity");
-        apiLog("→ Toplam tutar: $totalAmount €");
-        
-        // Minimum miktar VE tutar kontrolü
-        $conditionsMet = true;
-        
-        if ($campaign['min_quantity'] > 0 && $totalQuantity < $campaign['min_quantity']) {
-            $conditionsMet = false;
-            apiLog("→ Min miktar sağlanmadı (" . $campaign['min_quantity'] . ")");
-        }
-        
-        if ($campaign['min_total_amount'] > 0 && $totalAmount < $campaign['min_total_amount']) {
-            $conditionsMet = false;
-            apiLog("→ Min tutar sağlanmadı (" . $campaign['min_total_amount'] . "€)");
-        }
+        apiLog("  Min miktar: {$minQty}, Min tutar: {$minAmount} / Durum: " . ($conditionsMet ? '✓ SAĞLANDI' : '✗ SAĞLANMADI'));
         
         if (!$conditionsMet) {
-            // Fallback iskonto uygula
-            // Özel kural: Ödeme planı 060 ise farklı iskontolar
-            $paymentPlan = $input['paymentPlan'] ?? '';
-            $fallbackRate = $campaign['fallback_discount'];
+            // FALLBACK
+            $fallbackRate = $isCashPayment ? floatval($campaign['fallback_discount_cash']) : floatval($campaign['fallback_discount_credit']);
+            apiLog("  → FALLBACK uygulanıyor: {$fallbackRate}%");
             
-            if ($paymentPlan === '060' || strpos($paymentPlan, '060') !== false) {
-                // Ödeme planı 060 ise
-                if ($isCashPayment) {
-                    $fallbackRate = 50.5; // Peşin
-                } else {
-                    $fallbackRate = 45.0; // Vadeli
-                }
-            }
-            
-            apiLog("→ Fallback iskonto uygulanıyor: %" . $fallbackRate . " (Ödeme planı: $paymentPlan)");
-            
-            foreach ($matchedItems as $item) {
+            foreach ($items as $item) {
                 $response['discounts'][$item['code']] = [
-                    'rates' => [floatval($fallbackRate)],
+                    'rates' => [$fallbackRate],
                     'display' => number_format($fallbackRate, 2, ',', ''),
-                    'total' => floatval($fallbackRate),
-                    'campaigns' => [$campaign['name'] . ' (Fallback)']
+                    'total' => $fallbackRate,
+                    'campaigns' => ["{$categoryName} (Fallback)"]
                 ];
             }
             continue;
         }
         
-        // Kademeli iskonto kurallarını çek
+        // KOŞUL SAĞLANDI - Kademeli iskonto kurallarını çek
         $stmtRules = $conn->prepare("SELECT * FROM custom_campaign_rules WHERE campaign_id = ? ORDER BY priority ASC");
         $stmtRules->bind_param("i", $campaign['id']);
         $stmtRules->execute();
         $rules = $stmtRules->get_result()->fetch_all(MYSQLI_ASSOC);
+        $stmtRules->close();
+        
+        apiLog("  Kademeli iskonto kuralı sayısı: " . count($rules));
         
         // Her ürün için cascade iskonto hesapla
-        foreach ($matchedItems as $item) {
+        foreach ($items as $item) {
             $cascadeRates = [];
             $cascadeCampaigns = [];
             
-            // 1. Ürüne özel iskonto
-            $cascadeRates[] = floatval($item['discount_rate']);
-            $cascadeCampaigns[] = $campaign['name'];
+            // 1. Ürün özel iskontosu
+            $baseDiscount = $item['campaign_discount'];
+            $cascadeRates[] = $baseDiscount;
+            $cascadeCampaigns[] = $categoryName;
             
             // 2. Kademeli iskonto kuralları
-            // ÖNEMLİ: Kuralları kontrol ederken SADECE BU KAMPANYANIN ürünlerinin toplamını kullan
             foreach ($rules as $rule) {
                 $ruleApplies = false;
+                $ruleName = $rule['rule_name'];
                 
                 switch ($rule['rule_type']) {
                     case 'amount_based':
-                        // SADECE bu kampanyanın ürünlerinin tutarına bak
-                        $ruleApplies = ($totalAmount >= floatval($rule['condition_value']));
+                        $threshold = floatval($rule['condition_value']);
+                        $ruleApplies = ($totalAmount >= $threshold);
+                        if ($ruleApplies) {
+                            apiLog("    ✓ {$ruleName} sağlandı ({$totalAmount}€ >= {$threshold}€)");
+                        }
                         break;
+                    
+                    case 'quantity_based':
+                        $threshold = floatval($rule['condition_value']);
+                        $ruleApplies = ($totalQty >= $threshold);
+                        if ($ruleApplies) {
+                            apiLog("    ✓ {$ruleName} sağlandı ({$totalQty} adet >= {$threshold} adet)");
+                        }
+                        break;
+                    
                     case 'payment_based':
                         $ruleApplies = $isCashPayment;
-                        break;
-                    case 'quantity_based':
-                        // SADECE bu kampanyanın ürünlerinin miktarına bak
-                        $ruleApplies = ($totalQuantity >= floatval($rule['condition_value']));
+                        if ($ruleApplies) {
+                            apiLog("    ✓ {$ruleName} sağlandı");
+                        }
                         break;
                 }
                 
                 if ($ruleApplies) {
                     $cascadeRates[] = floatval($rule['discount_rate']);
-                    $cascadeCampaigns[] = $rule['rule_name'];
+                    $cascadeCampaigns[] = $ruleName;
                 }
             }
             
@@ -222,13 +285,54 @@ try {
                 'campaigns' => $cascadeCampaigns
             ];
             
-            apiLog("→ Ürün " . $item['code'] . ": " . $displayFormat . " (Toplam: %" . round($totalDiscount, 2) . ")");
+            apiLog("  → {$item['code']}: {$displayFormat} (Toplam: " . round($totalDiscount, 2) . "%)");
         }
         
         $response['applied_campaigns'][] = $campaign['name'];
+        
+        // Kampanya meta bilgilerini ekle (Frontend kontrolü için)
+        if (!isset($response['campaign_meta'])) {
+            $response['campaign_meta'] = [];
+        }
+        
+        // Dinamik koşul metni oluştur
+        $conditionText = "";
+        if ($minAmount > 0) {
+            $conditionText = "Min " . number_format($minAmount, 0, ',', '.') . " € alım";
+            if ($minQty > 0) {
+                $conditionText .= " ve Min $minQty adet";
+            }
+        } else {
+            $conditionText = "Min $minQty adet alım";
+        }
+
+        $response['campaign_meta'][$campaign['name']] = [
+            'min_amount' => floatval($campaign['min_purchase_amount']),
+            'condition_text' => $conditionText, // Frontend bunu kullanabilir
+            'category' => $categoryName
+        ];
+    }
+    
+    // ============================================
+    // 8. DİĞER ÜRÜNLERE FALLBACK UYGULA
+    // ============================================
+    if (!empty($otherProducts)) {
+        $fallbackRate = $isCashPayment ? 50.5 : 45.0;
+        apiLog("━━━ DİĞER ÜRÜNLER ━━━");
+        apiLog("  Ürün sayısı: " . count($otherProducts) . ", Fallback: {$fallbackRate}%");
+        
+        foreach ($otherProducts as $item) {
+            $response['discounts'][$item['code']] = [
+                'rates' => [$fallbackRate],
+                'display' => number_format($fallbackRate, 2, ',', ''),
+                'total' => $fallbackRate,
+                'campaigns' => ['Genel Fallback']
+            ];
+        }
     }
     
     $response['success'] = true;
+    $response['message'] = count($response['discounts']) . " ürüne kampanya uygulandı";
     
 } catch (Exception $e) {
     $response['success'] = false;
@@ -237,10 +341,10 @@ try {
 }
 
 // Debug log
-$logEntry = "--- " . date('Y-m-d H:i:s') . " ---\n";
-$logEntry .= "INPUT: " . print_r($input, true) . "\n";
-$logEntry .= "RESPONSE: " . print_r($response, true) . "\n";
-file_put_contents(__DIR__ . '/debug_manual_campaign.txt', $logEntry, FILE_APPEND);
+$logEntry = "=== " . date('Y-m-d H:i:s') . " ===\n";
+$logEntry .= "INPUT: " . json_encode($input, JSON_UNESCAPED_UNICODE) . "\n";
+$logEntry .= "RESPONSE: " . json_encode($response, JSON_UNESCAPED_UNICODE) . "\n\n";
+@file_put_contents(__DIR__ . '/campaign_debug.log', $logEntry, FILE_APPEND);
 
-echo json_encode($response);
+echo json_encode($response, JSON_UNESCAPED_UNICODE);
 ?>

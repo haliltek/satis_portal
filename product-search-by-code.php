@@ -94,6 +94,35 @@ switch($product['doviz']) {
     default: $dovizIkon = $product['doviz'];
 }
 
+// Bekleyen Fiyat Talebi Kontrolü
+$hasPendingRequest = false;
+$pendingRequestDate = null;
+
+if (isset($_SESSION['yonetici_id'])) {
+    $yoneticiId = $_SESSION['yonetici_id'];
+    // Fiyat talepleri tablosunu kontrol et
+    $talepSql = "SELECT talep_tarihi FROM fiyat_talepleri WHERE urun_id = ? AND talep_eden_id = ? AND durum = 'beklemede' LIMIT 1";
+    
+    // Eğer tablo yoksa hata vermemesi için try-catch (opsiyonel ama güvenli)
+    try {
+        $reqStmt = $db->prepare($talepSql);
+        if ($reqStmt) {
+            $urunIdInt = (int)$product['urun_id'];
+            $reqStmt->bind_param("ii", $urunIdInt, $yoneticiId);
+            $reqStmt->execute();
+            $reqResult = $reqStmt->get_result();
+            if ($reqRow = $reqResult->fetch_assoc()) {
+                $hasPendingRequest = true;
+                $pendingRequestDate = $reqRow['talep_tarihi'];
+            }
+            $reqStmt->close();
+        }
+    } catch (Exception $e) {
+        // Tablo yoksa veya hata varsa yoksay, false dönecek
+        error_log("Fiyat talep sorgu hatası: " . $e->getMessage());
+    }
+}
+
 // JSON response
 $response = [
     'success' => true,
@@ -107,7 +136,9 @@ $response = [
         'currency' => $product['doviz'],
         'currency_icon' => $dovizIkon,
         'unit' => $product['olcubirimi'],
-        'logicalref' => $product['LOGICALREF']
+        'logicalref' => $product['LOGICALREF'],
+        'has_pending_request' => $hasPendingRequest,
+        'pending_request_date' => $pendingRequestDate
     ]
 ];
 

@@ -10,6 +10,7 @@ if ($userType === 'Bayi') {
                         <li class="nav-item"><a class="nav-link" href="anasayfa.php">Anasayfa</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?= $userType==='Bayi' ? 'siparis-olustur.php' : 'teklif-olustur.php' ?>">Yeni Sipariş</a></li>
                         <li class="nav-item"><a class="nav-link" href="dealer_orders.php">Siparişlerim</a></li>
+                        <li class="nav-item"><a class="nav-link" href="kampanyalar.php">Kampanyalar</a></li>
                         <li class="nav-item"><a class="nav-link" href="include/cikisyap.php">Çıkış</a></li>
                     </ul>
                 </div>
@@ -103,6 +104,7 @@ $ayarlar = $yetkim['ayarlar'] ?? '';
                                                 <b class="dropdown-item" style="font-weight: 700; color:#448CCD">ÜRÜNLER</b>
                                                 <a href="<?= $userType === 'Yönetici' ? 'urunlerlogo.php' : 'urun_fiyat_onerisi.php' ?>" class="dropdown-item">Ürünler Logo</a>
                                                 <a href="urun_fiyat_log.php" class="dropdown-item">Ürün Fiyat Logu</a>
+                                                <a href="kampanyalar.php" class="dropdown-item">Kampanyalar</a>
                                             </div>
                                         </div>
                                     <?php  }

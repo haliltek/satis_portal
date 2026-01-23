@@ -8,24 +8,9 @@ $userType = $_SESSION['user_type'] ?? '';
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="anasayfa.php" class="logo logo-dark">
-                    <span class="logo-sm">
-                        <img src="images/<?php echo $ayarim["resim"]; ?>" alt="<?php echo $ayar["unvan"]; ?>"
-                            height="60">
-                    </span>
+                <a href="anasayfa.php" class="logo">
                     <span class="logo-lg">
-                        <img src="images/<?php echo $ayarim["resim"]; ?>" alt="<?php echo $ayar["unvan"]; ?>"
-                            height="60">
-                    </span>
-                </a>
-                <a href="anasayfa.php" class="logo logo-light">
-                    <span class="logo-sm">
-                        <img src="images/<?php echo $ayarim["resim"]; ?>" alt="<?php echo $ayar["unvan"]; ?>"
-                            height="60">
-                    </span>
-                    <span class="logo-lg">
-                        <img src="images/<?php echo $ayarim["resim"]; ?>" alt="<?php echo $ayar["unvan"]; ?>"
-                            height="60">
+                        <img src="images/<?php echo $ayarim["resim"]; ?>" alt="<?php echo $ayar["unvan"]; ?>" height="60">
                     </span>
                 </a>
             </div>

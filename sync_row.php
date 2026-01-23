@@ -4,6 +4,24 @@ ini_set('max_execution_time',0);
 header('Content-Type: application/json');
 session_start();
 
+// .env dosyasını oku
+function parseEnvFile($path) {
+    $vars = [];
+    if (!file_exists($path)) return $vars;
+    foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        if (strpos(trim($line), '#') === 0 || strpos($line, '=') === false) continue;
+        [$key, $value] = explode('=', $line, 2);
+        $vars[trim($key)] = trim($value);
+    }
+    return $vars;
+}
+
+$env = parseEnvFile(__DIR__ . '/.env');
+$mysql_host = $env['DB_HOST'] ?? 'localhost';
+$mysql_dbname = $env['DB_NAME'] ?? 'b2bgemascom_teklif';
+$mysql_username = $env['DB_USER'] ?? 'root';
+$mysql_password = $env['DB_PASS'] ?? '';
+
 $input = json_decode(file_get_contents('php://input'), true);
 $code = $input['code'] ?? null;
 if (!$code) {
@@ -24,7 +42,8 @@ if (isset($row['s_country_code'])) {
 }
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=b2bgemascom_teklif;charset=utf8mb4', 'root', '12621262', [
+    $mysql_dsn = "mysql:host=$mysql_host;dbname=$mysql_dbname;charset=utf8mb4";
+    $pdo = new PDO($mysql_dsn, $mysql_username, $mysql_password, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ]);

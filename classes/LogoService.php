@@ -703,6 +703,7 @@ class LogoService
             'NOTES1' => $order['notes1'],
             'NOTES2' => $order['notes2'] ?? '',
             'DOC_TRACK_NR' => $order['doc_track_nr'] ?? '',
+            'GENEXP1' => $order['aciklama'] ?? '', // Açıklama alanını GENEXP1'e aktar
             
             // YENİ: Döviz Bilgileri ve Taşıyıcı
             'CURRSEL_TOTAL'    => $currSelVal,

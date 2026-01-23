@@ -12,6 +12,7 @@ mail_log.txt
 # Large SQL dumps
 *.sql
 !sql/*.sql
+*.zip
 
 # Executables
 *.exe
@@ -25,3 +26,7 @@ error.log
 # B2B GEMAS folder with large files
 B2B GEMAS/
 
+
+# Dependencies
+/vendor
+/node_modules

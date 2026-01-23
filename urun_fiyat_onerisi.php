@@ -31,8 +31,9 @@ $yonetici_id_sabit = $_SESSION['yonetici_id'] ?? 'default_id';
 $authService = new AuthService($db, $yonetici_id_sabit);
 $authService->checkSession();
 $user_type = $authService->getUserType();
-if (!$user_type || ($user_type !== 'Satış' && $user_type !== 'Personel' && $user_type !== 'Yönetici')) {
-    echo '<div class="alert alert-danger" role="alert">Bu sayfaya erişim yetkiniz bulunmamaktadır.</div>';
+// Sadece Personel erişebilir
+if (!$user_type || $user_type !== 'Personel') {
+    echo '<div class="alert alert-danger" role="alert">Bu sayfaya sadece Personel kullanıcıları erişebilir.</div>';
     exit();
 }
 

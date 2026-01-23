@@ -16,11 +16,11 @@ use PDOException;
  */
 class LogoPriceUpsertRepository
 {
-    private PDO   $db;
+    private $db;
     private mixed $logger;
     private int   $defaultPType;
 
-    public function __construct(PDO $db, $logger, int $defaultPType = 2)
+    public function __construct($db, $logger, int $defaultPType = 2)
     {
         $this->db           = $db;
         $this->logger       = $logger;
@@ -36,6 +36,15 @@ class LogoPriceUpsertRepository
         float  $price,
         string $cyphCode = ''
     ): array {
+        if (!$this->db) {
+            return [
+                'success'       => false,
+                'action'        => 'error',
+                'newLogicalRef' => null,
+                'error'         => 'Veritabanı bağlantısı yok.',
+            ];
+        }
+
         $allowed = ['LG_566_PRCLIST', 'LG_526_PRCLIST'];
         if (!in_array($table, $allowed, true)) {
             throw new \InvalidArgumentException("Invalid table: $table");

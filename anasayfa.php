@@ -205,7 +205,7 @@ $hasMonthlyData = count($monthly) > 0;
 <div class="row mb-4">
     <!-- 1. Ürün Fiyatlar (Logo Fiyatları) -->
     <div class="col-md-3 col-sm-6 mb-3">
-        <a href="urun_fiyat_onerisi.php" class="text-decoration-none">
+        <a href="urunlerlogo.php" class="text-decoration-none">
             <div class="card shadow-sm h-100 shortcut-btn" style="transition: transform 0.3s;">
                 <div class="card-body text-center p-3">
                     <div class="mb-2">
@@ -217,6 +217,8 @@ $hasMonthlyData = count($monthly) > 0;
             </div>
         </a>
     </div>
+
+
 
     <!-- 2. Güncellenen Fiyatlar (Loglar) -->
     <div class="col-md-3 col-sm-6 mb-3">
@@ -370,7 +372,7 @@ $hasMonthlyData = count($monthly) > 0;
     </div>
     <?php } ?>
 
-    <!-- 11. Bayi Siparişleri (En sona) -->
+    <!-- 11. Bayi Siparişleri -->
     <div class="col-md-3 col-sm-6 mb-3">
         <a href="teklifsiparisler.php?bayi_filter=1" class="text-decoration-none">
             <div class="card shadow-sm h-100 shortcut-btn" style="transition: transform 0.3s;">
@@ -384,6 +386,54 @@ $hasMonthlyData = count($monthly) > 0;
             </div>
         </a>
     </div>
+
+    <!-- 12. Logo Satış Siparişleri (GEMPA) -->
+    <div class="col-md-3 col-sm-6 mb-3">
+        <a href="logo_satis_siparisleri.php" class="text-decoration-none">
+            <div class="card shadow-sm h-100 shortcut-btn" style="transition: transform 0.3s;">
+                <div class="card-body text-center p-3">
+                    <div class="mb-2">
+                        <i class="bx bx-list-check fs-1 text-primary"></i>
+                    </div>
+                    <h6 class="mb-1 fw-semibold text-dark">Logo Satış Siparişleri</h6>
+                    <p class="mb-0 small text-muted">GEMPA Siparişlerini Görüntüle</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <?php if ($userType !== 'Yönetici'): ?>
+    <!-- 13. Fabrika Ürün Talep -->
+    <div class="col-md-3 col-sm-6 mb-3">
+        <a href="fabrika_urun_talep.php" class="text-decoration-none">
+            <div class="card shadow-sm h-100 shortcut-btn" style="transition: transform 0.3s;">
+                <div class="card-body text-center p-3">
+                    <div class="mb-2">
+                        <i class="bx bx-building-house fs-1 text-info"></i>
+                    </div>
+                    <h6 class="mb-1 fw-semibold text-dark">Fabrika Ürün Talep</h6>
+                    <p class="mb-0 small text-muted">Fabrikadan ürün talep et</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- 14. Malzeme Talep -->
+    <div class="col-md-3 col-sm-6 mb-3">
+        <a href="#" class="text-decoration-none">
+            <div class="card shadow-sm h-100 shortcut-btn" style="transition: transform 0.3s;">
+                <div class="card-body text-center p-3">
+                    <div class="mb-2">
+                        <i class="bx bx-package fs-1 text-warning"></i>
+                    </div>
+                    <h6 class="mb-1 fw-semibold text-dark">Malzeme Talep</h6>
+                    <p class="mb-0 small text-muted">Malzeme ihtiyaç talebi</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <?php endif; ?>
+
 
 </div>
 <script>
@@ -476,6 +526,8 @@ renderStatCard($db, "SELECT * FROM personel WHERE p_durum='Red'", 'Red Edilen Pe
 renderStatCard($db, "SELECT * FROM personel WHERE p_durum='Onaylı'", 'Onaylanan Personeller', 'bx-user-check', '', 'success');
 ?>
 </div>
+
+
 <div class="row">
     <?php if ($hasStatusData): ?>
     <div class="col-lg-4 col-md-6 mb-4">

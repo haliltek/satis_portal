@@ -1,5 +1,5 @@
 <?php
-// fiyat_talepleri_islem.php
+// fiyat_talepleri_islem.php - Yeni tablo yapısı ile güncellendi
 include "fonk.php";
 oturumkontrol();
 
@@ -13,11 +13,6 @@ if ($_SESSION['user_type'] !== 'Yönetici') {
 $action = $_POST['action'] ?? '';
 $id = intval($_POST['id'] ?? 0);
 $note = $_POST['note'] ?? '';
-
-if (!$id) {
-    echo json_encode(['status' => 'error', 'message' => 'ID eksik']);
-    exit;
-}
 
 if ($action === 'getProductDetails') {
     $stokKodu = $_POST['stok_kodu'] ?? '';
@@ -35,17 +30,33 @@ if ($action === 'getProductDetails') {
     exit;
 }
 
+if (!$id) {
+    echo json_encode(['status' => 'error', 'message' => 'ID eksik']);
+    exit;
+}
+
 if ($action === 'reject') {
-    $stmt = $db->prepare("UPDATE fiyat_onerileri SET durum='Reddedildi', oneri_not=CONCAT(oneri_not, ' [Red Sebebi: ', ?, ']') WHERE id=?");
-    $stmt->bind_param("si", $note, $id);
+    $yonetici_id = $_SESSION['yonetici_id'] ?? 0;
+    $stmt = $db->prepare("UPDATE fiyat_talepleri SET 
+        durum='reddedildi', 
+        yonetici_notu=?, 
+        cevaplayan_id=?, 
+        cevap_tarihi=NOW() 
+        WHERE talep_id=?");
+    $stmt->bind_param("sii", $note, $yonetici_id, $id);
     if ($stmt->execute()) {
-        echo json_encode(['status' => 'success']);
+        echo json_encode(['status' => 'success', 'message' => 'Talep reddedildi.']);
     } else {
         echo json_encode(['status' => 'error', 'message' => $db->error]);
     }
 } elseif ($action === 'approve') {
-    $stmt = $db->prepare("UPDATE fiyat_onerileri SET durum='Onaylandı' WHERE id=?");
-    $stmt->bind_param("i", $id);
+    $yonetici_id = $_SESSION['yonetici_id'] ?? 0;
+    $stmt = $db->prepare("UPDATE fiyat_talepleri SET 
+        durum='onaylandi', 
+        cevaplayan_id=?, 
+        cevap_tarihi=NOW() 
+        WHERE talep_id=?");
+    $stmt->bind_param("ii", $yonetici_id, $id);
     if ($stmt->execute()) {
         echo json_encode(['status' => 'success', 'message' => 'Talep onaylandı olarak işaretlendi.']);
     } else {

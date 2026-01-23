@@ -1,0 +1,243 @@
+FİLTRELER		
+		
+PLASTİK FİLTRELER		
+KOD	AÇIKLAMA 	KAMPANYA FİYATI
+0211211S	Ø500 Gemas Fusion SL Enjeksiyon Filtre yan11/2"ÇYV	96 €
+0211212S	Ø600 Gemas Fusion-SL Enjeksiyon Filtre yan11/2"ÇYV	115 €
+021131	Ø500 Gemas Seljuk BL Enjeksiyon Filtre yan11/2"ÇYV	112 €
+021132	Ø630 Gemas Seljuk BL Enjeksiyon Filtre yan11/2"ÇYV	134 €
+021133	Ø710 Gemas Seljuk BL Enjeksiyon Filtre yandan2"ÇYV	175 €
+021911	Ø400 Gemaş Premium Havuz Kum Filtresi Yand. 11/2"	77 €
+021912	Ø500 Gemaş Premium Havuz Kum Filtresi Yand. 11/2"	95 €
+021913	Ø615 Gemaş Premium Havuz Kum Filtresi Yand. 11/2"	129 €
+021921	Ø400 Gemaş Premium Havuz Kum Filtresi Üst.11/2"	66 €
+021923	Ø615 Gemaş Premium Havuz Kum Filtresi Üst.11/2"	116 €
+021813	Ø615 Filtrone Havuz Kum Filt.Yandan 11/2"	140 €
+021814	Ø760 Filtrone Havuz Kum Filt.Yandan 2	185 €
+021815	Ø920 Filtrone Havuz Kum Filt.Yandan 2"	247 €
+		
+BOBİN SARGI FİLTRELER		
+KOD	AÇIKLAMA 	KAMPANYA FİYATI
+021712	Ø500 Gemaş "Bobin Sargılı" Havuz Kum Filtresi	146 €
+021712S	Ø500 Gemaş "Bobin Sargılı-S" Havuz Kum Filtresi	157 €
+021713	Ø630 Gemaş "Bobin Sargılı" Havuz Kum Filtresi	164 €
+021713S	Ø630 Gemaş "Bobin Sargılı-S" Havuz Kum Filtresi	177 €
+021714	Ø710 Gemaş "Bobin Sargılı" Havuz Kum Filtresi	218 €
+021715S	Ø830 Gemaş "Bobin Sargılı-S" Havuz Kum Filtresi	265 €
+021715	Ø830 Gemaş "Bobin Sargılı" Havuz Kum Filtresi	308 €
+021311B	Ø400 Turbidron CL Bobn S Fltre 1 1/2"Yandan Çyv ile	118 €
+021312B	Ø500 Bobin Sargılı CL Filtre 1 1/2 Çyv.Yandan	128 €
+		
+YENİ FİLTRELER		
+KOD	AÇIKLAMA 	KAMPANYA FİYATI
+021610	Ø500 FİLTREX 2025 CTP Kum Filtresi 1 1/2" Ç.V. İle	134 €
+021611	Ø630 FİLTREX 2025 CTP Kum Filtresi 1 1/2" Ç.V.İle	151 €
+021612	Ø710 Filtrex 2025 CTP Kum Filtresi 2" Ç.V. İle	197 €
+021610T	Ø500 Filtrex 2025 Kum Filtresi Üstten 11/2"ÇYV İle	121 €
+021611T	Ø630 Filtrex 2025 Kum Filtresi Üstten 11/2"ÇYV İle	138 €
+021612T	Ø710 Filtrex 2025 Kum Filtresi Üstten 2"ÇYV İle	184 €
+021131A	Ø500 Gemas Seljuk Acryl BL Enjeksiyon Filtre yan11/2"ÇYV	132 €
+021132A	Ø630 Gemas Seljuk Acryl BL Enjeksiyon Filtre yan11/2"ÇYV	155 €
+021133A	Ø710 Gemas Seljuk Acryl BL Enjeksiyon Filtre yandan2"ÇYV	195 €
+021131TA	Ø500 Gemas Seljuk Acryl BL Enjeksiyon Filtre üst11/2"ÇYV	116 €
+021132TA	Ø630 Gemas Seljuk Acryl BL Enjeksiyon Filtre üst11/2"ÇYV	136 €
+021133TA	Ø710 Gemas Seljuk Acryl BL Enjeksiyon Filtre Üstten2"ÇYV	172 €
+		
+	ÇOK YOLLU VANA	
+KOD 	ÜRÜN AÇIKLAMASI 	KAMPANYA FİYATI
+02400	1,5'' Çok yollu Vana Yandan	21.5 €
+02213027	2'' Çok yollu Vana Yandan	32 €
+		
+	HAVUZ MEDYA	
+KOD 	ÜRÜN AÇIKLAMASI 	KAMPANYA FİYATI
+02312	Kuvars Kumu (0,5-1,0 mm) İnce	0.30 €
+02313	Kuvars Kumu (1,0-3,0 mm) Orta	0.30 €
+02314	Kuvars Kumu (3,0-5,0 mm) Kalın	0.30 €
+023411	Gemaş Cam Filtrasyon Medyası 0,6-1,0 mm Tane İrili (Beyaz)	0.38 €
+023412	Gemaş Cam Filtrasyon Medyası 1,0-3,0mm Tane İrili (Beyaz)	0.38 €
+023413	Gemaş Cam Filtrasyon Medyası 3,0-5,0mm Tane İrili (Beyaz)	0.38 €
+023411K	Gemaş Karışık Cam Kumu 0,6-1,0mm Tane İrili	0.35 €
+023412K	Gemaş Karışık Cam Kumu  1,0-3,0mm Tane İrili	0.35 €
+023413K	Gemaş Karışık Cam Kumu 3,0-5,0mm Tane İrili	0.35 €
+		
+POMPALAR		
+		
+KOD 	ÜRÜN AÇIKLAMASI 	 ÖZEL FİYAT 2025 
+0111STRM50M	0111STRM-50M 1/2 HP Monofaze	 € 144 
+0111STRM80M	0111STRM-80M 3/4 HP Monofaze	 € 150 
+0111STRM100M	0111STRM-100M 1 HP Monofaze	 € 151 
+0111STRM150M	0111STRM-150M 1,5 HP Monofaze	 € 173 
+		
+0111STRN50M	0111STRN-50M 1/2 HP Monofaze Çevirme Kapak	 € 155 
+0111STRN75M	0111STRN-80M 3/4 HP Monofaze Çevirme Kapak	 € 167 
+0111STRN75T	0111STRN-80T 3/4 HP Trifaze Çevirme Kapak	 € 151 
+0111STRN100M	0111STRN-100M 1 HP Monofaze Çevirme Kapak	 € 171 
+0111STRN100T	0111STRN-100T 1 HP Trifaze Çevirme Kapak	 € 163 
+0111STRN150M	0111STRN-150M 1,5 HP Monofaze Çevirme Kapak	 € 198 
+0111STRN150T	0111STRN-150T 1,5 HP Trifaze Çevirme Kapak	 € 188 
+0111STRN200M	0111STRN-200M 2 HP Monofaze Çevirme Kapak Pompa	 € 205 
+0111STRN200T	0111STRN-200T 2 HP Trifaze Çevirme Kapak Pompa	 € 196 
+0111STRN300M	0111STRN-300M 3 HP Monofaze Çevirme Kapak	 € 226 
+0111STRN300T	0111STRN-300T 3 HP Trifaze Çevirme Kapak	 € 211 
+0111STRN350M	0111STRN-350M 3,5 HP Monofaze Çevirme Kapak	 € 296 
+0111STRN350T	0111STRN-350T 3,5 HP Trifaze Çevirme Kapak	 € 280 
+		
+MERDİVEN		
+		
+KOD 	ÜRÜN AÇIKLAMASI 	 ÖZEL FİYAT 2025 
+0311111	STANDART 2 BASAMAKLI MERDİVEN -304	 € 76 
+0311112	STANDART 3 BASAMAKLI MERDİVEN -304	 € 87 
+0311113	STANDART 4 BASMAKLI MERDİVEN -304	 € 101 
+0311114	STANDART 5 BASMAKLI MERDİVEN -304	 € 113 
+0311211	MURO 2 BASAMAKLI MERDİVEN -304	 € 73 
+0311212	MURO 3 BASAMAKLI MERDİVEN -304	 € 83 
+0311213	MURO 4 BASMAKLI MERDİVEN -304	 € 98 
+0312214	MURO 5 BASMAKLI MERDİVEN -304	 € 104 
+0312111	STANDART 2 BASAMAKLI MERDİVEN -316	 € 103 
+0312112	STANDART 3 BASAMAKLI MERDİVEN -316	 € 116 
+0312113	STANDART 4 BASMAKLI MERDİVEN -316	 € 132 
+0312114	STANDART 5 BASMAKLI MERDİVEN -316	 € 148 
+0312221	MURO 2 BASAMAKLI MERDİVEN -316	 € 99 
+0312222	MURO 3 BASAMAKLI MERDİVEN -316	 € 110 
+0312223	MURO 4 BASMAKLI MERDİVEN -316	 € 129 
+0312224	MURO 5 BASMAKLI MERDİVEN -316	 € 143 
+		
+KENAR EKİPMAN - IZGARA		
+		
+KOD 	ÜRÜN AÇIKLAMASI 	ÖZEL FİYAT 2025
+0372211	15 CM SAVAK IZGARASI                	 € 3.15 
+0372212	20 CM TEK GEÇME SAVAK IZGARASI                	 € 3.65 
+0372312	25 CM TEK GEÇME SAVAK IZGARASI                	 € 3.90 
+0372221	20 CM ÇİFT GEÇME SAVAK IZGARASI               	 € 3.96 
+0372321	25 CM ÇİFT GEÇME SAVAK IZGARASI               	 € 4.80 
+0372421	30 CM SAVAK IZGARASI                	 € 7.10 
+0372212K	20 CM TEK GEÇME SAVAK IZGARASI ( KARE MODEL )	 € 4.20 
+0372213K	25 CM TEK GEÇME SAVAK IZGARASI ( KARE MODEL ) 	 € 5.20 
+03750	Savak Kenar Profili	 € 0.75 
+		
+		
+HAVUZİÇİ EKİPMAN		
+		
+KOD 	ÜRÜN AÇIKLAMASI 	 ÖZEL FİYAT 2025 
+04143R1	26,5 X 26,5 KARE IZGARA 	 € 5.85 
+04131S	Yandan Besi Nozul d63	 € 1.05 
+04133S	Tabandan Besi Sabit Debi d63	 € 0.90 
+04134S	Vakum Nozul d63	 € 1.00 
+04131S1	Yandan Besi Nozul d50	 € 1.03 
+04133S1	Tabandan Besi Sabit Debi d50	 € 0.91 
+04134S1	Vakum Nozul d50	 € 0.92 
+041331S	Yeni Tip Sabit Debili Besleme Nozulu Mafsallı	 € 1.22 
+041321S	Yeni Tip Debi Ayarlı Besleme Nozulu - Mafsallı	 € 1.50 
+04132S4	Yeni Tip Debi Ayarlı Besleme Nozulu - Düz Tip	 € 1.95 
+04231BT	Liner Sarılı Yandan Besleme Nozulu	 € 5.00 
+04234TB	Liner Sarılı Vakum Nozulu	 € 5.00 
+04231BTN	YANDAN BES. NOZ. ÇELİK PANELLER İÇİN SARILI 	 € 5.50 
+04241T1B	Liner Sarılı Yuvarlak Dip Süzgeci 1,5''	 € 9.70 
+04241T2B	Liner Sarılı Yuvarlak Dip Süzgeci 2''	 € 9.70 
+04211BFW	Liner Sarılı STD Agiz Skimmer 	 € 33 
+04212BFW	Liner Sarılı Geniş Agız Skimmer	 € 41 
+04215BFW	Liner Sarılı Geniş Agız YÜKSEK SEVİYE Skimmer	 € 47 
+04115FW	Yükseltilmiş Geniş Ağız Beton Skimmer	 € 34 
+04111FW	Standart Kare Kapak Beton Skimmer	 € 17.5 
+04112FW	Standart Kare Kapak Geniş Ağız Beton Skimmer	 € 22 
+		
+		
+LEDLER		
+		
+KOD	AÇIKLAMA 	 ÖZEL FİYAT 2025 
+051330EO	Ekoslim Lamba - beyaz "kampanya kodu"	14 €
+051331EO	Ekoslim Lamba - günışığı "kampanya kodu"	14 €
+051333EO	Ekoslim Lamba - mavi "kampanya kodu"	15 €
+051150EO	Eco Slim Led 72 20W Rgb Ken Enteg-Flat Opak Çerçev	29 €
+051152EO	Eco Slim Led 72 20W Rgb Mer Enteg-Flat Opak Çerçev	19 €
+051120EO	Eco Slim 2025 Led 72 Beyaz 24W- Flat Opak Çerçeve	13 €
+051121EO	Eco Slim 2025 Led 72 Günışığ 24W-Flat Opak Çerçeve	13 €
+051123EO	Eco Slim 2025 Led 72 Mavi 20W- Flat Opak Çerçeve	14 €
+		
+051160E	Midi Clicker 72 Led’li Beyaz 11W	14 €
+051161E	Midi Clicker 72 Led’li Günışığı 11W	14 €
+051162E	Midi Clicker 72 Led’li Turkuaz 8W	14 €
+051163E	Midi Clicker 72 Led’li Mavi 8W	15 €
+051164E	Midi Clicker 72 Led’li Kırmızı 8W	15 €
+051165E	Midi Clicker 72 Led’li Yeşil 8W	14 €
+051170E	Midi Clicker 72 Led’li RGB Kendinden Entegreli 8W	21 €
+051171E	Midi Clicker 72 Led’li RGB Merkezi Entegreli 8W	14 €
+052160E	Midi Clicker 72 Ledli SMD Beyaz 11W	18 €
+052161E	Midi Clicker72 Ledli SMD Günışığı 11W	18 €
+052162E	Midi Clicker 72 Ledli 3528 Turkuaz 8W	19 €
+052163E	Midi Clicker 72 Ledli 3528 Mavi 8W	19 €
+052164E	Midi Clicker 72 Ledli 3528 Kırmızı 8W	19 €
+052165E	Midi Clicker 72 Ledli 3528 Yeşil 8W	19 €
+052170E	Midi Clicker 72 Ledli SMD K.Entegrel 8W	26 €
+052171E	Midi Clicker 72 Ledli SMD M.Entegreli 8W	18 €
+		
+051180	Mini Clicker Led Sualtı Lam36Led Kovansız Beyaz 7W	13 €
+051181	Mini Clicker Led Lam36 Ledli Kovansız Günışığı 7W	13 €
+051182	Mini Clicker Lamba 36 Ledli Kovansız Turkuaz 5W	14 €
+051183	Mini Clicker Led Lamba 36 Ledli Kovansız Mavi 5W	14 €
+051184	Mini Clicker Lamba 36 Ledli Kovansız Kırmızı 5W	13 €
+051185	Mini Clicker Lamba 36 Ledli Kovansız Yeşil 5W	14 €
+051190	Mini Clicker Sualtı Lamba 36 Kovansız RGB K.Ent5W	22 €
+051191	Mini Clicker Sualtı Lamba 36 Kovansız RGB M.Ent5W	9 €
+052180	Mini Clicker Lam.36 Led Kovsız SMD Beyaz 7W Liner	18 €
+052181	Mini Clicker LedH.Lamba 36 Kovsız Günışığı7W-Liner	18 €
+052182	Mini Clicker LedH.Lamba 36 Kovsız Turkuazı5W-Liner	18 €
+052183	Mini Clicker Led H.Lamba 36 Kovansız Mavi 5W-Liner	18 €
+052184	Mini Clicker Led H.Lamba 36 Kov.sızKırmızı5W-Liner	18 €
+052185	Mini Clicker Led H.Lamba 36 Kov.sız Yeşil 5W-Liner	18 €
+052190	Mini Clicker Havuz Lambası 36Led 2835RGB K.Ent 5W	26 €
+052191	MiniClicker Led H.Lamba 36Kvnsız RGB M.Ent5W-Liner	14 €
+		
+05074P	TRAFO ALÜMİNYUM SARGILI 300W	32.5 €
+		
+		
+TEMİZLİK EKİPMANLARI		
+		
+KOD	AÇIKLAMA	ÖZEL FİYAT 2025
+08211	Sıvı Test Aleti	 € 3.32 
+082111	Oto 25 Cc Sıvı Yedek Ajan	 € 1.00 
+082112	Phenol Red 25 Cc Sıvı Yedek Ajan	 € 1.00 
+092111	HAVUZ SÜPÜRGESİ 1,5" KELEBEK L =346 mm	 € 16 
+092112	HAVUZ SÜPÜRGESİ 1,5" KELEBEK L =456 mm	 € 20 
+0921121	HAVUZ SÜPÜRGESİ 2" KELEBEK L =456	 € 20 
+0921122	HAVUZ SÜPÜRGESİ 2" KLİPSLİ L =456 mm 	 € 19 
+092121	HAVUZ SÜPÜRGESİ 1,5" KLİPSLİ L =346 mm	 € 15 
+092122	HAVUZ SÜPÜRGESİ 1,5" KLİPSLİ L =456 mm	 € 19 
+09219	Kelebek Havuz Süpürgesi Yandan Fırçalı	 € 10 
+09224	Gemas Flex Heavy Duty Pool Cleaner Süpürge	 € 17 
+09225	Gemaş Flex Heavy Duty Pool Cleaner Süpürge Fırçalı	 € 19 
+09430	TELESKOPİK SAP 2 X2 m	 € 15 
+09440	TELESKOPİK SAP 2 X 3 m 	 € 18.5 
+09460	Teleskopik Sap 3X2 M Aluminyum Eloksallı	 € 22 
+09470	TELESKOPİK SAP 3 X 3 m 	 € 32 
+09490	TELESKOPİK SAP 2 X 2,4 m 	 € 16 
+09511	11/2 " Vakum Hortumu	 € 1.76 
+09511E	YERLİ SÜPÜRGE HORTUMU 1,5" ÇİFT RENK (EVA )	 € 1.75 
+09512	2 " Vakum Hortumu	 € 2.42 
+09512E	YERLİ SÜPÜRGE HORTUMU 2" ÇİFT RENK (EVA)	 € 2.28 
+09620	HAVUZ DUVAR FIRÇASI ( İKİ UCU KIVRIK )	 € 4.75 
+09626	GEMAŞ HAVUZ TABAN FIRÇASI DÜZ 26 cm	 € 2.45 
+09710	GEMAŞ DERİN KEPÇE 	 € 4.25 
+09730	Derin Havuz Kepçesi "Lüks"      	 € 5.00 
+09811	1,5" SÜPÜRGE HORTUM ADAPTÖRÜ 	 € 1.57 
+09812	2" SÜPÜRGE HORTUM ADAPTÖRÜ 	 € 2.42 
+09814	1,5" - 2" SÜPÜRGE HORTUM ADAPTÖRÜ 	 € 2.42 
+10431	Kadranlı Yüzer Göstergesi	 € 11 
+		
+		
+BORU		
+		
+KOD	BORU	ÖZEL FİYAT 2025
+1391001	Ø25 PVC Yapıştırma Muflu Temiz Su Borusu 10 Atü	 € 0.30 
+1391002	Ø32 PVC Yapıştırma Muflu Temiz Su Borusu 10 Atü	 € 0.41 
+1391003	Ø40 PVC Yapıştırma Muflu Temiz Su Borusu 10 Atü	 € 0.61 
+1391004	Ø50 PVC Yapıştırma Muflu Temiz Su Borusu 10 Atü	 € 0.94 
+1391005	Ø63 PVC Yapıştırma Muflu Temiz Su Borusu 10 Atü	 € 1.47 
+1391006	Ø75 PVC Yapıştırma Muflu Temiz Su Borusu 10 Atü	 € 2.08 
+1391007	Ø90 PVC Yapıştırma Muflu Temiz Su Borusu 10 Atü	 € 3.00 
+1391008	Ø110 PVC Yapıştırma Muflu Temiz Su Borusu 10 Atü	 € 3.70 
+1391009	Ø125 PVC Yapıştırma Muflu Temiz Su Borusu 10 Atü	 € 4.77 
+1391010	Ø140 PVC Yapıştırma Muflu Temiz Su Borusu 10 Atü	 € 6.03 
+1391011	Ø160 PVC Yapıştırma Muflu Temiz Su Borusu 10 Atü	 € 7.91 
+1391012	Ø200 PVC Yapıştırma Muflu Temiz Su Borusu 10 Atü	 € 12.23 
+1391013	Ø225 PVC Yapıştırma Muflu Temiz Su Borusu 10 Atü	 € 15.41 

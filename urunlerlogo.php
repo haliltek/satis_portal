@@ -36,6 +36,13 @@ if (!$user_type) {
     exit();
 }
 
+// Redirect non-admin users (e.g. Personnel) to their specific page
+if ($user_type !== 'Yönetici') {
+    $queryString = $_SERVER['QUERY_STRING'] ? '?' . $_SERVER['QUERY_STRING'] : '';
+    header("Location: urunlerlogo_personel.php" . $queryString);
+    exit();
+}
+
 $priceUpdater = new PriceUpdater($db, $gemas_logo_db, $gempa_logo_db, $gemas_web_db, $logger, $yonetici_id_sabit);
 $productTranslationService = new ProductTranslationService(
     $gemas_web_db,
@@ -101,9 +108,6 @@ if (isset($_POST['action'])) {
             echo json_encode(['error' => 'Stok kodu eksik'], JSON_UNESCAPED_UNICODE);
             exit;
         }
-        $history = $productTranslationService->getInvoiceHistory($stokKodu, $limit);
-        echo json_encode($history, JSON_UNESCAPED_UNICODE);
-        exit;
     }
 }
 
@@ -530,6 +534,8 @@ if (isset($_POST['action']) && $_POST['action'] === 'deleteMail') {
                                                     <th>Stok Adı</th>
                                                     <th>Yurtiçi Fiyatı</th>
                                                     <th>İhracat Fiyatı</th>
+                                                    <th>Web/App Fiyatı</th>
+                                                    <th>Maliyet</th>
                                                     <th>Döviz</th>
                                                     <th>Stok</th>
                                                     <th>Aktif</th>
@@ -543,6 +549,8 @@ if (isset($_POST['action']) && $_POST['action'] === 'deleteMail') {
                                                     <th>Stok Adı</th>
                                                     <th>Yurtiçi Fiyatı</th>
                                                     <th>İhracat Fiyatı</th>
+                                                    <th>Web/App Fiyatı</th>
+                                                    <th>Maliyet</th>
                                                     <th>Döviz</th>
                                                     <th>Stok</th>
                                                     <th>Aktif</th>
@@ -1445,8 +1453,11 @@ if (isset($_POST['action']) && $_POST['action'] === 'deleteMail') {
                     if (!validY && !validE) return;
                     rows.push({
                         kod: $tr.find('.kod').text().trim(),
+                        aciklama: $tr.find('td').eq(2).text().trim(), // 3. sütun (index 2) = Açıklama
                         yurtici: validY ? round2(parseFloat(y)) : round2(oldY),
                         export: validE ? round2(parseFloat(e)) : round2(oldE),
+                        oldYurtici: round2(oldY), // Eski yurtiçi fiyat
+                        oldExport: round2(oldE),  // Eski export fiyat
                         logicalref: $tr.find('.logicalref').text().trim(),
                         gempa: $tr.find('.gempa').text().trim(),
                         gemas: $tr.find('.gemas').text().trim(),
@@ -1493,11 +1504,15 @@ if (isset($_POST['action']) && $_POST['action'] === 'deleteMail') {
                 $.post('urunlerlogo.php', {
                     action: 'updatePriceWithMail',
                     stok_kodu: row.kod,
+                    urun_adi: row.aciklama || row.kod, // Ürün adı
                     yeni_domestic_price: row.yurtici,
                     yeni_export_price: row.export,
+                    old_domestic_price: row.oldYurtici, // Eski yurtiçi
+                    old_export_price: row.oldExport,    // Eski export
                     logicalref: row.logicalref,
                     gempa_logicalref: row.gempa,
-                    gemas_logicalref: row.gemas
+                    gemas_logicalref: row.gemas,
+                    send_mail: '0' // Toplu güncellemede mail gönderme (varsayılan: hayır)
                 }, function(resp) {
                     if (resp.status === 'success') {
                         $tr.find('.status').html('<span class="text-success">✔</span>');
@@ -2354,6 +2369,53 @@ if (isset($_POST['action']) && $_POST['action'] === 'deleteMail') {
                     alert('Güncelleme sırasında bir hata oluştu.');
                 }
             });
+        });
+    </script>
+    <script>
+        // Cost visibility toggle functionality
+        $(document).on('click', '.cost-toggle-icon', function() {
+            const icon = $(this);
+            const input = icon.siblings('.cost-price-input');
+            const isVisible = input.css('-webkit-text-security') === 'none';
+            
+            if (isVisible) {
+                // Hide the value
+                input.css({
+                    '-webkit-text-security': 'disc',
+                    'text-security': 'disc'
+                });
+                input.attr('readonly', true);
+                icon.removeClass('bi-eye-slash').addClass('bi-eye');
+                icon.attr('title', 'Maliyeti Göster');
+            } else {
+                // Show the value
+                input.css({
+                    '-webkit-text-security': 'none',
+                    'text-security': 'none'
+                });
+                input.attr('readonly', false);
+                icon.removeClass('bi-eye').addClass('bi-eye-slash');
+                icon.attr('title', 'Maliyeti Gizle');
+            }
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            // URL'den 'search' parametresini al
+            var urlParams = new URLSearchParams(window.location.search);
+            var searchTerm = urlParams.get('search');
+            
+            // Eğer arama terimi varsa
+            if (searchTerm) {
+                // Datatable henüz yüklenmemiş olabilir, biraz bekleyip deneyelim veya hemen deneyelim
+                var table = $('#example').DataTable();
+                
+                // Arama yap
+                table.search(searchTerm).draw();
+                
+                // Debug için
+                console.log("URL search parametresi algılandı ve arama yapıldı:", searchTerm);
+            }
         });
     </script>
 </body>

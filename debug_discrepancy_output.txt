@@ -1,0 +1,176 @@
+Database: GEMPA2026, View: [dbo].[LV_566_SALES_ITEMS]
+Date: 2026-01-23 09:22:45
+
+AGGREGATE TOTALS:
+Array
+(
+    [TotalOutput] => 121.0
+    [TotalInput] => 272.0
+    [TotalCount] => 15
+)
+
+BREAKDOWN BY TRCODE & WAREHOUSE:
+TRCODE     IOCODE     FICHE_TR        WH         OUTPUT(Sales)   INPUT(Ret?)    
+--------------------------------------------------------------------------------
+1          1          1               0          0.0             10.0           
+5          1          5               0          0.0             104.0          
+8          4          8               3          6.0             0.0            
+8          4          8               2          10.0            0.0            
+14         1          14              0          0.0             53.0           
+25         2          25              0          0.0             105.0          
+25         3          25              0          105.0           0.0            
+
+RAW LINES (Last 50):
+Array
+(
+    [0] => Array
+        (
+            [STLINE_DATE_] => 2026-01-20 00:00:00.000
+            [STLINE_TRCODE] => 25
+            [STLINE_OUTPUT_AMOUNT] => 10.0
+            [STLINE_INPUT_AMOUNT] => 0.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 0
+        )
+
+    [1] => Array
+        (
+            [STLINE_DATE_] => 2026-01-20 00:00:00.000
+            [STLINE_TRCODE] => 25
+            [STLINE_OUTPUT_AMOUNT] => 0.0
+            [STLINE_INPUT_AMOUNT] => 10.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 0
+        )
+
+    [2] => Array
+        (
+            [STLINE_DATE_] => 2026-01-14 00:00:00.000
+            [STLINE_TRCODE] => 1
+            [STLINE_OUTPUT_AMOUNT] => 0.0
+            [STLINE_INPUT_AMOUNT] => 10.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 0
+        )
+
+    [3] => Array
+        (
+            [STLINE_DATE_] => 2026-01-14 00:00:00.000
+            [STLINE_TRCODE] => 8
+            [STLINE_OUTPUT_AMOUNT] => 10.0
+            [STLINE_INPUT_AMOUNT] => 0.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 2
+        )
+
+    [4] => Array
+        (
+            [STLINE_DATE_] => 2026-01-09 00:00:00.000
+            [STLINE_TRCODE] => 8
+            [STLINE_OUTPUT_AMOUNT] => 6.0
+            [STLINE_INPUT_AMOUNT] => 0.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 3
+        )
+
+    [5] => Array
+        (
+            [STLINE_DATE_] => 2026-01-01 00:00:00.000
+            [STLINE_TRCODE] => 5
+            [STLINE_OUTPUT_AMOUNT] => 0.0
+            [STLINE_INPUT_AMOUNT] => 104.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 0
+        )
+
+    [6] => Array
+        (
+            [STLINE_DATE_] => 2026-01-01 00:00:00.000
+            [STLINE_TRCODE] => 14
+            [STLINE_OUTPUT_AMOUNT] => 0.0
+            [STLINE_INPUT_AMOUNT] => 53.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 0
+        )
+
+    [7] => Array
+        (
+            [STLINE_DATE_] => 2026-01-01 00:00:00.000
+            [STLINE_TRCODE] => 25
+            [STLINE_OUTPUT_AMOUNT] => 33.0
+            [STLINE_INPUT_AMOUNT] => 0.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 0
+        )
+
+    [8] => Array
+        (
+            [STLINE_DATE_] => 2026-01-01 00:00:00.000
+            [STLINE_TRCODE] => 25
+            [STLINE_OUTPUT_AMOUNT] => 0.0
+            [STLINE_INPUT_AMOUNT] => 33.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 0
+        )
+
+    [9] => Array
+        (
+            [STLINE_DATE_] => 2026-01-01 00:00:00.000
+            [STLINE_TRCODE] => 25
+            [STLINE_OUTPUT_AMOUNT] => 28.0
+            [STLINE_INPUT_AMOUNT] => 0.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 0
+        )
+
+    [10] => Array
+        (
+            [STLINE_DATE_] => 2026-01-01 00:00:00.000
+            [STLINE_TRCODE] => 25
+            [STLINE_OUTPUT_AMOUNT] => 0.0
+            [STLINE_INPUT_AMOUNT] => 28.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 0
+        )
+
+    [11] => Array
+        (
+            [STLINE_DATE_] => 2026-01-01 00:00:00.000
+            [STLINE_TRCODE] => 25
+            [STLINE_OUTPUT_AMOUNT] => 13.0
+            [STLINE_INPUT_AMOUNT] => 0.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 0
+        )
+
+    [12] => Array
+        (
+            [STLINE_DATE_] => 2026-01-01 00:00:00.000
+            [STLINE_TRCODE] => 25
+            [STLINE_OUTPUT_AMOUNT] => 0.0
+            [STLINE_INPUT_AMOUNT] => 13.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 0
+        )
+
+    [13] => Array
+        (
+            [STLINE_DATE_] => 2026-01-01 00:00:00.000
+            [STLINE_TRCODE] => 25
+            [STLINE_OUTPUT_AMOUNT] => 21.0
+            [STLINE_INPUT_AMOUNT] => 0.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 0
+        )
+
+    [14] => Array
+        (
+            [STLINE_DATE_] => 2026-01-01 00:00:00.000
+            [STLINE_TRCODE] => 25
+            [STLINE_OUTPUT_AMOUNT] => 0.0
+            [STLINE_INPUT_AMOUNT] => 21.0
+            [STLINE_LINETYPE] => 0
+            [CAPIWHOUSE_NR] => 0
+        )
+
+)

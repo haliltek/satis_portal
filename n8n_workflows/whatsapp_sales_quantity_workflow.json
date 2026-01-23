@@ -1,0 +1,293 @@
+{
+    "name": "WhatsApp Satış Miktarı Sorgulama",
+    "nodes": [
+        {
+            "parameters": {
+                "url": "https://satis.gemas.com.tr/api/urun/get_product_sales_summary.php",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "code",
+                            "value": "={{ ($json.body?.data?.message?.conversation || $json.body?.data?.message?.extendedTextMessage?.text || '').toLowerCase().split(' ')[1] || '' }}"
+                        },
+                        {
+                            "name": "token",
+                            "value": "gemas_secret_n8n_token_2025"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "sales-api-request",
+            "name": "Satış Miktarı Sorgula",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                -3088,
+                3088
+            ]
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": false,
+                        "typeValidation": "strict",
+                        "version": 2
+                    },
+                    "conditions": [
+                        {
+                            "id": "id-1",
+                            "leftValue": "={{ $json.found }}",
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "true"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "id": "sales-found-check",
+            "name": "Satış Verisi Bulundu mu?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.2,
+            "position": [
+                -2864,
+                3088
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://wp.gemas.com.tr/message/sendText/gemaswp",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "CA978DEA6B1C-4A5E-8E76-3534B9B6F1F3"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"{{ $('teklifOnayCevap4').item.json.body.data.key.remoteJid }}\",\n  \"text\": \"📊 *Satış Miktarı Raporu*\\n\\n*Stok Kodu:* {{ $('Satış Miktarı Sorgula').item.json.stock_code }}\\n\\n*📈 Özet Bilgiler*\\n━━━━━━━━━━━━━━━━\\nToplam Satış: {{ $('Satış Miktarı Sorgula').item.json.summary.total_quantity }} Adet\\nToplam Fatura: {{ $('Satış Miktarı Sorgula').item.json.summary.total_invoices }} Adet\\nYıllık Ortalama: {{ $('Satış Miktarı Sorgula').item.json.summary.avg_yearly_quantity }} Adet\\n\\n*🏆 En İyi Yıl*\\n{{ $('Satış Miktarı Sorgula').item.json.summary.best_year }}: {{ $('Satış Miktarı Sorgula').item.json.summary.best_year_quantity }} Adet\\n\\n*📅 Yıllara Göre Dağılım*\\n━━━━━━━━━━━━━━━━\\n{{ $('Satış Miktarı Sorgula').item.json.yearly_breakdown.map(y => `${y.year}: ${y.quantity} Adet (${y.invoices} Fatura)`).join('\\\\n') }}\\n\\n_Dönem: {{ $('Satış Miktarı Sorgula').item.json.period.start_year }}-{{ $('Satış Miktarı Sorgula').item.json.period.end_year }}_\"\n}",
+                "options": {}
+            },
+            "id": "sales-send-success",
+            "name": "Satış Bilgisi Gönder",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                -2640,
+                2992
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://wp.gemas.com.tr/message/sendText/gemaswp",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "CA978DEA6B1C-4A5E-8E76-3534B9B6F1F3"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"{{ $('teklifOnayCevap4').item.json.body.data.key.remoteJid }}\",\n  \"text\": \"❌ *Satış Verisi Bulunamadı*\\n\\nGirdiğiniz stok kodu için satış verisi bulunamadı.\\n\\nMuhtemel sebepler:\\n• Stok kodu hatalı\\n• Bu üründen hiç satış yapılmamış\\n• Ürün son 3 yılda kayıtlı değil\\n\\nLütfen stok kodunu kontrol edip tekrar deneyin.\"\n}",
+                "options": {}
+            },
+            "id": "sales-send-notfound",
+            "name": "Satış Bulunamadı Mesajı",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                -2640,
+                3184
+            ]
+        },
+        {
+            "parameters": {
+                "respondWith": "json",
+                "responseBody": "{\n  \"status\": \"ok\"\n}",
+                "options": {
+                    "responseCode": 200
+                }
+            },
+            "id": "sales-webhook-response",
+            "name": "Webhook Yanıtı (Satış)",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "typeVersion": 1.4,
+            "position": [
+                -2416,
+                2992
+            ]
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": false,
+                        "typeValidation": "strict",
+                        "version": 2
+                    },
+                    "conditions": [
+                        {
+                            "id": "sales-trigger-1",
+                            "leftValue": "={{ \n  (\n    $('teklifOnayCevap4').item.json.body?.data?.message?.conversation\n    || $('teklifOnayCevap4').item.json.body?.data?.message?.extendedTextMessage?.text\n    || ''\n  ).toLowerCase()\n}}",
+                            "rightValue": "",
+                            "operator": {
+                                "type": "string",
+                                "operation": "regex",
+                                "singleValue": "sati(s|ş)"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "id": "sales-format-check",
+            "name": "Satış Mesajı mı?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.2,
+            "position": [
+                -3360,
+                3104
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://wp.gemas.com.tr/message/sendText/gemaswp",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "CA978DEA6B1C-4A5E-8E76-3534B9B6F1F3"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"{{ $('WhatsApp Mesaj Webhook').item.json.body.data.key.remoteJid }}\",\n  \"text\": \"📊 *Satış Miktarı Sorgulama*\\n\\nLütfen ürünün stok kodunu aşağıdaki formatta girin:\\n\\n*satış STOKKODU*\\nveya\\n*satis STOKKODU*\\n\\nÖrnek:\\nsatış 0111300N\\nsatis 0111300N\"\n}",
+                "options": {}
+            },
+            "id": "sales-help-message",
+            "name": "Satış Stok Kodu İste",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                -2640,
+                2800
+            ]
+        }
+    ],
+    "connections": {
+        "Satış Miktarı Sorgula": {
+            "main": [
+                [
+                    {
+                        "node": "Satış Verisi Bulundu mu?",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Satış Verisi Bulundu mu?": {
+            "main": [
+                [
+                    {
+                        "node": "Satış Bilgisi Gönder",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Satış Bulunamadı Mesajı",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Satış Bilgisi Gönder": {
+            "main": [
+                [
+                    {
+                        "node": "Webhook Yanıtı (Satış)",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Satış Bulunamadı Mesajı": {
+            "main": [
+                [
+                    {
+                        "node": "Webhook Yanıtı (Satış)",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Satış Mesajı mı?": {
+            "main": [
+                [
+                    {
+                        "node": "Satış Miktarı Sorgula",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Satış Stok Kodu İste",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Satış Stok Kodu İste": {
+            "main": [
+                [
+                    {
+                        "node": "Webhook Yanıtı (Satış)",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "pinData": {},
+    "meta": {
+        "templateCredsSetupCompleted": true,
+        "instanceId": "80d21026f61d88fdec67dcb4d4141f25eaaa6c50023c0c5bf1a07c75f29233c7"
+    }
+}

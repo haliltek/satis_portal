@@ -259,36 +259,50 @@ function gonderEposta($db, $icerikid, $eposta, $metin, $notu, $url)
     $teklifNo = $row['teklifkodu'] ?? 'Bilinmeyen';
     $adiSoyadi = resolveCompanyName($db, $row);
     $hazirlayan = (int)($row['hazirlayanid'] ?? 0);
+    $sirketArpCode = $row['sirket_arp_code'] ?? '';
     $sorgu->close();
 
-    $yoneticiMail = '';
+    // Yurtdışı kontrolü (120.02 veya 320.02 ile başlayanlar)
+    $isForeign = false;
+    if (strpos($sirketArpCode, '120.02') === 0 || strpos($sirketArpCode, '320.02') === 0) {
+        $isForeign = true;
+    }
+    // Kullanıcı filtresi zorlaması (hidden inputtan gelen)
+    if (isset($_REQUEST['force_english']) && $_REQUEST['force_english'] == '1') {
+        $isForeign = true;
+    }
+
+    // Teklif mailleri için özel satis@gemas.com.tr kullan
+    // Diğer işlemler için veritabanındaki fiyat@gemas.com.tr kullanılmaya devam edecek
+    $yoneticiAd = $isForeign ? 'Gemas Sales Team' : 'Gemas Satış Ekibi';
+    $yoneticiMail = 'satis@gemas.com.tr';
+    $yoneticiSmtp = 'mail.gemas.com.tr';
+    $yoneticiPort = 465;
+    $yoneticiPass = 'Halil12621262.';
+    
+    // Hazırlayan kişi bilgilerini ek bilgi için alalım
     $yoneticiUnvan = '';
-    $yon = $db->prepare("SELECT adsoyad, mailposta, mailsmtp, mailport, mailparola, unvan, telefon FROM yonetici WHERE yonetici_id=?");
+    $yoneticiTel = '';
+    $yon = $db->prepare("SELECT unvan, telefon FROM yonetici WHERE yonetici_id=?");
     if ($yon) {
         $yon->bind_param('i', $hazirlayan);
         $yon->execute();
         $resYon = $yon->get_result();
         $yRow = $resYon->fetch_assoc();
-        $yoneticiAd = $yRow['adsoyad'] ?? '';
-        $yoneticiMail = $yRow['mailposta'] ?? '';
-        $yoneticiSmtp = $yRow['mailsmtp'] ?? 'satis.gemas.com.tr';
-        $yoneticiPort = $yRow['mailport'] ?? 465;
-        $yoneticiPass = $yRow['mailparola'] ?? 'Asdas123456!';
         $yoneticiUnvan = $yRow['unvan'] ?? '';
         $yoneticiTel = $yRow['telefon'] ?? '';
         $yon->close();
-    } else {
-        $yoneticiAd = '';
-        $yoneticiMail = '';
-        $yoneticiSmtp = 'satis.gemas.com.tr';
-        $yoneticiPort = 465;
-        $yoneticiPass = 'Asdas123456!';
-        $yoneticiUnvan = '';
-        $yoneticiTel = '';
     }
 
 
-    $template = file_get_contents("mail_templates/mail_template.html");
+
+    $templateFile = $isForeign ? "mail_templates/mail_template_en.html" : "mail_templates/mail_template.html";
+    if (file_exists($templateFile)) {
+        $template = file_get_contents($templateFile);
+    } else {
+        // Fallback to default if EN template missing
+        $template = file_get_contents("mail_templates/mail_template.html");
+    }
 
     $template = str_replace('{{ADI_SOYADI}}',         htmlspecialchars($adiSoyadi), $template);
     $template = str_replace('{{METIN}}',              isset($metin) ? htmlspecialchars($metin) : '', $template);
@@ -310,14 +324,14 @@ function gonderEposta($db, $icerikid, $eposta, $metin, $notu, $url)
         $mail->Username = $yoneticiMail;
         $mail->Password = $yoneticiPass;
 
-        $mail->SMTPDebug = 0; // Hata ayıklama kapalı
+        $mail->SMTPDebug = 2; // Debug modu açık - detaylı hata göster
         $mail->SMTPAutoTLS = true;
         $mail->SMTPSecure = 'ssl';
 
         $mail->SetFrom($mail->Username, $yoneticiAd);
         $mail->AddAddress($eposta, $adiSoyadi);
         $mail->CharSet = 'UTF-8';
-        $mail->Subject = 'Teklifiniz Hk.';
+        $mail->Subject = $isForeign ? 'Regarding Your Proposal' : 'Teklifiniz Hk.';
         $mail->MsgHTML($template);
 
         if ($mail->Send()) {
@@ -1833,11 +1847,27 @@ foreach ($tekliflerForTable as $t) {
         }
         $tekkod = isset($markalar["teklifkodu"]) ? htmlspecialchars($markalar["teklifkodu"]) : 'Bilinmeyen';
         $durr = isset($markalar["durum"]) ? htmlspecialchars($markalar["durum"]) : '';
-        $metin2 = ' numaralı teklifinizin durumu ' . $durr . ' olarak belirtilmiştir. Teklifi incelemek için aşağıdaki url adresini kullanabilirsiniz.';
-        $metin  = $kimehazir . ' ' . $metin2;
+
+        // Yurtdışı/İngilizce Kontrolü
+        $isForeignGen = false;
+        if (isset($_GET['trading_filter']) && $_GET['trading_filter'] == 'yurtdisi') {
+            $isForeignGen = true;
+        } else if (strpos($sirketArp, '120.02') === 0 || strpos($sirketArp, '320.02') === 0) {
+             $isForeignGen = true;
+        }
+
+        if ($isForeignGen) {
+            $metin = 'The current status of your offer is “' . $durr . '”. You may also review your offer by using the following link:';
+        } else {
+            $metin2 = ' numaralı teklifinizin durumu ' . $durr . ' olarak belirtilmiştir. Teklifi incelemek için aşağıdaki url adresini kullanabilirsiniz.';
+            $metin  = $kimehazir . ' ' . $metin2;
+        }
 
         include "include/url.php";
         $gonderUrl  = isset($url) ? $url . '/offer_detail.php?te=' . urlencode($markalar["id"]) . '&sta=Teklif' : '#';
+        if ($isForeignGen) {
+             $gonderUrl .= '&lang=en';
+        }
     ?>
         <div class="modal fade gonder<?php echo htmlspecialchars($markalar["id"] ?? ''); ?>" tabindex="-1" role="dialog"
             aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -1875,6 +1905,9 @@ foreach ($tekliflerForTable as $t) {
                                 <input type="hidden" name="url" value="<?php echo htmlspecialchars($gonderUrl); ?>">
                                 <input type="hidden" name="metin" value="<?php echo htmlspecialchars($metin); ?>">
                                 <input type="hidden" name="icerikid" value="<?php echo htmlspecialchars($markalar["id"] ?? ''); ?>">
+                                <?php if(isset($_GET['trading_filter']) && $_GET['trading_filter'] == 'yurtdisi') { ?>
+                                    <input type="hidden" name="force_english" value="1">
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="modal-footer">

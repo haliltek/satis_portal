@@ -97,10 +97,17 @@ if (!$offer) {
     exit;
 }
 
+
+
 // [ANTIGRAVITY UPDATE] Log decision to teklif_decisions table IMMEDIATELY
 // This ensures that even if the offer is already processed, we update the user's latest decision/click in the history.
 $decisionType = ($action === 'approve') ? 'ONAY' : 'RED';
+
+file_put_contents("n8n_callback.log", date("Y-m-d H:i:s") . " [DEBUG] Attempting to log decision - instance_id='$instance_id', teklif_id=$teklif_id, decision=$decisionType\n", FILE_APPEND);
+
 if ($instance_id) {
+    file_put_contents("n8n_callback.log", date("Y-m-d H:i:s") . " [DEBUG] instance_id is not empty, preparing INSERT statement\n", FILE_APPEND);
+    
     $decStmt = $db->prepare("INSERT INTO teklif_decisions 
         (message_id, teklif_id, manager_phone, decision_type, decision_status) 
         VALUES (?, ?, ?, ?, 'PROCESSED')
@@ -109,18 +116,36 @@ if ($instance_id) {
         decision_date = CURRENT_TIMESTAMP");
     
     if ($decStmt) {
-        $decStmt->bind_param("siss", $instance_id, $teklif_id, $manager_phone, $decisionType);
-        $decStmt->execute();
+        file_put_contents("n8n_callback.log", date("Y-m-d H:i:s") . " [DEBUG] Prepared statement created successfully\n", FILE_APPEND);
+        file_put_contents("n8n_callback.log", date("Y-m-d H:i:s") . " [DEBUG] Binding params: message_id=$instance_id, teklif_id=$teklif_id, phone=$manager_phone, decision=$decisionType\n", FILE_APPEND);
+        
+        // teklif_id VARCHAR olduğu için "ssss" kullan (eskiden "siss" idi)
+        $teklifIdStr = (string)$teklif_id;
+        $decStmt->bind_param("ssss", $instance_id, $teklifIdStr, $manager_phone, $decisionType);
+        
+        if ($decStmt->execute()) {
+            $affected = $decStmt->affected_rows;
+            file_put_contents("n8n_callback.log", date("Y-m-d H:i:s") . " ✅ Decision logged/updated in teklif_decisions: MsgID=$instance_id, TeklifID=$teklif_id, Decision=$decisionType, Affected_Rows=$affected\n", FILE_APPEND);
+        } else {
+            file_put_contents("n8n_callback.log", date("Y-m-d H:i:s") . " ❌ ERROR: Failed to execute INSERT - " . $decStmt->error . "\n", FILE_APPEND);
+        }
+        
         $decStmt->close();
+    } else {
+        file_put_contents("n8n_callback.log", date("Y-m-d H:i:s") . " ❌ ERROR: Failed to prepare statement - " . $db->error . "\n", FILE_APPEND);
     }
+} else {
+    file_put_contents("n8n_callback.log", date("Y-m-d H:i:s") . " ⚠️ WARNING: instance_id is empty, skipping teklif_decisions insert\n", FILE_APPEND);
 }
 
 // Allow process ONLY if status is 'pending' (or maybe 'none' if re-triggering, but strictly 'pending' is safer)
 if ($offer['approval_status'] !== 'pending') {
-    http_response_code(409); // Conflict
+    file_put_contents("n8n_callback.log", date("Y-m-d H:i:s") . " INFO: Offer already processed (status={$offer['approval_status']}), but decision was logged.\n", FILE_APPEND);
+    http_response_code(200); // Changed from 409 to 200 since we successfully logged the decision
     echo json_encode([
-        "status" => "error", 
-        "message" => "Offer already processed. Current status: " . $offer['approval_status']
+        "status" => "info", 
+        "message" => "Offer already processed (status: {$offer['approval_status']}), but your decision was recorded.",
+        "decision_logged" => true
     ]);
     exit;
 }

@@ -41,8 +41,8 @@ class PriceUpdater
         $this->logger->log("INFO", "Fiyat güncelleme başladı: $stokKodu");
 
         // 1. Mevcut fiyatları al
-        $mevcutDomesticFiyat = $this->getCurrentMysqlPrice($stokKodu);
-        $mevcutExportFiyat   = $this->getCurrentMysqlExportPrice($stokKodu);
+        $mevcutDomesticFiyat = $this->localMysqlDB ? $this->getCurrentMysqlPrice($stokKodu) : null;
+        $mevcutExportFiyat   = $this->localMysqlDB ? $this->getCurrentMysqlExportPrice($stokKodu) : null;
 
         $hasMysqlData = ($mevcutDomesticFiyat !== null && $mevcutExportFiyat !== null);
 
@@ -361,6 +361,9 @@ class PriceUpdater
 
     private function updateMysqlPrice(string $stokKodu, float $yeniFiyat): array
     {
+        if (!$this->localMysqlDB) {
+            return ['success' => false, 'error' => 'MySQL bağlantısı yok.'];
+        }
         $stmt = $this->localMysqlDB->prepare("UPDATE urunler SET fiyat = ? WHERE stokkodu = ?");
         if (!$stmt) {
             $msg = "Ana DB UPDATE statement oluşturulamadı.";
@@ -380,6 +383,9 @@ class PriceUpdater
 
     private function updateMysqlExportPrice(string $stokKodu, float $yeniExportFiyat): array
     {
+        if (!$this->localMysqlDB) {
+            return ['success' => false, 'error' => 'MySQL bağlantısı yok.'];
+        }
         $stmt = $this->localMysqlDB->prepare("UPDATE urunler SET export_fiyat = ? WHERE stokkodu = ?");
         if (!$stmt) {
             $msg = "Ana DB (export) UPDATE statement oluşturulamadı.";
@@ -497,6 +503,9 @@ class PriceUpdater
 
     private function updateGemasTRPrice(string $stokKodu, float $yeniFiyat): array
     {
+        if (!$this->gemasWebDB) {
+            return ['success' => false, 'error' => 'Gemaş Web DB bağlantısı yok.'];
+        }
         $stmt = $this->gemasWebDB->prepare("UPDATE malzemeviews SET fiyat = ? WHERE stok_kodu = ?");
         if (!$stmt) {
             $msg = "Gemas DB UPDATE statement oluşturulamadı.";
@@ -525,6 +534,9 @@ class PriceUpdater
 
     private function updateGemasExportPrice(string $stokKodu, float $yeniExportFiyat): array
     {
+        if (!$this->gemasWebDB) {
+            return ['success' => false, 'error' => 'Gemaş Web DB bağlantısı yok.'];
+        }
         $stmt = $this->gemasWebDB->prepare("UPDATE malzeme_viewEN SET fiyat = ? WHERE stok_kodu = ?");
         if (!$stmt) {
             $msg = "Gemas DB (export) UPDATE statement oluşturulamadı.";
@@ -563,6 +575,9 @@ class PriceUpdater
      */
     private function updateSuggestedItemsPrice(string $stokKodu, float $fiyat): array
     {
+        if (!$this->gemasWebDB) {
+            return ['success' => false, 'error' => 'Gemaş Web DB bağlantısı yok.'];
+        }
         // Sabit not bilgisi
         $notlar = '2025 güncel fiyat';
 
@@ -603,6 +618,9 @@ class PriceUpdater
     // Lokal fiyat güncelleme fonksiyonu
     private function updatePortalLocalPrice(string $stokKodu, float $yeniFiyat): array
     {
+        if (!$this->gemasWebDB) {
+            return ['success' => false, 'error' => 'Gemaş Web DB bağlantısı yok.'];
+        }
         $stmt = $this->gemasWebDB->prepare(
             "UPDATE portal_urunler SET fiyat = ? WHERE stokkodu = ?"
         );
@@ -641,6 +659,9 @@ class PriceUpdater
     // Export fiyat güncelleme fonksiyonu
     private function updatePortalExportPrice(string $stokKodu, float $yeniExportFiyat): array
     {
+        if (!$this->gemasWebDB) {
+            return ['success' => false, 'error' => 'Gemaş Web DB bağlantısı yok.'];
+        }
         $stmt = $this->gemasWebDB->prepare(
             "UPDATE portal_urunler SET export_fiyat = ? WHERE stokkodu = ?"
         );
@@ -727,6 +748,9 @@ class PriceUpdater
 
     private function updateMysqlActive(string $stokKodu, int $active): array
     {
+        if (!$this->localMysqlDB) {
+            return ['success' => false, 'error' => 'MySQL bağlantısı yok.'];
+        }
         $this->logger->log("updateMysqlActive: {$stokKodu} -> {$active}");
         $stmt = $this->localMysqlDB->prepare("UPDATE urunler SET logo_active = ? WHERE stokkodu = ?");
         if (!$stmt) {
@@ -747,6 +771,9 @@ class PriceUpdater
 
     private function updateGempaLogoActive(int $logicalRef, int $active): array
     {
+        if (!$this->gempaLogoDB) {
+            return ['success' => false, 'error' => 'Gempa Logo bağlantısı yok.'];
+        }
         $this->logger->log("updateGempaLogoActive: {$logicalRef} -> {$active}");
         $stmt = $this->gempaLogoDB->prepare("UPDATE LG_566_ITEMS SET ACTIVE = ? WHERE LOGICALREF = ?");
         if (!$stmt) {
@@ -764,6 +791,9 @@ class PriceUpdater
 
     private function updateGemasLogoActive(int $logicalRef, int $active): array
     {
+        if (!$this->gemasLogoDB) {
+            return ['success' => false, 'error' => 'Gemas Logo bağlantısı yok.'];
+        }
         $this->logger->log("updateGemasLogoActive: {$logicalRef} -> {$active}");
         $stmt = $this->gemasLogoDB->prepare("UPDATE LG_526_ITEMS SET ACTIVE = ? WHERE LOGICALREF = ?");
         if (!$stmt) {
@@ -781,44 +811,54 @@ class PriceUpdater
 
     private function insertPriceLogDomestic(string $stokKodu, float $oncekiFiyat, float $yeniFiyat): void
     {
-        $stokAdi = $this->getProductName($stokKodu) ?? '';
-        $stmt = $this->localMysqlDB->prepare(
-            "INSERT INTO urun_fiyat_log (stokkodu, stokadi, guncelleyen, onceki_fiyat, yeni_fiyat, fiyat_tipi) VALUES (?, ?, ?, ?, ?, 'domestic')"
-        );
-        if (!$stmt) {
-            $this->logger->log("Domestic fiyat log statement oluşturulamadı.", "ERROR");
-            return;
+        try {
+            $stokAdi = $this->getProductName($stokKodu) ?? '';
+            $stmt = $this->localMysqlDB->prepare(
+                "INSERT INTO urun_fiyat_log (stokkodu, stokadi, guncelleyen, onceki_fiyat, yeni_fiyat, fiyat_tipi) VALUES (?, ?, ?, ?, ?, 'domestic')"
+            );
+            if (!$stmt) {
+                $this->logger->log("Domestic fiyat log statement oluşturulamadı.", "ERROR");
+                return;
+            }
+            $stmt->bind_param("sssdd", $stokKodu, $stokAdi, $this->yoneticiID, $oncekiFiyat, $yeniFiyat);
+            if (!$stmt->execute()) {
+                $this->logger->log("Domestic fiyat log kaydı hatası: " . $stmt->error, "ERROR");
+            }
+            $stmt->close();
+        } catch (\Exception $e) {
+            $this->logger->log("Domestic fiyat log exception: " . $e->getMessage(), "ERROR");
         }
-        $stmt->bind_param("sssdd", $stokKodu, $stokAdi, $this->yoneticiID, $oncekiFiyat, $yeniFiyat);
-        if (!$stmt->execute()) {
-            $this->logger->log("Domestic fiyat log kaydı hatası: " . $stmt->error, "ERROR");
-        }
-        $stmt->close();
     }
 
     private function insertPriceLogExport(string $stokKodu, float $oncekiFiyat, float $yeniFiyat): void
     {
-        $stokAdi = $this->getProductName($stokKodu) ?? '';
-        $stmt = $this->localMysqlDB->prepare(
-            "INSERT INTO urun_fiyat_log (stokkodu, stokadi, guncelleyen, onceki_fiyat, yeni_fiyat, fiyat_tipi) VALUES (?, ?, ?, ?, ?, 'export')"
-        );
-        if (!$stmt) {
-            $this->logger->log("Export fiyat log statement oluşturulamadı.", "ERROR");
-            return;
+        try {
+            $stokAdi = $this->getProductName($stokKodu) ?? '';
+            $stmt = $this->localMysqlDB->prepare(
+                "INSERT INTO urun_fiyat_log (stokkodu, stokadi, guncelleyen, onceki_fiyat, yeni_fiyat, fiyat_tipi) VALUES (?, ?, ?, ?, ?, 'export')"
+            );
+            if (!$stmt) {
+                $this->logger->log("Export fiyat log statement oluşturulamadı.", "ERROR");
+                return;
+            }
+            $stmt->bind_param("sssdd", $stokKodu, $stokAdi, $this->yoneticiID, $oncekiFiyat, $yeniFiyat);
+            if (!$stmt->execute()) {
+                $this->logger->log("Export fiyat log kaydı hatası: " . $stmt->error, "ERROR");
+            }
+            $stmt->close();
+        } catch (\Exception $e) {
+            $this->logger->log("Export fiyat log exception: " . $e->getMessage(), "ERROR");
         }
-        $stmt->bind_param("sssdd", $stokKodu, $stokAdi, $this->yoneticiID, $oncekiFiyat, $yeniFiyat);
-        if (!$stmt->execute()) {
-            $this->logger->log("Export fiyat log kaydı hatası: " . $stmt->error, "ERROR");
-        }
-        $stmt->close();
     }
 
 
     private function insertManagementLog(string $overallStatus): void
     {
-        $query = "INSERT INTO log_yonetim (islem, personel, tarih, durum) VALUES ('Fiyat Güncelleme', '{$this->yoneticiID}', NOW(), '$overallStatus')";
-        if (!$this->localMysqlDB->query($query)) {
-            $this->logger->log("Log kaydı hatası: " . $this->localMysqlDB->error, "ERROR");
+        try {
+            $query = "INSERT INTO log_yonetim (islem, personel, tarih, durum) VALUES ('Fiyat Güncelleme', '{$this->yoneticiID}', NOW(), '$overallStatus')";
+            $this->localMysqlDB->query($query);
+        } catch (\Exception $e) {
+            $this->logger->log("Management log exception: " . $e->getMessage(), "ERROR");
         }
     }
 
