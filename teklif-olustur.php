@@ -5571,6 +5571,19 @@ $(document).ready(function() {
     font-weight: bold !important;
     background-color: #d1e7dd !important;
 }
+
+<?php if ($userType !== 'Yönetici'): ?>
+/* Özel Fiyat Çalışması modalında Marj % sütununu gizle */
+#ozelFiyatTable th:nth-child(7),
+#ozelFiyatTable td:nth-child(7) {
+    visibility: hidden;
+    width: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    font-size: 0;
+    line-height: 0;
+}
+<?php endif; ?>
 </style>
 
 <script src='campaign_logic.js?v=<?php echo time(); ?>'></script>
