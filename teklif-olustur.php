@@ -202,7 +202,7 @@ function getSelectedProductsDetails($db, $productIds)
         $types        = str_repeat('i', count($productIds));
 
         // Burada IN ($placeholders) kullanıyoruz
-        $sql = "SELECT urun_id, stokkodu, stokadi, fiyat, doviz, olcubirimi, LOGICALREF
+        $sql = "SELECT urun_id, stokkodu, stokadi, fiyat, maliyet, doviz, olcubirimi, LOGICALREF
                 FROM urunler
                 WHERE urun_id IN ($placeholders)";
         $stmt = $db->prepare($sql);
@@ -1320,7 +1320,7 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                         foreach ($_COOKIE['teklif'] as $fihristId => $val):
                                                             $fihristId = filter_var($fihristId, FILTER_VALIDATE_INT);
                                                             if (!$fihristId) continue;
-                                                            $stmt = $db->prepare("SELECT urun_id, stokkodu, stokadi, fiyat, export_fiyat, doviz, olcubirimi, LOGICALREF FROM urunler WHERE urun_id = ?");
+                                                            $stmt = $db->prepare("SELECT urun_id, stokkodu, stokadi, fiyat, export_fiyat, maliyet, doviz, olcubirimi, LOGICALREF FROM urunler WHERE urun_id = ?");
                                                             $stmt->bind_param("i", $fihristId);
                                                             $stmt->execute();
                                                             $row = $stmt->get_result()->fetch_assoc();
@@ -1336,8 +1336,9 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                             $readonlyAttr = ($discountDisabled || $campaignRate > 0) ? 'readonly' : '';
                                                             $campaignRatesMap[$row['urun_id']] = $campaignRate;
                                                             $qty = (is_numeric($val) && $val > 0) ? intval($val) : 1;
+                                                            $maliyet = floatval($row['maliyet'] ?? 0);
                                                     ?>
-                                                        <tr data-id="<?= $row['urun_id'] ?>" data-currency="<?= $row['doviz'] ?>">
+                                                        <tr data-id="<?= $row['urun_id'] ?>" data-currency="<?= $row['doviz'] ?>" data-maliyet="<?= $maliyet ?>">
                                                             <td style="padding: 0;">
                                                                 <input type="text" 
                                                                     name="product_code[<?= $row['urun_id'] ?>]"
@@ -1928,6 +1929,15 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                 
                 // Toplamı hesapla (birkaç kez çağır - DOM tam yüklenmesini bekle)
                 updateTotalAmount();
+                
+                // Marjları ve renkleri hesapla
+                $('#cartTableBody tr').each(function() {
+                    var $row = $(this);
+                    if ($row.attr('data-id') && $row.attr('data-id') !== 'new') {
+                        if (typeof recalcRow === 'function') recalcRow($row);
+                    }
+                });
+
                 setTimeout(function() {
                     updateTotalAmount(); // 1. tekrar
                 }, 200);
@@ -1939,7 +1949,14 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                 if (window.savedDiscounts && Object.keys(window.savedDiscounts).length > 0) {
                     setTimeout(function() {
                         loadSavedDiscounts();
-                        updateTotalAmount(); // İskontolardan sonra da hesapla
+                        // Tüm satırları tekrar hesapla (iskontalardan sonra)
+                        $('#cartTableBody tr').each(function() {
+                            var $row = $(this);
+                            if ($row.attr('data-id') && $row.attr('data-id') !== 'new') {
+                                if (typeof recalcRow === 'function') recalcRow($row);
+                            }
+                        });
+                        updateTotalAmount(); 
                     }, 300);
                 }
             }, 500); // Cookie'den ürünler yüklendikten sonra çalışsın
@@ -2607,8 +2624,12 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                 var unit = price * (1 - rate/100);
                 var total = unit * qty;
                 var readonlyAttr = readonly ? 'readonly' : '';
+                
+                // Maliyet bilgisini al (Datatable'dan gelen 9. kolon)
+                var maliyet = rowData[9] || 0;
+
                 $('#cartTableBody').append(
-                    '<tr data-id="'+id+'">'+
+                    '<tr data-id="'+id+'" data-maliyet="'+maliyet+'">'+
                     '<td style="padding: 0;">'+
                         '<input type="text" name="product_code['+id+']" class="form-control product-code-input editable-product-code" value="'+(rowData[1]||'')+'" data-original-code="'+(rowData[1]||'')+'" data-product-id="'+id+'" style="text-align: left; width: calc(100% - 24px); border: 1px solid #ccc; padding: 2px 4px; height: 28px; font-size: 13px; display: inline-block;">'+
                         '<button type="button" class="btn btn-sm product-search-btn editable-product-search-btn" data-product-id="'+id+'" style="padding: 0; width: 22px; height: 28px; border: 1px solid #ccc; background: white; vertical-align: top; display: inline-block;" title="Ürün Ara"><span style="font-size: 12px;">⋯</span></button>'+
@@ -2630,6 +2651,9 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                     '<td style="text-align: right; padding: 2px 4px;"><span class="total-price-display" style="font-size: 13px; line-height: 28px;">'+total.toFixed(2).replace('.',',')+' '+(function(){var d=rowData[5]||'';if(d==='EUR')return '€';else if(d==='USD')return '$';else if(d==='TL')return '₺';return d;})()+'</span></td>'+
                     '<td style="white-space: nowrap; text-align: center; padding: 2px 4px; font-size: 13px; line-height: 28px;">'+rowData[3]+'<input type="hidden" name="olcubirimi['+id+']" value="'+rowData[3]+'"></td>'+
                     '<td style="text-align: center; padding: 2px 4px; font-size: 13px; line-height: 28px;">20</td>'+
+                    '<td style="padding: 0;">'+
+                        '<input type="text" name="satis_marji['+id+']" value="0,00" class="form-control satis-marji-input" style="text-align: right; width: 100%; border: 1px solid #ccc; padding: 2px 4px; height: 28px; font-size: 13px;">'+
+                    '</td>'+
                     '<td style="text-align: center; padding: 2px;"><button type="button" class="btn btn-danger btn-sm remove-btn" data-id="'+id+'" style="padding: 0 6px; font-size: 11px; height: 24px; line-height: 22px;">Kaldır</button></td>'+
                     '</tr>'
                 );
@@ -2778,30 +2802,32 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                 }
                 console.log('Müşteri/Peşin durumuna göre fallback iskonto:', musteriKampanyaIskonto);
             }
-            $(function() {
-
-                // satır hesabını yapan fonksiyon
-                // Cascading discount helper
-                function calculateEffectiveDiscount(str) {
-                    if (!str) return 0;
-                    str = String(str).replace(',', '.').replace(/[+ ]/g, '-');
-                    var parts = str.split('-');
-                    var remaining = 1.0;
-                    var hasValid = false;
-                    for(var i=0; i<parts.length; i++) {
-                        var val = parseFloat(parts[i]);
-                        if(!isNaN(val) && val > 0) {
-                            remaining *= (1 - val/100);
-                            hasValid = true;
-                        }
+            updateMusteriKampanyaIskonto();
+            
+            // satır hesabını yapan fonksiyon
+            // Cascading discount helper
+            window.calculateEffectiveDiscount = function(str) {
+                if (!str) return 0;
+                str = String(str).replace(',', '.').replace(/[+ ]/g, '-');
+                var parts = str.split('-');
+                var remaining = 1.0;
+                var hasValid = false;
+                for(var i=0; i<parts.length; i++) {
+                    var val = parseFloat(parts[i]);
+                    if(!isNaN(val) && val > 0) {
+                        remaining *= (1 - val/100);
+                        hasValid = true;
                     }
-                    if(!hasValid) return 0;
-                    return (1 - remaining) * 100;
                 }
+                if(!hasValid) return 0;
+                return (1 - remaining) * 100;
+            };
 
                 // satır hesabını yapan fonksiyon
-                function recalcRow($row) {
+            // satır hesabını yapan fonksiyon
+            window.recalcRow = function($row) {
                     // Güvenli değer alma - undefined kontrolü
+                    var $discountInput = $row.find('.discount-input');
                     var qtyVal = $row.find('.quantity-input').val();
                     var listPriceVal = $row.find('input[name^="fiyatsi"]').val();
                     var discPctVal = $row.find('.discount-input').val();
@@ -2840,6 +2866,30 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                     var currencyIcon = $row.find('.currency-icon').text().trim();
                     $row.find('.total-price-display').text(total.toFixed(2).replace('.',',') + (currencyIcon ? ' ' + currencyIcon : ''));
                     
+                    // Satış Marjı Hesapla
+                    let maliyet = parseFloat($row.attr('data-maliyet')) || 0;
+                    let margin = 0;
+                    if (unitPrice > 0) {
+                        margin = ((unitPrice - maliyet) / unitPrice) * 100;
+                    } else if (maliyet > 0) {
+                        margin = -100; // Fiyat 0 ama maliyet varsa -100% marj
+                    }
+                    
+                    var $marginInput = $row.find('.satis-marji-input');
+                    $marginInput.val(margin.toFixed(2).replace('.', ','));
+                    
+                    // Renklendirme
+                    if (margin >= 25) {
+                        $marginInput.css({'background-color': '#d1e7dd', 'color': '#0a5131', 'font-weight': 'bold'}); // Yeşil
+                    } else if (margin >= 10) {
+                        $marginInput.css({'background-color': '#fff3cd', 'color': '#856404', 'font-weight': 'bold'}); // Turuncu
+                    } else {
+                        $marginInput.css({'background-color': '#f8d7da', 'color': '#842029', 'font-weight': 'bold'}); // Kırmızı
+                    }
+                    
+                    // Tooltip (Title)
+                    $marginInput.attr('title', 'Birim Maliyet: ' + maliyet.toFixed(2).replace('.', ',') + ' ' + (currencyIcon || ''));
+
                     // Toplamı güncelle
                     updateTotalAmount();
                 }
@@ -3007,9 +3057,7 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                     $currentRow.find('.discount-input').val(discPct.toFixed(2).replace('.',','));
                     recalcRow($currentRow);
                 });
-            });
-
-
+            
             // AJAX spinner
             $(document).ajaxStart(function() {
                 $('#spinnerOverlay').show();
@@ -3835,9 +3883,15 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                             }
                             
                             $currentNewRow.find('.total-price-display').first().text(total.toFixed(2).replace('.',','));
+                            
+                            // Maliyet bilgisini satıra ekle
+                            $currentNewRow.attr('data-maliyet', product.maliyet || 0);
 
                             // Sepete ekle
                             addProductToCartFromNewRow(product.id, qty, product, $currentNewRow);
+                            
+                            // Hesaplamayı tetikle
+                            recalcRow($currentNewRow);
                         } else {
                             alert(response.message || 'Ürün bulunamadı: ' + stokKodu);
                             $codeInput.focus();
@@ -3927,6 +3981,7 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                         if (resp2.success) {
                                             // Satırı güncelle
                                             $targetRow.attr('data-id', product.id);
+                                            $targetRow.attr('data-maliyet', product.maliyet || 0);
                                             $codeInput.val(product.code).data('original-code', product.code).data('product-id', product.id);
                                             $targetRow.find('.editable-product-search-btn').attr('data-product-id', product.id);
                                             $targetRow.find('td').eq(1).text(product.name);
@@ -3970,6 +4025,12 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                             $targetRow.find('.remove-btn').attr('data-id', product.id);
                                             
                                             updateCartInfo();
+                                            
+                                            // Satır marjını ve renkleri hesapla
+                                            if (typeof recalcRow === 'function') {
+                                                recalcRow($targetRow);
+                                            }
+                                            
                                             showToast('Ürün güncellendi');
                                         } else {
                                             alert('Yeni ürün sepete eklenirken bir hata oluştu.');
@@ -4033,6 +4094,7 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                         
                         // Satırı ÖNCE güncelle - ID'yi değiştir ki kontrol doğru çalışsın
                         $row.attr('data-id', productId);
+                        $row.attr('data-maliyet', productData.maliyet || 0);
                         $row.removeAttr('id'); // ID'yi kaldır ki yeni boş satır eklenebilsin
                         
                         // Stok kodu input'unu güncelle - ID veya class ile bul
@@ -4068,6 +4130,11 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                         // Toplam tutarı güncelle
                         if (typeof updateTotalAmount === 'function') {
                             updateTotalAmount();
+                        }
+                        
+                        // Satır marjını ve renkleri hesapla
+                        if (typeof recalcRow === 'function') {
+                            recalcRow($row);
                         }
                         
                         // Birim - ID veya class ile bul

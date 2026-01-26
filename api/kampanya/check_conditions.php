@@ -64,7 +64,7 @@ try {
         }
     }
     
-    // Kampanyaları çek (Veritabanından) - DÜZELTME: is_active kullan, customer_type yok
+    // Kampanyaları çek (Veritabanından)
     $stmt = $pdo->prepare("SELECT * FROM custom_campaigns WHERE is_active = 1");
     $stmt->execute();
     $dbCampaigns = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -81,7 +81,7 @@ try {
         if (isset($campaignRules[$kategori])) {
             $rule = $campaignRules[$kategori];
             $minQty = intval($rule['min_quantity']);
-            $minAmount = floatval($rule['min_total_amount']); // DÜZELTME: min_amount -> min_total_amount
+            $minAmount = floatval($rule['min_amount']); // min_amount kullan (min_total_amount değil)
             
             // Tutar hesapla (Bu kategori için)
             $catTotalAmount = 0;
@@ -122,10 +122,10 @@ try {
                 $currentStatus .= ")";
 
                 $campaigns[] = [
-                    'name' => "{$kategori} Özel Fiyat",
+                    'name' => "{$rule['category_name']} Özel Fiyat",
                     'condition' => $condText . " " . $currentStatus,
                     'products' => $groupData['products'],
-                    'category' => $kategori,
+                    'category' => $rule['category_name'],
                     'quantity' => $groupData['total_quantity'],
                     // Meta veriler (JS tarafı için)
                     'campaign_meta' => [
@@ -136,7 +136,7 @@ try {
             }
         } else {
              // Veritabanında kural yoksa varsayılan (Legacy - 10 Adet)
-             if ($groupData['total_quantity'] >= 10) {
+             if ($groupData['total_quantity'] >= 10 && $kategori === 'Genel') {
                 $campaigns[] = [
                     'name' => "{$kategori} Özel Fiyat",
                     'condition' => "Min 10 adet alım ({$groupData['total_quantity']} adet)",

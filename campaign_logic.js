@@ -41,7 +41,7 @@ $(document).ready(function () {
         if ($kb.css('display') === 'none') {
             $kb.show().css('display', 'inline-flex');
         }
-    }, 200);
+    }, 200); 50
 
     setTimeout(function () {
         clearInterval(protectionInterval);
@@ -779,8 +779,9 @@ $(document).ready(function () {
                         $discountInput.val('0,00').prop('readonly', true).attr('placeholder', 'Özel Fiyat');
                     }
 
-                    // 4. Satırı renklendir
+                    // 4. Satırı renklendir ve maliyet bilgisini güncelle
                     $row.addClass('table-success row-has-special-price');
+                    $row.attr('data-maliyet', data.cost || 0);
 
                     // 5. HESAPLAMAYI TETİKLE (Miktar değişmiş gibi davran)
                     var $qtyInput = $row.find('.quantity-input');

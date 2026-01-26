@@ -1976,28 +1976,72 @@ foreach ($tekliflerForTable as $t) {
 
     <?php
     // -------------------------------------------------------------------------
-    // Modal: MÜŞTERİ BİLGİLERİ (info)
+    // Modal: TEKLİF İŞLEM GEÇMİŞİ (eski adıyla MÜŞTERİ BİLGİLERİ / info)
     // -------------------------------------------------------------------------
     foreach ($tekliflerForModals as $info) {
-        $sirketArp = isset($info["sirket_arp_code"]) ? trim($info["sirket_arp_code"]) : '';
-        if ($sirketArp === '') {
-            $musteriTel = trim($info["projeadi"] ?? '');
-            $cariMiText = 'HAYIR';
-        } else {
-            $musteriTel = trim($info['p_cep'] ?? '');
-            $cariMiText = 'EVET';
-        }
+        $gecmisSorgu = mysqli_query($db, "SELECT * FROM durum_gecisleri WHERE teklif_id = " . (int)$info['id'] . " ORDER BY id DESC");
     ?>
         <div class="modal fade info<?= $info['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Müşteri Bilgileri</h5>
+                        <h5 class="modal-title">Teklif İşlem Geçmişi: <b><?= htmlspecialchars($info['teklifkodu'] ?? '') ?></b></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p><strong>Müşteri Telefon:</strong> <?= htmlspecialchars($musteriTel ?: '-') ?></p>
-                        <p><strong>Cari Mi?:</strong> <?= htmlspecialchars($cariMiText) ?></p>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-striped table-bordered mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 140px;">Tarih</th>
+                                        <th>İşlem Yapan</th>
+                                        <th>Eski Durum</th>
+                                        <th>Yeni Durum</th>
+                                        <th>Açıklama</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                if ($gecmisSorgu && mysqli_num_rows($gecmisSorgu) > 0) {
+                                    while ($log = mysqli_fetch_assoc($gecmisSorgu)) {
+                                        // Tarih alanı kontrolü: genellikle 'tarih' veya 'created_at' veya 'islem_tarihi'
+                                        $logTarih = $log['tarih'] ?? $log['created_at'] ?? $log['islem_tarihi'] ?? '-';
+                                        
+                                        // Personel ismini bul
+                                        $yapanPersonel = 'Sistem';
+                                        if (!empty($log['degistiren_personel_id'])) {
+                                            $yid = (int)$log['degistiren_personel_id'];
+                                            // Önce yönetici tablosuna bak
+                                            $ys = mysqli_query($db, "SELECT unvan FROM yonetici WHERE yonetici_id=$yid");
+                                            if ($ys && $yr = mysqli_fetch_assoc($ys)) {
+                                                $yapanPersonel = $yr['unvan'];
+                                            } else {
+                                                 // Personel tablosuna bak (opsiyonel)
+                                                 // $ps = mysqli_query($db, "SELECT p_adi, p_soyadi FROM personel WHERE personel_id=$yid");
+                                                 // if($ps && $pr = mysqli_fetch_assoc($ps)) $yapanPersonel = $pr['p_adi'].' '.$pr['p_soyadi'];
+                                            }
+                                        }
+                                        
+                                        // Durum renkleri için basit badge
+                                        $eskiBadge = !empty($log['eski_durum']) ? '<span class="badge badge-status-secondary">' . htmlspecialchars($log['eski_durum']) . '</span>' : '-';
+                                        $yeniBadge = !empty($log['yeni_durum']) ? '<span class="badge badge-status-warning">' . htmlspecialchars($log['yeni_durum']) . '</span>' : '-';
+                                ?>
+                                    <tr>
+                                        <td style="font-size: 11px;"><?= htmlspecialchars($logTarih) ?></td>
+                                        <td style="font-size: 11px; font-weight:bold;"><?= htmlspecialchars($yapanPersonel) ?></td>
+                                        <td style="font-size: 11px;"><?= $eskiBadge ?></td>
+                                        <td style="font-size: 11px;"><?= $yeniBadge ?></td>
+                                        <td style="font-size: 11px; white-space: pre-wrap;"><?= htmlspecialchars($log['notlar'] ?? '') ?></td>
+                                    </tr>
+                                <?php
+                                    }
+                                } else {
+                                    echo '<tr><td colspan="5" class="text-center text-muted">Henüz kayıt bulunmamaktadır.</td></tr>';
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

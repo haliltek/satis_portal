@@ -288,6 +288,7 @@ $columns = array(
         // Yurtdışı seçildiyse sadece export fiyatını göster, yurtiçi seçildiyse domestic fiyatını göster
         return $foreign ? htmlspecialchars(number_format($exportRaw, 2, ',', '.')) : htmlspecialchars(number_format($domesticRaw, 2, ',', '.'));
     }),
+    array('db' => 'maliyet', 'dt' => 9),
 );
 
 $extraWhere = '';
@@ -434,7 +435,7 @@ try {
     $hasStokadiEn = $checkResult && $checkResult->num_rows > 0;
     $checkStmt->close();
     
-    $extraFields = ['aciklama'];
+    $extraFields = ['aciklama', 'maliyet'];
     if ($hasStokadiEn) {
         $extraFields[] = 'stokadi_en';
     }

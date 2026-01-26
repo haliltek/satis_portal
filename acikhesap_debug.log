@@ -5984,3 +5984,105 @@
     [sirket_id] => 37246
 )
 
+2026-01-26 14:03:10 - Request received: Array
+(
+    [ts] => 1769425390409
+    [sirket_id] => 26847
+)
+
+2026-01-26 14:11:20 - Request received: Array
+(
+    [ts] => 1769425880870
+    [sirket_id] => 28540
+)
+
+2026-01-26 14:13:52 - Request received: Array
+(
+    [ts] => 1769426032088
+    [sirket_id] => 28294
+)
+
+2026-01-26 14:20:38 - Request received: Array
+(
+    [ts] => 1769426438874
+    [sirket_id] => 36214
+)
+
+2026-01-26 14:22:51 - Request received: Array
+(
+    [ts] => 1769426571440
+    [sirket_id] => 26847
+)
+
+2026-01-26 14:23:07 - Request received: Array
+(
+    [ts] => 1769426587063
+    [sirket_id] => 26847
+)
+
+2026-01-26 14:24:09 - Request received: Array
+(
+    [ts] => 1769426649309
+    [sirket_id] => 28294
+)
+
+2026-01-26 14:26:37 - Request received: Array
+(
+    [ts] => 1769426796978
+    [sirket_id] => 28294
+)
+
+2026-01-26 14:28:09 - Request received: Array
+(
+    [ts] => 1769426889394
+    [sirket_id] => 28294
+)
+
+2026-01-26 14:30:11 - Request received: Array
+(
+    [ts] => 1769427011430
+    [sirket_id] => 28294
+)
+
+2026-01-26 14:30:35 - Request received: Array
+(
+    [ts] => 1769427035468
+    [sirket_id] => 26847
+)
+
+2026-01-26 14:44:54 - Request received: Array
+(
+    [ts] => 1769427893818
+    [sirket_id] => 28294
+)
+
+2026-01-26 14:59:26 - Request received: Array
+(
+    [ts] => 1769428766159
+    [sirket_id] => 26847
+)
+
+2026-01-26 15:13:04 - Request received: Array
+(
+    [ts] => 1769429584006
+    [sirket_id] => 26847
+)
+
+2026-01-26 15:36:42 - Request received: Array
+(
+    [ts] => 1769431002563
+    [sirket_id] => 28294
+)
+
+2026-01-26 15:43:41 - Request received: Array
+(
+    [ts] => 1769431421244
+    [sirket_id] => 37246
+)
+
+2026-01-26 15:45:43 - Request received: Array
+(
+    [ts] => 1769431542971
+    [sirket_id] => 28540
+)
+
