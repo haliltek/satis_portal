@@ -304,10 +304,17 @@ function gonderEposta($db, $icerikid, $eposta, $metin, $notu, $url)
         $template = file_get_contents("mail_templates/mail_template.html");
     }
 
+    // URL'ye email ve isim parametrelerini ekle
+    $urlWithParams = $url;
+    if (!empty($url)) {
+        $separator = (strpos($url, '?') !== false) ? '&' : '?';
+        $urlWithParams = $url . $separator . 'email=' . urlencode($eposta) . '&name=' . urlencode($adiSoyadi);
+    }
+
     $template = str_replace('{{ADI_SOYADI}}',         htmlspecialchars($adiSoyadi), $template);
     $template = str_replace('{{METIN}}',              isset($metin) ? htmlspecialchars($metin) : '', $template);
     $template = str_replace('{{NOTU}}',               isset($notu) ? htmlspecialchars($notu) : '', $template);
-    $template = str_replace('{{URL}}',                isset($url) ? htmlspecialchars($url) : '', $template);
+    $template = str_replace('{{URL}}',                htmlspecialchars($urlWithParams), $template);
     $template = str_replace('{{YONETICI_UNVAN}}',     htmlspecialchars($yoneticiUnvan), $template);
     $template = str_replace('{{YONETICI_TELEFON}}',   htmlspecialchars($yoneticiTel ?? ''), $template);
     $template = str_replace('{{YONETICI_MAILPOSTA}}',  htmlspecialchars($yoneticiMail), $template);
@@ -331,7 +338,7 @@ function gonderEposta($db, $icerikid, $eposta, $metin, $notu, $url)
         $mail->SetFrom($mail->Username, $yoneticiAd);
         $mail->AddAddress($eposta, $adiSoyadi);
         $mail->CharSet = 'UTF-8';
-        $mail->Subject = $isForeign ? 'Regarding Your Proposal' : 'Teklifiniz Hk.';
+        $mail->Subject = $isForeign ? "Proposal Review – Ref. No: {$teklifNo}" : 'Teklifiniz Hk.';
         $mail->MsgHTML($template);
 
         if ($mail->Send()) {

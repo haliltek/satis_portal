@@ -33,5 +33,10 @@
         "LOGICALREF": 7,
         "GCODE": "01",
         "GDEF": "BEDELSİZ İHRACAT FATURASI"
+    },
+    {
+        "LOGICALREF": 8,
+        "GCODE": "İHRAÇ",
+        "GDEF": "İHRAÇ KAYITLI"
     }
 ]

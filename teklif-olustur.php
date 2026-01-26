@@ -43,8 +43,12 @@ if (isset($_GET['new_offer']) && $_GET['new_offer'] === '1') {
     // Temiz URLye yönlendir
     window.location.href = "teklif-olustur.php";
     </script></head><body>Yönlendiriliyor...</body></html>';
-    exit();
 }
+
+// KAMPANYA TEST MODU: Test ürünlerini otomatik yükle
+$testMode = isset($_GET['test_mode']) && $_GET['test_mode'] === '1';
+$testProducts = $_SESSION['test_products'] ?? [];
+$campaignInfo = $_SESSION['campaign_info'] ?? [];
 
 // Kullanıcı tipi
 $user_type = $_SESSION['user_type'] ?? '';
@@ -66,6 +70,11 @@ if (isset($_POST['pazar_tipi'])) {
 $genel_iskonto = 0.00;
 if (isset($_POST['genel_iskonto'])) {
     $genel_iskonto = floatval(str_replace(',', '.', $_POST['genel_iskonto']));
+}
+
+// Export kullanıcıları için otomatik yurtdışı seçimi
+if ($user_type === 'Export') {
+    $_SESSION['pazar_tipi'] = 'yurtdisi';
 }
 
 // Session'dan pazar tipini al, yoksa varsayılan olarak yurtiçi
@@ -244,10 +253,14 @@ $yonetici = $result->fetch_assoc();
 $stmt->close();
 
 // iskonto_max kolonundan yetki belirle
-// 60 veya daha az ise Personel, yoksa Yönetici
+// Export ve Personel: 60% veya daha az, Yönetici: sınırsız
 $iskonto_max_db = isset($yonetici['iskonto_max']) ? floatval($yonetici['iskonto_max']) : 100.0;
 
-if ($iskonto_max_db > 0 && $iskonto_max_db <= 60) {
+// Export kullanıcıları Personel ile aynı yetkilere sahip
+if ($user_type === 'Export') {
+    $iskonto_max = $iskonto_max_db > 0 && $iskonto_max_db <= 60 ? $iskonto_max_db : 60.0;
+    $yetki = 'Export';
+} elseif ($iskonto_max_db > 0 && $iskonto_max_db <= 60) {
     $iskonto_max = $iskonto_max_db; // Personel - veritabanındaki değer
     $yetki = 'Personel';
 } else {
@@ -992,6 +1005,39 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
+                    <?php if ($testMode && !empty($campaignInfo)): ?>
+                    <!-- KAMPANYA TEST MODU BANNER -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="alert alert-warning border-warning" style="border-left: 5px solid #ff9800;">
+                                <h5 class="alert-heading">
+                                    <i class="bi bi-flask me-2"></i>KAMPANYA TEST MODU AKTİF
+                                </h5>
+                                <p class="mb-2">Aşağıdaki kampanyalar için test ürünleri otomatik olarak sepete eklenmiştir:</p>
+                                <ul class="mb-0">
+                                    <?php foreach ($campaignInfo as $info): ?>
+                                    <li>
+                                        <strong><?= htmlspecialchars($info['name']) ?></strong>: 
+                                        <?= $info['product_count'] ?> ürün, 
+                                        Min: <?= number_format($info['min_quantity']) ?> adet
+                                        <?php if ($info['min_amount'] > 0): ?>
+                                        / <?= number_format($info['min_amount'], 2) ?> EUR
+                                        <?php endif; ?>
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                                <hr>
+                                <p class="mb-0">
+                                    <strong>Toplam <?= count($testProducts) ?> test ürünü yüklendi.</strong>
+                                    <a href="teklif-olustur.php?new_offer=1" class="btn btn-sm btn-danger ms-3">
+                                        <i class="bi bi-x-circle me-1"></i>Test Modundan Çık
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                    
                     <?php if (!empty($campaigns)): ?>
                     <div class="row mb-3">
                         <div class="col-12">
@@ -1018,7 +1064,8 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                         </div>
                     </div>
                     <?php endif; ?>
-                    <!-- Yurtiçi/Yurtdışı Seçimi -->
+                    <!-- Yurtiçi/Yurtdışı Seçimi - Export kullanıcıları için gizle -->
+                    <?php if ($user_type !== 'Export'): ?>
                     <div class="row mb-2">
                         <div class="col-12">
                             <div class="card shadow-sm" style="border: 1px solid #ddd;">
@@ -1030,12 +1077,12 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                 <div class="btn-group btn-group-sm" role="group">
                                                     <input type="radio" class="btn-check" name="pazar_tipi" id="pazar_yurtici" value="yurtici" <?= ($pazarTipi === 'yurtici') ? 'checked' : '' ?> onchange="pazarTipiDegisti()">
                                                     <label class="btn btn-outline-primary" for="pazar_yurtici" style="font-size: 11px; padding: 4px 16px; border-radius: 0;">
-                                                        <i class="mdi mdi-home me-1"></i> Yurtiçi
+                                                        <i class="bi bi-house-fill me-1"></i> Yurtiçi
                                                     </label>
                                                     
                                                     <input type="radio" class="btn-check" name="pazar_tipi" id="pazar_yurtdisi" value="yurtdisi" <?= ($pazarTipi === 'yurtdisi') ? 'checked' : '' ?> onchange="pazarTipiDegisti()">
                                                     <label class="btn btn-outline-primary" for="pazar_yurtdisi" style="font-size: 11px; padding: 4px 16px; border-radius: 0;">
-                                                        <i class="mdi mdi-earth me-1"></i> Yurtdışı
+                                                        <i class="bi bi-globe-americas me-1"></i> Yurtdışı
                                                     </label>
                                                 </div>
                                             </form>
@@ -1048,6 +1095,16 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                             </div>
                         </div>
                     </div>
+                    <?php else: ?>
+                    <!-- Export kullanıcıları için bilgilendirme -->
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <div class="alert alert-info py-2 px-3 mb-0" style="font-size: 11px;">
+                                <i class="bi bi-globe-americas me-1"></i> <strong>Export Modu:</strong> Sadece yurtdışı müşterileri ve fiyatları görüntülenecektir.
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
                     
                     <!-- Teklif Oluşturma Formu -->
                     <div class="row mb-3">
@@ -1198,38 +1255,45 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                     ?>
                                                 </select>
                                             </div>
-                                            <div>
-                                                <label class="erp-form-label" style="text-align: right; display: block;">Görüntülenecek Para Birimi</label>
-                                                <div style="display: flex; flex-direction: row; gap: 12px; align-items: center; flex-wrap: nowrap; justify-content: flex-end;">
-                                                    <div class="form-check" style="margin: 0; padding: 0; display: flex; align-items: center; white-space: nowrap;">
-                                                        <input class="form-check-input" type="radio" name="doviz_goster" id="doviz_eur" value="EUR" checked style="margin-top: 0; margin-right: 4px; width: 14px; height: 14px; flex-shrink: 0;">
-                                                        <label class="form-check-label" for="doviz_eur" style="font-size: 10px; margin: 0; padding-left: 0; white-space: nowrap; cursor: pointer;">EUR</label>
-                                                    </div>
-                                                    <div class="form-check" style="margin: 0; padding: 0; display: flex; align-items: center; white-space: nowrap;">
-                                                        <input class="form-check-input" type="radio" name="doviz_goster" id="doviz_usd" value="USD" style="margin-top: 0; margin-right: 4px; width: 14px; height: 14px; flex-shrink: 0;">
-                                                        <label class="form-check-label" for="doviz_usd" style="font-size: 10px; margin: 0; padding-left: 0; white-space: nowrap; cursor: pointer;">USD</label>
-                                                    </div>
-                                                    <div class="form-check" style="margin: 0; padding: 0; display: flex; align-items: center; white-space: nowrap;">
-                                                        <input class="form-check-input" type="radio" name="doviz_goster" id="doviz_tl" value="TL" style="margin-top: 0; margin-right: 4px; width: 14px; height: 14px; flex-shrink: 0;">
-                                                        <label class="form-check-label" for="doviz_tl" style="font-size: 10px; margin: 0; padding-left: 0; white-space: nowrap; cursor: pointer;">TL</label>
-                                                    </div>
-                                                    <div class="form-check" style="margin: 0; padding: 0; display: flex; align-items: center; white-space: nowrap;">
-                                                        <input class="form-check-input" type="radio" name="doviz_goster" id="doviz_tumu" value="TUMU" style="margin-top: 0; margin-right: 4px; width: 14px; height: 14px; flex-shrink: 0;">
-                                                        <label class="form-check-label" for="doviz_tumu" style="font-size: 10px; margin: 0; padding-left: 0; white-space: nowrap; cursor: pointer;">Tümü</label>
+                                            <div style="display: flex; align-items: flex-end; justify-content: flex-end; gap: 15px;">
+                                                <!-- Sol Grup: Label + Radio Butonları -->
+                                                <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                                                    <label class="erp-form-label" style="display: block; margin-bottom: 4px; font-weight: bold; font-size: 11px;">Görüntülenecek Para Birimi</label>
+                                                    
+                                                    <div style="display: flex; flex-direction: row; gap: 12px; align-items: center; flex-wrap: nowrap;">
+                                                        <div class="form-check" style="margin: 0; padding: 0; display: flex; align-items: center; white-space: nowrap;">
+                                                            <input class="form-check-input" type="radio" name="doviz_goster" id="doviz_eur" value="EUR" checked style="margin-top: 0; margin-right: 4px; width: 14px; height: 14px; flex-shrink: 0;">
+                                                            <label class="form-check-label" for="doviz_eur" style="font-size: 10px; margin: 0; padding-left: 0; white-space: nowrap; cursor: pointer;">EUR</label>
+                                                        </div>
+                                                        <div class="form-check" style="margin: 0; padding: 0; display: flex; align-items: center; white-space: nowrap;">
+                                                            <input class="form-check-input" type="radio" name="doviz_goster" id="doviz_usd" value="USD" style="margin-top: 0; margin-right: 4px; width: 14px; height: 14px; flex-shrink: 0;">
+                                                            <label class="form-check-label" for="doviz_usd" style="font-size: 10px; margin: 0; padding-left: 0; white-space: nowrap; cursor: pointer;">USD</label>
+                                                        </div>
+                                                        <div class="form-check" style="margin: 0; padding: 0; display: flex; align-items: center; white-space: nowrap;">
+                                                            <input class="form-check-input" type="radio" name="doviz_goster" id="doviz_tl" value="TL" style="margin-top: 0; margin-right: 4px; width: 14px; height: 14px; flex-shrink: 0;">
+                                                            <label class="form-check-label" for="doviz_tl" style="font-size: 10px; margin: 0; padding-left: 0; white-space: nowrap; cursor: pointer;">TL</label>
+                                                        </div>
+                                                        <div class="form-check" style="margin: 0; padding: 0; display: flex; align-items: center; white-space: nowrap;">
+                                                            <input class="form-check-input" type="radio" name="doviz_goster" id="doviz_tumu" value="TUMU" style="margin-top: 0; margin-right: 4px; width: 14px; height: 14px; flex-shrink: 0;">
+                                                            <label class="form-check-label" for="doviz_tumu" style="font-size: 10px; margin: 0; padding-left: 0; white-space: nowrap; cursor: pointer;">Tümü</label>
+                                                        </div>
                                                     </div>
                                                 </div>
+
+                                                <!-- Sağ Grup: Özel Fiyat Butonu -->
+                                                <div id="ozelFiyatContainer" style="min-width: 150px; text-align: right; margin-bottom: 2px;"></div>
                                             </div>
                                             <div style="text-align: right;">
                                                 <label class="erp-form-label">&nbsp;</label>
                                                 <!-- Kampanya Bilgi Butonu -->
                                                 <!-- Kampanya Bilgi Butonu -->
-                                                <button type="button" id="kampanyaBtn" class="btn btn-sm mb-1 kampanya-anim-box" style="width: auto; min-width: 140px; height: 28px; display: none; font-size: 12px; white-space: nowrap;" data-bs-toggle="modal" data-bs-target="#kampanyaModal">
+                                                <button type="button" id="kampanyaBtn" class="btn btn-sm mb-1 kampanya-anim-box" style="width: auto; min-width: 140px; height: 28px; font-size: 12px; white-space: nowrap;" data-bs-toggle="modal" data-bs-target="#kampanyaModal">
                                                     <span class="kampanya-content" style="padding: 0 10px;">
-                                                        <i class="bi bi-gift me-1"></i> Kampanya Bilgi
+                                                        <i class="bi bi-gift me-1"></i> Özel Fiyat Bilgi
                                                     </span>
                                                 </button>
                                                 <button type="button" id="applyCampaignsBtn" class="btn btn-warning btn-sm" style="width: auto; min-width: 140px; height: 28px; font-size: 12px; font-weight: bold; color: #000; display: flex; align-items: center; justify-content: center; display: inline-flex;">
-                                                    <i class="bi bi-percent me-1"></i> Kampanya Uygula
+                                                    <i class="bi bi-percent me-1"></i> Özel Fiyat Uygula
                                                 </button>
                                             </div>
                                         </div>
@@ -1768,7 +1832,7 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
             $('#stokSearch').val('');
             
             // Teklif Kalemlerini Boşalt butonu
-            $('#clearCartBtn').on('click', function() {
+            $('#clearCartBtn').off('click').on('click', function() {
                 if (!confirm('Teklif kalemlerini tamamen temizlemek istediğinize emin misiniz?')) {
                     return;
                 }
@@ -2993,15 +3057,14 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                 // Uyarıyı gizle
                 $('#limit-uyari').hide();
                 
-                // Kampanya butonunu gizle (varsayılan)
-                $('#kampanyaBtn').hide();
-                
                 if (sirket_id === '786' || sirket_id === null || sirket_id === '') {
                     $('.manual-fields').show();
                     $('#sirketbilgi').prop('readonly', false);
                     $('#acikhesap').val('');
                     $('#payplan').val('');
                     $('#sirketbilgi').val('');
+                    // Kampanya bilgi butonunu görünür tut
+                    $('#kampanyaBtn').show().css('display', 'inline-flex');
                     return;
                 } else {
                     $('.manual-fields').hide();
@@ -3018,12 +3081,17 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                         
                         // Cari kodunu kontrol et (120.01.E04)
                         var cariKodu = parts[0].trim();
+                        
+                        // Kampanya bilgi butonu modal hedefini güncelle
+                        if (cariKodu === '120.01.E04') {
+                            // Ana Bayi için Ana Bayi modalını aç
+                            $('#kampanyaBtn').attr('data-bs-target', '#kampanyaModal').show().css('display', 'inline-flex');
+                        } else {
+                            // Diğer müşteriler için genel modalı aç
+                            $('#kampanyaBtn').attr('data-bs-target', '#kampanyaModalRegular').show().css('display', 'inline-flex');
+                        }
                         if (cariKodu === '120.01.E04') {
                             try {
-                                // Kampanya butonunu göster
-                                // Kampanya butonunu göster
-                                $('#kampanyaBtn').show();
-                                
                                 // ERTEK carisi için %45 iskonto - İPTAL EDİLDİ
                                 // Kullanıcı isteği üzerine otomatik %45 default iskonto kaldırıldı.
                                 // Sadece özel fiyat listesindeki ürünlere özel fiyat uygulanacak.
@@ -3116,6 +3184,20 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                 });
             });
             // $('#musteri').trigger('change'); // Sayfa yüklenince gereksiz tetiklemeyi önle
+            
+            // Pazar tipine göre kampanya butonlarını kontrol et
+            var pazarTipi = '<?= $pazarTipi ?>';
+            if (pazarTipi === 'yurtdisi') {
+                // Yurtdışı ise kampanya butonlarını gizle
+                $('#kampanyaBtn').hide();
+                $('#applyCampaignsBtn').hide();
+                console.log('Sayfa yüklendi - Yurtdışı modu - Kampanya butonları gizlendi');
+            } else {
+                // Yurtiçi ise kampanya butonlarını göster
+                $('#kampanyaBtn').show().css('display', 'inline-flex');
+                $('#applyCampaignsBtn').show().css('display', 'inline-flex');
+                console.log('Sayfa yüklendi - Yurtiçi modu - Kampanya butonları gösterildi');
+            }
 
             // Bootstrap form validasyonu: Sadece required alanlar kontrol edilecek
             // Form submit edildiğinde referrer URL'i, ekstra_bilgi ve seçili müşteriyi session'a kaydet
@@ -4101,6 +4183,12 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                         updateCartInfo();
                         updateTotalAmount();
                         showToast('Ürün eklendi');
+
+                        // ÖZEL FİYAT KONTROLÜ İÇİN TETİKLE (Campaign Logic çalışsın)
+                        setTimeout(function(){
+                            console.log('Tetkik: Özel fiyat kontrolü için change tetikleniyor...');
+                            $codeInput.trigger('change');
+                        }, 500); // DOM update sonrası güvenli süre
                     } else {
                         alert('Ürün sepete eklenirken bir hata oluştu.');
                     }
@@ -4245,6 +4333,26 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
         // Pazar tipi değiştiğinde ürün ve cari listelerini yenile
         function pazarTipiDegisti() {
             var selectedValue = document.querySelector('input[name="pazar_tipi"]:checked').value;
+            
+            // KAMPANYA BUTONLARINI KONTROL ET
+            if (selectedValue === 'yurtdisi') {
+                // Yurtdışı seçildiğinde kampanya butonlarını GİZLE (Ama Özel Fiyat Butonunu KORU)
+                $('#kampanyaBtn').hide();
+                $('#applyCampaignsBtn').hide();
+                console.log('Yurtdışı seçildi - Kampanya butonları gizlendi');
+            } else {
+                // Yurtiçi seçildiğinde kampanya butonlarını GÖSTER
+                $('#kampanyaBtn').show().css('display', 'inline-flex');
+                $('#applyCampaignsBtn').show().css('display', 'inline-flex');
+                console.log('Yurtiçi seçildi - Kampanya butonları gösterildi');
+            }
+            
+            // Özel Fiyat Butonunu her durumda kontrol et (Gizlenmişse geri getir)
+            if (typeof checkSpecialWorkEligibility === 'function') {
+                setTimeout(checkSpecialWorkEligibility, 100);
+            }
+            $('#ozelFiyatBtn').show(); // Geçici olarak force show, asıl karar checkSpecialWorkEligibility'de
+            
             // Session'a kaydet (AJAX ile)
             $.ajax({
                 url: 'teklif-olustur.php',
@@ -4273,14 +4381,14 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
             <div class="modal-content">
                 <div class="modal-header bg-warning">
                     <h5 class="modal-title" id="kampanyaModalLabel">
-                        <i class="bi bi-gift me-2"></i>Kampanya Bilgileri
+                        <i class="bi bi-gift me-2"></i>Özel Fiyat Bilgileri
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                 <div class="alert alert-info">
                         <i class="bi bi-info-circle me-2"></i>
-                        <strong>Ana Bayi</strong> müşterisi için mevcut kampanyalar:
+                        <strong>Ana Bayi</strong> için mevcut özel fiyatlar:
                     </div>
                     
                     <div class="row g-3" id="kampanyaListesi">
@@ -4289,15 +4397,26 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                         $config = require __DIR__ . '/config/config.php';
                         $dbConfig = $config['db'];
                         $campDb = new mysqli($dbConfig['host'], $dbConfig['user'], $dbConfig['pass'], $dbConfig['name'], $dbConfig['port']);
-                        $campDb->set_charset("latin1"); // Veriler latin1 tabloda utf8 saklandığı için
+                        $campDb->set_charset("utf8mb4"); // UTF-8 charset for Turkish characters
                         
                         // Aktif kampanyaları çek
-                        $sql = "SELECT * FROM custom_campaigns WHERE active = 1 ORDER BY priority DESC";
+                        $sql = "SELECT * FROM custom_campaigns ORDER BY id ASC";
                         $result = $campDb->query($sql);
+                        
+                        // Duplicate önleme için görülen ID'leri takip et
+                        $seenIds = [];
+
 
                         if ($result && $result->num_rows > 0) {
                             while ($camp = $result->fetch_assoc()) {
                                 $campId = $camp['id'];
+                                $categoryName = $camp['category_name'] ?? $camp['name'];
+                                
+                                // Duplicate kontrolü - Aynı kategori adını tekrar gösterme
+                                if (in_array($categoryName, $seenIds)) {
+                                    continue;
+                                }
+                                $seenIds[] = $categoryName;
                                 
                                 // Kampanya kurallarını çek
                                 $rulesResult = $campDb->query("SELECT * FROM custom_campaign_rules WHERE campaign_id = $campId ORDER BY priority ASC");
@@ -4335,12 +4454,29 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                     <p class="card-text"><strong>Geçerlilik:</strong> <?= $validity ?></p>
                                     <p class="card-text"><strong>Kapsam:</strong> <?= $prodCount > 0 ? $prodCount . " Adet Ürün" : "Tüm Ürünler" ?></p>
                                     
+                                    <?php 
+                                    // Kampanyaya göre özel birimler
+                                    $isMediaCampaign = (stripos($categoryName, 'MEDYA') !== false);
+                                    $isKenarCampaign = (stripos($categoryName, 'KENAR') !== false);
+                                    
+                                    if ($isMediaCampaign) {
+                                        $quantityUnit = 'KG';
+                                        $amountUnit = 'KG';
+                                    } elseif ($isKenarCampaign) {
+                                        $quantityUnit = 'Metre';
+                                        $amountUnit = ($camp['currency'] ?? 'EUR');
+                                    } else {
+                                        $quantityUnit = 'Adet';
+                                        $amountUnit = ($camp['currency'] ?? 'EUR');
+                                    }
+                                    ?>
+                                    
                                     <?php if($camp['min_quantity'] > 0): ?>
-                                    <small class="text-muted d-block">Min. Sipariş: <?= number_format($camp['min_quantity'],0) ?> Adet</small>
+                                    <small class="text-muted d-block">Min. Sipariş: <?= number_format($camp['min_quantity'],0) ?> <?= $quantityUnit ?></small>
                                     <?php endif; ?>
                                     
                                     <?php if($camp['min_total_amount'] > 0): ?>
-                                    <small class="text-muted d-block">Min. Tutar: <?= number_format($camp['min_total_amount'],2,',','.') ?> <?= $camp['currency'] ?? 'EUR' ?></small>
+                                    <small class="text-muted d-block">Min. Tutar: <?= number_format($camp['min_total_amount'],2,',','.') ?> <?= $amountUnit ?></small>
                                     <?php endif; ?>
 
                                     <?php if(count($rules) > 0): ?>
@@ -4349,15 +4485,22 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                         <?php foreach($rules as $rule): 
                                             // rule_name düzeltmesi yoksa veya hatalı ise manuel match
                                             $desc = match($rule['rule_type']) {
-                                                'quantity_based' => number_format($rule['condition_value'],0)." adet+",
-                                                'amount_based'   => number_format($rule['condition_value'],0)." ".($camp['currency'] ?? 'EUR')."+",
+                                                'quantity_based' => number_format($rule['condition_value'],0)." ".$quantityUnit."+",
+                                                'amount_based'   => number_format($rule['condition_value'],0)." ".$amountUnit."+",
                                                 'payment_based'  => "Peşin Ödeme",
                                                 default          => "Genel"
                                             };
                                         ?>
                                         <li>
                                             <i class="bi bi-check-circle-fill text-<?= $color ?> me-1"></i>
-                                            <strong><?= htmlspecialchars($rule['rule_name']) ?>:</strong> %<?= number_format($rule['discount_rate'], 2) ?>
+                                            <?php 
+                                            // MEDYA kampanyasıysa rule_name'deki € işaretini KG ile değiştir
+                                            $displayRuleName = $rule['rule_name'];
+                                            if ($isMediaCampaign) {
+                                                $displayRuleName = str_replace('€', 'KG', $displayRuleName);
+                                            }
+                                            ?>
+                                            <strong><?= htmlspecialchars($displayRuleName) ?>:</strong> +%<?= number_format($rule['discount_rate'], 2) ?>
                                             <span class="text-muted">(<?= $desc ?>)</span>
                                         </li>
                                         <?php endforeach; ?>
@@ -4387,6 +4530,8 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
             </div>
         </div>
     </div>
+<?php include "includes/kampanya_modal_regular.php"; ?>
+<!-- Fatura Durumu Modal -->
 <!-- Fatura Durumu Modal -->
 <div class="modal fade" id="invoiceStatusModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -4912,7 +5057,7 @@ $(document).ready(function() {
         if (campaignApplied) {
             $('#submitCart').prop('disabled', true);
             $('#submitCart').val('Teklif Miktarı Değişti - Kampanyaları Tekrar Uygulayın');
-            $('#applyCampaignsBtn').addClass('btn-danger').text('⚠️ Yeniden Kampanya Uygula');
+            $('#applyCampaignsBtn').addClass('btn-danger').text('⚠️ Yeniden Özel Fiyat Uygula');
             
             // Kullanıcıya uyarı ver (Toast varsa toast, yoksa alert)
             if (typeof showToast === 'function') {
@@ -4926,7 +5071,7 @@ $(document).ready(function() {
         console.log('=== KAMPANYA BUTONU BASILDI ===');
         var $btn = $(this);
         // İkonlu orijinal HTML içeriğini koru
-        var originalHtml = '<i class="bi bi-percent me-1"></i> Kampanya Uygula';
+        var originalHtml = '<i class="bi bi-percent me-1"></i> <Özel Fiyat Uygula';
         
         // Sepetteki ürünleri topla
         var items = [];
@@ -5270,7 +5415,7 @@ $(document).ready(function() {
     <div class='modal-dialog modal-lg'>
         <div class='modal-content'>
             <div class='modal-header bg-success text-white'>
-                <h5 class='modal-title'><i class='bi bi-gift-fill me-2'></i>Kampanya Fırsatı</h5>
+                <h5 class='modal-title'><i class='bi bi-gift-fill me-2'></i>Gemaş Özel Fiyat</h5>
                 <button type='button' class='btn-close btn-close-white' data-bs-dismiss='modal' aria-label='Kapat'></button>
             </div>
             <div class='modal-body'>
@@ -5298,7 +5443,7 @@ $(document).ready(function() {
 .campaign-blink {
     animation: campaign-blink 2s infinite;
     background-color: #ffc107 !important;
-    border-color: #ffc107 !important;
+    border-color: #ffc107 !important
     color: #000 !important;
     font-weight: bold !important;
 }
@@ -5311,3 +5456,100 @@ $(document).ready(function() {
 </style>
 
 <script src='campaign_logic.js?v=<?php echo time(); ?>'></script>
+
+    <!-- Özel Fiyat Çalışması Modal -->
+    <div class="modal fade" id="ozelFiyatModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">
+                        <i class="bi bi-list-check me-2"></i>Özel Fiyat Çalışması Ürünleri
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="alert alert-light m-3 border">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Çalışma Başlığı:</strong> <span id="ozelFiyatBaslik">-</span>
+                            </div>
+                            <div>
+                                <strong>Tarih:</strong> <span id="ozelFiyatTarih">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover mb-0" id="ozelFiyatTable" style="font-size: 13px;">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Stok Kodu</th>
+                                    <th>Ürün Adı</th>
+                                    <th>Birim</th>
+                                    <th class="text-end">Maliyet</th>
+                                    <th class="text-end">Liste Fiyatı</th>
+                                    <th class="text-end">Özel Fiyat</th>
+                                    <th class="text-end">Marj %</th>
+                                    <th class="text-center">Döviz</th>
+                                    <th class="text-center" style="width: 100px;">İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ozelFiyatListesi">
+                                <!-- JS ile doldurulacak -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <input type="hidden" id="currentSpecialWorkId" value="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php if ($testMode && !empty($testProducts)): ?>
+<script>
+// KAMPANYA TEST MODU: Ürünleri otomatik sepete ekle
+$(document).ready(function() {
+    console.log('🧪 Test Modu Aktif - Ürünler yükleniyor...');
+    
+    // ERTEK müşterisini seç
+    setTimeout(function() {
+        $('#musteri').val('120.01.E04').trigger('change');
+    }, 500);
+    
+    // Test ürünlerini PHP'den al
+    var testProducts = <?= json_encode($testProducts) ?>;
+    
+    // Her ürünü sepete ekle
+    var delay = 1000; // İlk ürün için 1 saniye bekle
+    testProducts.forEach(function(product, index) {
+        setTimeout(function() {
+            console.log('➕ Ekleniyor:', product.code, '-', product.name, '(x' + product.quantity + ')');
+            
+            // Yeni satır ekle
+            var $newRow = $('#newProductRow');
+            if ($newRow.length > 0) {
+                // Ürün kodunu yaz
+                var $codeInput = $newRow.find('.editable-product-code');
+                $codeInput.val(product.code);
+                
+                // Ürün ara
+                searchProductByCode(product.code, $newRow);
+                
+                // Miktar yaz
+                setTimeout(function() {
+                    $newRow.find('.quantity-input').val(product.quantity).trigger('input');
+                }, 300);
+            }
+        }, delay + (index * 800)); // Her ürün arası 800ms
+    });
+    
+    // Tüm ürünler eklendikten sonra bilgi ver
+    setTimeout(function() {
+        console.log('✅ Toplam ' + testProducts.length + ' test ürünü eklendi!');
+        toastr.success('Test ürünleri sepete eklendi! Kampanya butonunu kontrol edin.', 'Test Modu');
+    }, delay + (testProducts.length * 800) + 1000);
+});
+</script>
+<?php endif; ?>

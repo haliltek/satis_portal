@@ -42,7 +42,17 @@ try {
         $prices[$row['stok_kodu']] = floatval($row['ozel_fiyat']);
     }
     
-    echo json_encode($prices);
+    // DEBUG: Hangi kodlar istendi, hangileri bulundu
+    $notFound = array_diff($codes, array_keys($prices));
+    
+    echo json_encode([
+        'prices' => $prices,
+        'debug' => [
+            'requested_codes' => $codes,
+            'found_count' => count($prices),
+            'not_found' => array_values($notFound)
+        ]
+    ]);
     
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);

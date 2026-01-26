@@ -112,6 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = [
             's_adi'        => $_POST['s_adi'] ?? '',
             's_arp_code'   => $_POST['s_arp_code'] ?? '',
+            'specode'      => $_POST['specode'] ?? '',
             'kategori'     => $_POST['kategori'] ?? '',
             'acikhesap'    => $_POST['acikhesap'] ?? '',
             's_adresi'     => $_POST['s_adresi'] ?? '',
@@ -202,8 +203,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
 <div class="row">
-    <div class="mb-3 col-md-6">
-        <label class="form-label">Özel Kod</label>
+    <div class="mb-3 col-md-4">
+        <label class="form-label">Specode (Şirket Özel Kodu)</label>
+        <input type="text" name="specode" class="form-control" value="<?= htmlspecialchars($company['specode'] ?? '') ?>" placeholder="Örn: yd, export">
+        <small class="text-muted">İhracat için 'yd' veya 'export' yazın</small>
+    </div>
+    <div class="mb-3 col-md-4">
+        <label class="form-label">Özel Kod (Logo)</label>
         <select name="s_auxil_code" class="form-select">
             <option value="">Seçiniz</option>
             <?php foreach ($specodes as $s): ?>
@@ -213,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endforeach; ?>
         </select>
     </div>
-    <div class="mb-3 col-md-6">
+    <div class="mb-3 col-md-4">
         <label class="form-label">Yetki Kodu</label>
         <select name="s_auth_code" class="form-select">
             <option value="">Seçiniz</option>

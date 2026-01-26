@@ -35,11 +35,12 @@ class MailService
      * @param string      $body       E-posta içeriği.
      * @param string|null $fromName   Gönderen adı (opsiyonel).
      * @param string|null $fromEmail  Gönderen e-posta adresi (opsiyonel).
+     * @param array       $attachments Ek dosyalar [['path' => 'dosya.pdf', 'name' => 'Teklif.pdf']]
      * @return bool                   Gönderim başarılı ise true, aksi halde false.
      */
     // services/MailService.php
 
-    public function sendMail($to, $toName, $subject, $bodyHtml, $fromName = 'Gemas Fiyat Güncelleme', $fromEmail = null)
+    public function sendMail($to, $toName, $subject, $bodyHtml, $fromName = 'Gemas Fiyat Güncelleme', $fromEmail = null, $attachments = [])
     {
         $mail = new PHPMailer(true);
         try {
@@ -66,6 +67,17 @@ class MailService
             $mail->Subject = $subject;      // artık UTF-8 olarak gönderilecek
             $mail->Body    = $bodyHtml;
             $mail->AltBody = strip_tags($bodyHtml);
+
+            // 4) Ek dosyalar
+            if (!empty($attachments)) {
+                foreach ($attachments as $attachment) {
+                    if (isset($attachment['path']) && file_exists($attachment['path'])) {
+                        $name = $attachment['name'] ?? basename($attachment['path']);
+                        $mail->addAttachment($attachment['path'], $name);
+                        $this->logger->log("MailService: Ek eklendi → {$name}");
+                    }
+                }
+            }
 
             $this->logger->log("MailService: Gönderiliyor → To: {$to}, Subject: {$subject}");
             return $mail->send();

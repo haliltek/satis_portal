@@ -64,8 +64,8 @@ try {
         }
     }
     
-    // Kampanyaları çek (Veritabanından)
-    $stmt = $pdo->prepare("SELECT * FROM custom_campaigns WHERE active = 1 AND customer_type = 'ana_bayi'");
+    // Kampanyaları çek (Veritabanından) - DÜZELTME: is_active kullan, customer_type yok
+    $stmt = $pdo->prepare("SELECT * FROM custom_campaigns WHERE is_active = 1");
     $stmt->execute();
     $dbCampaigns = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -81,7 +81,7 @@ try {
         if (isset($campaignRules[$kategori])) {
             $rule = $campaignRules[$kategori];
             $minQty = intval($rule['min_quantity']);
-            $minAmount = floatval($rule['min_amount']); // Tutar bazlı
+            $minAmount = floatval($rule['min_total_amount']); // DÜZELTME: min_amount -> min_total_amount
             
             // Tutar hesapla (Bu kategori için)
             $catTotalAmount = 0;
@@ -152,9 +152,14 @@ try {
     $customerId = $_POST['customer_id'] ?? 0;
     $customerName = $_POST['customer_name'] ?? '';
     
+    // DEBUG: Müşteri ve ödeme bilgilerini logla
+    error_log("DEBUG - Customer: $customerName, Payment: " . ($_POST['payment_method'] ?? 'EMPTY'));
+    
     // Ana Bayi mi?
-    $isMainDealer = (strpos($customerName, 'ERTEK') !== false || 
-                     strpos($customerName, 'Ana Bayi') !== false);
+    $isMainDealer = (stripos($customerName, 'ERTEK') !== false || 
+                     stripos($customerName, 'Ana Bayi') !== false);
+    
+    error_log("DEBUG - Is Main Dealer: " . ($isMainDealer ? 'YES' : 'NO'));
     
     if ($isMainDealer && count($campaigns) > 0) {
         // Tüm kampanyalı ürünleri topla
@@ -199,6 +204,26 @@ try {
                 'quantity' => count($allCampaignProducts),
                 'discount_rate' => 5,
                 'is_extra_discount' => true,
+                'total_value_eur' => $totalEuroValue
+            ];
+        }
+        
+        // Peşin Ödeme İskontosu Kontrolü (%10)
+        $paymentMethod = $_POST['payment_method'] ?? '';
+        $isCashPayment = (strpos($paymentMethod, 'PEŞİN') !== false || 
+                         strpos($paymentMethod, 'PEŞIN') !== false ||
+                         strpos($paymentMethod, 'Peşin') !== false);
+        
+        if ($isCashPayment && !empty($allCampaignProducts)) {
+            $campaigns[] = [
+                'name' => 'Ana Bayi Peşin İskontosu',
+                'condition' => "Peşin ödeme seçildi",
+                'products' => $allCampaignProducts,
+                'category' => 'Tüm Kategoriler',
+                'quantity' => count($allCampaignProducts),
+                'discount_rate' => 10,
+                'is_extra_discount' => true,
+                'is_cash_discount' => true,
                 'total_value_eur' => $totalEuroValue
             ];
         }

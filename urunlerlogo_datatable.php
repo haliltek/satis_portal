@@ -46,10 +46,12 @@ $columns = array(
     array('db' => 'stokkodu', 'dt' => 0),
     // 1 - Stok Adı
     array('db' => 'stokadi', 'dt' => 1),
-    // 2 - Yurtiçi Fiyatı
+    // 2 - Birim
+    array('db' => 'olcubirimi', 'dt' => 2),
+    // 3 - Yurtiçi Fiyatı
     array(
         'db' => 'fiyat',
-        'dt' => 2,
+        'dt' => 3,
         'formatter' => function ($d, $row) use ($user_type) {
             if ($user_type === 'Yönetici') {
                 return "<input type='number' step='0.01' class='form-control domestic-price-input' 
@@ -61,10 +63,10 @@ $columns = array(
             }
         }
     ),
-    // 3 - İhracat Fiyatı
+    // 4 - İhracat Fiyatı
     array(
         'db' => 'export_fiyat',
-        'dt' => 3,
+        'dt' => 4,
         'formatter' => function ($d, $row) use ($user_type) {
             if ($user_type === 'Yönetici') {
                 return "<input type='number' step='0.01' class='form-control export-price-input' 
@@ -76,10 +78,10 @@ $columns = array(
             }
         }
     ),
-    // 4 - Web/App Fiyatı
+    // 5 - Web/App Fiyatı
     array(
         'db' => 'web_fiyat',
-        'dt' => 4,
+        'dt' => 5,
         'formatter' => function ($d, $row) use ($user_type) {
             if ($user_type === 'Yönetici') {
                 return "<input type='number' step='0.01' class='form-control web-price-input' 
@@ -90,10 +92,10 @@ $columns = array(
             }
         }
     ),
-    // 5 - Maliyet (Masked for security)
+    // 6 - Maliyet (Masked for security)
     array(
         'db' => 'maliyet',
-        'dt' => 5,
+        'dt' => 6,
         'formatter' => function ($d, $row) use ($user_type) {
             if ($user_type === 'Yönetici') {
                 // Display masked value with eye icon to toggle
@@ -115,14 +117,14 @@ $columns = array(
             }
         }
     ),
-    // 6 - Döviz
-    array('db' => 'doviz', 'dt' => 6),
-    // 7 - Stok (Miktar)
-    array('db' => 'miktar', 'dt' => 7),
-    // 8 - Aktiflik
+    // 7 - Döviz
+    array('db' => 'doviz', 'dt' => 7),
+    // 8 - Stok (Miktar)
+    array('db' => 'miktar', 'dt' => 8),
+    // 9 - Aktiflik
     array(
         'db' => 'logo_active',
-        'dt' => 8,
+        'dt' => 9,
         'formatter' => function ($d, $row) use ($user_type) {
             $checked = ($d == 0) ? 'checked' : '';
             if ($user_type === 'Yönetici') {
@@ -135,10 +137,10 @@ $columns = array(
             }
         }
     ),
-    // 9 - Fiyat İşlemi: Güncelleme butonu + güncelleme tarih bilgileri
+    // 10 - Fiyat İşlemi: Güncelleme butonu + güncelleme tarih bilgileri
     array(
         'db' => 'urun_id',
-        'dt' => 9,
+        'dt' => 10,
         'formatter' => function ($d, $row) use ($user_type) {
             $domesticUpdate = !empty($row['mysql_guncelleme']) ? $row['mysql_guncelleme'] : '-';
             $exportUpdate   = !empty($row['export_mysql_guncelleme']) ? $row['export_mysql_guncelleme'] : '-';
@@ -163,10 +165,10 @@ $columns = array(
             }
         }
     ),
-    // 10 - Detay Güncelle Butonu
+    // 11 - Detay Güncelle Butonu
     array(
         'db' => 'stokkodu',
-        'dt' => 10,
+        'dt' => 11,
         'formatter' => function ($d, $row) {
             return "<button class='btn btn-secondary btn-sm detail-update-btn' 
                         data-stokkodu='{$d}'>
@@ -208,7 +210,7 @@ foreach ($result['data'] as &$row) {
     }
 
     $clean = [];
-    for ($i = 0; $i <= 10; $i++) {
+    for ($i = 0; $i <= 11; $i++) {
         $clean[] = $row[$i];
     }
     if (isset($row['DT_RowClass'])) {

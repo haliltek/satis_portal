@@ -1,0 +1,118 @@
+[2026-01-24 15:59:56] INFO: Onay işlemi başladı → Teklif ID: 59
+[2026-01-24 15:59:56] ERROR: Hata: Bu teklif zaten onaylanmış
+[2026-01-24 16:00:10] INFO: Onay işlemi başladı → Teklif ID: 59
+[2026-01-24 16:00:10] ERROR: Hata: Bu teklif zaten onaylanmış
+[2026-01-24 16:01:25] INFO: Onay işlemi başladı → Teklif ID: 63
+[2026-01-24 16:01:25] INFO: Durum güncellendi → Sipariş Onaylandı / Logoya Aktarım Bekliyor
+[2026-01-24 16:01:25] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 63
+[2026-01-24 16:01:25] ERROR: PdfService Exception: Table 'b2bgemascom_teklif.cariler' doesn't exist
+[2026-01-24 16:01:25] WARNING: PDF oluşturulamadı, ancak onay işlemi devam ediyor
+[2026-01-24 16:01:25] INFO: MailService: Gönderiliyor → To: fiyat@gemas.com.tr, Subject: Teklif Onaylandı - #943988783B77-2026
+[2026-01-24 16:01:27] INFO: Satışçıya mail gönderildi → fiyat@gemas.com.tr
+[2026-01-24 16:01:27] INFO: MailService: Gönderiliyor → To: haliltek@gemas.com.tr, Subject: Teklifiniz Onaylandı - #943988783B77-2026
+[2026-01-24 16:01:28] INFO: Müşteriye mail gönderildi → haliltek@gemas.com.tr
+[2026-01-25 08:33:57] INFO: Onay işlemi başladı → Teklif ID: 64
+[2026-01-25 08:33:57] INFO: Durum güncellendi → Sipariş Onaylandı / Logoya Aktarım Bekliyor
+[2026-01-25 08:33:58] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 64
+[2026-01-25 08:33:58] ERROR: PdfService Exception: Unknown column 'id' in 'where clause'
+[2026-01-25 08:33:58] WARNING: PDF oluşturulamadı, ancak onay işlemi devam ediyor
+[2026-01-25 08:33:58] INFO: MailService: Gönderiliyor → To: fiyat@gemas.com.tr, Subject: Teklif Onaylandı - #946306429B77-2026
+[2026-01-25 08:34:00] INFO: Satışçıya mail gönderildi → fiyat@gemas.com.tr
+[2026-01-25 08:34:00] INFO: MailService: Gönderiliyor → To: haliltek@gemas.com.tr, Subject: Teklifiniz Onaylandı - #946306429B77-2026
+[2026-01-25 08:34:02] INFO: Müşteriye mail gönderildi → haliltek@gemas.com.tr
+[2026-01-25 08:36:44] INFO: Onay işlemi başladı → Teklif ID: 65
+[2026-01-25 08:36:44] INFO: Durum güncellendi → Sipariş Onaylandı / Logoya Aktarım Bekliyor
+[2026-01-25 08:36:44] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 65
+[2026-01-25 08:36:44] ERROR: PdfService Exception: Unknown column 'id' in 'where clause'
+[2026-01-25 08:36:44] WARNING: PDF oluşturulamadı, ancak onay işlemi devam ediyor
+[2026-01-25 08:36:44] INFO: MailService: Gönderiliyor → To: fiyat@gemas.com.tr, Subject: Teklif Onaylandı - #806419010B77-2026
+[2026-01-25 08:36:45] INFO: Satışçıya mail gönderildi → fiyat@gemas.com.tr
+[2026-01-25 08:36:45] INFO: MailService: Gönderiliyor → To: haliltek@gemas.com.tr, Subject: Teklifiniz Onaylandı - #806419010B77-2026
+[2026-01-25 08:36:47] INFO: Müşteriye mail gönderildi → haliltek@gemas.com.tr
+[2026-01-25 08:42:40] INFO: Onay işlemi başladı → Teklif ID: 66
+[2026-01-25 08:42:40] INFO: Durum güncellendi → Sipariş Onaylandı / Logoya Aktarım Bekliyor
+[2026-01-25 08:42:40] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 66
+[2026-01-25 08:42:40] ERROR: PdfService Exception: Unknown column 'id' in 'where clause'
+[2026-01-25 08:42:40] WARNING: PDF oluşturulamadı, ancak onay işlemi devam ediyor
+[2026-01-25 08:42:40] INFO: MailService: Gönderiliyor → To: fiyat@gemas.com.tr, Subject: Teklif Onaylandı - #269028899B77-2026
+[2026-01-25 08:42:45] INFO: Satışçıya mail gönderildi → fiyat@gemas.com.tr
+[2026-01-25 08:42:45] INFO: MailService: Gönderiliyor → To: haliltek@gemas.com.tr, Subject: Teklifiniz Onaylandı - #269028899B77-2026
+[2026-01-25 08:42:47] INFO: Müşteriye mail gönderildi → haliltek@gemas.com.tr
+[2026-01-25 08:56:18] INFO: Onay işlemi başladı → Teklif ID: 67
+[2026-01-25 08:56:18] INFO: Durum güncellendi → Sipariş Onaylandı / Logoya Aktarım Bekliyor
+[2026-01-25 08:56:18] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 67
+[2026-01-25 08:56:18] INFO: PdfService: Veriler çekildi - 1 ürün
+[2026-01-25 08:56:18] INFO: PdfService: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_67_20260125085618.pdf
+[2026-01-25 08:56:18] INFO: PdfService: PDF başarıyla oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_67_20260125085618.pdf (72980 bytes)
+[2026-01-25 08:56:18] INFO: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_67_20260125085618.pdf
+[2026-01-25 08:56:18] INFO: MailService: Ek eklendi → Teklif_872296668B77-2026.pdf
+[2026-01-25 08:56:18] INFO: MailService: Gönderiliyor → To: fiyat@gemas.com.tr, Subject: Teklif Onaylandı - #872296668B77-2026
+[2026-01-25 08:56:20] INFO: Satışçıya mail gönderildi → fiyat@gemas.com.tr
+[2026-01-25 08:56:20] INFO: MailService: Ek eklendi → Teklif_872296668B77-2026.pdf
+[2026-01-25 08:56:20] INFO: MailService: Gönderiliyor → To: haliltek@gemas.com.tr, Subject: Teklifiniz Onaylandı - #872296668B77-2026
+[2026-01-25 08:56:21] INFO: Müşteriye mail gönderildi → haliltek@gemas.com.tr
+[2026-01-25 09:03:01] INFO: Onay işlemi başladı → Teklif ID: 69
+[2026-01-25 09:03:01] INFO: Durum güncellendi → Sipariş Onaylandı / Logoya Aktarım Bekliyor
+[2026-01-25 09:03:01] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 69
+[2026-01-25 09:03:01] INFO: PdfService: Veriler çekildi - 1 ürün
+[2026-01-25 09:03:01] INFO: PdfService: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_69_20260125090301.pdf
+[2026-01-25 09:03:01] INFO: PdfService: PDF başarıyla oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_69_20260125090301.pdf (72981 bytes)
+[2026-01-25 09:03:01] INFO: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_69_20260125090301.pdf
+[2026-01-25 09:03:01] INFO: MailService: Ek eklendi → Teklif_822782947B77-2026.pdf
+[2026-01-25 09:03:01] INFO: MailService: Gönderiliyor → To: fiyat@gemas.com.tr, Subject: Teklif Onaylandı - #822782947B77-2026
+[2026-01-25 09:03:06] INFO: Satışçıya mail gönderildi → fiyat@gemas.com.tr
+[2026-01-25 09:03:06] INFO: MailService: Ek eklendi → Teklif_822782947B77-2026.pdf
+[2026-01-25 09:03:06] INFO: MailService: Gönderiliyor → To: haliltek@gemas.com.tr, Subject: Teklifiniz Onaylandı - #822782947B77-2026
+[2026-01-25 09:03:08] INFO: Müşteriye mail gönderildi → haliltek@gemas.com.tr
+[2026-01-25 09:39:59] INFO: Onay işlemi başladı → Teklif ID: 70
+[2026-01-25 09:39:59] INFO: Durum güncellendi → Sipariş Onaylandı / Logoya Aktarım Bekliyor
+[2026-01-25 09:39:59] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 70
+[2026-01-25 09:39:59] INFO: PdfService: Veriler çekildi - 1 ürün
+[2026-01-25 09:39:59] INFO: PdfService: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_70_20260125093959.pdf
+[2026-01-25 09:39:59] INFO: PdfService: PDF başarıyla oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_70_20260125093959.pdf (81966 bytes)
+[2026-01-25 09:39:59] INFO: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_70_20260125093959.pdf
+[2026-01-25 09:39:59] INFO: MailService: Ek eklendi → Teklif_260328295B77-2026.pdf
+[2026-01-25 09:39:59] INFO: MailService: Gönderiliyor → To: fiyat@gemas.com.tr, Subject: Teklif Onaylandı - #260328295B77-2026
+[2026-01-25 09:40:02] INFO: Satışçıya mail gönderildi → fiyat@gemas.com.tr
+[2026-01-25 09:40:02] INFO: MailService: Ek eklendi → Teklif_260328295B77-2026.pdf
+[2026-01-25 09:40:02] INFO: MailService: Gönderiliyor → To: haliltek@gemas.com.tr, Subject: Teklifiniz Onaylandı - #260328295B77-2026
+[2026-01-25 09:40:04] INFO: Müşteriye mail gönderildi → haliltek@gemas.com.tr
+[2026-01-25 09:51:40] INFO: Onay işlemi başladı → Teklif ID: 71
+[2026-01-25 09:51:40] INFO: Durum güncellendi → Sipariş Onaylandı / Logoya Aktarım Bekliyor
+[2026-01-25 09:51:40] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 71
+[2026-01-25 09:51:40] INFO: PdfService: Veriler çekildi - 1 ürün
+[2026-01-25 09:51:40] INFO: PdfService: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_71_20260125095140.pdf
+[2026-01-25 09:51:40] INFO: PdfService: PDF başarıyla oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_71_20260125095140.pdf (73854 bytes)
+[2026-01-25 09:51:40] INFO: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_71_20260125095140.pdf
+[2026-01-25 09:51:40] INFO: MailService: Ek eklendi → Teklif_989761754B77-2026.pdf
+[2026-01-25 09:51:40] INFO: MailService: Gönderiliyor → To: fiyat@gemas.com.tr, Subject: Teklif Onaylandı - #989761754B77-2026
+[2026-01-25 09:51:42] INFO: Satışçıya mail gönderildi → fiyat@gemas.com.tr
+[2026-01-25 09:51:42] INFO: MailService: Ek eklendi → Teklif_989761754B77-2026.pdf
+[2026-01-25 09:51:42] INFO: MailService: Gönderiliyor → To: haliltek@gemas.com.tr, Subject: Teklifiniz Onaylandı - #989761754B77-2026
+[2026-01-25 09:51:44] INFO: Müşteriye mail gönderildi → haliltek@gemas.com.tr
+[2026-01-25 10:07:59] INFO: Onay işlemi başladı → Teklif ID: 72
+[2026-01-25 10:07:59] INFO: Durum güncellendi → Sipariş Onaylandı / Logoya Aktarım Bekliyor
+[2026-01-25 10:07:59] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 72
+[2026-01-25 10:07:59] INFO: PdfService: Veriler çekildi - 1 ürün
+[2026-01-25 10:07:59] INFO: PdfService: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_72_20260125100759.pdf
+[2026-01-25 10:07:59] INFO: PdfService: PDF başarıyla oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_72_20260125100759.pdf (72993 bytes)
+[2026-01-25 10:07:59] INFO: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_72_20260125100759.pdf
+[2026-01-25 10:07:59] INFO: MailService: Ek eklendi → Teklif_886445727B77-2026.pdf
+[2026-01-25 10:07:59] INFO: MailService: Gönderiliyor → To: fiyat@gemas.com.tr, Subject: Teklif Onaylandı - #886445727B77-2026
+[2026-01-25 10:08:01] INFO: Satışçıya mail gönderildi → fiyat@gemas.com.tr
+[2026-01-25 10:08:01] INFO: MailService: Ek eklendi → Teklif_886445727B77-2026.pdf
+[2026-01-25 10:08:01] INFO: MailService: Gönderiliyor → To: haliltek@gemas.com.tr, Subject: Teklifiniz Onaylandı - #886445727B77-2026
+[2026-01-25 10:08:02] INFO: Müşteriye mail gönderildi → haliltek@gemas.com.tr
+[2026-01-25 10:18:22] INFO: Onay işlemi başladı → Teklif ID: 73
+[2026-01-25 10:18:22] INFO: Durum güncellendi → Sipariş Onaylandı / Logoya Aktarım Bekliyor
+[2026-01-25 10:18:22] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 73
+[2026-01-25 10:18:22] INFO: PdfService: Veriler çekildi - 1 ürün
+[2026-01-25 10:18:22] INFO: PdfService: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_73_20260125101822.pdf
+[2026-01-25 10:18:22] INFO: PdfService: PDF başarıyla oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_73_20260125101822.pdf (72994 bytes)
+[2026-01-25 10:18:22] INFO: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_73_20260125101822.pdf
+[2026-01-25 10:18:22] INFO: MailService: Ek eklendi → Teklif_227444330B77-2026.pdf
+[2026-01-25 10:18:22] INFO: MailService: Gönderiliyor → To: fiyat@gemas.com.tr, Subject: Teklif Onaylandı - #227444330B77-2026
+[2026-01-25 10:18:24] INFO: Satışçıya mail gönderildi → fiyat@gemas.com.tr
+[2026-01-25 10:18:24] INFO: MailService: Ek eklendi → Teklif_227444330B77-2026.pdf
+[2026-01-25 10:18:24] INFO: MailService: Gönderiliyor → To: haliltek@gemas.com.tr, Subject: Teklifiniz Onaylandı - #227444330B77-2026
+[2026-01-25 10:18:26] INFO: Müşteriye mail gönderildi → haliltek@gemas.com.tr

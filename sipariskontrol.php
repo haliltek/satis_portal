@@ -44,6 +44,56 @@ if ($userType === 'Bayi') {
         $st->close();
     }
 }
+
+// Dil Belirleme Sistemi - Language Detection System
+$isForeignCustomer = false;
+$lang = 'tr'; // Default language
+
+// Manuel dil seçimi için GET parametresi
+if (isset($_GET['lang']) && in_array($_GET['lang'], ['tr', 'en'])) {
+    $lang = $_GET['lang'];
+    $isForeignCustomer = ($lang === 'en');
+}
+
+// Çeviri Fonksiyonu - Translation Function
+function t($key, $lang = 'tr') {
+    $translations = [
+        'proforma_invoice' => ['tr' => 'Proforma', 'en' => 'Proforma'],
+        'quote_number' => ['tr' => 'Proforma No', 'en' => 'PI'],
+        'date' => ['tr' => 'Tarih', 'en' => 'Date'],
+        'seller' => ['tr' => 'SATICI', 'en' => 'SELLER'],
+        'buyer' => ['tr' => 'ALICI', 'en' => 'BUYER'],
+        'item_no' => ['tr' => 'ÜRÜN NO', 'en' => 'ITEM Nº'],
+        'product_description' => ['tr' => 'ÜRÜN AÇIKLAMASI', 'en' => 'PRODUCT DESCRIPTION'],
+        'qty' => ['tr' => 'MİKTAR', 'en' => 'QTY'],
+        'unit_price' => ['tr' => 'BİRİM FİYAT', 'en' => 'UNIT PRICE'],
+        'total' => ['tr' => 'TOPLAM', 'en' => 'TOTAL'],
+        'terms_conditions' => ['tr' => 'Şartlar ve Koşullar', 'en' => 'Terms & Conditions'],
+        'payment_terms' => ['tr' => 'Ödeme Koşulları: Sevkiyat öncesi %50', 'en' => 'Payment Terms: 50% before shipment'],
+        'delivery_time' => ['tr' => 'Teslimat Süresi: Avans sonrası 6-8 hafta', 'en' => 'Delivery Time: 6-8 weeks after advance'],
+        'price_confirmation' => ['tr' => 'Fiyat Onayı', 'en' => 'Price Confirmation'],
+        'shipping_method' => ['tr' => 'Nakliye Yöntemi: Deniz Yolu, FOB', 'en' => 'Shipping Method: Sea Freight, FOB'],
+        'subtotal' => ['tr' => 'ARA TOPLAM', 'en' => 'SUBTOTAL'],
+        'shipping' => ['tr' => 'NAKLİYE (FOB)', 'en' => 'SHIPPING (FOB)'],
+        'total_amount' => ['tr' => 'GENEL TOPLAM', 'en' => 'TOTAL AMOUNT'],
+        'bank_details' => ['tr' => 'Ödeme İçin Banka Bilgileri', 'en' => 'Bank Details for Payment'],
+        'account_name' => ['tr' => 'Hesap Adı', 'en' => 'Account Name'],
+        'bank' => ['tr' => 'Banka', 'en' => 'Bank'],
+        'account_number' => ['tr' => 'Hesap Numarası', 'en' => 'Account Number'],
+        'iban' => ['tr' => 'IBAN', 'en' => 'IBAN'],
+        'swift' => ['tr' => 'SWIFT', 'en' => 'SWIFT'],
+        'authorized_signature' => ['tr' => 'YETKİLİ İMZA', 'en' => 'AUTHORIZED SIGNATURE'],
+        'sales_manager' => ['tr' => 'SATIŞ MÜDÜRÜ', 'en' => 'SALES MANAGER'],
+        'thank_you' => ['tr' => 'İşiniz için teşekkür ederiz', 'en' => 'Thank you for your business'],
+        'phone' => ['tr' => 'Telefon', 'en' => 'Phone'],
+        'email' => ['tr' => 'E-posta', 'en' => 'Email'],
+        'website' => ['tr' => 'Website', 'en' => 'Website'],
+        'address' => ['tr' => 'Adres', 'en' => 'Address']
+    ];
+    
+    return $translations[$key][$lang] ?? $key;
+}
+
 // Kullanıcı ve işlem bilgilerini alıyoruz
 $gelenid = xss(addslashes($_SESSION['yonetici_id']));
 $personelsorgu = mysqli_query($db, "SELECT * FROM personel WHERE personel_id='$gelenid'");
@@ -93,18 +143,242 @@ $turum = 'urun';
 
     <script src="//cdn.ckeditor.com/4.18.0/full/ckeditor.js"></script>
     <link href="assets/css/custom.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #0d6efd;
             --secondary-color: #6c757d;
             --light-bg: #f8f9fa;
             --border-color: #e9ecef;
+            --brand-color: #f6b900;
         }
         body {
-            background-color: #f4f6f8;
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            color: #333;
+            background-color: #f9fafb;
+            font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #1f2937;
+            line-height: 1.6;
         }
+        
+        /* Modern Brand Bar */
+        .brand-bar {
+            height: 8px;
+            background: linear-gradient(90deg, #f6b900 0%, #ffd700 100%);
+            box-shadow: 0 2px 4px rgba(246, 185, 0, 0.2);
+        }
+        
+        /* Modern Header */
+        .modern-header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1.5rem 0;
+        }
+        
+        .modern-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo-box {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #f6b900 0%, #ffd700 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #1f2937;
+            box-shadow: 0 4px 6px rgba(246, 185, 0, 0.2);
+        }
+        
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #9ca3af;
+            letter-spacing: 2px;
+        }
+        
+        .action-buttons-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .icon-btn {
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .icon-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .btn-whatsapp { background: #25D366; color: white; }
+        .btn-print { background: #3b82f6; color: white; }
+        .btn-download { background: #f59e0b; color: white; }
+        
+        /* Exchange Rates Widget */
+        .exchange-widget {
+            background: linear-gradient(135deg, #eff6ff 0%, #d1fae5 100%);
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+        }
+        
+        .exchange-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .exchange-rates {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .exchange-label {
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+        
+        .rate-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .rate-currency {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .rate-usd { color: #2563eb; }
+        .rate-eur { color: #059669; }
+        
+        .rate-value {
+            color: #374151;
+            font-size: 0.9rem;
+        }
+        
+        .rate-note {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+        
+        /* Toolbar */
+        .modern-toolbar {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+        }
+        
+        .toolbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .toolbar-left {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .toolbar-right {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .toolbar-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .toolbar-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        
+        .btn-green {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-green:hover {
+            background: #059669;
+        }
+        
+        .btn-red {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .btn-red:hover {
+            background: #dc2626;
+        }
+        
+        .btn-outline-light {
+            background: white;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+        
+        .btn-outline-light:hover {
+            background: #f9fafb;
+        }
+        
+        .btn-brand {
+            background: linear-gradient(135deg, #f6b900 0%, #ffd700 100%);
+            color: #1f2937;
+            font-weight: 700;
+        }
+        
+        .btn-brand:hover {
+            box-shadow: 0 6px 12px rgba(246, 185, 0, 0.4);
+        }
+        
+        /* Existing styles */
         .card {
             border: none;
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
@@ -137,12 +411,25 @@ $turum = 'urun';
             color: #333;
         }
         .table thead th {
-            background-color: var(--light-bg);
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
             border-bottom: 2px solid var(--border-color);
-            color: #495057;
+            color: #374151;
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 0.85rem;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+        }
+        .table tbody tr {
+            transition: background 0.2s ease;
+        }
+        .table tbody tr:hover {
+            background: #f9fafb;
+        }
+        .table tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+        .table tbody tr:nth-child(even):hover {
+            background: #f3f4f6;
         }
         .total-card {
             background-color: #fff;
@@ -159,10 +446,13 @@ $turum = 'urun';
             border-bottom: none;
         }
         .total-row.grand-total {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: #fff;
-            font-size: 1.1rem;
-            font-weight: bold;
+            font-size: 1.125rem;
+            font-weight: 700;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
         }
         .btn-action {
             padding: 0.6rem 1.5rem;
@@ -173,6 +463,130 @@ $turum = 'urun';
         .btn-action:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        /* Print Styles - Professional Invoice Appearance */
+        @media print {
+            body {
+                background: white;
+                margin: 0;
+                padding: 0;
+            }
+            
+            /* Hide toolbar and info banner */
+            .modern-toolbar,
+            .action-buttons-group,
+            .toolbar-btn,
+            .info-message-banner {
+                display: none !important;
+            }
+            
+            /* Header styling */
+            .invoice-header {
+                border-bottom: 2px solid #000;
+                padding: 1rem 0;
+            }
+            
+            .brand-bar {
+                height: 4px;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            .header-title {
+                color: #000 !important;
+                font-size: 2rem;
+            }
+            
+            .logo-box {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            /* Table styling for print */
+            table {
+                page-break-inside: auto;
+            }
+            
+            thead {
+                display: table-header-group; /* Repeat header on each page */
+            }
+            
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+            
+            tbody tr {
+                page-break-inside: avoid; /* Prevent row splitting */
+            }
+            
+            .table thead th {
+                background: #2563eb !important;
+                color: white !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+                border: 1px solid #1e40af;
+            }
+            
+            .table tbody td {
+                border: 1px solid #ddd;
+            }
+            
+            /* Prevent orphaned rows */
+            tbody tr:nth-last-child(-n+3) {
+                page-break-after: avoid;
+            }
+            
+            /* Total section - keep together */
+            .total-section,
+            .totals-box,
+            .total-row {
+                page-break-inside: avoid;
+            }
+            
+            .total-row.grand-total {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            /* Footer - keep together */
+            .invoice-footer,
+            .bank-details,
+            .signature-section {
+                page-break-inside: avoid;
+            }
+            
+            /* Page settings */
+            @page {
+                margin: 1.5cm 1cm;
+                size: A4;
+            }
+            
+            /* First page specific */
+            @page :first {
+                margin-top: 1cm;
+            }
+            
+            /* Avoid breaking SELLER/BUYER section */
+            .invoice-header,
+            [style*="SELLER / BUYER"] {
+                page-break-after: avoid;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .modern-header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .toolbar-content {
+                flex-direction: column;
+            }
+            .header-title {
+                font-size: 1.5rem;
+            }
         }
     </style>
     <script>
@@ -188,6 +602,52 @@ $turum = 'urun';
 </head>
 
 <body>
+    <!-- Professional Invoice Header -->
+    <div class="invoice-header" style="max-width: 900px; margin: 0 auto; padding: 2rem 2rem 1rem; display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #e5e7eb;">
+        <!-- Left Side: Logo and Company Info -->
+        <div class="header-left">
+            <img src="logogemas.png" alt="GEMAS" style="width: 80px; height: auto; margin-bottom: 0.5rem;">
+            <div style="color: #2563eb; font-size: 0.875rem; font-weight: 500;">gemas.com.tr</div>
+        </div>
+        
+        <!-- Right Side: Title and Meta -->
+        <div class="header-right" style="text-align: right;">
+            <!-- Blue Stripes -->
+            <div style="display: flex; gap: 4px; justify-content: flex-end; margin-bottom: 0.5rem;">
+                <div style="width: 30px; height: 4px; background: #2563eb;"></div>
+                <div style="width: 20px; height: 4px; background: #60a5fa;"></div>
+                <div style="width: 15px; height: 4px; background: #93c5fd;"></div>
+                <div style="width: 10px; height: 4px; background: #bfdbfe;"></div>
+            </div>
+            
+            <!-- Title -->
+            <h1 style="font-size: 1.75rem; font-weight: 600; color: #2563eb; margin: 0; line-height: 1;">
+                <?php echo t('proforma_invoice', $lang); ?>
+            </h1>
+            
+            <!-- Meta Information -->
+            <div style="margin-top: 0.75rem; font-size: 0.875rem; color: #6b7280;">
+                <div style="margin-bottom: 0.25rem;">
+                    <strong><?php echo t('quote_number', $lang); ?>:</strong> 
+                    <?php echo $_POST["teklifno"] ?? 'PI-' . date('Ymd'); ?>
+                </div>
+                <div style="margin-bottom: 0.25rem;">
+                    <strong><?php echo t('date', $lang); ?>:</strong> 
+                    <?php echo $lang === 'en' ? date('F d, Y') : date('d.m.Y'); ?>
+                </div>
+                <div style="margin-bottom: 0.25rem;">
+                    <strong><?php echo $lang === 'en' ? 'Document No' : 'Belge No'; ?>:</strong> 
+                    <?php echo htmlspecialchars($_POST["belgeno"] ?? '-'); ?>
+                </div>
+                <div>
+                    <strong><?php echo $lang === 'en' ? 'Prepared by' : 'Hazırlayan'; ?>:</strong> 
+                    <?php echo $yoneticisorgula["adsoyad"] ?? 'N/A'; ?> 
+                    <small style="color: #999;">(<?php echo $userType === 'Bayi' ? 'Bayi' : 'Gemas'; ?>)</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- ========== MAIN CONTENT ========== -->
     <main id="content" role="main">
         <div class="main-container">
@@ -616,142 +1076,131 @@ $turum = 'urun';
                                 <input type="hidden" name="hazirlayanid" value="<?php echo htmlspecialchars($_POST['hazirlayanid'] ?? ''); ?>">
                                 <input type="hidden" name="genel_iskonto" value="<?php echo isset($_POST['genel_iskonto']) ? htmlspecialchars($_POST['genel_iskonto']) : '0'; ?>">
                                 <input type="hidden" name="belgeno" value="<?php echo htmlspecialchars($_POST['belgeno'] ?? ''); ?>">
-                                <!-- Başlık ve Butonlar -->
-                                <div class="d-flex justify-content-between align-items-center mb-3" style="padding: 16px; background: #0d6efd; border-radius: 8px;">
-                                    <div>
-                                        <h5 class="mb-0" style="color: white; font-size: 16px; font-weight: 600;">
-                                            Teklifi müşteri göndermeden önceki kontrol sayfasıdır.
-                                        </h5>
-                                        <small style="color: rgba(255,255,255,0.8); font-size: 11px;"><?php echo date('d.m.Y H:i'); ?></small>
-                                    </div>
-                                    <div>
-                                        <!-- Geri Dön butonu -->
-                                        <?php
-                                        $referrerUrl = $_SESSION['form_referrer_url'] ?? '';
-                                        // Referrer URL yoksa veya geçersizse, t parametresine göre varsayılan sayfayı belirle
-                                        if (empty($referrerUrl)) {
-                                            $referrerUrl = ($tu === 'siparis') ? 'siparis-olustur.php' : 'teklif-olustur.php';
-                                        }
+                                <input type="hidden" name="paydefref" value="<?php echo htmlspecialchars($_POST['paydefref'] ?? ''); ?>">
+                                <input type="hidden" name="payment_code" value="<?php echo htmlspecialchars($_POST['odemeturu'] ?? ''); ?>">
+                                <input type="hidden" name="payplan_def" value="<?php echo htmlspecialchars($_POST['payplan_def'] ?? ''); ?>">
+                                
+                                <!-- Toolbar with Print Buttons and Control Buttons -->
+                                <div class="modern-toolbar" style="background: white; border-bottom: 1px solid #e5e7eb; padding: 1rem 0;">
+                                    <div style="max-width: 900px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center;">
+                                        <!-- Left: Print Buttons -->
+                                        <div style="display: flex; gap: 0.75rem;">
+                                            <button type="button" onclick="window.print()" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border: none; border-radius: 6px; font-size: 0.875rem; font-weight: 500; cursor: pointer;">
+                                                🖨️ <?php echo $lang === 'en' ? 'Print' : 'Yazdır'; ?>
+                                            </button>
+                                            <button type="button" onclick="alert('PDF özelliği yakında!')" style="padding: 0.5rem 1rem; background: #f59e0b; color: white; border: none; border-radius: 6px; font-size: 0.875rem; font-weight: 500; cursor: pointer;">
+                                                📥 PDF
+                                            </button>
+                                        </div>
                                         
-                                        // URL'den query string'i temizle ve sadece base URL'i al
-                                        $parsedUrl = parse_url($referrerUrl);
-                                        $backUrl = $parsedUrl['path'] ?? (($tu === 'siparis') ? 'siparis-olustur.php' : 'teklif-olustur.php');
-                                        
-                                        // Modal'ı açık tutmak için parametre ekle
-                                        $backUrl .= (strpos($backUrl, '?') !== false ? '&' : '?') . 'modal=open';
-                                        ?>
-                                        <a href="<?php echo htmlspecialchars($backUrl); ?>" class="btn btn-outline-light btn-sm" style="margin-right: 8px; font-size: 12px;">
-                                            ← Geri
-                                        </a>
-                                        <!-- Onayla butonu -->
-                                        <button type="submit" name="kayitet" class="btn btn-light btn-sm" style="font-size: 12px; font-weight: 600; color: #0d6efd;">
-                                            ✓ Onayla ve Kaydet
-                                        </button>
+                                        <!-- Right: Control Buttons -->
+                                        <div style="display: flex; gap: 0.75rem;">
+                                            <?php
+                                            $referrerUrl = $_SESSION['form_referrer_url'] ?? '';
+                                            if (empty($referrerUrl)) {
+                                                $referrerUrl = ($tu === 'siparis') ? 'siparis-olustur.php' : 'teklif-olustur.php';
+                                            }
+                                            $parsedUrl = parse_url($referrerUrl);
+                                            $backUrl = $parsedUrl['path'] ?? (($tu === 'siparis') ? 'siparis-olustur.php' : 'teklif-olustur.php');
+                                            $backUrl .= (strpos($backUrl, '?') !== false ? '&' : '?') . 'modal=open';
+                                            ?>
+                                            <a href="<?php echo htmlspecialchars($backUrl); ?>" style="padding: 0.5rem 1rem; background: white; color: #374151; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.875rem; font-weight: 500; text-decoration: none;">
+                                                ← <?php echo $lang === 'en' ? 'Back' : 'Geri'; ?>
+                                            </a>
+                                            <button type="submit" name="kayitet" style="padding: 0.5rem 1.5rem; background: linear-gradient(135deg, #f6b900 0%, #ffd700 100%); color: #1f2937; border: none; border-radius: 6px; font-size: 0.875rem; font-weight: 700; cursor: pointer;">
+                                                ✓ <?php echo $lang === 'en' ? 'Approve & Save' : 'Onayla ve Kaydet'; ?>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <!-- Modern Grid Layout for Company Info -->
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <div class="card h-100">
-                                            <div class="card-header py-2" style="background: #f8f9fa;">
-                                                <h6 class="mb-0" style="font-size: 13px; font-weight: 600;">🏢 Şirket Bilgileri</h6>
+                                
+                                <!-- SELLER / BUYER Section -->
+                                <div style="max-width: 900px; margin: 1.5rem auto; padding: 0 2rem;">
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem;">
+                                        <!-- SELLER -->
+                                        <div>
+                                            <h3 style="font-size: 0.75rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem; text-transform: uppercase;">
+                                                <?php echo t('seller', $lang); ?>:
+                                            </h3>
+                                            <div style="font-size: 0.75rem; color: #4b5563; line-height: 1.6;">
+                                                <div style="font-weight: 600; color: #1f2937;">Gemaş Genel Müh. Mek. San. Tic. A.Ş.</div>
+                                                <div>İTOB Organize Sanayi Bölgesi</div>
+                                                <div>10001 Sokak No:28</div>
+                                                <div>Tekeli-Menderes / İZMİR</div>
+                                                <div><?php echo t('phone', $lang); ?>: 0 232 469 43 53</div>
+                                                <div><?php echo t('website', $lang); ?>: www.gemas.com.tr</div>
                                             </div>
-                                            <div class="card-body py-2 px-3">
-                                                <?php
-                                                $musteris = $_POST["musteri"] ?? ($dealerCompany['sirket_id'] ?? '');
-                                                $musteriTelefon = ''; // Varsayılan değer
-                                                if ($musteris == '786') {
-                                                    $kimehazir = $_POST["sirketbilgi"] ?? '';
-                                                    $musteriTelefon = $_POST["projeadi"] ?? ''; // Cari telefon alanından al
-                                                } elseif ($musteris !== '') {
-                                                    $musteribag = mysqli_query($db, "SELECT * FROM sirket WHERE sirket_id='$musteris'");
-                                                    $musteribilgi = mysqli_fetch_array($musteribag);
+                                        </div>
+                                        
+                                        <!-- BUYER -->
+                                        <div>
+                                            <h3 style="font-size: 0.75rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem; text-transform: uppercase;">
+                                                <?php echo t('buyer', $lang); ?>:
+                                            </h3>
+                                            <?php
+                                            $musteris = $_POST["musteri"] ?? ($dealerCompany['sirket_id'] ?? '');
+                                            $musteriTelefon = '';
+                                            $musteriEmail = '';
+                                            $musteriAdres = '';
+                                            
+                                            if ($musteris == '786') {
+                                                $kimehazir = $_POST["sirketbilgi"] ?? '';
+                                                $musteriTelefon = $_POST["projeadi"] ?? '';
+                                            } elseif ($musteris !== '') {
+                                                $musteribag = mysqli_query($db, "SELECT * FROM sirket WHERE sirket_id='$musteris'");
+                                                if ($musteribilgi = mysqli_fetch_array($musteribag)) {
                                                     $kimehazir = $musteribilgi["s_adi"] ?? '';
                                                     $musteriTelefon = $musteribilgi["s_telefonu"] ?? '';
-                                                } else {
-                                                    $kimehazir = '';
-                                                    $musteriTelefon = '';
+                                                    $musteriAdres = $musteribilgi["s_adres"] ?? '';
                                                 }
-                                                ?>
-                                                <input type="hidden" name="musteriid" value="<?php echo $musteris; ?>">
-                                                <input type="hidden" name="sirket_id" value="<?php echo $musteris; ?>">
-                                                <input type="hidden" name="musteriadi" value="<?php echo $kimehazir; ?>">
-                                                <input type="hidden" name="hazirlayanid" value="<?php echo $yoneticisorgula["yonetici_id"]; ?>">
-                                                <input type="hidden" name="kime" value="<?php echo ($musteris == '786') ? "Carisiz Müşteriye" : "Müşteriye"; ?>">
-                                                <input type="hidden" name="projeadi" value="<?php echo $_POST["projeadi"] ? $_POST["projeadi"] : $musteriTelefon; ?>">
-                                                <input type="hidden" name="tekliftarihi" value="<?php echo date("Y-m-d H:i"); ?>">
-                                                <input type="hidden" name="teklifkodu" value="<?php echo $_POST["teklifno"] ?? ''; ?>">
-
-                                                <div style="font-size: 11px; margin-bottom: 6px;">
-                                                    <span style="color: #666; font-weight: 500;">Şirket:</span>
-                                                    <span style="font-weight: 600; color: #000;"><?php echo $kimehazir; ?></span>
-                                                </div>
-                                                <div style="font-size: 11px; margin-bottom: 6px;">
-                                                    <span style="color: #666; font-weight: 500;">Telefon:</span>
-                                                    <span><?php echo $_POST["projeadi"] ? $_POST["projeadi"] : $musteriTelefon; ?></span>
-                                                </div>
-                                                <div style="font-size: 11px;">
-                                                    <span style="color: #666; font-weight: 500;">E-Posta:</span>
-                                                    <span style="font-size: 10px;">
-                                                        <?php
-                                                        if ($musteris !== '786' && $musteris !== '') {
-                                                            $q1 = mysqli_query($db, "SELECT yetkili FROM sirket WHERE sirket_id='" . mysqli_real_escape_string($db, $musteris) . "'");
-                                                            if ($row1 = mysqli_fetch_assoc($q1)) {
-                                                                $yetkiliId = $row1["yetkili"] ?? "";
-                                                                if ($yetkiliId !== "") {
-                                                                    $q2 = mysqli_query($db, "SELECT p_eposta FROM personel WHERE personel_id='" . mysqli_real_escape_string($db, $yetkiliId) . "'");
-                                                                    if (($row2 = mysqli_fetch_assoc($q2)) !== null && !empty($row2['p_eposta'])) {
-                                                                        echo htmlspecialchars($row2['p_eposta']);
-                                                                    } else {
-                                                                        echo '<span style="color: #999;">-</span>';
-                                                                    }
-                                                                } else {
-                                                                    echo '<span style="color: #999;">-</span>';
-                                                                }
-                                                            } else {
-                                                                echo '<span style="color: #999;">-</span>';
-                                                            }
-                                                        } else {
-                                                            echo '<span style="color: #999;">-</span>';
-                                                        }
-                                                        ?>
-                                                    </span>
-                                                </div>
+                                            } else {
+                                                $kimehazir = '';
+                                            }
+                                            ?>
+                                            <div style="font-size: 0.75rem; color: #4b5563; line-height: 1.6;">
+                                                <div style="font-weight: 600; color: #1f2937;"><?php echo $kimehazir; ?></div>
+                                                <?php if ($musteriAdres): ?>
+                                                <div><?php echo $musteriAdres; ?></div>
+                                                <?php endif; ?>
+                                                <?php if ($musteriTelefon): ?>
+                                                <div><?php echo t('phone', $lang); ?>: <?php echo $musteriTelefon; ?></div>
+                                                <?php endif; ?>
+                                                <?php if ($musteriEmail): ?>
+                                                <div><?php echo t('email', $lang); ?>: <?php echo $musteriEmail; ?></div>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="card h-100">
-                                            <div class="card-header py-2" style="background: #f8f9fa;">
-                                                <h6 class="mb-0" style="font-size: 13px; font-weight: 600;">📋 İşlem Detayları</h6>
-                                            </div>
-                                            <div class="card-body py-2 px-3">
-                                                <div style="font-size: 11px; margin-bottom: 6px;">
-                                                    <span style="color: #666; font-weight: 500;">Hazırlayan:</span>
-                                                    <span style="font-weight: 600;"><?php echo $yoneticisorgula["adsoyad"]; ?></span>
-                                                    <small style="color: #999; font-size: 10px;">(<?php echo $userType === 'Bayi' ? 'Bayi' : 'Gemas'; ?>)</small>
-                                                </div>
-                                                <div style="font-size: 11px; margin-bottom: 6px;">
-                                                    <span style="color: #666; font-weight: 500;">Ödeme:</span>
-                                                    <span><?php echo htmlspecialchars($_POST['odemeturu'] ?? '-'); ?></span>
-                                                </div>
-                                                <div style="font-size: 11px; margin-bottom: 6px;">
-                                                    <span style="color: #666; font-weight: 500;">Tarih:</span>
-                                                    <span><?php echo date("d.m.Y H:i"); ?></span>
-                                                </div>
-                                                <div style="font-size: 11px;">
-                                                    <span style="color: #666; font-weight: 500;"><?php echo $islemi; ?> No:</span>
-                                                    <span style="font-weight: 700; color: #dc3545;"><?php echo $_POST["teklifno"] ?? ''; ?></span>
-                                                </div>
-                                                <div style="font-size: 11px;">
-                                                    <span style="color: #666; font-weight: 500;">Belge No:</span>
-                                                    <span style="font-weight: 600;"><?php echo htmlspecialchars($_POST["belgeno"] ?? '-'); ?></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!-- Separator Line -->
+                                    <div style="border-bottom: 1px solid #e5e7eb; margin-bottom: 1.5rem;"></div>
                                 </div>
+
+                                <!-- Hidden Inputs for Form Submission -->
+                                <?php
+                                $musteris = $_POST["musteri"] ?? ($dealerCompany['sirket_id'] ?? '');
+                                $musteriTelefon = '';
+                                if ($musteris == '786') {
+                                    $kimehazir = $_POST["sirketbilgi"] ?? '';
+                                    $musteriTelefon = $_POST["projeadi"] ?? '';
+                                } elseif ($musteris !== '') {
+                                    $musteribag = mysqli_query($db, "SELECT * FROM sirket WHERE sirket_id='$musteris'");
+                                    $musteribilgi = mysqli_fetch_array($musteribag);
+                                    $kimehazir = $musteribilgi["s_adi"] ?? '';
+                                    $musteriTelefon = $musteribilgi["s_telefonu"] ?? '';
+                                } else {
+                                    $kimehazir = '';
+                                    $musteriTelefon = '';
+                                }
+                                ?>
+                                <input type="hidden" name="musteriid" value="<?php echo $musteris; ?>">
+                                <input type="hidden" name="sirket_id" value="<?php echo $musteris; ?>">
+                                <input type="hidden" name="musteriadi" value="<?php echo $kimehazir; ?>">
+                                <input type="hidden" name="hazirlayanid" value="<?php echo $yoneticisorgula["yonetici_id"]; ?>">
+                                <input type="hidden" name="kime" value="<?php echo ($musteris == '786') ? "Carisiz Müşteriye" : "Müşteriye"; ?>">
+                                <input type="hidden" name="projeadi" value="<?php echo $_POST["projeadi"] ? $_POST["projeadi"] : $musteriTelefon; ?>">
+                                <input type="hidden" name="tekliftarihi" value="<?php echo date("Y-m-d H:i"); ?>">
+                                <input type="hidden" name="teklifkodu" value="<?php echo $_POST["teklifno"] ?? ''; ?>">
+
                                 <br><br>
                                 <p>
                                     <?php
@@ -795,27 +1244,22 @@ $turum = 'urun';
                                     <?php echo $closing; ?>
                                 </p>
 
-                                <!-- ERP Kompakt Ürün Tablosu -->
-                                <div class="card">
-                                    <div class="card-header py-2" style="background: #f8f9fa;">
-                                        <h6 class="mb-0" style="font-size: 13px; font-weight: 600;">🛒 Ürün Listesi</h6>
-                                    </div>
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table mb-0" style="font-size: 11px;">
-                                                <thead style="background: #f8f9fa;">
-                                                    <tr>
-                                                        <th style="padding: 4px 8px; font-size: 10px; font-weight: 600;">Stok Kodu</th>
-                                                        <th style="padding: 4px 8px; font-size: 10px; font-weight: 600;">Stok Adı</th>
-                                                        <th style="padding: 4px 8px; text-align: center; font-size: 10px; font-weight: 600;">Miktar</th>
-                                                        <th style="padding: 4px 8px; text-align: center; font-size: 10px; font-weight: 600;">Birim</th>
-                                                        <th style="padding: 4px 8px; text-align: right; font-size: 10px; font-weight: 600;">Liste Fiyatı</th>
-                                                        <th style="padding: 4px 8px; text-align: center; font-size: 10px; font-weight: 600;">İskonto</th>
-                                                        <th style="padding: 4px 8px; text-align: right; font-size: 10px; font-weight: 600;">Net Fiyat</th>
-                                                        <th style="padding: 4px 8px; text-align: right; font-size: 10px; font-weight: 600;">Tutar</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                                <!-- Professional Product Table -->
+                                <div style="max-width: 900px; margin: 2rem auto; padding: 0 2rem;">
+                                    <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+                                        <thead>
+                                            <tr style="background: #2563eb; color: white;">
+                                                <th style="padding: 0.75rem 0.5rem; text-align: left; font-weight: 600; font-size: 0.75rem;">Stok Kodu</th>
+                                                <th style="padding: 0.75rem 0.5rem; text-align: left; font-weight: 600; font-size: 0.75rem;">Stok Adı</th>
+                                                <th style="padding: 0.75rem 0.5rem; text-align: center; font-weight: 600; font-size: 0.75rem;">Miktar</th>
+                                                <th style="padding: 0.75rem 0.5rem; text-align: center; font-weight: 600; font-size: 0.75rem;">Birim</th>
+                                                <th style="padding: 0.75rem 0.5rem; text-align: right; font-weight: 600; font-size: 0.75rem;">Liste Fiyatı</th>
+                                                <th style="padding: 0.75rem 0.5rem; text-align: center; font-weight: 600; font-size: 0.75rem;">İskonto</th>
+                                                <th style="padding: 0.75rem 0.5rem; text-align: right; font-weight: 600; font-size: 0.75rem;">Net Fiyat</th>
+                                                <th style="padding: 0.75rem 0.5rem; text-align: right; font-weight: 600; font-size: 0.75rem;">Tutar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                                     <?php
                                                     $dovizkurbag = mysqli_query($db, "SELECT * FROM dovizkuru");
                                                     $dovizkuru = mysqli_fetch_array($dovizkurbag);
@@ -836,8 +1280,8 @@ $turum = 'urun';
                                                         while ($fihrist = mysqli_fetch_array($teklifbag)) {
                                                             $fihid = $fihrist["urun_id"];
                                                             $camp = null; // Initialize variable
-                                                            $miktarsim = $miktarisiList[$fihid] ?? 0;
-                                                            $fiyatsi   = convert($fiyatsiList[$fihid] ?? 0);
+                                                            $miktarsim = floatval($miktarisiList[$fihid] ?? 0);
+                                                            $fiyatsi   = floatval(convert($fiyatsiList[$fihid] ?? 0));
                                                             
                                                             // İskonto Parsing ve Hesaplama
                                                             $rawDiscount = $iskontosiList[$fihid] ?? '0';
@@ -890,9 +1334,9 @@ $turum = 'urun';
                                                             $aiskontom = $efektifBirimIskonto; // DB kaydı için toplam oran
                                                             
                                                             $aolcubirimi = $birimList[$fihid] ?? '';
-                                                            $brut_tutar = $miktarsim * $fiyatsi; 
-                                                            $aiskyaz   = $fiyatsi * $netFiyatCarpan; // Net Birim Fiyat
-                                                            $son_tutar = $miktarsim * $aiskyaz;
+                                                            $brut_tutar = floatval($miktarsim) * floatval($fiyatsi); 
+                                                            $aiskyaz   = floatval($fiyatsi) * floatval($netFiyatCarpan); // Net Birim Fiyat
+                                                            $son_tutar = floatval($miktarsim) * floatval($aiskyaz);
 
                                                             // Brüt toplamları hesapla
                                                             switch ($fihrist['doviz']) {
@@ -929,7 +1373,7 @@ $turum = 'urun';
                                                                 <td style="padding: 4px; text-align: center; font-size: 11px; vertical-align: middle;"><?php echo $miktarsim; ?></td>
                                                                 <td style="padding: 4px; text-align: center; font-size: 10px; color: #666; vertical-align: middle;"><?php echo $birimList[$fihid] ?? '-' ; ?></td>
                                                                 <td style="padding: 4px; text-align: right; font-size: 11px; vertical-align: middle;">
-                                                                    <?php echo number_format($fiyatsi, 2, ',', '.') . ' ' . $dovizSembol; ?>
+                                                                    <?php echo number_format(floatval($fiyatsi), 2, ',', '.') . ' ' . $dovizSembol; ?>
                                                                 </td>
                                                                 
                                                                 <!-- İSKONTO GÖSTERİMİ (LOGO ERP STYLE) -->

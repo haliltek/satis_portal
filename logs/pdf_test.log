@@ -1,0 +1,26 @@
+[2026-01-25 08:47:01] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 66
+[2026-01-25 08:47:01] ERROR: PdfService Exception: Unknown column 'id' in 'where clause'
+[2026-01-25 08:50:31] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 66
+[2026-01-25 08:50:31] INFO: PdfService: Veriler çekildi - 1 ürün
+[2026-01-25 08:50:31] INFO: PdfService: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_66_20260125085031.pdf
+[2026-01-25 08:50:31] INFO: PdfService: PDF başarıyla oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_66_20260125085031.pdf (72983 bytes)
+[2026-01-25 09:00:59] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 66
+[2026-01-25 09:00:59] INFO: PdfService: Veriler çekildi - 1 ürün
+[2026-01-25 09:00:59] INFO: PdfService: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_66_20260125090059.pdf
+[2026-01-25 09:00:59] INFO: PdfService: PDF başarıyla oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_66_20260125090059.pdf (72979 bytes)
+[2026-01-25 09:37:48] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 66
+[2026-01-25 09:37:48] INFO: PdfService: Veriler çekildi - 1 ürün
+[2026-01-25 09:37:48] INFO: PdfService: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_66_20260125093748.pdf
+[2026-01-25 09:37:48] INFO: PdfService: PDF başarıyla oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_66_20260125093748.pdf (81966 bytes)
+[2026-01-25 09:46:15] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 66
+[2026-01-25 09:46:15] INFO: PdfService: Veriler çekildi - 1 ürün
+[2026-01-25 09:46:15] INFO: PdfService: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_66_20260125094615.pdf
+[2026-01-25 09:46:15] INFO: PdfService: PDF başarıyla oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_66_20260125094615.pdf (81965 bytes)
+[2026-01-25 09:48:43] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 66
+[2026-01-25 09:48:43] INFO: PdfService: Veriler çekildi - 1 ürün
+[2026-01-25 09:48:43] INFO: PdfService: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_66_20260125094843.pdf
+[2026-01-25 09:48:43] INFO: PdfService: PDF başarıyla oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_66_20260125094843.pdf (73852 bytes)
+[2026-01-25 10:01:04] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 66
+[2026-01-25 10:01:04] INFO: PdfService: Veriler çekildi - 1 ürün
+[2026-01-25 10:01:04] INFO: PdfService: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_66_20260125100104.pdf
+[2026-01-25 10:01:04] INFO: PdfService: PDF başarıyla oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_66_20260125100104.pdf (72795 bytes)
