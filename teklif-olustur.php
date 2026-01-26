@@ -118,11 +118,6 @@ if ($selected_sozlesme_id > 0) {
 }
 
 // Hata raporlaması ayarları
-// Kullanıcı tipi kontrolü - Marj bilgilerini sadece yöneticilere göster
-// Sadece 'Yönetici' user_type'a sahip kullanıcılar görebilir
-$userType = $_SESSION['user_type'] ?? '';
-$isAdmin = (stripos($userType, 'Yönetici') !== false || stripos($userType, 'Admin') !== false);
-
 ini_set('log_errors', 1);
 ini_set('error_log', '/Applications/XAMPP/xamppfiles/htdocs/b2b-project/error.log');
 ini_set('display_errors', 0);
@@ -1302,6 +1297,21 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                 </button>
                                             </div>
                                         </div>
+                                        <style>
+                                            <?php if ($userType !== 'Yönetici'): ?>
+                                            /* Satış Marjı sütununu sadece Yönetici kullanıcıları görebilir */
+                                            #cartTable th:nth-child(11),
+                                            #cartTable td:nth-child(11),
+                                            #cartTableFooter tr td:nth-child(8) {
+                                                visibility: hidden;
+                                                width: 0 !important;
+                                                padding: 0 !important;
+                                                border: none !important;
+                                                font-size: 0;
+                                                line-height: 0;
+                                            }
+                                            <?php endif; ?>
+                                        </style>
                                         <div class="table-responsive mt-3">
                                             <table id="cartTable" class="table table-bordered" style="table-layout: fixed; width: 100%;">
                                                 <thead>
@@ -1316,9 +1326,7 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                         <th style="width: 120px;">İskontolu Toplam</th>
                                                         <th style="width: 60px;">Birim</th>
                                                         <th style="width: 30px;">KDV (%)</th>
-                                                        <?php if ($isAdmin): ?>
                                                         <th style="width: 75px;">Satış Marjı (%)</th>
-                                                        <?php endif; ?>
                                                         <th style="width: 60px;">İşlem</th>
                                                     </tr>
                                                 </thead>
@@ -1478,7 +1486,6 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                             <td style="text-align: center; padding: 2px 4px; font-size: 13px; line-height: 28px;">
                                                                 20
                                                             </td>
-                                                            <?php if ($isAdmin): ?>
                                                             <td style="padding: 0;">
                                                                 <input type="text"
                                                                     name="satis_marji[<?= $row['urun_id'] ?>]"
@@ -1486,7 +1493,6 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                                     class="form-control satis-marji-input"
                                                                     style="text-align: right; width: 100%; border: 1px solid #ccc; padding: 2px 4px; height: 28px; font-size: 13px;">
                                                             </td>
-                                                            <?php endif; ?>
 
                                                             <td style="text-align: center; padding: 2px;">
                                                                 <button type="button" class="btn btn-danger btn-sm remove-btn" data-id="<?= $row['urun_id'] ?>" style="padding: 0 6px; font-size: 11px; height: 24px; line-height: 22px;">Kaldır</button>
@@ -1503,7 +1509,6 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                         </td>
                                                         <td colspan="4"></td>
                                                     </tr>
-                                                    <?php if ($isAdmin): ?>
                                                     <tr style="background: #ffffff; font-weight: bold; font-size: 11px;">
                                                         <td colspan="7" style="text-align: right; padding: 4px 4px;">ORTALAMA MARJ (%):</td>
                                                         <td style="text-align: right; padding: 4px 4px;">
@@ -1511,7 +1516,6 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                         </td>
                                                         <td colspan="4"></td>
                                                     </tr>
-                                                    <?php endif; ?>
                                                     <tr style="background: #f8f9fa;">
                                                         <td colspan="7" style="text-align: right; padding: 8px 4px; vertical-align: middle;">GENEL İSKONTO (%):</td>
                                                         <td style="text-align: right; padding: 4px;">
@@ -2698,9 +2702,9 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                     '<td style="text-align: right; padding: 2px 4px;"><span class="total-price-display" style="font-size: 13px; line-height: 28px;">'+total.toFixed(2).replace('.',',')+' '+(function(){var d=rowData[5]||'';if(d==='EUR')return '€';else if(d==='USD')return '$';else if(d==='TL')return '₺';return d;})()+'</span></td>'+
                     '<td style="white-space: nowrap; text-align: center; padding: 2px 4px; font-size: 13px; line-height: 28px;">'+rowData[3]+'<input type="hidden" name="olcubirimi['+id+']" value="'+rowData[3]+'"></td>'+
                     '<td style="text-align: center; padding: 2px 4px; font-size: 13px; line-height: 28px;">20</td>'+
-                    (isAdmin ? '<td style="padding: 0;">'+
+                    '<td style="padding: 0;">'+
                         '<input type="text" name="satis_marji['+id+']" value="0,00" class="form-control satis-marji-input" style="text-align: right; width: 100%; border: 1px solid #ccc; padding: 2px 4px; height: 28px; font-size: 13px;">'+
-                    '</td>' : '')+
+                    '</td>'+
                     '<td style="text-align: center; padding: 2px;"><button type="button" class="btn btn-danger btn-sm remove-btn" data-id="'+id+'" style="padding: 0 6px; font-size: 11px; height: 24px; line-height: 22px;">Kaldır</button></td>'+
                     '</tr>'
                 );
@@ -2834,7 +2838,6 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
             var discountDisabled = <?= json_encode($discountDisabled) ?>;
             var campaignRates = <?= json_encode($campaignRatesMap) ?>;
             var musteriKampanyaIskonto = 0; // ERTEK/Ana Bayi fallback oranı
-            var isAdmin = <?= json_encode($isAdmin) ?>; // Yönetici kontrolü
 
             function updateMusteriKampanyaIskonto() {
                 const $musteriSelect = $('#musteri');
