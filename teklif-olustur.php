@@ -119,7 +119,9 @@ if ($selected_sozlesme_id > 0) {
 
 // Hata raporlaması ayarları
 // Kullanıcı tipi kontrolü - Marj bilgilerini sadece yöneticilere göster
-$isAdmin = !isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'Bayi';
+// Sadece 'Yönetici' user_type'a sahip kullanıcılar görebilir
+$userType = $_SESSION['user_type'] ?? '';
+$isAdmin = (stripos($userType, 'Yönetici') !== false || stripos($userType, 'Admin') !== false);
 
 ini_set('log_errors', 1);
 ini_set('error_log', '/Applications/XAMPP/xamppfiles/htdocs/b2b-project/error.log');
