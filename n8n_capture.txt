@@ -75,3 +75,4 @@ API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","m
 API Resp: {"status":"sent","http_code":404,"n8n_response":{"code":404,"message":"The requested webhook \"POST teklifOnay\" is not registered.","hint":"The workflow must be active for a production URL to run successfully. You can activate the workflow using the toggle in the top-right of the editor. Note that unlike test URL calls, production URL calls aren't shown on the canvas (only in the executions list)"}}
 API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"No changes made (ID might be same or Offer not found)"}}
 API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"Message ID saved successfully"}}
+API Resp: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"No changes made (ID might be same or Offer not found)"}}

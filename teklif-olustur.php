@@ -1301,14 +1301,17 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                             <?php if ($userType !== 'Yönetici'): ?>
                                             /* Satış Marjı sütununu sadece Yönetici kullanıcıları görebilir */
                                             #cartTable th:nth-child(11),
-                                            #cartTable td:nth-child(11),
-                                            #cartTableFooter tr td:nth-child(8) {
+                                            #cartTable td:nth-child(11) {
                                                 visibility: hidden;
                                                 width: 0 !important;
                                                 padding: 0 !important;
                                                 border: none !important;
                                                 font-size: 0;
                                                 line-height: 0;
+                                            }
+                                            /* ORTALAMA MARJ satırını gizle */
+                                            #cartTableFooter tr:nth-child(2) {
+                                                display: none !important;
                                             }
                                             <?php endif; ?>
                                         </style>
@@ -5573,7 +5576,9 @@ $(document).ready(function() {
 }
 
 <?php if ($userType !== 'Yönetici'): ?>
-/* Özel Fiyat Çalışması modalında Marj % sütununu gizle */
+/* Özel Fiyat Çalışması modalında Maliyet ve Marj % sütunlarını gizle */
+#ozelFiyatTable th:nth-child(4),
+#ozelFiyatTable td:nth-child(4),
 #ozelFiyatTable th:nth-child(7),
 #ozelFiyatTable td:nth-child(7) {
     visibility: hidden;
@@ -5684,3 +5689,6 @@ $(document).ready(function() {
 });
 </script>
 <?php endif; ?>
+
+<!-- Kampanya Sistemi -->
+<script src="campaign_logic.js"></script>
