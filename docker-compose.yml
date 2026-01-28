@@ -1,39 +1,11 @@
 services:
-  # Traefik Reverse Proxy
-  traefik:
-    image: traefik:v2.10
-    container_name: gemas_portal_traefik
-    restart: always
-    command:
-      - "--api.dashboard=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
-      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
-      - "--certificatesresolvers.letsencrypt.acme.email=admin@gemas.com.tr"
-      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - traefik_letsencrypt:/letsencrypt
-    networks:
-      - gemas_portal_network
-    labels:
-      - "traefik.enable=true"
-      # Dashboard
-      - "traefik.http.routers.traefik.rule=Host(`traefik.gemas.local`)"
-      - "traefik.http.routers.traefik.service=api@internal"
-      - "traefik.http.routers.traefik.entrypoints=web"
-
   # PHP Application
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: gemas_portal_app
-    restart: always
+    restart: unless-stopped
     volumes:
       - .:/var/www/html
       - uploads:/var/www/html/uploads
@@ -53,28 +25,24 @@ services:
       redis:
         condition: service_started
     networks:
+      - coolify
       - gemas_portal_network
     labels:
       - "traefik.enable=true"
-      # HTTP Router
-      - "traefik.http.routers.gemas.rule=Host(`satis.gemas.com.tr`) || Host(`localhost`)"
-      - "traefik.http.routers.gemas.entrypoints=web"
-      # HTTPS Router
-      - "traefik.http.routers.gemas-secure.rule=Host(`satis.gemas.com.tr`)"
-      - "traefik.http.routers.gemas-secure.entrypoints=websecure"
-      - "traefik.http.routers.gemas-secure.tls=true"
-      - "traefik.http.routers.gemas-secure.tls.certresolver=letsencrypt"
-      # Middleware: Redirect HTTP to HTTPS
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.routers.gemas.middlewares=redirect-to-https"
-      # Service
-      - "traefik.http.services.gemas.loadbalancer.server.port=80"
+      - "traefik.http.routers.gemas_portal.entrypoints=http"
+      - "traefik.http.services.gemas_portal.loadbalancer.server.port=80"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost/healthcheck.php" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   # MySQL Database
   db:
     image: mariadb:10.11
     container_name: gemas_portal_db
-    restart: always
+    restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-root}
       - MYSQL_DATABASE=${DB_NAME:-gemas_portal}
@@ -101,7 +69,7 @@ services:
   redis:
     image: redis:7-alpine
     container_name: gemas_portal_redis
-    restart: always
+    restart: unless-stopped
     command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
     volumes:
       - redis_data:/data
@@ -113,12 +81,30 @@ services:
       timeout: 3s
       retries: 3
 
+  # phpMyAdmin (Optional - for database management)
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: gemas_portal_phpmyadmin
+    restart: unless-stopped
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=${DB_PASSWORD:-root}
+    depends_on:
+      - db
+    networks:
+      - coolify
+      - gemas_portal_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gemas_phpmyadmin.entrypoints=http"
+      - "traefik.http.services.gemas_phpmyadmin.loadbalancer.server.port=80"
+
 volumes:
   mysql_data:
     driver: local
   redis_data:
-    driver: local
-  traefik_letsencrypt:
     driver: local
   uploads:
     driver: local
@@ -126,5 +112,7 @@ volumes:
     driver: local
 
 networks:
+  coolify:
+    external: true
   gemas_portal_network:
     driver: bridge
