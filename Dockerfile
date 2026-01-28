@@ -42,17 +42,19 @@ COPY php.ini $PHP_INI_DIR/conf.d/custom.ini
 # Set working directory
 WORKDIR /var/www/html
 
-# 7. Copy Application Code
+# 7. Copy entrypoint script first
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# 8. Copy Application Code
 # Note: In development/Coolify, this might be overridden by volume mounts or git pulls
 COPY . /var/www/html
 
-# 8. Permissions
+# 9. Permissions
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html \
-    && sed -i 's/\r$//' entrypoint.sh \
-    && chmod +x entrypoint.sh
+    && chmod -R 755 /var/www/html
 
-# 9. Health Check
+# 10. Health Check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD curl -f http://localhost/healthcheck.php || exit 1
 
@@ -60,4 +62,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
 EXPOSE 80
 
 # Start Apache
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
