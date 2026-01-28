@@ -1,0 +1,33 @@
+--- Grouping ---
+Product 021714 (BOBİN SARGI FİLTRELER) -> Mapped: FİLTRELER
+Product 02213027 (ÇOK YOLLU VANA) -> Mapped: ÇOK YOLLU VANA
+Product 023411K (FİLTRE MEDYA) -> Mapped: FİLTRE MEDYA
+Product 0312221 (MERDİVEN) -> Mapped: MERDİVEN
+Product 051170E (LEDLER) -> Mapped: LEDLER
+
+--- Checking ---
+Checking Group: FİLTRELER (Qty: 10)
+  Rule Qty: 10 | Rule Amount: 10000
+  User Qty: 10 | User Amount: 4360
+  QtyCond: PASS | AmtCond: FAIL
+  RESULT: NOT ELIGIBLE
+Checking Group: ÇOK YOLLU VANA (Qty: 100)
+  Rule Qty: 100 | Rule Amount: 10000
+  User Qty: 100 | User Amount: 7000
+  QtyCond: PASS | AmtCond: FAIL
+  RESULT: NOT ELIGIBLE
+Checking Group: FİLTRE MEDYA (Qty: 5000)
+  Rule Qty: 5000 | Rule Amount: 20000
+  User Qty: 5000 | User Amount: 3800
+  QtyCond: PASS | AmtCond: FAIL
+  RESULT: NOT ELIGIBLE
+Checking Group: MERDİVEN (Qty: 50)
+  Rule Qty: 10 | Rule Amount: 5000
+  User Qty: 50 | User Amount: 9450
+  QtyCond: PASS | AmtCond: PASS
+  RESULT: ELIGIBLE
+Checking Group: LEDLER (Qty: 100)
+  Rule Qty: 0 | Rule Amount: 1500
+  User Qty: 100 | User Amount: 6800
+  QtyCond: PASS | AmtCond: PASS
+  RESULT: ELIGIBLE

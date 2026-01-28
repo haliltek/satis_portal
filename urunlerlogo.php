@@ -469,9 +469,39 @@ if (isset($_POST['action']) && $_POST['action'] === 'deleteMail') {
         }
 
         /* Buton hover’unda parlaklaşma efekti */
+        /* Buton hover’unda parlaklaşma efekti */
         #toggleDetailsBtn:hover {
             filter: brightness(1.1);
         }
+        
+        /* Compact Table Styles */
+        table.dataTable tbody td, table.dataTable thead th {
+            padding: 4px 6px !important;
+            font-size: 13px !important;
+            vertical-align: middle !important;
+        }
+        .form-control-sm, .form-control {
+            font-size: 12px !important;
+            padding: 2px 4px !important;
+            height: auto !important;
+        }
+        /* Input widths inside table */
+        .domestic-price-input, .export-price-input, .web-price-input, .cost-price-input {
+            width: 80px !important;
+            text-align: right;
+        }
+        /* Buttons compact */
+        .btn-sm {
+            padding: 2px 6px !important;
+            font-size: 11px !important;
+        }
+        /* Badge formatting */
+        .update-info .badge {
+            font-size: 10px !important;
+            padding: 2px 4px !important;
+        }
+        /* Prevent wrapping for code */
+        .kd-col { white-space: nowrap; }
     </style>
 </head>
 
@@ -532,6 +562,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'deleteMail') {
                                                 <tr>
                                                     <th>Stok Kodu</th>
                                                     <th>Stok Adı</th>
+                                                    <th>Birim</th>
                                                     <th>Yurtiçi Fiyatı</th>
                                                     <th>İhracat Fiyatı</th>
                                                     <th>Web/App Fiyatı</th>
@@ -547,6 +578,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'deleteMail') {
                                                 <tr>
                                                     <th>Stok Kodu</th>
                                                     <th>Stok Adı</th>
+                                                    <th>Birim</th>
                                                     <th>Yurtiçi Fiyatı</th>
                                                     <th>İhracat Fiyatı</th>
                                                     <th>Web/App Fiyatı</th>
@@ -1288,11 +1320,15 @@ if (isset($_POST['action']) && $_POST['action'] === 'deleteMail') {
                 "processing": true,
                 "ajax": ajaxUrl,
                 "pageLength": 10,
+                "scrollX": true,
+                "autoWidth": false,
                 "language": {
                     "url": "assets/libs/datatables.net/i18n/tr.json"
                 },
                 "columnDefs": [
-                    { "targets": 1, "width": "30%", "className": "stock-col" }
+                    { "targets": 1, "width": "250px", "className": "stock-col" },
+                    { "targets": [2, 7, 8], "width": "50px", "className": "text-center" }, // Birim, Döviz, Stok
+                    { "targets": 9, "width": "40px", "className": "text-center" }  // Aktif
                 ]
             });
 

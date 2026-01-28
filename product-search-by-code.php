@@ -41,7 +41,7 @@ if (!$db) {
 
 // Stok kodu ile ürün ara (case-insensitive ve trim ile)
 // Pazar tipine göre fiyat alanını seç
-$sql = "SELECT urun_id, stokkodu, stokadi, fiyat, export_fiyat, doviz, olcubirimi, LOGICALREF 
+$sql = "SELECT urun_id, stokkodu, stokadi, fiyat, export_fiyat, maliyet, doviz, olcubirimi, LOGICALREF 
         FROM urunler 
         WHERE TRIM(UPPER(stokkodu)) = TRIM(UPPER(?))
         LIMIT 1";
@@ -137,6 +137,7 @@ $response = [
         'currency_icon' => $dovizIkon,
         'unit' => $product['olcubirimi'],
         'logicalref' => $product['LOGICALREF'],
+        'maliyet' => $product['maliyet'],
         'has_pending_request' => $hasPendingRequest,
         'pending_request_date' => $pendingRequestDate
     ]

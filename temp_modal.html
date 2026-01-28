@@ -1,0 +1,39 @@
+<!-- Product Search Modal -->
+<div class="modal fade" id="productSearchModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title text-white"><i class="fa fa-search me-2"></i>Ürün Arama</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="modalSearchInput"
+                        placeholder="Stok kodu veya ürün adı ile arayın...">
+                    <button class="btn btn-primary" type="button" id="modalSearchBtn">
+                        <i class="fa fa-search me-1"></i> Ara
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover table-sm">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Stok Kodu</th>
+                                <th>Ürün Adı</th>
+                                <th>Birim</th>
+                                <th style="width: 80px;">İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modalSearchResults">
+                            <tr>
+                                <td colspan="4" class="text-center text-muted py-3">
+                                    Arama yapmak için yukarıdaki alanı kullanın.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

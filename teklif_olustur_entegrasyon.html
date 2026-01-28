@@ -1,0 +1,226 @@
+<!-- ÖZEL FİYAT ÇALIŞMASI ENTEGRASYONU -->
+<!-- Bu kodu teklif-olustur.php sayfasındaki müşteri seçim alanının yakınına ekleyin -->
+
+<!-- 1. BUTON - Müşteri seçim alanının yanına eklenecek -->
+<button type="button" class="btn btn-warning btn-sm" id="specialPricingBtn" style="display:none;">
+    <i class="fa fa-money-bill-wave me-1"></i> Özel Fiyat Çalışması Var
+</button>
+
+<!-- 2. MODAL - Sayfanın sonuna, diğer modallerin yanına eklenecek -->
+<div class="modal fade" id="specialPricingModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title">
+                    <i class="fa fa-money-bill-wave me-2"></i>
+                    Özel Fiyat Çalışması: <span id="specialPricingTitle"></span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info">
+                    <i class="fa fa-info-circle me-2"></i>
+                    Bu müşteri için özel fiyat çalışması tanımlanmış. Aşağıdaki ürünlerin fiyatları sepete
+                    uygulanacaktır.
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Stok Kodu</th>
+                                <th>Ürün Adı</th>
+                                <th>Birim</th>
+                                <th>Liste Fiyatı</th>
+                                <th>Özel Fiyat</th>
+                                <th>İskonto</th>
+                                <th>Döviz</th>
+                            </tr>
+                        </thead>
+                        <tbody id="specialPricingTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-success" id="applySpecialPricingBtn">
+                    <i class="fa fa-check me-1"></i> Sepete Uygula
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 3. JAVASCRIPT - Sayfanın script bölümüne eklenecek -->
+<script>
+    $(document).ready(function () {
+        let currentSpecialPricing = null;
+
+        // Müşteri seçildiğinde özel fiyat kontrolü
+        // NOT: $('#musteri') yerine sayfanızdaki müşteri select elementinin ID'sini kullanın
+        $('#musteri').on('select2:select change', function (e) {
+            const $option = $(this).find('option:selected');
+            const customerText = $option.text();
+
+            // Cari kodunu al (format: "120.01.E04 - Firma Adı")
+            const customerCode = customerText.split(' - ')[0].trim();
+
+            if (!customerCode) {
+                $('#specialPricingBtn').hide();
+                return;
+            }
+
+            // Özel fiyat çalışması var mı kontrol et
+            $.ajax({
+                url: 'api/check_special_pricing.php',
+                method: 'GET',
+                data: { customer_code: customerCode },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.has_pricing) {
+                        $('#specialPricingBtn').show();
+                        $('#specialPricingBtn').data('work-id', response.work_id);
+                        $('#specialPricingBtn').data('work-title', response.baslik);
+                    } else {
+                        $('#specialPricingBtn').hide();
+                    }
+                },
+                error: function () {
+                    $('#specialPricingBtn').hide();
+                }
+            });
+        });
+
+        // Özel fiyat butonuna tıklandığında
+        $('#specialPricingBtn').on('click', function () {
+            const workId = $(this).data('work-id');
+            const workTitle = $(this).data('work-title');
+
+            if (!workId) return;
+
+            // Çalışma bilgilerini getir
+            $.ajax({
+                url: 'api/get_special_pricing.php',
+                method: 'GET',
+                data: { work_id: workId },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        currentSpecialPricing = response;
+                        displaySpecialPricing(response);
+                        $('#specialPricingModal').modal('show');
+                    } else {
+                        alert('Özel fiyat bilgileri alınamadı: ' + (response.message || ''));
+                    }
+                },
+                error: function () {
+                    alert('Özel fiyat bilgileri alınırken hata oluştu');
+                }
+            });
+        });
+
+        // Özel fiyatları modal'da göster
+        function displaySpecialPricing(data) {
+            $('#specialPricingTitle').text(data.work.baslik || '');
+
+            const $tbody = $('#specialPricingTableBody');
+            $tbody.empty();
+
+            if (!data.products || data.products.length === 0) {
+                $tbody.append('<tr><td colspan="7" class="text-center">Ürün bulunamadı</td></tr>');
+                return;
+            }
+
+            data.products.forEach(function (product) {
+                const listPrice = parseFloat(product.liste_fiyati) || 0;
+                const specialPrice = parseFloat(product.ozel_fiyat) || 0;
+                const discount = parseFloat(product.iskonto_orani) || 0;
+
+                const row = `
+                <tr>
+                    <td>${product.stok_kodu}</td>
+                    <td>${product.urun_adi}</td>
+                    <td>${product.birim}</td>
+                    <td class="text-end">${listPrice.toFixed(2).replace('.', ',')} ${product.doviz}</td>
+                    <td class="text-end"><strong class="text-success">${specialPrice.toFixed(2).replace('.', ',')} ${product.doviz}</strong></td>
+                    <td class="text-end">${discount.toFixed(2).replace('.', ',')}%</td>
+                    <td class="text-center">${product.doviz}</td>
+                </tr>
+            `;
+                $tbody.append(row);
+            });
+        }
+
+        // Sepete uygula butonu
+        $('#applySpecialPricingBtn').on('click', function () {
+            if (!currentSpecialPricing || !currentSpecialPricing.products) {
+                alert('Uygulanacak fiyat bulunamadı');
+                return;
+            }
+
+            let appliedCount = 0;
+
+            currentSpecialPricing.products.forEach(function (product) {
+                // Sepette bu ürünü bul
+                // NOT: Bu kısım sayfanızdaki sepet yapısına göre özelleştirilmeli
+                const $productRow = findProductInCart(product.stok_kodu);
+
+                if ($productRow && $productRow.length > 0) {
+                    // Ürün sepette var, fiyatını güncelle
+                    updateProductPrice($productRow, product.ozel_fiyat, product.doviz);
+                    appliedCount++;
+                } else {
+                    // Ürün sepette yok, ekle (opsiyonel)
+                    // addProductToCart(product);
+                    // appliedCount++;
+                }
+            });
+
+            $('#specialPricingModal').modal('hide');
+
+            if (appliedCount > 0) {
+                alert(appliedCount + ' ürüne özel fiyat uygulandı');
+                // Toplamları güncelle
+                if (typeof updateTotalAmount === 'function') {
+                    updateTotalAmount();
+                }
+            } else {
+                alert('Sepette uygulanacak ürün bulunamadı. Önce ürünleri sepete ekleyin.');
+            }
+        });
+
+        // Yardımcı fonksiyonlar - Sayfanıza göre özelleştirin
+        function findProductInCart(stockCode) {
+            // Sepetteki ürünleri tarayan kod
+            // Örnek: return $('.editable-product-code[value="' + stockCode + '"]').closest('tr');
+            return $('.editable-product-code').filter(function () {
+                return $(this).val() === stockCode;
+            }).closest('tr');
+        }
+
+        function updateProductPrice($row, specialPrice, currency) {
+            // Ürün fiyatını güncelleyen kod
+            // Sayfanızdaki fiyat input alanlarını bulup güncelleyin
+            const $priceInput = $row.find('input[name^="fiyatsi"]');
+            if ($priceInput.length) {
+                $priceInput.val(parseFloat(specialPrice).toFixed(2).replace('.', ','));
+                $priceInput.trigger('change');
+            }
+
+            // İskonto alanını sıfırla (özel fiyat zaten iskontolu)
+            const $discountInput = $row.find('.discount-input');
+            if ($discountInput.length) {
+                $discountInput.val('0,00');
+                $discountInput.attr('readonly', true);
+                $discountInput.attr('placeholder', 'Özel Fiyat');
+                $discountInput.trigger('change');
+            }
+
+            // Satırı vurgula
+            $row.addClass('table-success');
+            setTimeout(function () {
+                $row.removeClass('table-success');
+            }, 2000);
+        }
+    });
+</script>

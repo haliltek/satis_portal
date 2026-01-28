@@ -17,6 +17,9 @@ if (!isset($db) || !$db) {
 // services/RevisionService.php içindeki RevisionService sınıfını yükle
 require_once __DIR__ . '/services/OrderProcessService.php';
 require_once __DIR__ . '/services/RevisionService.php';
+require_once __DIR__ . '/services/LoggerService.php';
+require_once __DIR__ . '/services/MailService.php';
+require_once __DIR__ . '/services/PdfService.php';
 
 use Services\RevisionService;
 use Services\OrderProcessService;
@@ -102,6 +105,15 @@ if (!$teklifBilgi) {
 }
 $sirketArp = isset($teklifBilgi["sirket_arp_code"]) ? trim($teklifBilgi["sirket_arp_code"]) : '';
 
+// Müşteri email adresini URL parametresinden al (mail gönderimi için kullanılacak)
+$customerEmail = isset($_GET['email']) ? trim($_GET['email']) : '';
+$customerName = isset($_GET['name']) ? trim($_GET['name']) : '';
+
+// Eğer URL'de yoksa, teklif bilgisinden almayı dene
+if (empty($customerEmail) && !empty($teklifBilgi['musteriadi'])) {
+    $customerName = trim($teklifBilgi['musteriadi']);
+}
+
 // Müşterinin yurtdışı olup olmadığını kontrol et
 $isForeignCustomer = false;
 if (!empty($sirketArp)) {
@@ -118,6 +130,8 @@ if (!empty($sirketArp)) {
     }
 }
 // URL parametresi ile dil zorlama
+// PDF oluşturma modu kontrolü
+$isPdfMode = isset($_GET['pdf']) && $_GET['pdf'] == '1';
 if (isset($_GET['lang']) && $_GET['lang'] === 'en') {
     $isForeignCustomer = true;
 }
@@ -181,7 +195,7 @@ $isEditable = in_array($currentDurum, [
 // $dbManager kontrolü - fonk.php'de tanımlı olmalı
 if (!isset($dbManager)) {
     // Eğer $dbManager yoksa, config'den oluştur
-    if (!class_exists('Proje\DatabaseManager')) {
+    if (!class_exists('Proje\\DatabaseManager')) {
         require_once __DIR__ . '/classes/DatabaseManager.php';
     }
     $config = require __DIR__ . '/config/config.php';
@@ -232,6 +246,188 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['durum'])) {
                 $notlar,
                 $teklifBilgi['sirket_arp_code']
             )) {
+                // Onay durumunda PDF oluştur ve mail gönder
+                if ($seciliDurum === 'Onayla') {
+                    try {
+                        // Logger başlat
+                        $logger = new LoggerService(__DIR__ . '/logs/offer_approval.log');
+                        $logger->log("Onay işlemi - PDF ve mail gönderimi başlıyor → Teklif ID: {$teklifId}");
+                        
+                        // PDF oluştur (logo base64 olarak gömülü)
+                        $pdfService = new PdfService($logger);
+                        $pdfPath = $pdfService->createOfferPdf($teklifId, $db);
+                        
+                        if ($pdfPath && file_exists($pdfPath)) {
+                            $logger->log("PDF oluşturuldu → {$pdfPath}");
+                            
+                            // Mail ayarlarını al
+                            $mailHost = getenv('MAIL_HOST') ?: 'mail.gemas.com.tr';
+                            $mailPort = getenv('MAIL_PORT') ?: 465;
+                            $mailSecure = getenv('MAIL_SECURE') ?: 'ssl';
+                            $mailUsername = getenv('MAIL_USERNAME') ?: 'satis@gemas.com.tr';
+                            $mailPassword = getenv('MAIL_PASSWORD') ?: 'Halil12621262.';
+                            
+                            $mailService = new MailService($mailHost, $mailPort, $mailSecure, $mailUsername, $mailPassword, $logger);
+                            
+                            // Müşteriye mail gönder
+                            if (!empty($customerEmail)) {
+                                // Müşteri ülke bilgisini al (İngilizce mail için)
+                                // Çoklu kriter ile yurtdışı müşteri tespiti
+                                $isForeign = false;
+                                $customerData = null;
+                                
+                                if (!empty($teklifBilgi['sirket_arp_code'])) {
+                                    $stmt = $db->prepare("SELECT ulke, s_country_code, is_export, specode FROM sirket WHERE s_arp_code = ?");
+                                    $stmt->bind_param("s", $teklifBilgi['sirket_arp_code']);
+                                    $stmt->execute();
+                                    $customerData = $stmt->get_result()->fetch_assoc();
+                                }
+                                
+                                if ($customerData) {
+                                    // 1. is_export flag kontrolü
+                                    if (isset($customerData['is_export']) && $customerData['is_export'] == 1) {
+                                        $isForeign = true;
+                                    }
+                                    
+                                    // 2. SPECODE kontrolü
+                                    if (!$isForeign && !empty($customerData['specode'])) {
+                                        $specode = $customerData['specode'];
+                                        if (stripos($specode, 'İhracat') !== false || stripos($specode, 'Ihracat') !== false || stripos($specode, 'EXPORT') !== false) {
+                                            $isForeign = true;
+                                        }
+                                    }
+                                    
+                                    // 3. Ülke kodu kontrolü
+                                    if (!$isForeign && !empty($customerData['s_country_code'])) {
+                                        $countryCode = strtoupper(trim($customerData['s_country_code']));
+                                        if ($countryCode !== 'TR' && $countryCode !== 'TUR' && $countryCode !== 'TURKEY') {
+                                            $isForeign = true;
+                                        }
+                                    }
+                                    
+                                    // 4. Ülke adı kontrolü
+                                    if (!$isForeign && !empty($customerData['ulke'])) {
+                                        $ulke = strtoupper(trim($customerData['ulke']));
+                                        if ($ulke !== 'TÜRKİYE' && $ulke !== 'TURKIYE' && $ulke !== 'TURKEY') {
+                                            $isForeign = true;
+                                        }
+                                    }
+                                }
+                                
+                                // Mail içeriği - dile göre
+                                if ($isForeign) {
+                                    $musteriSubject = "Quotation Approved – Ref. No: {$teklifBilgi['teklifkodu']}";
+                                    $musteriBody = "
+                                    <html>
+                                    <head>
+                                        <style>
+                                            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                                            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+                                            .header { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+                                            .content { background: #f9fafb; padding: 20px; border-radius: 0 0 8px 8px; }
+                                            .info { background: white; padding: 15px; border-left: 4px solid #10b981; margin: 15px 0; }
+                                            .footer { margin-top: 20px; padding-top: 15px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #6b7280; }
+                                        </style>
+                                    </head>
+                                    <body>
+                                        <div class='container'>
+                                            <div class='header'>
+                                                <h2>✅ Quotation Approved</h2>
+                                            </div>
+                                            <div class='content'>
+                                                <p>Dear <strong>{$customerName}</strong>,</p>
+                                                <p>Thank you for approving our quotation.</p>
+                                                
+                                                <div class='info'>
+                                                    <strong>Reference No:</strong> {$teklifBilgi['teklifkodu']}<br>
+                                                    <strong>Approval Date:</strong> " . date('d.m.Y H:i') . "
+                                                </div>
+                                                
+                                                <p>Your quotation details have been sent as a PDF attachment.</p>
+                                                <p>Our sales team will contact you shortly to proceed with your order.</p>
+                                                
+                                                <div class='footer'>
+                                                    <p>This email has been sent automatically as part of our quotation management process.<br>
+                                                    If you have any questions or require assistance, please contact us at <a href='mailto:satis@gemas.com.tr'>satis@gemas.com.tr</a>.</p>
+                                                    <p><strong>Best regards,</strong><br>
+                                                    Gemas Sales Team<br>
+                                                    <a href='https://www.gemas.com.tr'>www.gemas.com.tr</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </body>
+                                    </html>
+                                    ";
+                                } else {
+                                    $musteriSubject = "Teklifiniz Onaylandı - #{$teklifBilgi['teklifkodu']}";
+                                    $musteriBody = "
+                                    <html>
+                                    <head>
+                                        <style>
+                                            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                                            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+                                            .header { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+                                            .content { background: #f9fafb; padding: 20px; border-radius: 0 0 8px 8px; }
+                                            .info { background: white; padding: 15px; border-left: 4px solid #10b981; margin: 15px 0; }
+                                        </style>
+                                    </head>
+                                    <body>
+                                        <div class='container'>
+                                            <div class='header'>
+                                                <h2>✅ Onayınız Alındı!</h2>
+                                            </div>
+                                            <div class='content'>
+                                                <p>Sayın <strong>{$customerName}</strong>,</p>
+                                                <p>Teklifimizi onayladığınız için teşekkür ederiz.</p>
+                                                
+                                                <div class='info'>
+                                                    <strong>Teklif Kodu:</strong> {$teklifBilgi['teklifkodu']}<br>
+                                                    <strong>Onay Tarihi:</strong> " . date('d.m.Y H:i') . "
+                                                </div>
+                                                
+                                                <p>Teklif detaylarınız ekte PDF olarak gönderilmiştir.</p>
+                                                <p>Satış ekibimiz en kısa sürede sizinle iletişime geçecektir.</p>
+                                                
+                                                <p style='margin-top: 20px;'>
+                                                    <strong>GEMAS</strong><br>
+                                                    gemas.com.tr
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </body>
+                                    </html>
+                                    ";
+                                }
+                                
+                                $attachments = [
+                                    [
+                                        'path' => $pdfPath,
+                                        'name' => "Teklif_{$teklifBilgi['teklifkodu']}.pdf"
+                                    ]
+                                ];
+                                
+                                $mailService->sendMail(
+                                    $customerEmail,
+                                    $customerName,
+                                    $musteriSubject,
+                                    $musteriBody,
+                                    'GEMAS',
+                                    null,
+                                    $attachments
+                                );
+                                
+                                $logger->log("Müşteriye PDF ekli mail gönderildi → {$customerEmail}");
+                            } else {
+                                $logger->log("Müşteri email adresi bulunamadı, mail gönderilemedi", "WARNING");
+                            }
+                        } else {
+                            $logger->log("PDF oluşturulamadı", "ERROR");
+                        }
+                    } catch (Exception $e) {
+                        error_log("PDF/Mail hatası: " . $e->getMessage());
+                    }
+                }
+                
                 header("Location: offer_detail.php?te={$teklifId}&sta={$siparisStatu}");
                 exit;
             } else {
@@ -303,54 +499,101 @@ if ($stmtSatir) {
 $urunler = [];
 $urunAltIndirimleri = [];
 $genelIndirimler = [];
-foreach ($satirlar as $row) {
-    if ((int)$row['transaction_type'] === 0) {
-        // Yurtdışı müşteri için ürün ismini İngilizce'ye çevir
-        if ($isForeignCustomer && !empty($row['kod'])) {
-            $stokKodu = trim($row['kod']);
-            // Uzak MySQL'den İngilizce isim çek
-            $translationDb = null;
-            try {
-                $hostname = "89.43.31.214";
-                $username = "gemas_mehmet";
-                $password = "2261686Me!";
-                $dbname = "gemas_pool_technology";
-                $port = 3306;
-                $translationDb = new mysqli($hostname, $username, $password, $dbname, $port);
-                if (!$translationDb->connect_error) {
-                    $translationDb->set_charset("utf8");
-                    // malzeme ve malzeme_translations tablolarından İngilizce isim çek
-                    $stmt = $translationDb->prepare("
-                        SELECT mt.ad, mt.name, mt.title, mt.baslik, mt.urun_adi, mt.malzeme_adi, mt.aciklama
-                        FROM malzeme m
-                        INNER JOIN malzeme_translations mt ON mt.malzeme_id = m.id
-                        WHERE UPPER(TRIM(m.stok_kodu)) = UPPER(TRIM(?)) AND mt.locale = 'en'
-                        LIMIT 1
-                    ");
-                    if ($stmt) {
-                        $stmt->bind_param("s", $stokKodu);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                        if ($transRow = $result->fetch_assoc()) {
-                            // İlk bulunan İngilizce ismi kullan
-                            $englishName = '';
-                            $nameColumns = ['ad', 'name', 'title', 'baslik', 'urun_adi', 'malzeme_adi', 'aciklama'];
-                            foreach ($nameColumns as $col) {
-                                if (!empty($transRow[$col])) {
-                                    $englishName = trim($transRow[$col]);
-                                    break;
-                                }
-                            }
-                            if (!empty($englishName)) {
-                                $row['adi'] = $englishName;
+
+// Uzak veritabanı bağlantısı (Sadece 1 kez bağlan)
+$translationDb = null;
+$translationsMap = []; // Stok Kodu -> İngilizce İsim eşleşmesi
+
+if ($isForeignCustomer) {
+    // 1. Stok kodlarını topla
+    $targetCodes = [];
+    foreach ($satirlar as $r) {
+        if ((int)$r['transaction_type'] === 0 && !empty($r['kod'])) {
+            $targetCodes[] = trim($r['kod']);
+        }
+    }
+    $targetCodes = array_unique($targetCodes);
+
+    if (!empty($targetCodes)) {
+        try {
+            $hostname = "89.43.31.214";
+            $username = "gemas_mehmet";
+            $password = "2261686Me!";
+            $dbname = "gemas_pool_technology";
+            $port = 3306;
+            $translationDb = new mysqli($hostname, $username, $password, $dbname, $port);
+            
+            if ($translationDb->connect_error) {
+                error_log("Uzak DB Bağlantı Hatası: " . $translationDb->connect_error);
+            } else {
+                $translationDb->set_charset("utf8");
+                
+                // 2. Batch (Toplu) Sorgu Hazırla
+                // WHERE UPPER(TRIM(m.stok_kodu)) IN (?, ?, ...) yapısı
+                $placeholders = implode(',', array_fill(0, count($targetCodes), '?'));
+                $types = str_repeat('s', count($targetCodes));
+                
+                $sql = "
+                    SELECT m.stok_kodu, mt.ad, mt.name, mt.title, mt.baslik, mt.urun_adi, mt.malzeme_adi, mt.aciklama
+                    FROM malzeme m
+                    INNER JOIN malzeme_translations mt ON mt.malzeme_id = m.id
+                    WHERE mt.locale = 'en' AND UPPER(TRIM(m.stok_kodu)) IN (
+                        SELECT UPPER(TRIM(check_code)) FROM (VALUES " . implode(',', array_fill(0, count($targetCodes), 'ROW(?)')) . ") AS t(check_code)
+                    )
+                ";
+                
+                // MySQL sürümü eski olabilir, VALUES row constructor desteklemeyebilir.
+                // Klasik IN (?) yöntemi daha güvenli:
+                $sql = "
+                    SELECT m.stok_kodu, mt.ad, mt.name, mt.title, mt.baslik, mt.urun_adi, mt.malzeme_adi, mt.aciklama
+                    FROM malzeme m
+                    INNER JOIN malzeme_translations mt ON mt.malzeme_id = m.id
+                    WHERE mt.locale = 'en' AND m.stok_kodu IN ($placeholders)
+                ";
+                
+                // Not: Stok kodu eşleşmesinde büyük/küçük harf duyarlılığı veya boşluklar sorun olabilir.
+                // Basit IN kullanımı genellikle case-insensitive'dir (tablo collation'ına bağlı).
+                
+                $stmt = $translationDb->prepare($sql);
+                if ($stmt) {
+                    $stmt->bind_param($types, ...$targetCodes);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    
+                    while ($transRow = $result->fetch_assoc()) {
+                        $code = trim($transRow['stok_kodu']);
+                        
+                        $englishName = '';
+                        $nameColumns = ['ad', 'name', 'title', 'baslik', 'urun_adi', 'malzeme_adi', 'aciklama'];
+                        foreach ($nameColumns as $col) {
+                            if (!empty($transRow[$col])) {
+                                $englishName = trim($transRow[$col]);
+                                break;
                             }
                         }
-                        $stmt->close();
+                        
+                        if (!empty($englishName)) {
+                            // Map'e ekle (Büyük harf anahtar ile daha güvenli olabilir ama direkt code kullanıyorum)
+                            $translationsMap[$code] = $englishName;
+                        }
                     }
-                    $translationDb->close();
+                    $stmt->close();
                 }
-            } catch (Exception $e) {
-                error_log("İngilizce isim çevirisi hatası: " . $e->getMessage());
+                $translationDb->close();
+            }
+        } catch (Exception $e) {
+            error_log("Uzak DB Batch Sorgu Hatası: " . $e->getMessage());
+        }
+    }
+}
+
+foreach ($satirlar as $row) {
+    if ((int)$row['transaction_type'] === 0) {
+        // Yurtdışı müşteri için ürün ismini İngilizce'ye çevir (Cache'den)
+        if ($isForeignCustomer && !empty($row['kod'])) {
+            $codeKey = trim($row['kod']);
+            if (isset($translationsMap[$codeKey])) {
+                $row['adi'] = $translationsMap[$codeKey];
             }
         }
         $urunler[] = $row;
@@ -386,7 +629,7 @@ function t($key, $isForeign = false) {
             'list_price' => 'LİSTE FİYATI',
             'discount' => 'İSKONTO (%)',
             'net_price' => 'İSKONTOLU BİRİM FİYAT',
-            'total' => 'TOPLAM TUTAR',
+            'total' => 'TOPLAM',
             'vat_rate' => 'KDV',
             'vat_unit_price' => 'KDV\'Lİ BİRİM FİYAT',
             'grand_total' => 'GENEL TOPLAM',
@@ -419,6 +662,7 @@ function t($key, $isForeign = false) {
             'revise_right_exceeded' => 'Revize Hakkınız Doldu',
             'revise_tooltip' => 'Revize etmek için tıklayın.',
             'revise_complete_tooltip' => 'Revize işlemini tamamlamak için tıklayın.',
+            'request_revise' => 'Revize',
         ],
         'en' => [
             'offer_details' => 'Offer Details',
@@ -439,8 +683,11 @@ function t($key, $isForeign = false) {
             'unit' => 'UNIT',
             'list_price' => 'LIST PRICE',
             'discount' => 'DISCOUNT (%)',
-            'net_price' => 'DISC. UNIT PRICE',
+            'net_price' => 'NET UNIT PRICE',
             'total' => 'TOTAL',
+            'vat_rate' => 'VAT',
+            'vat_unit_price' => 'VAT UNIT PRICE',
+            'grand_total' => 'GRAND TOTAL',
             'offer_summary' => 'Offer Summary & Currency Conversions',
             'main_unit' => 'Main Unit',
             'vat_included' => 'VAT Included',
@@ -448,7 +695,7 @@ function t($key, $isForeign = false) {
             'net' => 'Net',
             'vat' => 'VAT (20%)',
             'general' => 'General',
-            'terms' => 'Terms and Conditions',
+            'terms' => 'Terms & Conditions',
             'yes' => 'YES',
             'no' => 'NO',
             'action_options' => 'Action Options',
@@ -458,7 +705,7 @@ function t($key, $isForeign = false) {
             'revise' => 'Revise',
             'revise_process' => 'Revision Process',
             'revise_note' => 'Revision Note',
-            'revise_placeholder' => 'Add notes regarding the revision',
+            'revise_placeholder' => 'Add a note about the revision',
             'revise_update' => 'Update Revision',
             'status_history' => 'Status History',
             'date' => 'Date',
@@ -466,10 +713,11 @@ function t($key, $isForeign = false) {
             'new_status' => 'New Status',
             'changed_by' => 'Changed By',
             'notes' => 'Notes',
-            'no_change_allowed' => 'No changes can be made to this offer.',
-            'revise_right_exceeded' => 'Revision Rights Exceeded',
+            'no_change_allowed' => 'Changes continue as requested.',
+            'revise_right_exceeded' => 'Revise Right Exceeded',
             'revise_tooltip' => 'Click to revise.',
-            'revise_complete_tooltip' => 'Click to complete the revision process.',
+            'revise_complete_tooltip' => 'Click to complete the revision.',
+            'request_revise' => 'Request Revision',
         ]
     ];
     $lang = $isForeign ? 'en' : 'tr';
@@ -491,7 +739,206 @@ function t($key, $isForeign = false) {
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* Modern Invoice Styles */
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Remove all top spacing */
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        #layout-wrapper,
+        .main-content,
+        .page-content,
+        .container-fluid {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+            min-height: auto !important; /* Prevent full height focus */
+        }
+        
+        .page-content {
+            padding-bottom: 1rem !important; /* Reduce bottom padding */
+        }
+        
+        /* Invoice Header */
+        .invoice-header {
+            max-width: 1200px;
+            margin: 1rem auto 0.5rem;
+            padding: 0.5rem 2rem 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid #e5e7eb;
+            position: relative; /* Enable absolute positioning for children */
+        }
+        
+        .header-left img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header-left {
+            color: #2563eb;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .header-right {
+            text-align: right;
+        }
+        
+        .header-stripes {
+            display: flex;
+            gap: 4px;
+            justify-content: flex-end;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header-stripes div {
+            height: 4px;
+            background: #2563eb;
+        }
+        
+        .header-stripes div:nth-child(1) { width: 30px; }
+        .header-stripes div:nth-child(2) { width: 20px; background: #60a5fa; }
+        .header-stripes div:nth-child(3) { width: 15px; background: #93c5fd; }
+        .header-stripes div:nth-child(4) { width: 10px; background: #bfdbfe; }
+        
+        .header-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #2563eb;
+            margin: 0;
+            line-height: 1;
+        }
+        
+        .header-meta {
+            margin-top: 0.75rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        .header-meta div {
+            margin-bottom: 0.25rem;
+        }
+        
+        /* SELLER/BUYER Section */
+        .parties-section {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 2rem;
+        }
+        
+        .parties-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .party-box h3 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        
+        .party-details {
+            font-size: 0.75rem;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+        
+        .party-details div {
+            margin-bottom: 0.25rem;
+        }
+        
+        .party-details .company-name {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .separator-line {
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Modern Table */
+        .modern-table {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .modern-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        
+        .modern-table thead tr {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .modern-table thead th {
+            padding: 0.75rem 0.5rem;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-align: left;
+        }
+        
+        .modern-table tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+        
+        .modern-table tbody td {
+            padding: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        /* Toolbar */
+        .modern-toolbar {
+            max-width: 900px;
+            margin: 1rem auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .toolbar-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-right: 0.5rem;
+        }
+        
+        .btn-print {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .btn-pdf {
+            background: #f59e0b;
+            color: white;
+        }
         a {
             text-decoration: none;
         }
@@ -552,56 +999,436 @@ function t($key, $isForeign = false) {
             display: block;
         }
 
+        /* Force small font for terms content including user-generated HTML */
+        .terms-content, 
+        .terms-content * {
+            font-size: 0.75rem !important;
+            line-height: 1.4 !important;
+        }
+        
+        /* Smaller Proforma Title */
+        .header-title {
+            font-size: 1.5rem; /* Was h1 default */
+            font-weight: 700;
+            color: #2563eb;
+            margin: 0 0 0.5rem 0;
+            line-height: 1.2;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            /* Header adjustments */
+            .invoice-header {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            .header-right {
+                flex-direction: column !important;
+                gap: 1rem !important;
+                width: 100%;
+            }
+            
+            .header-left {
+                text-align: center;
+            }
+            
+            .header-left img {
+                width: 60px;
+            }
+            
+            .header-title {
+                font-size: 1.5rem !important;
+            }
+            
+            .header-meta {
+                font-size: 0.75rem;
+            }
+            
+            /* QR and buttons stack */
+            .header-right > div:last-child {
+                flex-direction: row !important;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .header-right > div:last-child img {
+                width: 80px !important;
+                height: 80px !important;
+            }
+            
+            .toolbar-btn {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            /* Tables */
+            .modern-table,
+            .parties-section,
+            div[style*="max-width: 900px"] {
+                padding: 0 1rem !important;
+            }
+            
+            .modern-table table {
+                font-size: 0.75rem !important;
+            }
+            
+            .modern-table thead th,
+            .modern-table tbody td {
+                padding: 0.5rem 0.25rem !important;
+            }
+            
+            /* Company info table */
+            table[style*="border-collapse"] th,
+            table[style*="border-collapse"] td {
+                display: block;
+                width: 100% !important;
+                padding: 0.5rem !important;
+            }
+            
+            table[style*="border-collapse"] tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid #e5e7eb;
+                border-radius: 4px;
+            }
+            
+            /* Summary section */
+            .modern-table h1 {
+                font-size: 2rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.25rem !important;
+            }
+            
+            .modern-table table {
+                font-size: 0.65rem !important;
+            }
+            
+            .toolbar-btn {
+                width: 80px !important;
+                font-size: 0.65rem;
+            }
+        }
+
         @media print {
             @page {
                 size: A4;
-                margin: 5mm 10mm;
-            }
-            body {
-                background-color: #fff !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-                font-size: 11px;
-            }
-            .no-print, 
-            .nav-tabs, 
-            .footer, 
-            .page-topbar, 
-            #durum, 
-            .btn,
-            .rightbar-overlay,
-            .modal {
-                display: none !important;
+                margin: 1.5cm 1cm;
             }
             
-            /* Layout Resets */
-            .main-content { margin-left: 0 !important; }
-            .page-content { padding: 0 !important; margin: 0 !important; }
-            .container-fluid { padding: 0 !important; max-width: 100% !important; }
-            .card {
-                border: none !important;
-                box-shadow: none !important;
-                margin-bottom: 10px !important;
-            }
-            .card-body { padding: 0 !important; }
-            .card-header {
-                background-color: transparent !important;
-                border-bottom: 1px solid #ddd !important;
-                padding: 5px 0 !important;
-                margin-bottom: 5px !important;
-            }
-            .card-header h5 {
-                font-size: 14px !important;
-                font-weight: bold;
-                margin: 0 !important;
-            }
+            @media print {
+                @page {
+                    margin: 0.5cm;
+                    size: A4 portrait;
+                }
 
-            /* Header Grid Fix */
-            .row { display: flex !important; flex-wrap: nowrap !important; }
-            .col-md-6 { width: 50% !important; flex: 0 0 50% !important; max-width: 50% !important; }
-            .logo-container { text-align: left !important; }
-            .qr-container { text-align: right !important; }
-            .logo-container img { max-width: 120px !important; }
+                body {
+                    background-color: #fff !important;
+                    -webkit-print-color-adjust: exact;
+                    print-color-adjust: exact;
+                    font-size: 10pt;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }
+                
+                /* Hide non-printable elements */
+                .no-print, 
+                .nav-tabs, 
+                .footer, 
+                .page-topbar, 
+                #durum, 
+                .btn,
+                .rightbar-overlay,
+                .modal,
+                .modern-toolbar,
+                .vertical-menu,
+                .navbar-header,
+                .d-print-none {
+                    display: none !important;
+                }
+                
+                /* Layout Resets */
+                #layout-wrapper,
+                .main-content,
+                .page-content,
+                .container-fluid {
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    min-height: auto !important;
+                    box-shadow: none !important;
+                }
+
+                /* Header styling - Using Table Layout for better print support */
+                .invoice-header {
+                    display: table !important;
+                    width: 100% !important;
+                    border-bottom: 2px solid #2563eb !important;
+                    padding-bottom: 10px !important;
+                    margin-bottom: 20px !important;
+                }
+                
+                .header-left {
+                    display: table-cell !important;
+                    vertical-align: top !important;
+                    width: 40% !important;
+                    text-align: left !important;
+                }
+                
+                .header-right {
+                    display: table-cell !important;
+                    vertical-align: top !important;
+                    width: 60% !important;
+                    text-align: right !important;
+                }
+
+                /* Override inline flex styles */
+                .header-right {
+                    flex-direction: row !important;
+                    align-items: flex-start !important;
+                }
+                
+                /* Layout for header right components to sit side-by-side */
+                .header-right > div {
+                    display: inline-block !important;
+                    vertical-align: top !important;
+                    text-align: right !important;
+                }
+                
+                /* QR Code Positioning - CENTER IN PRINT */
+                .header-actions {
+                    display: block !important;
+                    position: absolute !important;
+                    top: 0 !important;
+                    left: 50% !important;
+                    transform: translateX(-50%) !important;
+                    margin: 0 !important;
+                }
+                
+                .header-actions img {
+                    width: 80px !important;
+                    height: 80px !important;
+                }
+                
+                /* Keep Title & Meta aligned to right */
+                .header-right > div:not(.header-actions) {
+                    display: block !important; 
+                    text-align: right !important;
+                    width: 100% !important; 
+                }
+                
+                /* Hide stripes in print since they might look odd without context or take space */
+                .header-stripes {
+                    display: none !important;
+                }
+                
+                /* Force standard table display to fix fragmented layout */
+                table {
+                    display: table !important;
+                    width: 100% !important;
+                    border-collapse: collapse !important;
+                }
+                
+                thead {
+                    display: table-header-group !important;
+                }
+                
+                tbody {
+                    display: table-row-group !important;
+                }
+                
+                tr {
+                    display: table-row !important;
+                    page-break-inside: avoid;
+                }
+                
+                
+                th, td {
+                    display: table-cell !important;
+                }
+
+
+                /* Product table column widths for better print layout */
+                .modern-table table th:nth-child(1),
+                .modern-table table td:nth-child(1) {
+                    width: 3% !important;
+                    min-width: 25px !important;
+                }
+                
+                .modern-table table th:nth-child(2),
+                .modern-table table td:nth-child(2) {
+                    width: 18% !important;
+                    min-width: 120px !important;
+                }
+                
+                .modern-table table th:nth-child(3),
+                .modern-table table td:nth-child(3) {
+                    width: 6% !important;
+                    min-width: 40px !important;
+                }
+                
+                .modern-table table th:nth-child(4),
+                .modern-table table td:nth-child(4) {
+                    width: 6% !important;
+                    min-width: 40px !important;
+                }
+                
+                .modern-table table th:nth-child(5),
+                .modern-table table td:nth-child(5) {
+                    width: 10% !important;
+                    min-width: 65px !important;
+                }
+                
+                .modern-table table th:nth-child(6),
+                .modern-table table td:nth-child(6) {
+                    width: 10% !important;
+                    min-width: 70px !important;
+                }
+                
+                .modern-table table th:nth-child(7),
+                .modern-table table td:nth-child(7) {
+                    width: 13% !important;
+                    min-width: 90px !important;
+                }
+                
+                .modern-table table th:nth-child(8),
+                .modern-table table td:nth-child(8) {
+                    width: 10% !important;
+                    min-width: 65px !important;
+                }
+                
+                .modern-table table th:nth-child(9),
+                .modern-table table td:nth-child(9) {
+                    width: 7% !important;
+                    min-width: 45px !important;
+                }
+                
+                .modern-table table th:nth-child(10),
+                .modern-table table td:nth-child(10) {
+                    width: 12% !important;
+                    min-width: 80px !important;
+                }
+
+                /* Ensure text wraps in cells */
+                .modern-table table td {
+                    word-wrap: break-word !important;
+                    word-break: break-word !important;
+                    white-space: normal !important;
+                    overflow: hidden !important;
+                    font-size: 8pt !important;
+                    padding: 3px 2px !important;
+                }
+                
+                /* Allow headers to wrap if needed */
+                .modern-table table th {
+                    white-space: normal !important;
+                    font-size: 7pt !important;
+                    padding: 3px 2px !important;
+                    line-height: 1.1 !important;
+                    vertical-align: middle !important;
+                }
+
+                /* Modern table styling (Both Product List and Summary) */
+                .modern-table {
+                    margin: 1rem 0 !important;
+                    width: 100% !important;
+                    display: block !important; /* Wrapper is block */
+                }
+                
+                .modern-table table {
+                    width: 100% !important;
+                }
+
+                .modern-table thead tr {
+                    background: #2563eb !important;
+                    color: white !important;
+                    -webkit-print-color-adjust: exact;
+                    print-color-adjust: exact;
+                }
+                
+                .modern-table th, 
+                .modern-table td {
+                    border: 1px solid #ccc !important;
+                    padding: 8px !important;
+                    vertical-align: middle !important;
+                }
+                
+                /* Specific fix for Summary Table Headers */
+                .modern-table th {
+                    background-color: #2563eb !important;
+                    color: white !important;
+                    font-weight: bold !important;
+                    white-space: nowrap !important; /* Prevent header wrapping */
+                    text-align: center !important;
+                }
+                
+                /* Fix alignment for summary table data */
+                .modern-table td {
+                    text-align: right !important;
+                }
+                
+                .modern-table td:first-child,
+                .modern-table th:first-child {
+                    text-align: left !important;
+                }
+                
+                /* Terms Container - Page Break Rules */
+                .terms-container {
+                    page-break-before: always !important;
+                    page-break-inside: avoid !important;
+                    break-before: always !important;
+                    break-inside: avoid !important;
+                    margin-top: 20px !important;
+                    display: block !important;
+                }
+                
+                /* Terms text size */
+                .terms-content, .terms-content * {
+                    font-size: 8pt !important;
+                    line-height: 1.2 !important;
+                }
+                
+                /* Optimize Summary Table Row Height */
+                .modern-table td {
+                    height: auto !important;
+                    padding: 4px 8px !important; /* Reduce vertical padding */
+                    line-height: 1.2 !important;
+                }
+                
+                /* Ensure currency column doesn't wrap awkwardly */
+                .modern-table td:first-child {
+                    white-space: nowrap !important;
+                    width: 1% !important; /* Shrink to fit content */
+                }
+
+                /* Card Resets */
+                .card {
+                    border: none !important;
+                    box-shadow: none !important;
+                    margin-bottom: 10px !important;
+                    page-break-inside: avoid;
+                }
+                .card-body { padding: 0 !important; }
+                .card-header {
+                    background-color: transparent !important;
+                    border-bottom: 1px solid #ddd !important;
+                    padding: 5px 0 !important;
+                    margin-bottom: 5px !important;
+                }
+
+                /* Container Widths */
+                div[style*="max-width: 1200px"] {
+                    max-width: 100% !important;
+                    padding: 0 !important;
+                    margin: 0.5rem 0 !important;
+                }
+            }
             .qr-container img { max-width: 80px !important; }
 
             /* Table Optimization */
@@ -631,10 +1458,6 @@ function t($key, $isForeign = false) {
             .mb-4 { margin-bottom: 10px !important; }
             .mt-3, .mt-4 { margin-top: 10px !important; }
             
-            /* Avoid page breaks inside elements */
-            tr { page-break-inside: avoid; }
-            .card, .table { page-break-inside: avoid; }
-            
             /* Hide URL printing */
             a[href]:after { content: none !important; }
 
@@ -646,7 +1469,7 @@ function t($key, $isForeign = false) {
                 margin-bottom: 2px !important;
             }
             .terms-content h1, .terms-content h2, .terms-content h3, .terms-content h4, .terms-content h5, .terms-content h6 {
-                font-size: 11px !important; /* Slightly larger than text but not huge */
+                font-size: 11px !important;
                 font-weight: bold !important;
             }
         }
@@ -656,118 +1479,148 @@ function t($key, $isForeign = false) {
 <body data-layout="horizontal" data-topbar="colored">
     <div id="layout-wrapper">
         <div class="main-content">
-            <div class="page-content pt-2">
+            <div class="page-content">
                 <div class="container-fluid">
-                    <!-- Logo ve QR Kod -->
-                    <div class="row mb-3 align-items-center">
-                        <div class="col-md-6 logo-container">
-                            <a href="teklifsiparisler.php">
-                                <img src="images/<?= htmlspecialchars($genelAyar["resim"] ?? ""); ?>" alt="Logo">
-                            </a>
+                    <!-- Modern Professional Invoice Header -->
+                    <div class="invoice-header">
+                        <!-- Left Side: Logo and Company Info -->
+                        <div class="header-left">
+                            <img src="logogemas.png" alt="GEMAS">
+                            <div>gemas.com.tr</div>
+                            
+                            <!-- Company Details -->
+                            <div style="margin-top: 1rem; font-size: 0.75rem; color: #4b5563; line-height: 1.8;">
+                                <div style="margin-bottom: 0.5rem;">
+                                    <strong style="color: #1f2937;"><?= t('company_name', $isForeignCustomer); ?>:</strong><br>
+                                    <?php
+                                    if (empty($sirketArp)) {
+                                        echo htmlspecialchars($teklifBilgi["musteriadi"]);
+                                    } else {
+                                        $musteriBilgi = fetchSingle(
+                                            $db,
+                                            "SELECT * FROM sirket WHERE s_arp_code = ?",
+                                            "Müşteri sorgusu başarısız.",
+                                            [ $sirketArp ],
+                                            's'
+                                        );
+                                        echo htmlspecialchars($musteriBilgi["s_adi"] ?? '');
+                                    }
+                                    ?>
+                                </div>
+                                <div style="margin-bottom: 0.5rem;">
+                                    <strong style="color: #1f2937;"><?= t('customer_record', $isForeignCustomer); ?>:</strong>
+                                    <?= empty($teklifBilgi["sirket_arp_code"]) ? '<span style="color: #dc2626;">' . t('no', $isForeignCustomer) . '</span>' : '<span style="color: #16a34a;">' . t('yes', $isForeignCustomer) . '</span>'; ?>
+                                </div>
+                                <div style="margin-bottom: 0.5rem;">
+                                    <strong style="color: #1f2937;"><?= t('delivery_place', $isForeignCustomer); ?>:</strong><br>
+                                    <?= htmlspecialchars($teklifBilgi["teslimyer"]); ?>
+                                </div>
+                                <div>
+                                    <strong style="color: #1f2937;"><?= t('payment_plan', $isForeignCustomer); ?>:</strong><br>
+                                    <?= htmlspecialchars($payPlanDisplay); ?>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6 text-end qr-container">
-                            <?php
-                            function qrCode($icerik, $width = 130, $height = 130)
-                            {
-                                $apiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=%dx%d&data=%s';
-                                return sprintf($apiUrl, $width, $height, urlencode($icerik));
-                            }
-                            // $url include/url.php'den geliyor, kontrol et
-                            if (!isset($url) || empty($url)) {
-                                $url = 'http://localhost/b2b-gemas-project-main';
-                            }
-                            $qrKodURL  = qrCode($url . '/offer_detail.php?te=' . $teklifId . '&sta=' . urlencode($siparisStatu), 120, 120);
-                            ?>
-                            <img src="<?= htmlspecialchars($qrKodURL) ?>" alt="QR Kod">
-                            <p class="small mt-1">Mobil cihazınızla tarayarak detaylara ulaşın.</p>
-                        </div>
-                    </div>
-                    <div class="row mb-3 no-print">
-                        <div class="col text-end">
-                            <button onclick="window.print()" class="btn btn-outline-secondary">PDF / Yazdır</button>
+                        
+                        <!-- Right Side: Title and Meta -->
+                        <div class="header-right" style="display: flex; gap: 2rem; align-items: flex-start;">
+                            <div>
+                                <!-- Blue Stripes -->
+                                <div class="header-stripes">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                
+                                <!-- Title -->
+                                <h1 class="header-title">Proforma</h1>
+                                
+                                <!-- Meta Information -->
+                                <div style="margin-top: 1rem; font-size: 0.75rem; color: #4b5563; line-height: 1.8;">
+                                    <div style="margin-bottom: 0.5rem;">
+                                        <strong style="color: #1f2937;"><?= t('offer_code', $isForeignCustomer); ?>:</strong>
+                                        <?= htmlspecialchars($teklifBilgi["teklifkodu"]); ?>
+                                    </div>
+                                    <div style="margin-bottom: 0.5rem;">
+                                        <strong style="color: #1f2937;"><?= t('date', $isForeignCustomer); ?>:</strong>
+                                        <?= $isForeignCustomer ? date('F d, Y') : date('d.m.Y'); ?>
+                                    </div>
+                                    <div style="margin-bottom: 0.5rem;">
+                                        <strong style="color: #1f2937;"><?= t('prepared_by', $isForeignCustomer); ?>:</strong>
+                                        <?= htmlspecialchars($personelProfil["adsoyad"] ?? ''); ?> 
+                                        <small>(<?= htmlspecialchars($hazirlayanKaynak) ?>)</small>
+                                    </div>
+                                    <div style="margin-bottom: 0.5rem;">
+                                        <strong style="color: #1f2937;"><?= t('offer_validity_date', $isForeignCustomer); ?>:</strong>
+                                        <?= htmlspecialchars($gecerlilikDisplay); ?>
+                                    </div>
+                                    <div>
+                                        <strong style="color: #1f2937;"><?= t('offer_process_date', $isForeignCustomer); ?>:</strong>
+                                        <?= htmlspecialchars($teklifBilgi["tekliftarihi"]); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- QR Code and Buttons -->
+                            <div class="header-actions" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                                <?php
+                                function qrCode($icerik, $width = 130, $height = 130)
+                                {
+                                    $apiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=%dx%d&data=%s';
+                                    return sprintf($apiUrl, $width, $height, urlencode($icerik));
+                                }
+                                if (!isset($url) || empty($url)) {
+                                    $url = 'http://localhost/b2b-gemas-project-main';
+                                }
+                                $qrKodURL  = qrCode($url . '/offer_detail.php?te=' . $teklifId . '&sta=' . urlencode($siparisStatu), 100, 100);
+                                ?>
+                                <img src="<?= htmlspecialchars($qrKodURL) ?>" alt="QR Kod" style="width: 100px; height: 100px;">
+                                
+                                <div class="no-print" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                    <button onclick="window.print()" class="toolbar-btn btn-print" style="width: 100px; margin: 0;">
+                                        🖨️ <?= $isForeignCustomer ? 'Print' : 'Yazdır'; ?>
+                                    </button>
+                                    <button onclick="window.print()" class="toolbar-btn btn-pdf" style="width: 100px; margin: 0;">
+                                        📥 PDF
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- İki Tab: Detaylar ve Durum Düzenleme -->
-                    <ul class="nav nav-tabs" id="teklifTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="detay-tab" data-bs-toggle="tab" data-bs-target="#detay" type="button" role="tab" aria-controls="detay" aria-selected="true"><?= t('offer_details', $isForeignCustomer); ?></button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="durum-tab" data-bs-toggle="tab" data-bs-target="#durum" type="button" role="tab" aria-controls="durum" aria-selected="false">Revize Süreci</button>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="teklifTabContent">
+                    <div class="no-print" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+                        <ul class="nav nav-tabs" id="teklifTab" role="tablist" style="border-bottom: 2px solid #e5e7eb;">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="detay-tab" data-bs-toggle="tab" data-bs-target="#detay" type="button" role="tab" aria-controls="detay" aria-selected="true" style="font-weight: 600;"><?= t('offer_details', $isForeignCustomer); ?></button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="durum-tab" data-bs-toggle="tab" data-bs-target="#durum" type="button" role="tab" aria-controls="durum" aria-selected="false" style="font-weight: 600;"><?= t('revise_process', $isForeignCustomer); ?></button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="teklifTabContent" style="max-width: 1200px; margin: 0 auto; padding: 0;">
                         <!-- Tab 1: Detaylar -->
                         <div class="tab-pane fade show active" id="detay" role="tabpanel" aria-labelledby="detay-tab">
-                            <!-- Şirket ve Ürün Detayları -->
-                            <div class="card mt-3">
-                                <div class="card-header">
-                                    <h5><?= t('company_product_info', $isForeignCustomer); ?></h5>
+                            
+                            <!-- Extra Notes (if exists) -->
+                            <?php if (!empty($teklifBilgi["notes1"])): ?>
+                            <div style="max-width: 1200px; margin: 2rem auto; padding: 0 2rem;">
+                                <div style="background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem; border-radius: 4px;">
+                                    <h6 style="font-size: 0.875rem; font-weight: 600; color: #92400e; margin-bottom: 0.5rem;">
+                                        <?= t('extra_info_notes', $isForeignCustomer); ?>
+                                    </h6>
+                                    <div style="font-size: 0.875rem; color: #78350f;">
+                                        <?= nl2br(strip_tags($teklifBilgi["notes1"])); ?>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <table class="table table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <th><?= t('company_name', $isForeignCustomer); ?></th>
-                                                <td>
-                                                    <?php
-                                                    if (empty($sirketArp)) {
-                                                        echo htmlspecialchars($teklifBilgi["musteriadi"]);
-                                                    } else {
-                                                        $musteriBilgi = fetchSingle(
-                                                            $db,
-                                                            "SELECT * FROM sirket WHERE s_arp_code = ?",
-                                                            "Müşteri sorgusu başarısız.",
-                                                            [ $sirketArp ],
-                                                            's'
-                                                        );
-                                                        echo htmlspecialchars($musteriBilgi["s_adi"] ?? '');
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <th><?= t('prepared_by', $isForeignCustomer); ?></th>
-                                                <td><?= htmlspecialchars($personelProfil["adsoyad"] ?? ''); ?> (<small><?= htmlspecialchars($hazirlayanKaynak) ?></small>)</td>
-                                            </tr>
-                                            <tr>
-                                                <th><?= t('customer_record', $isForeignCustomer); ?></th>
-                                                <td><?= empty($teklifBilgi["sirket_arp_code"]) ? '<span class="text-danger">' . t('no', $isForeignCustomer) . '</span>' : '<span class="text-success">' . t('yes', $isForeignCustomer) . '</span>'; ?></td>
-                                                <th><?= t('email', $isForeignCustomer); ?></th>
-                                                <td><?= htmlspecialchars($contactMail); ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th><?= t('offer_validity_date', $isForeignCustomer); ?></th>
-                                                <td><?= htmlspecialchars($gecerlilikDisplay); ?></td>
-                                                <th><?= t('phone', $isForeignCustomer); ?></th>
-                                                <td><?= htmlspecialchars($contactPhone); ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th><?= t('offer_process_date', $isForeignCustomer); ?></th>
-                                                <td><?= htmlspecialchars($teklifBilgi["tekliftarihi"]); ?></td>
-                                                <th><?= t('offer_code', $isForeignCustomer); ?></th>
-                                                <td><?= htmlspecialchars($teklifBilgi["teklifkodu"]); ?></td>
-                                            </tr>
+                            </div>
+                            <?php endif; ?>
 
-                                            <tr>
-                                                <th><?= t('delivery_place', $isForeignCustomer); ?></th>
-                                                <td colspan="3"><?= htmlspecialchars($teklifBilgi["teslimyer"]); ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th><?= t('payment_plan', $isForeignCustomer); ?></th>
-                                                <td colspan="3"><?= htmlspecialchars($payPlanDisplay); ?></td>
-                                            </tr>
-                                            <?php if (!empty($teklifBilgi["notes1"])): ?>
-                                            <tr>
-                                                <th><?= t('extra_info_notes', $isForeignCustomer); ?></th>
-                                                <td colspan="3"><?= nl2br(strip_tags($teklifBilgi["notes1"])); ?></td>
-                                            </tr>
-                                            <?php endif; ?>
-                                        </tbody>
-                                    </table>
-
-                                    <!-- Ürün Listesi -->
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered mb-0" style="font-size: 11px;">
+                            <!-- Modern Product Table -->
+                                    <div class="modern-table">
+                                        <table>
                                         <?php
                                         // İskonto kontrolü: Herhangi bir üründe iskonto varsa sütun gösterilecek
                                         $hasDiscount = false;
@@ -778,19 +1631,19 @@ function t($key, $isForeign = false) {
                                             }
                                         }
                                         ?>
-                                            <thead style="background: #f8f9fa;">
+                                            <thead>
                                                 <tr>
-                                                    <th style="padding: 6px; width: 40px; text-align: center;">#</th>
-                                                    <th style="padding: 6px;"><?= t('product_service', $isForeignCustomer); ?></th>
-                                                    <th style="padding: 6px; text-align: center;"><?= t('quantity', $isForeignCustomer); ?></th>
-                                                    <th style="padding: 6px; text-align: center;"><?= t('unit', $isForeignCustomer); ?></th>
-                                                    <th style="padding: 6px; text-align: right;"><?= t('list_price', $isForeignCustomer); ?></th>
-                                                    <th style="padding: 6px; text-align: center;"><?= t('discount', $isForeignCustomer); ?></th>
-                                                    <th style="padding: 6px; text-align: right;"><?= t('net_price', $isForeignCustomer); ?></th>
-                                                    <th style="padding: 6px; text-align: right;"><?= t('total', $isForeignCustomer); ?></th>
-                                                    <th style="padding: 6px; text-align: center;"><?= t('vat_rate', $isForeignCustomer); ?></th>
-                                                    <th style="padding: 6px; text-align: right;"><?= t('vat_unit_price', $isForeignCustomer); ?></th>
-                                                    <th style="padding: 6px; text-align: right;"><?= t('grand_total', $isForeignCustomer); ?></th>
+                                                    <th style="padding: 0.75rem 1rem; text-align: center; width: 40px;">#</th>
+                                                    <th style="padding: 0.75rem 1rem;"><?= t('product_service', $isForeignCustomer); ?></th>
+                                                    <th style="padding: 0.75rem 1rem; text-align: center;"><?= t('quantity', $isForeignCustomer); ?></th>
+                                                    <th style="padding: 0.75rem 1rem; text-align: center;"><?= t('unit', $isForeignCustomer); ?></th>
+                                                    <th style="padding: 0.75rem 1rem; text-align: right;"><?= t('list_price', $isForeignCustomer); ?></th>
+                                                    <th style="padding: 0.75rem 1rem; text-align: center;"><?= t('discount', $isForeignCustomer); ?></th>
+                                                    <th style="padding: 0.75rem 1rem; text-align: right;"><?= t('net_price', $isForeignCustomer); ?></th>
+                                                    <th style="padding: 0.75rem 1rem; text-align: right;"><?= t('total', $isForeignCustomer); ?></th>
+                                                    <th style="padding: 0.75rem 1rem; text-align: center;"><?= t('vat_rate', $isForeignCustomer); ?></th>
+                                                    <th style="padding: 0.75rem 1rem; text-align: right;"><?= t('vat_unit_price', $isForeignCustomer); ?></th>
+                                                    <th style="padding: 0.75rem 1rem; text-align: right;"><?= $isForeignCustomer ? 'TOTAL' : 'TOPLAM'; ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -1150,76 +2003,88 @@ function t($key, $isForeign = false) {
                             }
 
                             ?>
-                            <div class="card mt-3">
-                                <div class="card-header text-secondary">
-                                    <h5 class="mb-0 text-black"><?= t('offer_summary', $isForeignCustomer); ?></h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-center mb-4">
-                                        <h1 class="display-4 font-weight-bold">
+                            <!-- Modern Offer Summary -->
+                            <div id="offer-summary-section" class="modern-table" style="margin-top: 1rem;">
+                                <div style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h5 style="font-size: 1rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">
+                                        <?= t('offer_summary', $isForeignCustomer); ?>
+                                    </h5>
+                                    
+                                    <!-- Grand Total Display -->
+                                    <div style="text-align: center; margin-bottom: 1.5rem; padding: 1rem; background: white; border-radius: 6px;">
+                                        <h1 style="font-size: 1.75rem; font-weight: 700; color: #2563eb; margin: 0;">
                                             <?= number_format($anaGross, 2, ',', '.'); ?> <?= $anaSembol; ?>
                                         </h1>
-                                        <p class="mb-0 text-muted"><?= t('main_unit', $isForeignCustomer); ?>: <?= $anaBirim; ?> (<?= t('vat_included', $isForeignCustomer); ?>)</p>
+                                        <p style="margin: 0.25rem 0 0 0; color: #6b7280; font-size: 0.75rem;">
+                                            <?= t('main_unit', $isForeignCustomer); ?>: <?= $anaBirim; ?> (<?= t('vat_included', $isForeignCustomer); ?>)
+                                        </p>
                                     </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered text-right">
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th class="text-left"><?= t('currency', $isForeignCustomer); ?></th>
-                                                    <th><?= t('net', $isForeignCustomer); ?></th>
-                                                    <th><?= t('vat', $isForeignCustomer); ?></th>
-                                                    <th><?= t('general', $isForeignCustomer); ?></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php if ($dovizGoster === 'EUR'): ?>
-                                                <tr class="table-primary">
-                                                    <th class="text-left">EUR</th>
-                                                    <td><?= number_format($netEUR,  2, ',', '.'); ?> €</td>
-                                                    <td><?= number_format($kdvEUR,  2, ',', '.'); ?> €</td>
-                                                    <td><?= number_format($grossEUR, 2, ',', '.'); ?> €</td>
-                                                </tr>
-                                                <?php elseif ($dovizGoster === 'TL'): ?>
-                                                <tr class="table-success">
-                                                    <th class="text-left">TL</th>
-                                                    <td><?= number_format($netTL,  2, ',', '.'); ?> ₺</td>
-                                                    <td><?= number_format($kdvTL,  2, ',', '.'); ?> ₺</td>
-                                                    <td><?= number_format($grossTL, 2, ',', '.'); ?> ₺</td>
-                                                </tr>
-                                                <?php elseif ($dovizGoster === 'USD'): ?>
-                                                <tr class="table-warning">
-                                                    <th class="text-left">USD</th>
-                                                    <td><?= number_format($netUSD,  2, ',', '.'); ?> $</td>
-                                                    <td><?= number_format($kdvUSD,  2, ',', '.'); ?> $</td>
-                                                    <td><?= number_format($grossUSD, 2, ',', '.'); ?> $</td>
-                                                </tr>
-                                                <?php else: // TUMU ?>
-                                                <tr class="table-primary">
-                                                    <th class="text-left">EUR</th>
-                                                    <td><?= number_format($netEUR,  2, ',', '.'); ?> €</td>
-                                                    <td><?= number_format($kdvEUR,  2, ',', '.'); ?> €</td>
-                                                    <td><?= number_format($grossEUR, 2, ',', '.'); ?> €</td>
-                                                </tr>
-                                                <tr class="table-success">
-                                                    <th class="text-left">TL <small class="text-muted">(≈)</small></th>
-                                                    <td class="small text-muted"><?= number_format($netTL,  2, ',', '.'); ?> ₺</td>
-                                                    <td class="small text-muted"><?= number_format($kdvTL,  2, ',', '.'); ?> ₺</td>
-                                                    <td class="small text-muted"><?= number_format($grossTL, 2, ',', '.') ?> ₺</td>
-                                                </tr>
-                                                <tr class="table-warning">
-                                                    <th class="text-left">USD <small class="text-muted">(≈)</small></th>
-                                                    <td class="small text-muted"><?= number_format($netUSD,  2, ',', '.'); ?> $</td>
-                                                    <td class="small text-muted"><?= number_format($kdvUSD,  2, ',', '.'); ?> $</td>
-                                                    <td class="small text-muted"><?= number_format($grossUSD, 2, ',', '.') ?> $</td>
-                                                </tr>
-                                                <?php endif; ?>
-                                            </tbody>
-
-                                        </table>
-                                    </div>
+                                    
+                                    <!-- Currency Breakdown Table -->
+                                    <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+                                        <thead>
+                                            <tr style="background: #2563eb; color: white;">
+                                                <th style="padding: 0.75rem; text-align: left; font-weight: 600; font-size: 0.75rem;">
+                                                    <?= t('currency', $isForeignCustomer); ?>
+                                                </th>
+                                                <th style="padding: 0.75rem; text-align: right; font-weight: 600; font-size: 0.75rem;">
+                                                    <?= t('net', $isForeignCustomer); ?>
+                                                </th>
+                                                <th style="padding: 0.75rem; text-align: right; font-weight: 600; font-size: 0.75rem;">
+                                                    <?= t('vat', $isForeignCustomer); ?>
+                                                </th>
+                                                <th style="padding: 0.75rem; text-align: right; font-weight: 600; font-size: 0.75rem;">
+                                                    <?= $isForeignCustomer ? 'Grand Total' : 'Genel Toplam'; ?>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if ($dovizGoster === 'EUR'): ?>
+                                            <tr style="background: white;">
+                                                <td style="padding: 0.75rem; font-weight: 600;">EUR</td>
+                                                <td style="padding: 0.75rem; text-align: right;"><?= number_format($netEUR,  2, ',', '.'); ?> €</td>
+                                                <td style="padding: 0.75rem; text-align: right;"><?= number_format($kdvEUR,  2, ',', '.'); ?> €</td>
+                                                <td style="padding: 0.75rem; text-align: right; font-weight: 600;"><?= number_format($grossEUR, 2, ',', '.'); ?> €</td>
+                                            </tr>
+                                            <?php elseif ($dovizGoster === 'TL'): ?>
+                                            <tr style="background: white;">
+                                                <td style="padding: 0.75rem; font-weight: 600;">TL</td>
+                                                <td style="padding: 0.75rem; text-align: right;"><?= number_format($netTL,  2, ',', '.'); ?> ₺</td>
+                                                <td style="padding: 0.75rem; text-align: right;"><?= number_format($kdvTL,  2, ',', '.'); ?> ₺</td>
+                                                <td style="padding: 0.75rem; text-align: right; font-weight: 600;"><?= number_format($grossTL, 2, ',', '.'); ?> ₺</td>
+                                            </tr>
+                                            <?php elseif ($dovizGoster === 'USD'): ?>
+                                            <tr style="background: white;">
+                                                <td style="padding: 0.75rem; font-weight: 600;">USD</td>
+                                                <td style="padding: 0.75rem; text-align: right;"><?= number_format($netUSD,  2, ',', '.'); ?> $</td>
+                                                <td style="padding: 0.75rem; text-align: right;"><?= number_format($kdvUSD,  2, ',', '.'); ?> $</td>
+                                                <td style="padding: 0.75rem; text-align: right; font-weight: 600;"><?= number_format($grossUSD, 2, ',', '.'); ?> $</td>
+                                            </tr>
+                                            <?php else: // TUMU ?>
+                                            <tr style="background: white;">
+                                                <td style="padding: 0.75rem; font-weight: 600;">EUR</td>
+                                                <td style="padding: 0.75rem; text-align: right;"><?= number_format($netEUR,  2, ',', '.'); ?> €</td>
+                                                <td style="padding: 0.75rem; text-align: right;"><?= number_format($kdvEUR,  2, ',', '.'); ?> €</td>
+                                                <td style="padding: 0.75rem; text-align: right; font-weight: 600;"><?= number_format($grossEUR, 2, ',', '.'); ?> €</td>
+                                            </tr>
+                                            <tr style="background: #f9fafb;">
+                                                <td style="padding: 0.75rem; font-weight: 600;">TL <small style="color: #9ca3af;">(≈)</small></td>
+                                                <td style="padding: 0.75rem; text-align: right; color: #6b7280;"><?= number_format($netTL,  2, ',', '.'); ?> ₺</td>
+                                                <td style="padding: 0.75rem; text-align: right; color: #6b7280;"><?= number_format($kdvTL,  2, ',', '.'); ?> ₺</td>
+                                                <td style="padding: 0.75rem; text-align: right; color: #6b7280;"><?= number_format($grossTL, 2, ',', '.') ?> ₺</td>
+                                            </tr>
+                                            <tr style="background: white;">
+                                                <td style="padding: 0.75rem; font-weight: 600;">USD <small style="color: #9ca3af;">(≈)</small></td>
+                                                <td style="padding: 0.75rem; text-align: right; color: #6b7280;"><?= number_format($netUSD,  2, ',', '.'); ?> $</td>
+                                                <td style="padding: 0.75rem; text-align: right; color: #6b7280;"><?= number_format($kdvUSD,  2, ',', '.'); ?> $</td>
+                                                <td style="padding: 0.75rem; text-align: right; color: #6b7280;"><?= number_format($grossUSD, 2, ',', '.') ?> $</td>
+                                            </tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <!-- /Teklif Özeti & Döviz Dönüşümleri -->
+                            <!-- /Modern Offer Summary -->
 
                             <?php
                             //  ─────────── “Sözleşme” Kartı ───────────
@@ -1233,12 +2098,13 @@ function t($key, $isForeign = false) {
                             );
                             if ($soz):
                             ?>
-                                <div class="card mt-4">
-                                    <div class="card-header text-secondary">
-                                        <h5 class="mb-0 text-black"><?= htmlspecialchars($soz['sozlesmeadi']); ?></h5>
-                                    </div>
-                                    <div class="card-body terms-content">
-                                        <?= $soz['sozlesme_metin']; /* zaten HTML <ol>…</ol> içeriyor */ ?>
+                                <!-- Terms Container with Page Break Protection -->
+                                <div id="offer-terms-section" class="terms-container" style="max-width: 1200px; margin: 0.5rem auto; padding: 0 2rem;">
+                                    <div style="background: #f9fafb; padding: 1rem; border-radius: 8px;">
+                                        <h5 style="font-size: 1rem; font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;"><?= htmlspecialchars($soz['sozlesmeadi']); ?></h5>
+                                        <div class="terms-content" style="font-size: 0.75rem; color: #4b5563; line-height: 1.6;">
+                                            <?= $soz['sozlesme_metin']; ?>
+                                        </div>
                                     </div>
                                 </div>
                             <?php
@@ -1247,32 +2113,27 @@ function t($key, $isForeign = false) {
 
                             <!-- İşlem Butonları -->
                             <?php if ($isEditable): ?>
-                                <div class="card mt-3">
-                                    <div class="card-header bg-light">
-                                        <h5 class="mb-1"><?= t('action_options', $isForeignCustomer); ?></h5>
-                                        <p class="mb-0"><?= t('current_status', $isForeignCustomer); ?>: <strong><?= htmlspecialchars($currentDurum); ?></strong></p>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-end align-items-center gap-2">
-                                            <form action="offer_detail.php?te=<?= urlencode($teklifId); ?>&sta=<?= urlencode($siparisStatu); ?>" method="POST" data-parsley-validate class="d-inline">
-                                                <input type="hidden" name="durum" value="Onayla">
-                                                <button type="submit" class="btn btn-success" data-bs-toggle="tooltip" title="<?= htmlspecialchars($onayTooltip); ?>"><?= t('approve', $isForeignCustomer); ?></button>
-                                            </form>
+                                <div style="max-width: 1200px; margin: 0.5rem auto 2rem; padding: 0 2rem;">
+                                    <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded">
+                                        <div>
+                                            <h5 class="mb-1" style="font-size: 1rem; font-weight: 600;"><?= t('action_options', $isForeignCustomer); ?></h5>
+                                            <p class="mb-0" style="font-size: 0.875rem;"><?= t('current_status', $isForeignCustomer); ?>: <strong><?= htmlspecialchars($currentDurum); ?></strong></p>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button type="button" class="btn btn-success" onclick="approveOffer()" data-bs-toggle="tooltip" title="<?= htmlspecialchars($onayTooltip); ?>"><?= t('approve', $isForeignCustomer); ?></button>
                                             <form action="offer_detail.php?te=<?= urlencode($teklifId); ?>&sta=<?= urlencode($siparisStatu); ?>" method="POST" data-parsley-validate class="d-inline">
                                                 <input type="hidden" name="durum" value="Reddet">
                                                 <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" title="<?= htmlspecialchars($redTooltip); ?>"><?= t('reject', $isForeignCustomer); ?></button>
                                             </form>
                                             <?php if ($canRevise): ?>
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="tooltip" title="<?= t('revise_tooltip', $isForeignCustomer); ?>" onclick="switchTabToDurum()"><?= t('revise', $isForeignCustomer); ?></button>
-                                            <?php else: ?>
-                                                <button type="button" class="btn btn-warning" disabled data-bs-toggle="tooltip" title="<?= t('revise_right_exceeded', $isForeignCustomer); ?>"><?= t('revise_right_exceeded', $isForeignCustomer); ?></button>
+                                                <button type="button" class="btn btn-warning" onclick="document.getElementById('durum-tab').click();" data-bs-toggle="tooltip" title="<?= t('revise_tooltip', $isForeignCustomer); ?>"><?= t('request_revise', $isForeignCustomer); ?></button>
                                             <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
-                            <?php else: ?>
-                                <div class="card mt-3">
-                                    <div class="card-body">
+                            <?php elseif (!$isEditable): ?>
+                                <div style="max-width: 1200px; margin: 0.5rem auto 2rem; padding: 0 2rem;">
+                                    <div class="alert alert-secondary mb-0">
                                         <p class="mb-0"><?= t('no_change_allowed', $isForeignCustomer); ?> <?= t('current_status', $isForeignCustomer); ?>: <strong><?= htmlspecialchars($currentDurum); ?></strong></p>
                                     </div>
                                 </div>
@@ -1280,82 +2141,102 @@ function t($key, $isForeign = false) {
 
                         </div>
 
+
                         <!-- Tab 2: Durum Düzenleme (Revize İşlemi) -->
                         <div class="tab-pane fade" id="durum" role="tabpanel" aria-labelledby="durum-tab">
-                            <div class="card mt-3">
-
-                                <div class="card-header">
-                                    <h5><?= t('revise_process', $isForeignCustomer); ?></h5>
-                                </div>
-                                <div class="card-body">
-                                    <form action="offer_detail.php?te=<?= urlencode($teklifId); ?>&sta=<?= urlencode($siparisStatu); ?>" method="POST" data-parsley-validate>
-                                        <input type="hidden" name="durum" value="Revize Et">
-                                        <div class="mb-3">
-                                            <label for="notlar" class="form-label"><?= t('revise_note', $isForeignCustomer); ?>:</label>
-                                            <textarea class="form-control" id="notlar" name="notlar" rows="4"
-                                                placeholder="<?= t('revise_placeholder', $isForeignCustomer); ?>"
-                                                data-parsley-minlength="10"
-                                                data-parsley-maxlength="300"
-                                                data-parsley-trigger="change"></textarea>
-                                        </div>
-                                        <div class="text-end">
-                                            <button type="submit" class="btn btn-warning" data-bs-toggle="tooltip" title="<?= t('revise_complete_tooltip', $isForeignCustomer); ?>"><?= t('revise_update', $isForeignCustomer); ?></button>
-                                        </div>
-                                    </form>
+                            <!-- Revize Form Section -->
+                            <div style="max-width: 1200px; margin: 2rem auto; padding: 0 2rem;">
+                                <div class="card">
+                                    <div class="card-header" style="background: linear-gradient(45deg, #f59e0b, #d97706); color: white;">
+                                        <h5 class="mb-0" style="font-weight: 600;"><?= t('revise_process', $isForeignCustomer); ?></h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <?php if ($canRevise): ?>
+                                            <form action="offer_detail.php?te=<?= urlencode($teklifId); ?>&sta=<?= urlencode($siparisStatu); ?>" method="POST" data-parsley-validate>
+                                                <input type="hidden" name="durum" value="Revize Et">
+                                                <div class="mb-3">
+                                                    <label for="notlar" class="form-label" style="font-weight: 600; color: #1f2937;"><?= t('revise_note', $isForeignCustomer); ?>:</label>
+                                                    <textarea class="form-control" id="notlar" name="notlar" rows="4"
+                                                        placeholder="<?= t('revise_placeholder', $isForeignCustomer); ?>"
+                                                        data-parsley-minlength="10"
+                                                        data-parsley-maxlength="300"
+                                                        data-parsley-trigger="change"
+                                                        style="border: 2px solid #e5e7eb; border-radius: 8px; padding: 0.75rem;"></textarea>
+                                                    <small class="text-muted">Minimum 10, maksimum 300 karakter</small>
+                                                </div>
+                                                <div class="text-end">
+                                                    <button type="submit" class="btn btn-warning btn-lg" data-bs-toggle="tooltip" title="<?= t('revise_complete_tooltip', $isForeignCustomer); ?>" style="padding: 0.75rem 2rem; font-weight: 600;">
+                                                        <i class="bi bi-pencil-square me-2"></i><?= t('revise_update', $isForeignCustomer); ?>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        <?php else: ?>
+                                            <div class="alert alert-warning" role="alert">
+                                                <i class="bi bi-exclamation-triangle me-2"></i>
+                                                <strong><?= t('revise_right_exceeded', $isForeignCustomer); ?></strong>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card mt-3">
-                                <div class="card-header">
-                                    <h5><?= t('status_history', $isForeignCustomer); ?></h5>
-                                </div>
-                                <div class="card-body table-responsive">
-                                    <table class="table table-bordered table-striped">
-                                        <thead class="table-dark">
-                                            <tr>
-                                                <th><?= t('date', $isForeignCustomer); ?></th>
-                                                <th><?= t('old_status', $isForeignCustomer); ?></th>
-                                                <th><?= t('new_status', $isForeignCustomer); ?></th>
-                                                <th><?= t('changed_by', $isForeignCustomer); ?></th>
-                                                <th><?= t('notes', $isForeignCustomer); ?></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $historyRows = fetchMultiple(
-                                                $db,
-                                                "SELECT * FROM durum_gecisleri WHERE teklif_id = ? ORDER BY degistirme_tarihi DESC",
-                                                "Durum geçmişi sorgusu başarısız.",
-                                                [ $teklifId ],
-                                                'i'
-                                            );
-                                            if (!empty($historyRows)) {
-                                                foreach ($historyRows as $hSatir) {
-                                                    $degistirenId = (int)$hSatir["degistiren_personel_id"];
-                                                    $pAd = "Bilinmiyor";
-                                                    if ($degistirenId > 0) {
-                                                        $pBilgi = fetchSingle(
-                                                            $db,
-                                                            "SELECT adsoyad FROM yonetici WHERE yonetici_id = ?",
-                                                            "Yetkili sorgusu başarısız.",
-                                                            [ $degistirenId ],
-                                                            'i'
-                                                        );
-                                                        $pAd = $pBilgi["adsoyad"] ?? $pAd;
+
+                            <!-- Status History Section -->
+                            <div style="max-width: 1200px; margin: 2rem auto; padding: 0 2rem;">
+                                <div class="card">
+                                    <div class="card-header" style="background: linear-gradient(45deg, #2563eb, #1d4ed8); color: white;">
+                                        <h5 class="mb-0" style="font-weight: 600;"><?= t('status_history', $isForeignCustomer); ?></h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover">
+                                                <thead style="background: #2563eb; color: white;">
+                                                    <tr>
+                                                        <th style="font-weight: 600;"><?= t('date', $isForeignCustomer); ?></th>
+                                                        <th style="font-weight: 600;"><?= t('old_status', $isForeignCustomer); ?></th>
+                                                        <th style="font-weight: 600;"><?= t('new_status', $isForeignCustomer); ?></th>
+                                                        <th style="font-weight: 600;"><?= t('changed_by', $isForeignCustomer); ?></th>
+                                                        <th style="font-weight: 600;"><?= t('notes', $isForeignCustomer); ?></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $historyRows = fetchMultiple(
+                                                        $db,
+                                                        "SELECT * FROM durum_gecisleri WHERE teklif_id = ? ORDER BY degistirme_tarihi DESC",
+                                                        "Durum geçmişi sorgusu başarısız.",
+                                                        [ $teklifId ],
+                                                        'i'
+                                                    );
+                                                    if (!empty($historyRows)) {
+                                                        foreach ($historyRows as $hSatir) {
+                                                            $degistirenId = (int)$hSatir["degistiren_personel_id"];
+                                                            $pAd = "Bilinmiyor";
+                                                            if ($degistirenId > 0) {
+                                                                $pBilgi = fetchSingle(
+                                                                    $db,
+                                                                    "SELECT adsoyad FROM yonetici WHERE yonetici_id = ?",
+                                                                    "Yetkili sorgusu başarısız.",
+                                                                    [ $degistirenId ],
+                                                                    'i'
+                                                                );
+                                                                $pAd = $pBilgi["adsoyad"] ?? $pAd;
+                                                            }
+                                                            echo '<tr>';
+                                                            echo '<td style="white-space: nowrap;">' . htmlspecialchars($hSatir["degistirme_tarihi"]) . '</td>';
+                                                            echo '<td><span class="badge bg-secondary">' . htmlspecialchars($hSatir["eski_durum"]) . '</span></td>';
+                                                            echo '<td><span class="badge bg-primary">' . htmlspecialchars($hSatir["yeni_durum"]) . '</span></td>';
+                                                            echo '<td>' . htmlspecialchars($pAd) . '</td>';
+                                                            echo '<td>' . htmlspecialchars($hSatir["notlar"]) . '</td>';
+                                                            echo '</tr>';
+                                                        }
+                                                    } else {
+                                                        echo '<tr><td colspan="5" class="text-center text-muted">Henüz durum değişikliği kaydı bulunmamaktadır.</td></tr>';
                                                     }
-                                                    echo '<tr>';
-                                                    echo '<td>' . htmlspecialchars($hSatir["degistirme_tarihi"]) . '</td>';
-                                                    echo '<td>' . htmlspecialchars($hSatir["eski_durum"]) . '</td>';
-                                                    echo '<td>' . htmlspecialchars($hSatir["yeni_durum"]) . '</td>';
-                                                    echo '<td>' . htmlspecialchars($pAd) . '</td>';
-                                                    echo '<td>' . htmlspecialchars($hSatir["notlar"]) . '</td>';
-                                                    echo '</tr>';
-                                                }
-                                            } else {
-                                                echo '<tr><td colspan="5" class="text-center">Kayıt Yok</td></tr>';
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1384,7 +2265,71 @@ function t($key, $isForeign = false) {
                     ?>
                 </div>
             </div>
-            <footer class="footer mt-4">
+
+            <!-- Onay Modal -->
+            <div class="modal fade" id="approvalModal" tabindex="-1" aria-labelledby="approvalModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
+                        <div class="modal-header" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border-radius: 12px 12px 0 0; border: none;">
+                            <h5 class="modal-title" id="approvalModalLabel">
+                                <i class="fas fa-check-circle me-2"></i>
+                                <span id="modalTitle"><?= $isForeignCustomer ? 'Confirm Offer' : 'Teklifi Onayla' ?></span>
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" style="padding: 2rem;">
+                            <div class="alert alert-info" style="background: #dbeafe; border-left: 4px solid #3b82f6; border-radius: 8px;">
+                                <p class="mb-0" id="modalMessage" style="font-size: 0.95rem; line-height: 1.6;">
+                                    <?= $isForeignCustomer 
+                                        ? 'You are approving this offer. After your approval, an offer summary will be sent to your email address.' 
+                                        : 'Teklifi onaylıyorsunuz. Onayınız sonrasında mailinize teklif onay özeti gönderilecektir.' 
+                                    ?>
+                                </p>
+                            </div>
+                            
+                            <form id="approvalForm">
+                                <div class="mb-3">
+                                    <label for="customerEmail" class="form-label" id="emailLabel">
+                                        <?= $isForeignCustomer ? 'Email Address' : 'E-posta Adresi' ?>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="email" class="form-control" id="customerEmail" required 
+                                           value="<?= htmlspecialchars($customerEmail) ?>"
+                                           <?= !empty($customerEmail) ? 'readonly' : '' ?>
+                                           placeholder="<?= $isForeignCustomer ? 'your@email.com' : 'ornek@email.com' ?>"
+                                           style="border-radius: 8px; padding: 0.75rem; <?= !empty($customerEmail) ? 'background-color: #f3f4f6;' : '' ?>">
+                                    <?php if (!empty($customerEmail)): ?>
+                                    <small class="text-muted">
+                                        <?= $isForeignCustomer ? 'Email address from your offer' : 'Teklifinizdeki e-posta adresi' ?>
+                                    </small>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="customerName" class="form-label" id="nameLabel">
+                                        <?= $isForeignCustomer ? 'Full Name' : 'Ad Soyad' ?>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="customerName" required 
+                                           value="<?= htmlspecialchars($customerName) ?>"
+                                           placeholder="<?= $isForeignCustomer ? 'John Doe' : 'Adınız Soyadınız' ?>"
+                                           style="border-radius: 8px; padding: 0.75rem;">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer" style="border-top: 1px solid #e5e7eb; padding: 1rem 2rem;">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 8px;">
+                                <?= $isForeignCustomer ? 'Cancel' : 'İptal' ?>
+                            </button>
+                            <button type="button" class="btn btn-success" onclick="submitApproval()" style="border-radius: 8px; padding: 0.5rem 1.5rem;">
+                                <i class="fas fa-check me-2"></i>
+                                <span id="confirmButton"><?= $isForeignCustomer ? 'Confirm Approval' : 'Onayı Tamamla' ?></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer mt-0">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">© 2023 Gemas. Tüm Hakları Saklıdır.</div>
@@ -1403,15 +2348,199 @@ function t($key, $isForeign = false) {
     <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/libs/parsleyjs/parsley.min.js"></script>
     <script>
+        // Initialize tooltips
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
 
+        // Manual tab switching (Bootstrap tabs weren't working properly)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get tab buttons and panes
+            const detayTab = document.getElementById('detay-tab');
+            const durumTab = document.getElementById('durum-tab');
+            const detayPane = document.getElementById('detay');
+            const durumPane = document.getElementById('durum');
+
+            // Get specific sections that are outside tab-pane
+            const summarySection = document.getElementById('offer-summary-section');
+            const termsSection = document.getElementById('offer-terms-section');
+
+            if (!detayTab || !durumTab || !detayPane || !durumPane) {
+                console.error('Tab elements not found');
+                return;
+            }
+
+            console.log('Summary section:', summarySection);
+            console.log('Terms section:', termsSection);
+
+            // Function to switch tabs
+            function switchTab(showTab, hideTab, showPane, hidePane) {
+                // Update tab buttons
+                showTab.classList.add('active');
+                showTab.setAttribute('aria-selected', 'true');
+                hideTab.classList.remove('active');
+                hideTab.setAttribute('aria-selected', 'false');
+
+                // Update tab panes
+                showPane.classList.add('show', 'active');
+                hidePane.classList.remove('show', 'active');
+
+                // Manually hide/show summary and terms
+                if (showPane.id === 'durum') {
+                    // Hide summary and terms when showing Revize tab
+                    if (summarySection) {
+                        summarySection.style.display = 'none';
+                        console.log('Hiding summary section');
+                    }
+                    if (termsSection) {
+                        termsSection.style.display = 'none';
+                        console.log('Hiding terms section');
+                    }
+                } else {
+                    // Show summary and terms when showing Detay tab
+                    if (summarySection) {
+                        summarySection.style.display = '';
+                        console.log('Showing summary section');
+                    }
+                    if (termsSection) {
+                        termsSection.style.display = '';
+                        console.log('Showing terms section');
+                    }
+                }
+            }
+
+            // Add click handlers
+            detayTab.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Detay tab clicked');
+                switchTab(detayTab, durumTab, detayPane, durumPane);
+            });
+
+            durumTab.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Durum tab clicked');
+                switchTab(durumTab, detayTab, durumPane, detayPane);
+            });
+
+            console.log('Manual tab switching initialized');
+        });
+
+        // Helper function to switch to Durum tab
         function switchTabToDurum() {
-            var triggerEl = document.querySelector('#durum-tab');
-            bootstrap.Tab.getInstance(triggerEl).show();
+            const durumTab = document.getElementById('durum-tab');
+            if (durumTab) {
+                durumTab.click();
+            }
         }
+
+        // Teklif onaylama - Modal aç
+        function approveOffer() {
+            const modal = new bootstrap.Modal(document.getElementById('approvalModal'));
+            modal.show();
+        }
+
+        // Modal'dan onay gönder
+        async function submitApproval() {
+            const emailInput = document.getElementById('customerEmail');
+            const nameInput = document.getElementById('customerName');
+            const confirmBtn = event.target.closest('button');
+            
+            // Form validasyonu
+            if (!emailInput.value || !emailInput.value.includes('@')) {
+                emailInput.focus();
+                emailInput.classList.add('is-invalid');
+                return;
+            }
+            
+            if (!nameInput.value || nameInput.value.trim() === '') {
+                nameInput.focus();
+                nameInput.classList.add('is-invalid');
+                return;
+            }
+
+            // Loading göster
+            const originalText = confirmBtn.innerHTML;
+            confirmBtn.disabled = true;
+            const isForeign = <?= $isForeignCustomer ? 'true' : 'false' ?>;
+            confirmBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>' + (isForeign ? 'Processing...' : 'İşleniyor...');
+
+            try {
+                const response = await fetch('api/approve_offer.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        teklif_id: <?= $teklifId ?>,
+                        customer_email: emailInput.value,
+                        customer_name: nameInput.value
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Form'u gizle, başarı mesajını göster
+                    document.getElementById('approvalForm').style.display = 'none';
+                    document.querySelector('.modal-footer').style.display = 'none';
+                    document.querySelector('.alert-info').style.display = 'none';
+                    
+                    // Başarı mesajı
+                    const modalBody = document.querySelector('#approvalModal .modal-body');
+                    const successMsg = isForeign 
+                        ? `<div class="alert alert-success" style="background: #d1fae5; border-left: 4px solid #10b981; border-radius: 8px; padding: 20px; text-align: center;">
+                            <i class="fas fa-check-circle" style="font-size: 48px; color: #10b981; margin-bottom: 15px;"></i>
+                            <h4 style="color: #065f46; margin-bottom: 10px;">Offer Approved Successfully!</h4>
+                            <p style="color: #047857; margin-bottom: 15px;">A confirmation email and PDF have been sent to your email address.</p>
+                            <p style="color: #047857;">Our sales team will contact you shortly.</p>
+                            <button class="btn btn-success mt-3" onclick="window.location.reload()" style="border-radius: 8px; padding: 10px 30px;">
+                                <i class="fas fa-redo me-2"></i>OK
+                            </button>
+                        </div>`
+                        : `<div class="alert alert-success" style="background: #d1fae5; border-left: 4px solid #10b981; border-radius: 8px; padding: 20px; text-align: center;">
+                            <i class="fas fa-check-circle" style="font-size: 48px; color: #10b981; margin-bottom: 15px;"></i>
+                            <h4 style="color: #065f46; margin-bottom: 10px;">Teklif başarıyla onaylandı!</h4>
+                            <p style="color: #047857; margin-bottom: 15px;">E-posta adresinize onay maili ve PDF gönderilmiştir.</p>
+                            <p style="color: #047857;">Satış ekibimiz en kısa sürede sizinle iletişime geçecektir.</p>
+                            <button class="btn btn-success mt-3" onclick="window.location.reload()" style="border-radius: 8px; padding: 10px 30px;">
+                                <i class="fas fa-redo me-2"></i>Tamam
+                            </button>
+                        </div>`;
+                    
+                    modalBody.innerHTML = successMsg;
+                    
+                } else {
+                    throw new Error(data.error || (isForeign ? 'Unknown error occurred' : 'Bilinmeyen bir hata oluştu'));
+                }
+            } catch (error) {
+                console.error('Onay hatası:', error);
+                const errorMsg = isForeign 
+                    ? '❌ An error occurred during approval:\n' + error.message
+                    : '❌ Onay işlemi sırasında bir hata oluştu:\n' + error.message;
+                alert(errorMsg);
+                confirmBtn.disabled = false;
+                confirmBtn.innerHTML = originalText;
+            }
+        }
+
+        // Input validation - remove invalid class on input
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailInput = document.getElementById('customerEmail');
+            const nameInput = document.getElementById('customerName');
+            
+            if (emailInput) {
+                emailInput.addEventListener('input', function() {
+                    this.classList.remove('is-invalid');
+                });
+            }
+            
+            if (nameInput) {
+                nameInput.addEventListener('input', function() {
+                    this.classList.remove('is-invalid');
+                });
+            }
+        });
     </script>
 </body>
 

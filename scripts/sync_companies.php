@@ -91,6 +91,12 @@ $dbManager = new DatabaseManager([
 ]);
 
 function mapLogoRow(array $row): array {
+    // İhracat kontrolü - SPECODE alanında "İhracat" varsa yurtdışı müşterisi
+    $specode = $row['SPECODE'] ?? '';
+    $isExport = (stripos($specode, 'İhracat') !== false || 
+                 stripos($specode, 'Ihracat') !== false || 
+                 stripos($specode, 'EXPORT') !== false) ? 1 : 0;
+    
     return [
         'internal_reference' => $row['LOGICALREF'] ?? null,
         's_adi'            => $row['DEFINITION_'] ?? null,
@@ -113,7 +119,9 @@ function mapLogoRow(array $row): array {
         'acikhesap'        => $row['BAKIYE'] ?? 0,
         'payplan_code'     => $row['PAYPLAN_CODE'] ?? null,
         'payplan_def'      => $row['PAYPLAN_DEF'] ?? null,
-        'logo_company_code'=> $row['CODE'] ?? null
+        'logo_company_code'=> $row['CODE'] ?? null,
+        'specode'          => $specode,
+        'is_export'        => $isExport
     ];
 }
 
@@ -140,6 +148,7 @@ function mapLogoRow(array $row): array {
         {$tradingField}
         CL.TELNRS1,
         CL.EMAILADDR,
+        CL.SPECODE,
         PP.CODE        AS PAYPLAN_CODE,
         PP.DEFINITION_ AS PAYPLAN_DEF,
         BAL.BAKIYE

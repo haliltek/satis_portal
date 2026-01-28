@@ -48,6 +48,8 @@ try {
                         ."<i class='fa fa-users'></i></a>"
                     ."<a href='faturalar.php?id={$data}' class='text-warning' data-bs-toggle='tooltip' title='Fatura / İrsaliye'>"
                         ."<i class='fa fa-receipt'></i></a>"
+                    ."<a href='fiyat_calismasi.php?id={$data}' class='text-primary' data-bs-toggle='tooltip' title='Fiyat Çalışması'>"
+                        ."<i class='fa fa-money-bill-wave'></i></a>"
                     ."<a href='sirketeaitsiparisler.php?id={$data}' class='text-success' data-bs-toggle='tooltip' title='Siparişler'>"
                         ."<i class='fa fa-shopping-basket'></i></a>"
                     ."<a href='sirketsil.php?id={$data}' class='text-danger' data-bs-toggle='tooltip' title='Kaldır'>"

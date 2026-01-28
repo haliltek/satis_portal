@@ -189,7 +189,7 @@ function renderNewPersonelModal($db) {
         ["label" => "Ad Soyad", "name" => "adsoyad", "type" => "text", "placeholder" => "ÖR. Erkan AK", "col" => 4],
         ["label" => "E-Posta", "name" => "eposta", "type" => "email", "placeholder" => "ÖR. egemasr@gemas.com", "col" => 4],
         ["label" => "Parola", "name" => "parola", "type" => "password", "placeholder" => "***********", "col" => 4],
-        ["label" => "Tür", "name" => "tur", "type" => "select", "options" => ["Personel", "Yönetici"], "col" => 4],
+        ["label" => "Tür", "name" => "tur", "type" => "select", "options" => ["Personel", "Export", "Yönetici"], "col" => 4],
         ["label" => "Satış Tipi", "name" => "satis_tipi", "type" => "select", "options" => ["Yurt İçi", "Yurt Dışı"], "col" => 4],
         ["label" => "Bölüm", "name" => "bolum", "type" => "select_db", "query" => "SELECT * FROM departmanlar", "col" => 4],
         ["label" => "Telefon", "name" => "telefon", "type" => "number", "placeholder" => "ÖR. 05333333333", "col" => 4],
@@ -307,6 +307,7 @@ function renderEditModals($db) {
                                   <select class="form-select" name="tur" id="tur' . $modalId . '">
                                     <option value="' . htmlspecialchars($personel["tur"]) . '" selected>' . htmlspecialchars($personel["tur"]) . '</option>
                                     <option value="Personel">Personel</option>
+                                    <option value="Export">Export</option>
                                     <option value="Yönetici">Yönetici</option>
                                   </select>
                                 </div>

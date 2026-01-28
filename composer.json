@@ -8,7 +8,8 @@
         "ahmeti/bank-exchange-rates": "^1.8",
         "symfony/css-selector": "^7.2",
         "monolog/monolog": "^3.9",
-        "phpoffice/phpspreadsheet": "^4.3"
+        "phpoffice/phpspreadsheet": "^4.3",
+        "mpdf/mpdf": "^8.2"
     },
     "autoload": {
         "psr-4": {

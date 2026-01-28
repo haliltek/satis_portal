@@ -1,0 +1,10 @@
+2026-01-27 10:59:27 - ÖZEL TEKLİF BLOGU TETIKLENDİ - Teklif ID: 74
+2026-01-27 10:59:27 - API URL (normalized): http://localhost/b2b-gemas-project-main/api/teklif/onay-gonder.php
+2026-01-27 10:59:27 - Approval Data: {"yonetici_tel":"905525287286","cari":"ERTEK YAPI VE MAK.END.EK\u0130PMANLARI SAN.T\u0130C.LTD.\u015eT\u0130.","toplam":"19080204.00","teklif_id":74,"temsilci":"gemas_admin","urunler":[{"ad":"\u00d8900 Gemas Seljuk BL Enjeksiyon Filtre yandan2","adet":50,"fiyat":13722.5},{"ad":"\u00d8630 Gema\u015f ","adet":1500,"fiyat":292050}]}
+2026-01-27 10:59:30 - cURL Result: HTTP 200, Error: 0, Message: 
+2026-01-27 10:59:30 - API Response: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"No changes made (ID might be same or Offer not found)"}}
+2026-01-27 17:50:15 - ÖZEL TEKLİF BLOGU TETIKLENDİ - Teklif ID: 77
+2026-01-27 17:50:15 - API URL (normalized): http://localhost/b2b-gemas-project-main/api/teklif/onay-gonder.php
+2026-01-27 17:50:15 - Approval Data: {"yonetici_tel":"905525287286","cari":"","toplam":"27643.20","teklif_id":77,"temsilci":"gemas_admin","urunler":[{"ad":"0111STRN-100M 1 HP Monofaze \u00c7evirme Kapak","adet":1,"fiyat":171},{"ad":"0111STRN-200T 2 HP Trifaze \u00c7evirme Kapak","adet":1,"fiyat":272}]}
+2026-01-27 17:50:17 - cURL Result: HTTP 200, Error: 0, Message: 
+2026-01-27 17:50:17 - API Response: {"status":"sent","http_code":200,"n8n_response":{"status":"success","message":"No changes made (ID might be same or Offer not found)"}}

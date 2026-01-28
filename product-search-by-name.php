@@ -43,7 +43,7 @@ if (!$db) {
 // Ürün adı veya stok kodu ile ürün ara (case-insensitive LIKE ile)
 $searchTerm = '%' . strtoupper(trim($productName)) . '%';
 
-$sql = "SELECT urun_id, stokkodu, stokadi, fiyat, export_fiyat, doviz, olcubirimi, LOGICALREF 
+$sql = "SELECT urun_id, stokkodu, stokadi, fiyat, export_fiyat, maliyet, doviz, olcubirimi, LOGICALREF 
         FROM urunler 
         WHERE (UPPER(TRIM(stokadi)) LIKE ? OR UPPER(TRIM(stokkodu)) LIKE ?)
         ORDER BY 
@@ -110,7 +110,8 @@ while ($row = $result->fetch_assoc()) {
         'currency' => $row['doviz'],
         'currency_icon' => $dovizIkon,
         'unit' => $row['olcubirimi'],
-        'logicalref' => $row['LOGICALREF']
+        'logicalref' => $row['LOGICALREF'],
+        'maliyet' => $row['maliyet']
     ];
 }
 $stmt->close();
