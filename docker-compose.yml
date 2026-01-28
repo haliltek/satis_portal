@@ -1,52 +1,131 @@
 version: '3.8'
 
 services:
+  # Traefik Reverse Proxy
+  traefik:
+    image: traefik:v2.10
+    container_name: gemas_portal_traefik
+    restart: always
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.letsencrypt.acme.email=admin@gemas.com.tr"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik_letsencrypt:/letsencrypt
+    networks:
+      - gemas_portal_network
+    labels:
+      - "traefik.enable=true"
+      # Dashboard
+      - "traefik.http.routers.traefik.rule=Host(`traefik.gemas.local`)"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.entrypoints=web"
+
+  # PHP Application
   app:
     build: .
     container_name: gemas_portal_app
     restart: always
-    ports:
-      - "8080:80"
     volumes:
       - .:/var/www/html
+      - uploads:/var/www/html/uploads
+      - pdfs:/var/www/html/pdfs
     environment:
       - DB_HOST=db
+      - DB_PORT=3306
       - DB_NAME=${DB_NAME:-gemas_portal}
       - DB_USER=${DB_USER:-root}
       - DB_PASSWORD=${DB_PASSWORD:-root}
       - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - TZ=Europe/Istanbul
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
     networks:
       - gemas_portal_network
+    labels:
+      - "traefik.enable=true"
+      # HTTP Router
+      - "traefik.http.routers.gemas.rule=Host(`satis.gemas.com.tr`) || Host(`localhost`)"
+      - "traefik.http.routers.gemas.entrypoints=web"
+      # HTTPS Router
+      - "traefik.http.routers.gemas-secure.rule=Host(`satis.gemas.com.tr`)"
+      - "traefik.http.routers.gemas-secure.entrypoints=websecure"
+      - "traefik.http.routers.gemas-secure.tls=true"
+      - "traefik.http.routers.gemas-secure.tls.certresolver=letsencrypt"
+      # Middleware: Redirect HTTP to HTTPS
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.gemas.middlewares=redirect-to-https"
+      # Service
+      - "traefik.http.services.gemas.loadbalancer.server.port=80"
 
+  # MySQL Database
   db:
-    image: mariadb:10.6
+    image: mariadb:10.11
     container_name: gemas_portal_db
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-root}
       - MYSQL_DATABASE=${DB_NAME:-gemas_portal}
+      - MYSQL_USER=${DB_USER:-gemas}
+      - MYSQL_PASSWORD=${DB_PASSWORD:-root}
+      - TZ=Europe/Istanbul
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
       - gemas_portal_network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD:-root}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --max_connections=500
+      - --innodb_buffer_pool_size=512M
 
+  # Redis Cache
   redis:
-    image: redis:alpine
+    image: redis:7-alpine
     container_name: gemas_portal_redis
     restart: always
-    command: redis-server --appendonly yes
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
     volumes:
       - redis_data:/data
     networks:
       - gemas_portal_network
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 3s
+      retries: 3
 
 volumes:
   mysql_data:
+    driver: local
   redis_data:
-
+    driver: local
+  traefik_letsencrypt:
+    driver: local
+  uploads:
+    driver: local
+  pdfs:
+    driver: local
 
 networks:
   gemas_portal_network:

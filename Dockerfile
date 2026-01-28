@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
+    netcat-openbsd \
     && rm -rf /var/lib/apt/lists/*
 
 # 2. Add Microsoft Repo for SQL Server Drivers
@@ -33,9 +34,8 @@ RUN pecl install redis sqlsrv pdo_sqlsrv \
 # 5. Enable Apache Modules
 RUN a2enmod rewrite headers
 
-# 6. Configure PHP
-# Use the default production configuration
-RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+# 6. Copy Custom PHP Configuration
+COPY php.ini $PHP_INI_DIR/conf.d/custom.ini
 
 # Set working directory
 WORKDIR /var/www/html
@@ -49,6 +49,10 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html \
     && sed -i 's/\r$//' entrypoint.sh \
     && chmod +x entrypoint.sh
+
+# 9. Health Check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD curl -f http://localhost/healthcheck.php || exit 1
 
 # Expose Port
 EXPOSE 80
