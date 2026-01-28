@@ -16,6 +16,6 @@
 2026-01-21 08:51:15 - Response Code: 200, Error: , Response: {"status":"success","message":"No changes made (ID might be same or Offer not found)"}
 2026-01-22 06:59:34 - Request Data: {"yonetici_tel":"905525287286","cari":"","toplam":"33403.78","teklif_id":57,"temsilci":"gemas_admin","urunler":[{"ad":"0111STRN-300T 3 HP Trifaze \u00c7evirme Kapak","adet":1,"fiyat":272},{"ad":"0111STRN-200T 2 HP Trifaze \u00c7evirme Kapak","adet":1,"fiyat":272}]}
 2026-01-22 06:59:36 - Response Code: 200, Error: , Response: {"status":"success","message":"Message ID saved successfully"}
-[2026-01-27 08:59:27] Request Data: {"yonetici_tel":"905525287286","cari":"ERTEK YAPI VE MAK.END.EK\u0130PMANLARI SAN.T\u0130C.LTD.\u015eT\u0130.","toplam":"19080204.00","teklif_id":74,"temsilci":"gemas_admin","urunler":[{"ad":"\u00d8900 Gemas Seljuk BL Enjeksiyon Filtre yandan2","adet":50,"fiyat":13722.5},{"ad":"\u00d8630 Gema\u015f ","adet":1500,"fiyat":292050}]}
-[2026-01-27 08:59:30] Webhook Response - HTTP Code: 200, cURL Error: 0, Error Message: 
-[2026-01-27 08:59:30] Webhook Response Body: {"status":"success","message":"No changes made (ID might be same or Offer not found)"}
+[2026-01-27 15:50:15] Request Data: {"yonetici_tel":"905525287286","cari":"","toplam":"27643.20","teklif_id":77,"temsilci":"gemas_admin","urunler":[{"ad":"0111STRN-100M 1 HP Monofaze \u00c7evirme Kapak","adet":1,"fiyat":171},{"ad":"0111STRN-200T 2 HP Trifaze \u00c7evirme Kapak","adet":1,"fiyat":272}]}
+[2026-01-27 15:50:17] Webhook Response - HTTP Code: 200, cURL Error: 0, Error Message: 
+[2026-01-27 15:50:17] Webhook Response Body: {"status":"success","message":"No changes made (ID might be same or Offer not found)"}

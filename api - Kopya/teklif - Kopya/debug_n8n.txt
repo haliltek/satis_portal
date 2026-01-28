@@ -1,0 +1,32 @@
+Request Received: Array
+(
+    [message_id] => 3EB05BF5F667F80F7E2E4D
+    [action] => approve
+    [token] => gemas_secret_n8n_token_2025
+    [manager_phone] => 905525287286@s.whatsapp.net
+)
+
+Request Received: Array
+(
+    [message_id] => 3EB0051DCF5440B5BB5E57
+    [action] => approve
+    [token] => gemas_secret_n8n_token_2025
+    [manager_phone] => 905525287286@s.whatsapp.net
+)
+
+2025-12-15 12:52:07 Request Received: Array
+(
+    [message_id] => 3EB0A2B5AF1AE3A9B6548B
+    [action] => approve
+    [token] => gemas_secret_n8n_token_2025
+    [manager_phone] => 905525287286@s.whatsapp.net
+)
+
+2025-12-15 12:55:23 Request Received: Array
+(
+    [message_id] => 3EB0CB44899766146AC53A
+    [action] => approve
+    [token] => gemas_secret_n8n_token_2025
+    [manager_phone] => 905525287286@s.whatsapp.net
+)
+

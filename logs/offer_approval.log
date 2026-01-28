@@ -129,3 +129,16 @@
 [2026-01-27 11:02:38] INFO: MailService: Ek eklendi → Teklif_513973477B77-2026.pdf
 [2026-01-27 11:02:38] INFO: MailService: Gönderiliyor → To: haliltek@gemas.com.tr, Subject: Teklifiniz Onaylandı - #513973477B77-2026
 [2026-01-27 11:02:40] INFO: Müşteriye mail gönderildi → haliltek@gemas.com.tr
+[2026-01-27 14:40:18] INFO: Onay işlemi başladı → Teklif ID: 76
+[2026-01-27 14:40:18] INFO: Durum güncellendi → Sipariş Onaylandı / Logoya Aktarım Bekliyor
+[2026-01-27 14:40:19] INFO: PdfService: Teklif PDF oluşturuluyor → ID: 76
+[2026-01-27 14:40:19] INFO: PdfService: Veriler çekildi - 1 ürün
+[2026-01-27 14:40:19] INFO: PdfService: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_76_20260127144019.pdf
+[2026-01-27 14:40:19] INFO: PdfService: PDF başarıyla oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_76_20260127144019.pdf (72563 bytes)
+[2026-01-27 14:40:19] INFO: PDF oluşturuldu → C:\xampp\htdocs\b2b-gemas-project-main\services/../pdfs/teklif_76_20260127144019.pdf
+[2026-01-27 14:40:19] INFO: MailService: Ek eklendi → Teklif_765671510B77-2026.pdf
+[2026-01-27 14:40:19] INFO: MailService: Gönderiliyor → To: fiyat@gemas.com.tr, Subject: Teklif Onaylandı - #765671510B77-2026
+[2026-01-27 14:40:20] INFO: Satışçıya mail gönderildi → fiyat@gemas.com.tr
+[2026-01-27 14:40:20] INFO: MailService: Ek eklendi → Teklif_765671510B77-2026.pdf
+[2026-01-27 14:40:20] INFO: MailService: Gönderiliyor → To: haliltek@gemas.com.tr, Subject: Teklifiniz Onaylandı - #765671510B77-2026
+[2026-01-27 14:40:21] INFO: Müşteriye mail gönderildi → haliltek@gemas.com.tr

@@ -1,0 +1,1448 @@
+{
+    "name": "AI Agent workflow",
+    "nodes": [
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "loose",
+                        "version": 2
+                    },
+                    "conditions": [
+                        {
+                            "id": "id-1",
+                            "leftValue": "={{ $json.body?.data?.message?.conversation?.toLowerCase() || $json.body?.text?.toLowerCase() || '' }}",
+                            "rightValue": "fiyat",
+                            "operator": {
+                                "type": "string",
+                                "operation": "contains"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "looseTypeValidation": true,
+                "options": {}
+            },
+            "id": "86092d32-bab6-449a-ae6d-9a69252924af",
+            "name": "Mesaj Tipi Kontrolü",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.2,
+            "position": [
+                48,
+                512
+            ]
+        },
+        {
+            "parameters": {
+                "url": "https://f8a1e6b1094c.ngrok-free.app/b2b-gemas-project-main/api/urun/get_product_price.php",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "code",
+                            "value": "={{ $json.body?.data?.message?.conversation || $json.body?.text }}"
+                        }
+                    ]
+                },
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Authorization",
+                            "value": "Bearer gemas_secret_n8n_token_2025"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "d312ed50-eedd-40f6-9ea6-43f13e5d631d",
+            "name": "Ürün Fiyatı Sorgula",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                272,
+                416
+            ]
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": false,
+                        "leftValue": "",
+                        "typeValidation": "loose"
+                    },
+                    "conditions": [
+                        {
+                            "id": "id-1",
+                            "leftValue": "={{ $json.found }}",
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "true"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "id": "31bd0209-810b-4bd2-a129-6d46351755d8",
+            "name": "Ürün Bulundu mu?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.2,
+            "position": [
+                496,
+                416
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://wp.gemas.com.tr/message/sendText/gemaswp",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "363D82358564-488F-A87A-3BD36C3CF02A"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"{{ $('teklifOnayCevap4').item.json.body.sender }}\",\n  \"text\": \"💰 *Ürün Fiyat Bilgisi*\\n\\nStok Kodu: {{ $('Ürün Fiyatı Sorgula').item.json.stokkodu }}\\nÜrün Adı: {{ $('Ürün Fiyatı Sorgula').item.json.name }}\\nFiyat: {{ $('Ürün Fiyatı Sorgula').item.json.price }} {{ $('Ürün Fiyatı Sorgula').item.json.currency }}\"\n}",
+                "options": {}
+            },
+            "id": "75cf2e06-bba3-4c81-a3f3-b32a4d9cec1b",
+            "name": "Fiyat Bilgisi Gönder",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                720,
+                320
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://wp.gemas.com.tr/message/sendText/gemaswp",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "363D82358564-488F-A87A-3BD36C3CF02A"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"{{ $('teklifOnayCevap4').item.json.body.sender }}\",\n  \"text\": \"📋 *Fiyat Sorgulama*\\n\\nLütfen ürünün stok kodunu eksiksiz olarak girin.\\n\\nÖrnek: 0111300N\"\n}",
+                "options": {}
+            },
+            "id": "c625ecc1-4217-45f4-bfac-9f92819d01c3",
+            "name": "Stok Kodu İste",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                720,
+                704
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://wp.gemas.com.tr/message/sendText/gemaswp",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "363D82358564-488F-A87A-3BD36C3CF02A"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"{{ $('teklifOnayCevap4').item.json.body.sender }}\",\n  \"text\": \"❌ *Ürün Bulunamadı*\\n\\nGirdiğiniz stok kodu sistemde bulunamadı.\\n\\nLütfen stok kodunu kontrol edip tekrar deneyin.\"\n}",
+                "options": {}
+            },
+            "id": "16a8c349-a97e-4ab4-bc82-6f7fd2a47234",
+            "name": "Ürün Bulunamadı Mesajı",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                720,
+                512
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://f8a1e6b1094c.ngrok-free.app/b2b-gemas-project-main/api/teklif/save_key_id.php",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        },
+                        {
+                            "name": "Authorization",
+                            "value": "Bearer gemas_secret_n8n_token_2025"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"teklif_id\": \"{{ $('teklifOnay4').item.json.body.teklif_id }}\",\n  \"message_id\": \"{{ $('HTTP Request4').item.json.key.id }}\",\n  \"yonetici_tel\": \"{{ $('teklifOnay4').item.json.body.yonetici_tel }}\",\n  \"token\": \"gemas_secret_n8n_token_2025\"\n}",
+                "options": {}
+            },
+            "id": "0c04bf05-465c-4e92-947f-001f06966655",
+            "name": "Backend'e Key ID Kaydet1",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                -848,
+                1504
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://f8a1e6b1094c.ngrok-free.app/b2b-gemas-project-main/api/teklif/n8n_callback.php",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"message_id\": \"{{ $('RED4').item.json.teklif_id }}\",\n  \"action\": \"reject\",\n  \"token\": \"gemas_secret_n8n_token_2025\",\n  \"manager_phone\": \"{{ $('Mesaj ID Hazırla3').item.json.body.sender }}\"\n}",
+                "options": {
+                    "response": {
+                        "response": {
+                            "neverError": true
+                        }
+                    }
+                }
+            },
+            "id": "f14d8e4a-538c-4c46-b5ba-250088a66791",
+            "name": "SİSTEM REDDİ1",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                720,
+                1280
+            ]
+        },
+        {
+            "parameters": {
+                "assignments": {
+                    "assignments": [
+                        {
+                            "id": "id-1",
+                            "name": "full_body",
+                            "value": "={{ JSON.stringify($json.body, null, 2) }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-2",
+                            "name": "pollUpdates_check",
+                            "value": "={{ $json.body?.data?.pollUpdates }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-3",
+                            "name": "data_check",
+                            "value": "={{ $json.data }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-4",
+                            "name": "pollUpdates_full",
+                            "value": "={{ JSON.stringify($json.body?.data?.pollUpdates, null, 2) }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-5",
+                            "name": "has_pollUpdates",
+                            "value": "={{ $json.body?.data?.pollUpdates !== undefined }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-6",
+                            "name": "is_array",
+                            "value": "={{ Array.isArray($json.body?.data?.pollUpdates) }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-7",
+                            "name": "length",
+                            "value": "={{ $json.body?.data?.pollUpdates?.length || 0 }}",
+                            "type": "number"
+                        }
+                    ]
+                },
+                "includeOtherFields": true,
+                "options": {}
+            },
+            "id": "cd3b7d43-648c-46e7-b161-e6c2e5c2929d",
+            "name": "DEBUG - Gelen Veri3",
+            "type": "n8n-nodes-base.set",
+            "typeVersion": 3.4,
+            "position": [
+                -1072,
+                800
+            ]
+        },
+        {
+            "parameters": {
+                "url": "https://f8a1e6b1094c.ngrok-free.app/b2b-gemas-project-main/api/teklif/check_decision.php",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "message_id",
+                            "value": "={{ $json.teklif_id }}"
+                        },
+                        {
+                            "name": "manager_phone",
+                            "value": "={{ $json.manager_phone }}"
+                        },
+                        {
+                            "name": "teklif_id",
+                            "value": "={{ $('Mesaj ID Hazırla3').item.json.teklif_id }}"
+                        }
+                    ]
+                },
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Authorization",
+                            "value": "Bearer gemas_secret_n8n_token_2025"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "fd7b8458-0246-447b-a21c-f9b90aaf2ba8",
+            "name": "Karar Kontrolü3",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                -400,
+                1088
+            ]
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "loose",
+                        "version": 2
+                    },
+                    "conditions": [
+                        {
+                            "id": "id-1",
+                            "leftValue": "={{ $json.decided }}",
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "true"
+                            }
+                        },
+                        {
+                            "id": "id-2",
+                            "leftValue": "={{ $json.decided }}",
+                            "rightValue": "true",
+                            "operator": {
+                                "type": "string",
+                                "operation": "equals"
+                            }
+                        },
+                        {
+                            "id": "id-3",
+                            "leftValue": "={{ $json.decided }}",
+                            "rightValue": 1,
+                            "operator": {
+                                "type": "number",
+                                "operation": "equals"
+                            }
+                        }
+                    ],
+                    "combinator": "or"
+                },
+                "looseTypeValidation": true,
+                "options": {}
+            },
+            "id": "4f44c110-7f02-4a8a-bc37-8b08665acba8",
+            "name": "Daha Önce Karar Verilmiş mi?3",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.2,
+            "position": [
+                -176,
+                1088
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://wp.gemas.com.tr/message/sendText/gemaswp",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "363D82358564-488F-A87A-3BD36C3CF02A"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"{{ $('Mesaj ID Hazırla3').item.json.manager_phone }}@s.whatsapp.net\",\n  \"text\": \"⚠️ *Uyarı: Daha Önce Karar Verilmiş*\\n\\nBu teklif için daha önce karar verilmiştir.\\n\\nÖnceki Karar: {{ $('Karar Kontrolü3').item.json.decision }}\\nKarar Tarihi: {{ $('Karar Kontrolü3').item.json.date }}\\n\\nYeni bir karar veremezsiniz.\"\n}",
+                "options": {}
+            },
+            "id": "053a04ab-cf02-4c5f-b08e-d352d65d13a0",
+            "name": "Uyarı Mesajı Gönder3",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                720,
+                896
+            ]
+        },
+        {
+            "parameters": {
+                "assignments": {
+                    "assignments": [
+                        {
+                            "id": "id-1",
+                            "name": "message_id",
+                            "value": "={{ $json.body?.data?.instanceId || \"\" }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-2",
+                            "name": "manager_phone",
+                            "value": "={{ $json.body?.sender?.replace(\"@s.whatsapp.net\", \"\") || \"\" }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-4",
+                            "name": "first_option_name",
+                            "value": "={{ $json.body?.data?.pollUpdates?.[0]?.name }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-5",
+                            "name": "first_option_voters",
+                            "value": "={{ $json.body?.data?.pollUpdates?.[0]?.voters?.length || 0 }}",
+                            "type": "number"
+                        },
+                        {
+                            "id": "id-6",
+                            "name": "second_option_name",
+                            "value": "={{ $json.body?.data?.pollUpdates?.[1]?.name }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-7",
+                            "name": "second_option_voters",
+                            "value": "={{ $json.body?.data?.pollUpdates?.[1]?.voters?.length || 0 }}",
+                            "type": "number"
+                        },
+                        {
+                            "id": "id-8",
+                            "name": "karar_check",
+                            "value": "={{ $json.body?.data?.pollUpdates?.[0]?.name === \"✔️ Onayla\" && $json.body?.data?.pollUpdates?.[0]?.voters?.length > 0 }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-9",
+                            "name": "selected_option",
+                            "value": "={{ $json.body?.data?.message?.pollUpdateMessage?.vote?.selectedOptions?.[0] }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-10",
+                            "name": "teklif_id",
+                            "value": "={{ $json.body?.data?.message?.pollUpdateMessage?.pollCreationMessageKey?.id || \"\" }}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "includeOtherFields": true,
+                "options": {}
+            },
+            "id": "3b8c0b8a-92ac-4059-9810-a7199e214b42",
+            "name": "Mesaj ID Hazırla3",
+            "type": "n8n-nodes-base.set",
+            "typeVersion": 3.4,
+            "position": [
+                -624,
+                1088
+            ]
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict",
+                        "version": 2
+                    },
+                    "conditions": [
+                        {
+                            "id": "eea1a527-13e4-41e0-9ce7-2b1cb4e3398c",
+                            "leftValue": "={{ $('Mesaj ID Hazırla3').item.json.selected_option }}",
+                            "operator": {
+                                "type": "string",
+                                "operation": "contains"
+                            },
+                            "rightValue": "✔️ Onayla"
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.2,
+            "position": [
+                48,
+                1184
+            ],
+            "id": "8ccb25bf-747c-44ac-a139-9a0efa742810",
+            "name": "KARAR4"
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "loose",
+                        "version": 2
+                    },
+                    "conditions": [
+                        {
+                            "id": "4beb0e7a-7f83-42ed-8dd3-5dfa168d8760",
+                            "leftValue": "={{ $json.body?.data?.pollUpdates !== undefined && Array.isArray($json.body?.data?.pollUpdates) && $json.body?.data?.pollUpdates.length > 0 }}",
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "true",
+                                "singleValue": true
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "looseTypeValidation": true,
+                "options": {}
+            },
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.2,
+            "position": [
+                -848,
+                800
+            ],
+            "id": "6c539558-a307-48a8-ab1f-376e9d59f7ee",
+            "name": "If4"
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://wp.gemas.com.tr/message/sendText/gemaswp",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "363D82358564-488F-A87A-3BD36C3CF02A"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"{{ $json.yonetici_tel }}@s.whatsapp.net\",\n  \"text\": \"📌 *Özel Teklif Reddi*\\n\\nDurum: ❌ SİSTEME REDDEDİLDİ OLARAK İŞLENMİŞTİR.\\nTarih: {{ $now.setLocale(\"tr\").toFormat(\"dd.MM.yyyy HH:mm\") }}\\n\\nLütfen detayları kontrol ediniz.\"\n}",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                496,
+                1280
+            ],
+            "id": "b0c516b4-c78f-4400-979a-776dde925674",
+            "name": "Red Mesajı4"
+        },
+        {
+            "parameters": {
+                "assignments": {
+                    "assignments": [
+                        {
+                            "id": "d115a4ad-9b59-4cd2-87d8-98bcb43e1686",
+                            "name": "durum",
+                            "value": "RED",
+                            "type": "string"
+                        },
+                        {
+                            "id": "adad3ad3-d077-465b-aca1-7f50d0a400a2",
+                            "name": "yonetici",
+                            "value": "={{ $('Mesaj ID Hazırla3').item.json.body.sender }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "667cbca4-f412-4710-b72a-d072ff8e43c0",
+                            "name": "yonetici_tel",
+                            "value": "={{ $('Mesaj ID Hazırla3').item.json.manager_phone }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "768107c9-f848-4e5d-8ab2-5ebe9c871967",
+                            "name": "tarih",
+                            "value": "={{ $now.format('DD.MM.YYYY HH:mm') }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-5",
+                            "name": "teklif_id",
+                            "value": "={{ $('Mesaj ID Hazırla3').item.json.teklif_id }}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.set",
+            "typeVersion": 3.4,
+            "position": [
+                272,
+                1280
+            ],
+            "id": "d298a29b-87ab-41f5-9e97-42bee1b07742",
+            "name": "RED4"
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://wp.gemas.com.tr/message/sendPoll/gemaswp",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        },
+                        {
+                            "name": "apikey",
+                            "value": "363D82358564-488F-A87A-3BD36C3CF02A"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"{{ $json.body.yonetici_tel }}@s.whatsapp.net\",\n  \"name\": \"Yeni bir teklif onayı gerekiyor.\\n\\nCari: {{ $json.body.cari }}\\nTutar: {{ $json.body.toplam }} TL\\nSatış Temsilcisi: {{ $json.body.temsilci }}\\nTeklif ID: {{ $json.body.teklif_id }}\\n\\nLütfen bir seçim yazın:\\n1 - ✔️ Onayla\\n2 - ❌ Reddet\",\n  \"selectableCount\": 1,\n  \"values\": [\n    \"✔️ Onayla\",\n    \"❌ Reddet\"\n  ],\n  \"teklif_id\": \"{{ $json.body.key.id }}\"\n}",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                -1072,
+                1504
+            ],
+            "id": "d7866000-159c-4366-9cbe-f1be49e7c20f",
+            "name": "HTTP Request4"
+        },
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "teklifOnayCevap",
+                "responseMode": "responseNode",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 2.1,
+            "position": [
+                -1296,
+                800
+            ],
+            "id": "c4160346-34f7-4c5e-b080-dd9a569f2fee",
+            "name": "teklifOnayCevap4",
+            "webhookId": "5227d55d-b60f-48f4-a00c-c2d773f3c421"
+        },
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "teklifOnay",
+                "responseMode": "responseNode",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 2.1,
+            "position": [
+                -1296,
+                1504
+            ],
+            "id": "c815c4a2-9ccf-4dba-a31d-613b3b9884e1",
+            "name": "teklifOnay4",
+            "webhookId": "8861d134-4013-4e78-9434-e47d4d4010f1"
+        },
+        {
+            "parameters": {
+                "respondWith": "json",
+                "responseBody": "{\n  \"status\": \"ok\"\n}\n",
+                "options": {
+                    "responseCode": 200
+                }
+            },
+            "type": "n8n-nodes-base.respondToWebhook",
+            "typeVersion": 1.4,
+            "position": [
+                944,
+                800
+            ],
+            "id": "422d8c11-e85a-4657-a3aa-d8f0a6e04d05",
+            "name": "Respond to Webhook4"
+        },
+        {
+            "parameters": {
+                "assignments": {
+                    "assignments": [
+                        {
+                            "id": "d115a4ad-9b59-4cd2-87d8-98bcb43e1686",
+                            "name": "durum",
+                            "value": "ONAY",
+                            "type": "string"
+                        },
+                        {
+                            "id": "adad3ad3-d077-465b-aca1-7f50d0a400a2",
+                            "name": "yonetici",
+                            "value": "={{ $('Mesaj ID Hazırla3').item.json.body.sender }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "667cbca4-f412-4710-b72a-d072ff8e43c0",
+                            "name": "yonetici_tel",
+                            "value": "={{ $('Mesaj ID Hazırla3').item.json.manager_phone }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "768107c9-f848-4e5d-8ab2-5ebe9c871967",
+                            "name": "tarih",
+                            "value": "={{ $now.format('DD.MM.YYYY HH:mm') }}",
+                            "type": "string"
+                        },
+                        {
+                            "id": "id-5",
+                            "name": "teklif_id",
+                            "value": "={{ $('Mesaj ID Hazırla3').item.json.teklif_id }}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.set",
+            "typeVersion": 3.4,
+            "position": [
+                272,
+                1088
+            ],
+            "id": "ab57b57a-d3c0-45c0-8415-6813d10667e2",
+            "name": "ONAYLANDI4",
+            "retryOnFail": false
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://wp.gemas.com.tr/message/sendText/gemaswp",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "363D82358564-488F-A87A-3BD36C3CF02A"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"{{ $json.yonetici_tel }}@s.whatsapp.net\",\n  \"text\": \"📌 *Özel Teklif Onayı*\\n\\nDurum: ✔️ SİSTEMDE ONAYLANDI OLARAK İŞLENMİŞTİR.\\nTarih: {{ $now.setLocale(\"tr\").toFormat(\"dd.MM.yyyy HH:mm\") }}\\n\\nBilginize sunulur.\"\n}",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                496,
+                1088
+            ],
+            "id": "a772e41d-d84b-4eee-b18b-c9737d8e5e97",
+            "name": "OnayMesajı4"
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://f8a1e6b1094c.ngrok-free.app/b2b-gemas-project-main/api/teklif/n8n_callback.php",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"message_id\": \"{{ $('ONAYLANDI4').item.json.teklif_id }}\",\n  \"action\": \"approve\",\n  \"token\": \"gemas_secret_n8n_token_2025\",\n  \"manager_phone\": \"{{ $('Mesaj ID Hazırla3').item.json.body.sender }}\"\n}",
+                "options": {
+                    "response": {
+                        "response": {
+                            "neverError": true
+                        }
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                720,
+                1088
+            ],
+            "id": "45cad844-b744-4132-9110-cf49b680ca9c",
+            "name": "SİSTEM ONAYI4"
+        },
+        {
+            "parameters": {
+                "respondWith": "json",
+                "responseBody": "={{ $json }}",
+                "options": {
+                    "responseCode": 200
+                }
+            },
+            "type": "n8n-nodes-base.respondToWebhook",
+            "typeVersion": 1.4,
+            "position": [
+                -624,
+                1504
+            ],
+            "id": "fb302d7e-c9c0-4813-b9bb-55c66dde7269",
+            "name": "Respond to Trigger4"
+        },
+        {
+            "parameters": {
+                "url": "https://f8a1e6b1094c.ngrok-free.app/b2b-gemas-project-main/api/fiyat/check_reply.php",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "phone",
+                            "value": "={{ $json.body?.sender?.replace('@s.whatsapp.net', '') }}"
+                        },
+                        {
+                            "name": "replied_message_id",
+                            "value": "={{ $json.body?.message?.extendedTextMessage?.contextInfo?.stanzaId || $json.body?.message?.contextInfo?.stanzaId || '' }}"
+                        }
+                    ]
+                },
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Authorization",
+                            "value": "Bearer gemas_secret_n8n_token_2025"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "97092d32-bab6-449a-ae6d-9a69252924bf",
+            "name": "Reply Kontrolü",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                -500,
+                512
+            ]
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "loose",
+                        "version": 2
+                    },
+                    "conditions": [
+                        {
+                            "id": "id-1",
+                            "leftValue": "={{ $json.is_reply }}",
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "true"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "id": "98092d32-bab6-449a-ae6d-9a69252924bf",
+            "name": "Reply Doğru mu?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.2,
+            "position": [
+                -250,
+                512
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://f8a1e6b1094c.ngrok-free.app/b2b-gemas-project-main/api/fiyat/save_message_id.php",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        },
+                        {
+                            "name": "Authorization",
+                            "value": "Bearer gemas_secret_n8n_token_2025"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"phone\": \"{{ $('teklifOnayCevap4').item.json.body.sender.replace('@s.whatsapp.net', '') }}\",\n  \"message_id\": \"{{ $json.key.id }}\"\n}",
+                "options": {}
+            },
+            "id": "99092d32-bab6-449a-ae6d-9a69252924bf",
+            "name": "Mesaj ID Kaydet",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                950,
+                704
+            ]
+        },
+        {
+            "parameters": {
+                "url": "https://f8a1e6b1094c.ngrok-free.app/b2b-gemas-project-main/api/fiyat/check_session.php",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "phone",
+                            "value": "={{ $json.body?.sender?.replace('@s.whatsapp.net', '') }}"
+                        }
+                    ]
+                },
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Authorization",
+                            "value": "Bearer gemas_secret_n8n_token_2025"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "a1092d32-bab6-449a-ae6d-9a69252924cf",
+            "name": "Session Kontrolü",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                250,
+                704
+            ]
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "loose",
+                        "version": 2
+                    },
+                    "conditions": [
+                        {
+                            "id": "id-1",
+                            "leftValue": "={{ $json.is_active }}",
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "true"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "id": "a2092d32-bab6-449a-ae6d-9a69252924cf",
+            "name": "Session Aktif mi?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.2,
+            "position": [
+                450,
+                704
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://wp.gemas.com.tr/message/sendText/gemaswp",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "363D82358564-488F-A87A-3BD36C3CF02A"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"{{ $('teklifOnayCevap4').item.json.body.sender }}\",\n  \"text\": \"⏳ *İşlem Devam Ediyor*\\n\\nLütfen bekleyiniz, önceki işleminiz henüz tamamlanmadı.\\n\\nYeni bir sorgu yapabilmek için 30 saniye beklemelisiniz.\"\n}",
+                "options": {}
+            },
+            "id": "a3092d32-bab6-449a-ae6d-9a69252924cf",
+            "name": "Sistem Meşgul Mesajı",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                450,
+                900
+            ]
+        }
+    ],
+    "pinData": {},
+    "connections": {
+        "Mesaj Tipi Kontrolü": {
+            "main": [
+                [
+                    {
+                        "node": "Session Kontrolü",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Ürün Fiyatı Sorgula",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Session Kontrolü": {
+            "main": [
+                [
+                    {
+                        "node": "Session Aktif mi?",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Session Aktif mi?": {
+            "main": [
+                [
+                    {
+                        "node": "Sistem Meşgul Mesajı",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Stok Kodu İste",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Sistem Meşgul Mesajı": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Webhook4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Ürün Fiyatı Sorgula": {
+            "main": [
+                [
+                    {
+                        "node": "Ürün Bulundu mu?",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Ürün Bulundu mu?": {
+            "main": [
+                [
+                    {
+                        "node": "Fiyat Bilgisi Gönder",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Ürün Bulunamadı Mesajı",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Fiyat Bilgisi Gönder": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Webhook4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Stok Kodu İste": {
+            "main": [
+                [
+                    {
+                        "node": "Mesaj ID Kaydet",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Ürün Bulunamadı Mesajı": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Webhook4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Backend'e Key ID Kaydet1": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Trigger4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "SİSTEM REDDİ1": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Webhook4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "DEBUG - Gelen Veri3": {
+            "main": [
+                [
+                    {
+                        "node": "If4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Karar Kontrolü3": {
+            "main": [
+                [
+                    {
+                        "node": "Daha Önce Karar Verilmiş mi?3",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Daha Önce Karar Verilmiş mi?3": {
+            "main": [
+                [
+                    {
+                        "node": "Uyarı Mesajı Gönder3",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "KARAR4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Uyarı Mesajı Gönder3": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Webhook4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Mesaj ID Hazırla3": {
+            "main": [
+                [
+                    {
+                        "node": "Karar Kontrolü3",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "KARAR4": {
+            "main": [
+                [
+                    {
+                        "node": "ONAYLANDI4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "RED4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "If4": {
+            "main": [
+                [
+                    {
+                        "node": "Mesaj ID Hazırla3",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Reply Kontrolü",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Red Mesajı4": {
+            "main": [
+                [
+                    {
+                        "node": "SİSTEM REDDİ1",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "RED4": {
+            "main": [
+                [
+                    {
+                        "node": "Red Mesajı4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "HTTP Request4": {
+            "main": [
+                [
+                    {
+                        "node": "Backend'e Key ID Kaydet1",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "teklifOnayCevap4": {
+            "main": [
+                [
+                    {
+                        "node": "DEBUG - Gelen Veri3",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "teklifOnay4": {
+            "main": [
+                [
+                    {
+                        "node": "HTTP Request4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "ONAYLANDI4": {
+            "main": [
+                [
+                    {
+                        "node": "OnayMesajı4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "OnayMesajı4": {
+            "main": [
+                [
+                    {
+                        "node": "SİSTEM ONAYI4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "SİSTEM ONAYI4": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Webhook4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Reply Kontrolü": {
+            "main": [
+                [
+                    {
+                        "node": "Reply Doğru mu?",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Reply Doğru mu?": {
+            "main": [
+                [
+                    {
+                        "node": "Ürün Fiyatı Sorgula",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Mesaj Tipi Kontrolü",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Mesaj ID Kaydet": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Webhook4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "active": true,
+    "settings": {},
+    "versionId": "b2c65be3-0c6e-445b-9ce7-9459bc342286",
+    "meta": {
+        "templateId": "ready-to-run-ai-workflow",
+        "templateCredsSetupCompleted": true,
+        "instanceId": "c075dfd4956237fecd8c78f53ac9971c4d11465277739187d3baaf87e6d3cfb6"
+    },
+    "id": "HRn4FjsDkcDBgCDU",
+    "tags": []
+}

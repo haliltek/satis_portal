@@ -1289,32 +1289,14 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                 <!-- Kampanya Bilgi Butonu -->
                                                 <button type="button" id="kampanyaBtn" class="btn btn-sm mb-1 kampanya-anim-box" style="width: auto; min-width: 140px; height: 28px; font-size: 12px; white-space: nowrap;" data-bs-toggle="modal" data-bs-target="#kampanyaModal">
                                                     <span class="kampanya-content" style="padding: 0 10px;">
-                                                        <i class="bi bi-gift me-1"></i> Özel Fiyat Bilgi
+                                                        <i class="bi bi-gift me-1"></i> Özel Fiyat Bilgileri
                                                     </span>
                                                 </button>
                                                 <button type="button" id="applyCampaignsBtn" class="btn btn-warning btn-sm" style="width: auto; min-width: 140px; height: 28px; font-size: 12px; font-weight: bold; color: #000; display: flex; align-items: center; justify-content: center; display: inline-flex;">
-                                                    <i class="bi bi-percent me-1"></i> Özel Fiyat Uygula
+                                                    <i class="bi bi-percent me-1"></i> ÖZEL FİYAT !
                                                 </button>
                                             </div>
                                         </div>
-                                        <style>
-                                            <?php if ($userType !== 'Yönetici'): ?>
-                                            /* Satış Marjı sütununu sadece Yönetici kullanıcıları görebilir */
-                                            #cartTable th:nth-child(11),
-                                            #cartTable td:nth-child(11) {
-                                                visibility: hidden;
-                                                width: 0 !important;
-                                                padding: 0 !important;
-                                                border: none !important;
-                                                font-size: 0;
-                                                line-height: 0;
-                                            }
-                                            /* ORTALAMA MARJ satırını gizle */
-                                            #cartTableFooter tr:nth-child(2) {
-                                                display: none !important;
-                                            }
-                                            <?php endif; ?>
-                                        </style>
                                         <div class="table-responsive mt-3">
                                             <table id="cartTable" class="table table-bordered" style="table-layout: fixed; width: 100%;">
                                                 <thead>
@@ -1512,14 +1494,7 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                                         </td>
                                                         <td colspan="4"></td>
                                                     </tr>
-                                                    <tr style="background: #ffffff; font-weight: bold; font-size: 11px;">
-                                                        <td colspan="7" style="text-align: right; padding: 4px 4px;">ORTALAMA MARJ (%):</td>
-                                                        <td style="text-align: right; padding: 4px 4px;">
-                                                            <span id="averageMarginDisplay" style="padding: 2px 8px; border-radius: 4px;">% 0,00</span>
-                                                        </td>
-                                                        <td colspan="4"></td>
-                                                    </tr>
-                                                    <tr style="background: #f8f9fa;">
+                                                    <tr style="background: #ffffff;">
                                                         <td colspan="7" style="text-align: right; padding: 8px 4px; vertical-align: middle;">GENEL İSKONTO (%):</td>
                                                         <td style="text-align: right; padding: 4px;">
                                                             <div class="input-group input-group-sm justify-content-end" style="width: 120px; float: right;">
@@ -1601,40 +1576,67 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                                         <div class="row mt-3" style="overflow: visible; margin-left: -15px; margin-right: -15px;">
                                             <div class="col-12 text-center" style="overflow: visible; padding: 20px;">
                                                 <input type="hidden" name="hazirlayanid" value="<?php echo $_SESSION['yonetici_id'] ?? 0; ?>">
-                                                <div class="form-check d-inline-block mb-3 me-3">
-                                                    <input class="form-check-input" type="checkbox" id="is_special_offer" name="is_special_offer" value="1">
-                                                    <label class="form-check-label fw-bold text-danger" for="is_special_offer" style="font-size: 14px;">
+                                                <div class="form-check d-inline-block mb-4 me-3">
+                                                    <input class="form-check-input" type="checkbox" id="is_special_offer" name="is_special_offer" value="1" style="transform: scale(1.3); margin-right: 8px;">
+                                                    <label class="form-check-label fw-bold text-danger" for="is_special_offer" style="font-size: 16px;">
                                                         Özel Teklif (Yönetici Onayı Gerektirir)
                                                     </label>
                                                 </div>
                                                 <br>
-                                                <input type="submit" name="preview" id="submitCart" class="btn btn-success btn-lg" style="padding: 10px 50px 20px 50px; font-size: 20px; min-width: 250px; width: auto; display: inline-block; line-height: 1;" value="<?php echo ($user_type === "Müşteri") ? "Kaydet" : "Kaydet"; ?>">
+                                                <button type="submit" name="preview" id="submitCart" class="btn btn-success btn-lg" style="padding: 15px 60px; font-size: 18px; min-width: 250px; font-weight: 600; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: inline-flex; align-items: center; justify-content: center;">
+                                                    <?php echo ($user_type === "Müşteri") ? "Kaydet" : "Kaydet"; ?>
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
                                     <script>
-                                        document.addEventListener('DOMContentLoaded', function() {
-                                            const specialOfferCheckbox = document.getElementById('is_special_offer');
-                                            const submitBtn = document.getElementById('submitCart');
-                                            
-                                            // Store original state
-                                            let originalBtnText = submitBtn ? submitBtn.value : 'Kaydet';
-                                            let originalBtnClass = submitBtn ? submitBtn.className : 'btn btn-success btn-lg';
-
-                                            if(specialOfferCheckbox && submitBtn) {
-                                                specialOfferCheckbox.addEventListener('change', function() {
-                                                    if(this.checked) {
-                                                        submitBtn.value = 'YÖNETİCİ ONAYA GÖNDER';
-                                                        submitBtn.classList.remove('btn-success');
-                                                        submitBtn.classList.add('btn-warning'); 
-                                                    } else {
-                                                        submitBtn.value = originalBtnText; // Restore original text
-                                                        submitBtn.classList.remove('btn-warning');
-                                                        submitBtn.classList.add('btn-success');
-                                                    }
-                                                });
+                                        // Ensure jQuery is loaded before initializing
+                                        (function initCheckboxListener() {
+                                            if (typeof jQuery === 'undefined') {
+                                                console.warn('⚠️ jQuery not loaded yet, retrying in 100ms...');
+                                                setTimeout(initCheckboxListener, 100);
+                                                return;
                                             }
-                                        });
+                                            
+                                            $(document).ready(function() {
+                                                var specialOfferCheckbox = $('#is_special_offer');
+                                                var submitBtn = $('#submitCart');
+                                                
+                                                console.log('🔍 Elements found:', {
+                                                    checkbox: specialOfferCheckbox.length,
+                                                    button: submitBtn.length,
+                                                    buttonText: submitBtn.text()
+                                                });
+                                                
+                                                // Store original state
+                                                var originalBtnText = submitBtn.length ? submitBtn.text().trim() : 'Kaydet';
+                                                
+                                                console.log('🔧 Checkbox event listener initialized. Original text:', originalBtnText);
+
+                                                if(specialOfferCheckbox.length && submitBtn.length) {
+                                                    specialOfferCheckbox.on('change', function() {
+                                                        console.log('📋 Checkbox changed! Checked:', this.checked);
+                                                        if(this.checked) {
+                                                            submitBtn.text('YÖNETİCİ ONAYA GÖNDER');
+                                                            submitBtn.removeClass('btn-success').addClass('btn-warning');
+                                                            console.log('✅ Button updated to: YÖNETİCİ ONAYA GÖNDER');
+                                                        } else {
+                                                            submitBtn.text(originalBtnText);
+                                                            submitBtn.removeClass('btn-warning').addClass('btn-success');
+                                                            console.log('✅ Button restored to:', originalBtnText);
+                                                        }
+                                                    });
+                                                    
+                                                    // Test: Trigger change event immediately if already checked
+                                                    if(specialOfferCheckbox.prop('checked')) {
+                                                        console.log('🔄 Checkbox already checked on load, triggering change...');
+                                                        specialOfferCheckbox.trigger('change');
+                                                    }
+                                                } else {
+                                                    console.error('❌ Elements not found!');
+                                                }
+                                            });
+                                        })();
                                     </script>
                                 </div>
                             </div>
@@ -2505,7 +2507,6 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                 var totalTL = 0;
                 var totalWithVAT = 0;
                 var totalTLWithVAT = 0;
-                var totalCostTL = 0;
                 var hasProducts = false;
                 
                 // Tüm ürün satırlarını kontrol et (boş satırlar hariç)
@@ -2548,26 +2549,18 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                             }
                             
                             // TL karşılığını hesapla (veritabanından alınan güncel kurlar)
-                            var qty = parseFloat($row.find('.quantity-input').val()) || 0;
-                            var rowCost = (parseFloat($row.attr('data-maliyet')) || 0) * qty;
-                            var rowCostTL = 0;
-                            
                             if (currency === 'TL') {
                                 totalTL += rowTotal;
                                 totalTLWithVAT += rowTotalWithVAT;
-                                rowCostTL = rowCost;
                             } else if (currency === 'EUR') {
                                 // EUR -> TL (güncel kur)
                                 totalTL += rowTotal * <?php echo $eurKuru; ?>;
                                 totalTLWithVAT += rowTotalWithVAT * <?php echo $eurKuru; ?>;
-                                rowCostTL = rowCost * <?php echo $eurKuru; ?>;
                             } else if (currency === 'USD') {
                                 // USD -> TL (güncel kur)
                                 totalTL += rowTotal * <?php echo $usdKuru; ?>;
                                 totalTLWithVAT += rowTotalWithVAT * <?php echo $usdKuru; ?>;
-                                rowCostTL = rowCost * <?php echo $usdKuru; ?>;
                             }
-                            totalCostTL += rowCostTL;
                         }
                     }
                 });
@@ -2605,26 +2598,6 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                     
                     $('#totalAmountWithVAT').text(netTotalWithVAT.toFixed(2).replace('.', ',') + ' €');
                     $('#totalAmountTLWithVAT').text(netTotalTLWithVAT.toFixed(2).replace('.', ',') + ' ₺');
-                    
-                    // Ortalama Marj Hesapla (İskontolu Toplam üzerinden)
-                    var avgMargin = 0;
-                    if (netTotalTL > 0) {
-                        avgMargin = ((netTotalTL - totalCostTL) / netTotalTL) * 100;
-                    } else if (totalCostTL > 0) {
-                        avgMargin = -100;
-                    }
-                    
-                    var $avgMarginDisp = $('#averageMarginDisplay');
-                    $avgMarginDisp.text('% ' + avgMargin.toFixed(2).replace('.', ','));
-                    
-                    // Renklendirme
-                    if (avgMargin >= 25) {
-                        $avgMarginDisp.css({'background-color': '#d1e7dd', 'color': '#0a5131'});
-                    } else if (avgMargin >= 10) {
-                        $avgMarginDisp.css({'background-color': '#fff3cd', 'color': '#856404'});
-                    } else {
-                        $avgMarginDisp.css({'background-color': '#f8d7da', 'color': '#842029'});
-                    }
                 } else {
                     $('#cartTableFooter').hide();
                 }
@@ -4507,143 +4480,88 @@ $selectedProductsDetails = getSelectedProductsDetails($db, $selectedIds);
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                <div class="alert alert-info">
+                    <div class="alert alert-info">
                         <i class="bi bi-info-circle me-2"></i>
-                        <strong>Ana Bayi</strong> için mevcut özel fiyatlar:
+                        <strong>Özel Fiyat Listesi</strong> - Kategorilere göre ürün fiyatları
                     </div>
                     
-                    <div class="row g-3" id="kampanyaListesi">
-                        <?php
-                        // DB bağlantısı (Karakter seti sorunu için özel bağlantı)
-                        $config = require __DIR__ . '/config/config.php';
-                        $dbConfig = $config['db'];
-                        $campDb = new mysqli($dbConfig['host'], $dbConfig['user'], $dbConfig['pass'], $dbConfig['name'], $dbConfig['port']);
-                        $campDb->set_charset("utf8mb4"); // UTF-8 charset for Turkish characters
-                        
-                        // Aktif kampanyaları çek
-                        $sql = "SELECT * FROM custom_campaigns ORDER BY id ASC";
-                        $result = $campDb->query($sql);
-                        
-                        // Duplicate önleme için görülen ID'leri takip et
-                        $seenIds = [];
-
-
-                        if ($result && $result->num_rows > 0) {
-                            while ($camp = $result->fetch_assoc()) {
-                                $campId = $camp['id'];
-                                $categoryName = $camp['category_name'] ?? $camp['name'];
-                                
-                                // Duplicate kontrolü - Aynı kategori adını tekrar gösterme
-                                if (in_array($categoryName, $seenIds)) {
-                                    continue;
-                                }
-                                $seenIds[] = $categoryName;
-                                
-                                // Kampanya kurallarını çek
-                                $rulesResult = $campDb->query("SELECT * FROM custom_campaign_rules WHERE campaign_id = $campId ORDER BY priority ASC");
-                                $rules = [];
-                                while($rule = $rulesResult->fetch_assoc()) $rules[] = $rule;
-
-                                // Kampanya ürünlerini çek
-                                $prodResult = $campDb->query("SELECT count(*) as total FROM custom_campaign_products WHERE campaign_id = $campId");
-                                $prodCount = $prodResult->fetch_assoc()['total'];
-
-                                // Tarih formatı
-                                $start = date('d.m.Y', strtotime($camp['start_date']));
-                                $end = date('d.m.Y', strtotime($camp['end_date']));
-                                $validity = ($camp['start_date'] == '0000-00-00' || $camp['end_date'] == '0000-00-00') ? "Sürekli" : "$start - $end";
-                                
-                                // Renk seçimi
-                                $colors = ['primary', 'success', 'warning', 'info'];
-                                $color = $colors[$campId % count($colors)];
-
-                                // GÖRÜNÜM DÜZELTMELERİ (User request overriding DB)
-                                // 1. İsim düzeltmesi
-                                $displayName = str_replace('Ertek', 'Ana Bayi', $camp['name']);
-                                
-                                // 2. Tarih düzeltmesi (DB 1970 ise veya her durumda 2026 isteniyorsa)
-                                $start = '01.01.2026';
-                                $end = '31.12.2026';
-                                $validity = "$start - $end";
-                        ?>
-                        <div class="col-md-6">
-                            <div class="card border-<?= $color ?> h-100">
-                                <div class="card-header bg-<?= $color ?> text-white">
-                                    <h6 class="mb-0"><i class="bi bi-gift-fill me-2"></i><?= htmlspecialchars($displayName) ?></h6>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text"><strong>Geçerlilik:</strong> <?= $validity ?></p>
-                                    <p class="card-text"><strong>Kapsam:</strong> <?= $prodCount > 0 ? $prodCount . " Adet Ürün" : "Tüm Ürünler" ?></p>
-                                    
-                                    <?php 
-                                    // Kampanyaya göre özel birimler
-                                    $isMediaCampaign = (stripos($categoryName, 'MEDYA') !== false);
-                                    $isKenarCampaign = (stripos($categoryName, 'KENAR') !== false);
-                                    
-                                    if ($isMediaCampaign) {
-                                        $quantityUnit = 'KG';
-                                        $amountUnit = 'KG';
-                                    } elseif ($isKenarCampaign) {
-                                        $quantityUnit = 'Metre';
-                                        $amountUnit = ($camp['currency'] ?? 'EUR');
-                                    } else {
-                                        $quantityUnit = 'Adet';
-                                        $amountUnit = ($camp['currency'] ?? 'EUR');
-                                    }
-                                    ?>
-                                    
-                                    <?php if($camp['min_quantity'] > 0): ?>
-                                    <small class="text-muted d-block">Min. Sipariş: <?= number_format($camp['min_quantity'],0) ?> <?= $quantityUnit ?></small>
-                                    <?php endif; ?>
-                                    
-                                    <?php if($camp['min_total_amount'] > 0): ?>
-                                    <small class="text-muted d-block">Min. Tutar: <?= number_format($camp['min_total_amount'],2,',','.') ?> <?= $amountUnit ?></small>
-                                    <?php endif; ?>
-
-                                    <?php if(count($rules) > 0): ?>
-                                    <hr class="my-2">
-                                    <ul class="list-unstyled mb-0 small">
-                                        <?php foreach($rules as $rule): 
-                                            // rule_name düzeltmesi yoksa veya hatalı ise manuel match
-                                            $desc = match($rule['rule_type']) {
-                                                'quantity_based' => number_format($rule['condition_value'],0)." ".$quantityUnit."+",
-                                                'amount_based'   => number_format($rule['condition_value'],0)." ".$amountUnit."+",
-                                                'payment_based'  => "Peşin Ödeme",
-                                                default          => "Genel"
-                                            };
-                                        ?>
-                                        <li>
-                                            <i class="bi bi-check-circle-fill text-<?= $color ?> me-1"></i>
-                                            <?php 
-                                            // MEDYA kampanyasıysa rule_name'deki € işaretini KG ile değiştir
-                                            $displayRuleName = $rule['rule_name'];
-                                            if ($isMediaCampaign) {
-                                                $displayRuleName = str_replace('€', 'KG', $displayRuleName);
-                                            }
-                                            ?>
-                                            <strong><?= htmlspecialchars($displayRuleName) ?>:</strong> +%<?= number_format($rule['discount_rate'], 2) ?>
-                                            <span class="text-muted">(<?= $desc ?>)</span>
-                                        </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        </div>
-                        <?php 
+                    <?php
+                    // DB bağlantısı
+                    $config = require __DIR__ . '/config/config.php';
+                    $dbConfig = $config['db'];
+                    $campDb = new mysqli($dbConfig['host'], $dbConfig['user'], $dbConfig['pass'], $dbConfig['name'], $dbConfig['port']);
+                    $campDb->set_charset("utf8mb4");
+                    
+                    // Kategorilere göre ürünleri çek (ürün adlarıyla birlikte)
+                    $sql = "SELECT kof.stok_kodu, kof.yurtici_fiyat, kof.ozel_fiyat, kof.kategori, u.stokadi 
+                            FROM kampanya_ozel_fiyatlar kof 
+                            LEFT JOIN urunler u ON kof.stok_kodu = u.stokkodu 
+                            ORDER BY kof.kategori, kof.stok_kodu";
+                    $result = $campDb->query($sql);
+                    
+                    $productsByCategory = [];
+                    if ($result && $result->num_rows > 0) {
+                        while ($product = $result->fetch_assoc()) {
+                            $category = $product['kategori'] ?: 'Genel';
+                            if (!isset($productsByCategory[$category])) {
+                                $productsByCategory[$category] = [];
                             }
-                        } else { 
-                        ?>
-                        <div class="col-12">
-                            <div class="alert alert-warning text-center">
-                                <i class="bi bi-exclamation-triangle me-2"></i> Aktif kampanya bulunmamaktadır.
-                            </div>
+                            $productsByCategory[$category][] = $product;
+                        }
+                    }
+                    
+                    if (count($productsByCategory) > 0):
+                        foreach ($productsByCategory as $category => $products):
+                    ?>
+                    <div class="mb-4">
+                        <h6 class="bg-success text-white p-2 mb-2">
+                            <i class="bi bi-tag-fill me-2"></i><?= htmlspecialchars($category) ?> Özel Fiyat
+                        </h6>
+                        <div style="max-height: 300px; overflow-y: auto;">
+                            <table class="table table-sm table-bordered mb-0" style="font-size: 0.7rem;">
+                                <thead style="position: sticky; top: 0; background: white; z-index: 1;">
+                                    <tr>
+                                        <th style="padding: 4px 6px;">Kod</th>
+                                        <th style="padding: 4px 6px;">Ürün Adı</th>
+                                        <th style="padding: 4px 6px;">Liste</th>
+                                        <th style="padding: 4px 6px;">Özel</th>
+                                        <th style="padding: 4px 6px;">İndirim</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($products as $product): 
+                                        $listPrice = floatval($product['yurtici_fiyat']);
+                                        $specialPrice = floatval($product['ozel_fiyat']);
+                                        $discountPercent = 0;
+                                        if ($listPrice > 0) {
+                                            $discountPercent = (($listPrice - $specialPrice) / $listPrice) * 100;
+                                        }
+                                        $productName = $product['stokadi'] ?: '-';
+                                    ?>
+                                    <tr>
+                                        <td style="padding: 4px 6px; font-size: 0.65rem;"><?= htmlspecialchars($product['stok_kodu']) ?></td>
+                                        <td style="padding: 4px 6px; font-size: 0.65rem;"><?= htmlspecialchars($productName) ?></td>
+                                        <td style="padding: 4px 6px; font-size: 0.65rem;"><?= number_format($listPrice, 2, ',', '.') ?></td>
+                                        <td style="padding: 4px 6px;" class="text-success fw-bold"><?= number_format($specialPrice, 2, ',', '.') ?></td>
+                                        <td style="padding: 4px 6px;" class="text-danger fw-bold">-%<?= number_format($discountPercent, 0) ?></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
                         </div>
-                        <?php } 
-                        // Bağlantıyı kapat
-                        if(isset($campDb)) $campDb->close();
-                        ?>
                     </div>
+                    <?php 
+                        endforeach;
+                    else: 
+                    ?>
+                    <div class="alert alert-warning text-center">
+                        <i class="bi bi-exclamation-triangle me-2"></i> Özel fiyat bulunmamaktadır.
+                    </div>
+                    <?php 
+                    endif;
+                    // Bağlantıyı kapat
+                    if(isset($campDb)) $campDb->close();
+                    ?>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
@@ -5574,21 +5492,6 @@ $(document).ready(function() {
     font-weight: bold !important;
     background-color: #d1e7dd !important;
 }
-
-<?php if ($userType !== 'Yönetici'): ?>
-/* Özel Fiyat Çalışması modalında Maliyet ve Marj % sütunlarını gizle */
-#ozelFiyatTable th:nth-child(4),
-#ozelFiyatTable td:nth-child(4),
-#ozelFiyatTable th:nth-child(7),
-#ozelFiyatTable td:nth-child(7) {
-    visibility: hidden;
-    width: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-    font-size: 0;
-    line-height: 0;
-}
-<?php endif; ?>
 </style>
 
 <script src='campaign_logic.js?v=<?php echo time(); ?>'></script>
@@ -5689,6 +5592,3 @@ $(document).ready(function() {
 });
 </script>
 <?php endif; ?>
-
-<!-- Kampanya Sistemi -->
-<script src="campaign_logic.js"></script>

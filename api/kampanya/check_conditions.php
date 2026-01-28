@@ -33,7 +33,18 @@ try {
         exit;
     }
     
-    // kampanya_ozel_fiyatlar tablosundan ürünleri çek
+    // 1. ÖNCE KAMPANYA KURALLARINI ÇEK (Mapping için gerekli)
+    // Uzun isimleri önce kontrol etmek için ORDER BY LENGTH DESC ekliyoruz
+    $stmtRules = $pdo->prepare("SELECT * FROM custom_campaigns WHERE is_active = 1 ORDER BY LENGTH(category_name) DESC");
+    $stmtRules->execute();
+    $dbCampaigns = $stmtRules->fetchAll(PDO::FETCH_ASSOC);
+    
+    $campaignRules = [];
+    foreach ($dbCampaigns as $dbCamp) {
+        $campaignRules[$dbCamp['category_name']] = $dbCamp;
+    }
+
+    // 2. Ürünleri Çek
     $placeholders = implode(',', array_fill(0, count($productCodes), '?'));
     $stmt = $pdo->prepare("
         SELECT stok_kodu, kategori, ozel_fiyat 
@@ -43,11 +54,24 @@ try {
     $stmt->execute($productCodes);
     $campaignProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // Kategorilere göre grupla
+    // 3. Kategorilere göre grupla (Dinamik Mapping ile)
     foreach ($campaignProducts as $product) {
-        $kategori = $product['kategori'] ?: 'Genel';
-        if (!isset($categoryGroups[$kategori])) {
-            $categoryGroups[$kategori] = [
+        $prodCat = $product['kategori'] ?: 'Genel';
+        $mappedCat = $prodCat; // Varsayılan: Kendi kategorisi
+
+        // Eğer bu kategori için birebir kural yoksa, partial match ara
+        if (!isset($campaignRules[$prodCat])) {
+            foreach ($campaignRules as $ruleCat => $ruleVal) {
+                // mb_stripos ile büyük/küçük harf duyarsız ve güvenli kontrol
+                if (mb_stripos($prodCat, $ruleCat) !== false) {
+                    $mappedCat = $ruleCat;
+                    break; // İlk (ve en uzun) eşleşeni al
+                }
+            }
+        }
+        
+        if (!isset($categoryGroups[$mappedCat])) {
+            $categoryGroups[$mappedCat] = [
                 'products' => [],
                 'total_quantity' => 0
             ];
@@ -57,89 +81,89 @@ try {
         foreach ($cart as $item) {
             if ($item['code'] === $product['stok_kodu']) {
                 $qty = intval($item['quantity'] ?? 1);
-                $categoryGroups[$kategori]['products'][] = $product['stok_kodu'];
-                $categoryGroups[$kategori]['total_quantity'] += $qty;
+                $categoryGroups[$mappedCat]['products'][] = $product['stok_kodu'];
+                $categoryGroups[$mappedCat]['total_quantity'] += $qty;
                 break;
             }
         }
     }
-    
-    // Kampanyaları çek (Veritabanından)
-    $stmt = $pdo->prepare("SELECT * FROM custom_campaigns WHERE is_active = 1");
-    $stmt->execute();
-    $dbCampaigns = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Kategoriye göre map oluştur
-    $campaignRules = [];
-    foreach ($dbCampaigns as $dbCamp) {
-        $campaignRules[$dbCamp['category_name']] = $dbCamp;
-    }
 
     $campaigns = [];
     foreach ($categoryGroups as $kategori => $groupData) {
-        // Bu kategori için veritabanında kampanya var mı?
         if (isset($campaignRules[$kategori])) {
             $rule = $campaignRules[$kategori];
-            $minQty = intval($rule['min_quantity']);
-            $minAmount = floatval($rule['min_amount']); // min_amount kullan (min_total_amount değil)
             
-            // Tutar hesapla (Bu kategori için)
+            // Koşul kontrolü KALDIRILDI - Her ürün için kampanya göster
+            // Ürün detaylarını çek (Liste fiyatı, Özel fiyat ve Ürün adı)
+            $productDetails = [];
             $catTotalAmount = 0;
-            // Ürün fiyatlarını çekmemiz lazım (Döngü içinde SQL kötü ama hızlı çözüm)
-             if (!empty($groupData['products'])) {
+            
+            if (!empty($groupData['products'])) {
                 $placeholders = implode(',', array_fill(0, count($groupData['products']), '?'));
-                $stmtPrice = $pdo->prepare("SELECT stok_kodu, ozel_fiyat FROM kampanya_ozel_fiyatlar WHERE stok_kodu IN ($placeholders)");
+                $stmtPrice = $pdo->prepare("
+                    SELECT kof.stok_kodu, kof.yurtici_fiyat, kof.ozel_fiyat, u.stokadi 
+                    FROM kampanya_ozel_fiyatlar kof 
+                    LEFT JOIN urunler u ON kof.stok_kodu = u.stokkodu 
+                    WHERE kof.stok_kodu IN ($placeholders)
+                ");
                 $stmtPrice->execute($groupData['products']);
-                $catPrices = $stmtPrice->fetchAll(PDO::FETCH_KEY_PAIR);
+                $productPrices = $stmtPrice->fetchAll(PDO::FETCH_ASSOC);
+                
+                foreach ($productPrices as $prod) {
+                    $productDetails[$prod['stok_kodu']] = [
+                        'list_price' => floatval($prod['yurtici_fiyat']),
+                        'special_price' => floatval($prod['ozel_fiyat']),
+                        'product_name' => $prod['stokadi'] ?: '-'
+                    ];
+                }
                 
                 foreach ($cart as $item) {
-                     if (in_array($item['code'], $groupData['products']) && isset($catPrices[$item['code']])) {
+                     if (in_array($item['code'], $groupData['products']) && isset($productDetails[$item['code']])) {
                          $qty = floatval($item['quantity'] ?? 1);
-                         $catTotalAmount += (floatval($catPrices[$item['code']]) * $qty);
+                         $catTotalAmount += ($productDetails[$item['code']]['special_price'] * $qty);
                      }
                 }
-             }
-
-            // Koşul kontrolü
-            $qtyCondition = ($minQty > 0) ? ($groupData['total_quantity'] >= $minQty) : true;
-            $amountCondition = ($minAmount > 0) ? ($catTotalAmount >= $minAmount) : true;
-            $isEligible = ($qtyCondition && $amountCondition);
-            
-            // Eğer ikisi de 0 ise (Genel bir kampanya değilse atla)
-            if ($minQty == 0 && $minAmount == 0) continue;
-
-            if ($isEligible) {
-                // Dinamik metin
-                $condText = "";
-                if ($minAmount > 0) $condText .= "Min " . number_format($minAmount, 0, ',', '.') . " € tutar";
-                if ($minAmount > 0 && $minQty > 0) $condText .= " ve ";
-                if ($minQty > 0) $condText .= "Min $minQty adet";
-                
-                $currentStatus = "(";
-                if ($minAmount > 0) $currentStatus .= number_format($catTotalAmount, 2, ',', '.') . " €";
-                if ($minAmount > 0 && $minQty > 0) $currentStatus .= " / ";
-                if ($minQty > 0) $currentStatus .= "{$groupData['total_quantity']} adet";
-                $currentStatus .= ")";
-
-                $campaigns[] = [
-                    'name' => "{$rule['category_name']} Özel Fiyat",
-                    'condition' => $condText . " " . $currentStatus,
-                    'products' => $groupData['products'],
-                    'category' => $rule['category_name'],
-                    'quantity' => $groupData['total_quantity'],
-                    // Meta veriler (JS tarafı için)
-                    'campaign_meta' => [
-                         'min_amount' => $minAmount,
-                         'condition_text' => $condText
-                    ]
-                ];
             }
+
+            // Dinamik metin (bilgi amaçlı)
+            $minQty = intval($rule['min_quantity']);
+            $minAmount = floatval($rule['min_amount']);
+            if ($minAmount <= 0 && isset($rule['min_total_amount'])) {
+                $minAmount = floatval($rule['min_total_amount']);
+            }
+            
+            $condText = "";
+            if ($minAmount > 0) $condText .= "Min " . number_format($minAmount, 0, ',', '.') . " € tutar";
+            if ($minAmount > 0 && $minQty > 0) $condText .= " ve ";
+            if ($minQty > 0) $condText .= "Min $minQty adet";
+            
+            $currentStatus = "(";
+            if ($minAmount > 0) $currentStatus .= number_format($catTotalAmount, 2, ',', '.') . " €";
+            if ($minAmount > 0 && $minQty > 0) $currentStatus .= " / ";
+            if ($minQty > 0) $currentStatus .= "{$groupData['total_quantity']} adet";
+            $currentStatus .= ")";
+
+            $campaigns[] = [
+                'name' => "{$rule['category_name']} Özel Fiyat",
+                'condition' => $condText . " " . $currentStatus,
+                'products' => $groupData['products'],
+                'product_details' => $productDetails, // Fiyat detayları eklendi
+                'category' => $rule['category_name'],
+                'quantity' => $groupData['total_quantity'],
+                // Meta veriler (JS tarafı için)
+                'campaign_meta' => [
+                     'min_amount' => $minAmount,
+                     'min_quantity' => $minQty,
+                     'min_purchase_amount' => floatval($rule['min_purchase_amount'] ?? 0),
+                     'condition_text' => $condText
+                ]
+            ];
         } else {
-             // Veritabanında kural yoksa varsayılan (Legacy - 10 Adet)
-             if ($groupData['total_quantity'] >= 10 && $kategori === 'Genel') {
+             // Veritabanında kural yoksa varsayılan
+             if ($kategori === 'Genel') {
                 $campaigns[] = [
                     'name' => "{$kategori} Özel Fiyat",
-                    'condition' => "Min 10 adet alım ({$groupData['total_quantity']} adet)",
+                    'condition' => "Genel kampanya ({$groupData['total_quantity']} adet)",
                     'products' => $groupData['products'],
                     'category' => $kategori,
                     'quantity' => $groupData['total_quantity']
@@ -148,86 +172,9 @@ try {
         }
     }
     
-    // Ana Bayi Ek İskonto Kontrolü
-    $customerId = $_POST['customer_id'] ?? 0;
-    $customerName = $_POST['customer_name'] ?? '';
     
-    // DEBUG: Müşteri ve ödeme bilgilerini logla
-    error_log("DEBUG - Customer: $customerName, Payment: " . ($_POST['payment_method'] ?? 'EMPTY'));
+    // Ana Bayi ve Peşin Ödeme kontrolleri kaldırıldı
     
-    // Ana Bayi mi?
-    $isMainDealer = (stripos($customerName, 'ERTEK') !== false || 
-                     stripos($customerName, 'Ana Bayi') !== false);
-    
-    error_log("DEBUG - Is Main Dealer: " . ($isMainDealer ? 'YES' : 'NO'));
-    
-    if ($isMainDealer && count($campaigns) > 0) {
-        // Tüm kampanyalı ürünleri topla
-        $allCampaignProducts = [];
-        foreach ($campaigns as $camp) {
-            $allCampaignProducts = array_merge($allCampaignProducts, $camp['products']);
-        }
-        $allCampaignProducts = array_unique($allCampaignProducts);
-        
-        // Özel fiyatlı ürünlerin toplam EUR tutarını hesapla
-        $totalEuroValue = 0;
-        
-        // Özel fiyatları çek
-        if (!empty($allCampaignProducts)) {
-            $placeholders = implode(',', array_fill(0, count($allCampaignProducts), '?'));
-            $stmt = $pdo->prepare("
-                SELECT stok_kodu, ozel_fiyat 
-                FROM kampanya_ozel_fiyatlar 
-                WHERE stok_kodu IN ($placeholders)
-            ");
-            $stmt->execute($allCampaignProducts);
-            $specialPrices = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
-            
-            // Sepetten miktarları al ve tutar hesapla
-            foreach ($cart as $item) {
-                $code = $item['code'];
-                if (isset($specialPrices[$code])) {
-                    $qty = floatval($item['quantity'] ?? 1);
-                    $price = floatval($specialPrices[$code]);
-                    $totalEuroValue += ($price * $qty);
-                }
-            }
-        }
-        
-        // 5000 EUR kontrolü
-        if ($totalEuroValue >= 5000) {
-            $campaigns[] = [
-                'name' => 'Anabayi Ek İskonto',
-                'condition' => "Min 5.000 EUR alım (" . number_format($totalEuroValue, 2, ',', '.') . " EUR)",
-                'products' => $allCampaignProducts,
-                'category' => 'Tüm Kategoriler',
-                'quantity' => count($allCampaignProducts),
-                'discount_rate' => 5,
-                'is_extra_discount' => true,
-                'total_value_eur' => $totalEuroValue
-            ];
-        }
-        
-        // Peşin Ödeme İskontosu Kontrolü (%10)
-        $paymentMethod = $_POST['payment_method'] ?? '';
-        $isCashPayment = (strpos($paymentMethod, 'PEŞİN') !== false || 
-                         strpos($paymentMethod, 'PEŞIN') !== false ||
-                         strpos($paymentMethod, 'Peşin') !== false);
-        
-        if ($isCashPayment && !empty($allCampaignProducts)) {
-            $campaigns[] = [
-                'name' => 'Ana Bayi Peşin İskontosu',
-                'condition' => "Peşin ödeme seçildi",
-                'products' => $allCampaignProducts,
-                'category' => 'Tüm Kategoriler',
-                'quantity' => count($allCampaignProducts),
-                'discount_rate' => 10,
-                'is_extra_discount' => true,
-                'is_cash_discount' => true,
-                'total_value_eur' => $totalEuroValue
-            ];
-        }
-    }
     
     echo json_encode([
         'eligible' => !empty($campaigns),

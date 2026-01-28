@@ -1,0 +1,4821 @@
+--- 2025-12-16 15:37:04 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD=''
+            [5] => Ürün:  - V1 Sonuç: 0
+            [6] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [7] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD=''
+            [8] => Ürün:  - V1 Sonuç: 0
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:37:16 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD=''
+            [5] => Ürün:  - V1 Sonuç: 0
+            [6] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [7] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD=''
+            [8] => Ürün:  - V1 Sonuç: 0
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:37:37 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD=''
+            [5] => Ürün:  - V1 Sonuç: 0
+            [6] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [7] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD=''
+            [8] => Ürün:  - V1 Sonuç: 0
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:39:57 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD=''
+            [5] => Ürün:  - V1 Sonuç: 0
+            [6] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [7] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD=''
+            [8] => Ürün:  - V1 Sonuç: 0
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:41:27 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU)
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:42:38 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:42:45 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU)
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:44:04 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:44:07 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:44:32 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 20
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU)
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:45:20 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:45:28 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU)
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:46:54 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU)
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:48:20 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU)
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:51:07 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:51:22 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU)
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 15:51:47 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU)
+            [14] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [15] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => Ürün: 0211212S - V1 Sonuç: 1
+            [17] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [18] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [19] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [20] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [21] => Ürün: 0211212S - V1 Sonuç: 1
+            [22] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [23] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-16 15:52:00 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+            [0211212S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+            [0211212S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU)
+            [14] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [15] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => Ürün: 0211212S - V1 Sonuç: 1
+            [17] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [18] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [19] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [20] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [21] => Ürün: 0211212S - V1 Sonuç: 1
+            [22] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [23] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [24] => Ürün: 0211212S -> %53 İskonto (FILTRE GRUBU)
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-16 15:52:48 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+            [0211212S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+            [0211212S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU)
+            [14] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [15] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => Ürün: 0211212S - V1 Sonuç: 1
+            [17] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [18] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [19] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [20] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [21] => Ürün: 0211212S - V1 Sonuç: 1
+            [22] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [23] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [24] => Ürün: 0211212S -> %53 İskonto (FILTRE GRUBU)
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-16 15:56:17 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [14] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [15] => Ürün: 0211212S - V1 Sonuç: 1
+            [16] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [17] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [18] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [19] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [20] => Ürün: 0211212S - V1 Sonuç: 1
+            [21] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [22] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-16 15:56:28 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => Ürün: 0211211S - V1 Sonuç: 1
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [9] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => Ürün: 0211211S - V1 Sonuç: 1
+            [11] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU)
+            [14] => Kampanya: FILTRE GRUBU - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [15] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => Ürün: 0211212S - V1 Sonuç: 1
+            [17] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [18] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [19] => Kampanya: FILTRE GRUBU 2 - V1: VAL(_SQLINFO("COUNT(*)","MEG_565_FILTRE","KOD='"+P101+"'"))
+            [20] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [21] => Ürün: 0211212S - V1 Sonuç: 1
+            [22] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [23] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-16 16:04:59 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 2
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+            [0211212S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+            [0211212S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [11] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 12]
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [13] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [14] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [15] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => Ürün: 0211212S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 12]
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-16 16:34:41 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [10] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-16 16:34:54 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+            [0211212S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+            [0211212S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [11] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 11]
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [13] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [14] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [15] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => Ürün: 0211212S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 11]
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-16 17:18:02 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [9] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-16 17:18:32 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+            [0211212S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+            [0211212S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [11] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 11]
+            [12] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [13] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [14] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [15] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => Ürün: 0211212S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 11]
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-16 17:19:30 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [10] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-17 13:48:32 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111EFS300T
+                    [quantity] => 1
+                )
+
+            [1] => Array
+                (
+                    [code] => 0111EFS200T
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS300T'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS300T'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS200T'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS200T'
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-17 13:48:39 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111EFS300T
+                    [quantity] => 1
+                )
+
+            [1] => Array
+                (
+                    [code] => 0111EFS200T
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS300T'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS300T'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS200T'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS200T'
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-17 13:48:50 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111EFS300T
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0111EFS200T
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS300T'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS300T'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS200T'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS200T'
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-17 13:48:57 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111EFS300T
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0111EFS200T
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS300T'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS300T'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS200T'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS200T'
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-17 13:49:11 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111EFS300T
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0111EFS200T
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS300T'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS300T'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS200T'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS200T'
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-17 13:49:27 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [6] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-17 13:49:32 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [9] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-17 14:05:18 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [6] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [8] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [9] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-17 14:11:02 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 2
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 10
+                )
+
+            [2] => Array
+                (
+                    [code] => 021712S
+                    [quantity] => 5
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+            [0211212S] => 53
+            [021712S] => 50
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+            [0211212S] => FILTRE GRUBU
+            [021712S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 3
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [7] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [8] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [11] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 17]
+            [14] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [15] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [17] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [18] => Ürün: 0211212S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 17]
+            [19] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [20] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [21] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [22] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [23] => Ürün: 021712S -> %50 İskonto (FILTRE GRUBU) [Grup Toplam: 17]
+        )
+
+    [items_recieved_count] => 3
+)
+
+--- 2025-12-17 14:52:23 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+            [2] => Array
+                (
+                    [code] => 021712S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+            [0211212S] => 53
+            [021712S] => 50
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+            [0211212S] => FILTRE GRUBU
+            [021712S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 3
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [7] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [8] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [11] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 12]
+            [14] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [15] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [17] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [18] => Ürün: 0211212S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 12]
+            [19] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [20] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [21] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [22] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [23] => Ürün: 021712S -> %50 İskonto (FILTRE GRUBU) [Grup Toplam: 12]
+        )
+
+    [items_recieved_count] => 3
+)
+
+--- 2025-12-17 14:56:04 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 8
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+            [2] => Array
+                (
+                    [code] => 021712S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+            [0211212S] => 53
+            [021712S] => 50
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+            [0211212S] => FILTRE GRUBU
+            [021712S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 3
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [7] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [8] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [11] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+            [14] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [15] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [17] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [18] => Ürün: 0211212S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+            [19] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [20] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [21] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [22] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [23] => Ürün: 021712S -> %50 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+        )
+
+    [items_recieved_count] => 3
+)
+
+--- 2025-12-17 14:56:10 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 8
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+            [2] => Array
+                (
+                    [code] => 021712S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+            [0211212S] => 53
+            [021712S] => 50
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+            [0211212S] => FILTRE GRUBU
+            [021712S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 3
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [7] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [8] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [11] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+            [14] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [15] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [17] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [18] => Ürün: 0211212S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+            [19] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [20] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [21] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [22] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [23] => Ürün: 021712S -> %50 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+        )
+
+    [items_recieved_count] => 3
+)
+
+--- 2025-12-17 15:03:44 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+            [2] => Array
+                (
+                    [code] => 021712S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+            [0211212S] => 53
+            [021712S] => 50
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+            [0211212S] => FILTRE GRUBU
+            [021712S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 3
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [7] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [8] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [11] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 12]
+            [14] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [15] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [17] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [18] => Ürün: 0211212S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 12]
+            [19] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [20] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [21] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [22] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [23] => Ürün: 021712S -> %50 İskonto (FILTRE GRUBU) [Grup Toplam: 12]
+        )
+
+    [items_recieved_count] => 3
+)
+
+--- 2025-12-17 15:03:57 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 8
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+            [2] => Array
+                (
+                    [code] => 021712S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+            [0211212S] => 53
+            [021712S] => 50
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+            [0211212S] => FILTRE GRUBU
+            [021712S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 3
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [7] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [8] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [11] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+            [14] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [15] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [17] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [18] => Ürün: 0211212S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+            [19] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [20] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [21] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [22] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [23] => Ürün: 021712S -> %50 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+        )
+
+    [items_recieved_count] => 3
+)
+
+--- 2025-12-17 15:04:01 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 8
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+            [2] => Array
+                (
+                    [code] => 021712S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+            [0211212S] => 53
+            [021712S] => 50
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU
+            [0211212S] => FILTRE GRUBU
+            [021712S] => FILTRE GRUBU
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 3
+            [2] => 2 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [6] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [7] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [8] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [11] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [12] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [13] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+            [14] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [15] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [16] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [17] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211212S'
+            [18] => Ürün: 0211212S -> %53 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+            [19] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [20] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [21] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [22] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='021712S'
+            [23] => Ürün: 021712S -> %50 İskonto (FILTRE GRUBU) [Grup Toplam: 10]
+        )
+
+    [items_recieved_count] => 3
+)
+
+--- 2025-12-29 10:39:14 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111EFS300T
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0111EFS200T
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS300T'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS200T'
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-29 10:39:55 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111EFS300T
+                    [quantity] => 10
+                )
+
+            [1] => Array
+                (
+                    [code] => 0111EFS200T
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 2
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS300T'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0111EFS200T'
+        )
+
+    [items_recieved_count] => 2
+)
+
+--- 2025-12-29 10:40:37 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU HALILTEST
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [6] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU HALILTEST) [Grup Toplam: 10]
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2025-12-29 11:14:17 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 11
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => FILTRE GRUBU HALILTEST
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 ORAN FROM [Tiger].[dbo].[MEG_565_FILTRE] WHERE KOD='0211211S'
+            [6] => Ürün: 0211211S -> %53 İskonto (FILTRE GRUBU HALILTEST) [Grup Toplam: 11]
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:34:50 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 
+    [message] => SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => HATA: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:36:07 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 
+    [message] => SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => HATA: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:36:40 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 
+    [message] => SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => HATA: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:36:46 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 
+    [message] => SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => HATA: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:37:30 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 
+    [message] => SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => HATA: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:39:12 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 
+    [message] => SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => HATA: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:42:14 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 
+    [message] => SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => HATA: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'LG_566_CAMPAIGN'.
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:42:47 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:42:54 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:43:41 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 5
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:43:44 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 5
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:43:51 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 55
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:43:53 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 55
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:43:53 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 55
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:44:01 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:44:13 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:44:14 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:44:25 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 50
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:53:02 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:53:09 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 50
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:53:22 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 50
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:57:14 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:57:16 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:57:16 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:57:17 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:58:22 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 11
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:58:24 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 11
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:58:24 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 11
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 10:58:24 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 11
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:00:20 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [4] => SQL Hatası: SQLSTATE[42S02]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Geçersiz nesne adı 'HALIL_OZEL_FIYAT'. | SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:01:35 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 10
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 ORAN FROM HALIL_OZEL_FIYAT WHERE KOD='0211211S'
+            [6] => Ürün: 0211211S -> %53 İskonto (Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar) [Grup Toplam: 10]
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:01:50 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:01:52 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:02:01 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 11
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0111STRN50M] => 53.0303
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0111STRN50M] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [5] => DEBUG SQL: SELECT TOP 1 ORAN FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [6] => Ürün: 0111STRN50M -> %53.0303 İskonto (Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar) [Grup Toplam: 11]
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:02:12 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 500
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0111STRN50M] => 53.0303
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0111STRN50M] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [5] => DEBUG SQL: SELECT TOP 1 ORAN FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [6] => Ürün: 0111STRN50M -> %53.0303 İskonto (Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar) [Grup Toplam: 500]
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:10:00 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 500
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0111STRN50M] => 53.0303
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0111STRN50M] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [5] => DEBUG SQL: SELECT TOP 1 ORAN FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [6] => Ürün: 0111STRN50M -> %53.0303 İskonto (Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar) [Grup Toplam: 500]
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:19:43 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:19:45 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:19:53 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 2
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:19:55 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 2
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:19:55 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 2
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:19:55 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 2
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:19:55 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 2
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:20:01 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:23:12 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-08 11:41:22 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 5
+                )
+
+            [1] => Array
+                (
+                    [code] => 0111EFS300T
+                    [quantity] => 15
+                )
+
+            [2] => Array
+                (
+                    [code] => 0111STRN100M
+                    [quantity] => 25
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0111STRN50M] => 53.0303
+            [0111STRN100M] => 52.89256
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0111STRN50M] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+            [0111STRN100M] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 3
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111EFS300T'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN100M'
+            [6] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [7] => DEBUG SQL: SELECT TOP 1 ORAN FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [8] => Ürün: 0111STRN50M -> %53.0303 İskonto (Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar) [Grup Toplam: 30]
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN100M'
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN100M'
+            [11] => Ürün: 0111STRN100M -> %52.89256 İskonto (Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar) [Grup Toplam: 30]
+        )
+
+    [items_recieved_count] => 3
+)
+
+--- 2026-01-08 14:15:59 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0111STRN50M
+                    [quantity] => 1
+                )
+
+            [1] => Array
+                (
+                    [code] => 0111EFS300T
+                    [quantity] => 1
+                )
+
+            [2] => Array
+                (
+                    [code] => 0111STRN100M
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 3
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111EFS300T'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN100M'
+            [6] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN50M'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM HALIL_OZEL_FIYAT WHERE KOD='0111STRN100M'
+        )
+
+    [items_recieved_count] => 3
+)
+
+--- 2026-01-14 00:11:16 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 115
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => 53
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 ORAN FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [6] => Ürün: 0211211S -> %53 İskonto (Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar) [Grup Toplam: 115]
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-14 00:22:34 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 115
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 53
+                        )
+
+                    [display] => 53,00
+                    [campaigns] => Array
+                        (
+                            [0] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+                        )
+
+                    [total] => 53
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 ORAN FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [6] => Ürün: 0211211S -> Cascade: 53,00 (Toplam: %53) - Kampanyalar: Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-14 00:24:47 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 115
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 53
+                        )
+
+                    [display] => 53,00
+                    [campaigns] => Array
+                        (
+                            [0] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+                        )
+
+                    [total] => 53
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 1
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [5] => DEBUG SQL: SELECT TOP 1 ORAN FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [6] => Ürün: 0211211S -> Cascade: 53,00 (Toplam: %53) - Kampanyalar: Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [items_recieved_count] => 1
+)
+
+--- 2026-01-14 00:48:22 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+            [2] => Array
+                (
+                    [code] => 021113T
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 3
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='0211212S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='021113T'
+            [6] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM MEG_565_FILTRE WHERE KOD='0211212S'
+        )
+
+    [items_recieved_count] => 3
+)
+
+--- 2026-01-14 00:48:42 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 5
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 5
+                )
+
+            [2] => Array
+                (
+                    [code] => 021113T
+                    [quantity] => 5
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 53
+                        )
+
+                    [display] => 53,00
+                    [campaigns] => Array
+                        (
+                            [0] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+                        )
+
+                    [total] => 53
+                )
+
+            [0211212S] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 53
+                        )
+
+                    [display] => 53,00
+                    [campaigns] => Array
+                        (
+                            [0] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+                        )
+
+                    [total] => 53
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+            [0211212S] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 3
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='0211212S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='021113T'
+            [6] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 ORAN FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [8] => Ürün: 0211211S -> Cascade: 53,00 (Toplam: %53) - Kampanyalar: Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM MEG_565_FILTRE WHERE KOD='0211212S'
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM MEG_565_FILTRE WHERE KOD='0211212S'
+            [11] => Ürün: 0211212S -> Cascade: 53,00 (Toplam: %53) - Kampanyalar: Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [items_recieved_count] => 3
+)
+
+--- 2026-01-14 00:49:09 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 1
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 1
+                )
+
+            [2] => Array
+                (
+                    [code] => 021113T
+                    [quantity] => 1
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+        )
+
+    [applied_campaigns] => Array
+        (
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 3
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='0211212S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='021113T'
+            [6] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM MEG_565_FILTRE WHERE KOD='0211212S'
+        )
+
+    [items_recieved_count] => 3
+)
+
+--- 2026-01-14 00:49:22 ---
+INPUT: Array
+(
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [code] => 0211211S
+                    [quantity] => 5
+                )
+
+            [1] => Array
+                (
+                    [code] => 0211212S
+                    [quantity] => 5
+                )
+
+            [2] => Array
+                (
+                    [code] => 021113T
+                    [quantity] => 5
+                )
+
+        )
+
+)
+
+RESPONSE: Array
+(
+    [success] => 1
+    [message] => 
+    [discounts] => Array
+        (
+            [0211211S] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 53
+                        )
+
+                    [display] => 53,00
+                    [campaigns] => Array
+                        (
+                            [0] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+                        )
+
+                    [total] => 53
+                )
+
+            [0211212S] => Array
+                (
+                    [rates] => Array
+                        (
+                            [0] => 53
+                        )
+
+                    [display] => 53,00
+                    [campaigns] => Array
+                        (
+                            [0] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+                        )
+
+                    [total] => 53
+                )
+
+        )
+
+    [applied_campaigns] => Array
+        (
+            [0211211S] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+            [0211212S] => Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [logs] => Array
+        (
+            [0] => UYARI: Cari kodu bulunamadı, varsayılan (120.01.E04) kullanılıyor.
+            [1] => İşlem Başladı. Cari: 120.01.E04, Ürün Sayısı: 3
+            [2] => 1 adet aktif kampanya yüklendi.
+            [3] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [4] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='0211212S'
+            [5] => DEBUG SQL: SELECT TOP 1 COUNT(*) FROM MEG_565_FILTRE WHERE KOD='021113T'
+            [6] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [7] => DEBUG SQL: SELECT TOP 1 ORAN FROM MEG_565_FILTRE WHERE KOD='0211211S'
+            [8] => Ürün: 0211211S -> Cascade: 53,00 (Toplam: %53) - Kampanyalar: Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+            [9] => DEBUG SQL: SELECT TOP 1 MIN_MIKTAR FROM MEG_565_FILTRE WHERE KOD='0211212S'
+            [10] => DEBUG SQL: SELECT TOP 1 ORAN FROM MEG_565_FILTRE WHERE KOD='0211212S'
+            [11] => Ürün: 0211212S -> Cascade: 53,00 (Toplam: %53) - Kampanyalar: Anabayi Özel Fiyat / Min Alım / Peşin / İskontolar
+        )
+
+    [items_recieved_count] => 3
+)
+

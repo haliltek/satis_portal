@@ -1,0 +1,34 @@
+Trace: ID Found: 128
+Trace: ID Found: 129
+Trace: Status Check OK. Current: Yönetici Onayı Bekleniyor
+Trace: ID Found: 130
+Trace: Status Check OK. Current: Yönetici Onayı Bekleniyor
+Trace: Decision Insert OK
+Trace: ID Found: 131
+Trace: Status Check OK. Current: Yönetici Onayı Bekleniyor
+Trace: Decision Insert OK
+Trace: Update OK
+Trace: ID Found: 133
+Trace: Status Check OK. Current: Yönetici Onayı Bekleniyor
+Trace: Decision Insert OK
+Trace: Update OK
+Trace: ID Found: 134
+Trace: Status Check OK. Current: Yönetici Onayı Bekleniyor
+Trace: Decision Insert OK
+Trace: Update OK
+Trace: ID Found: 135
+Trace: Status Check OK. Current: Yönetici Onayı Bekleniyor
+Trace: Decision Insert OK
+Trace: Update OK
+Trace: ID Found: 136
+Trace: Status Check OK. Current: Yönetici Onayı Bekleniyor
+Trace: Decision Insert OK
+Trace: Update OK
+Trace: ID Found: 137
+Trace: Status Check OK. Current: Yönetici Onayı Bekleniyor
+Trace: Decision Insert OK
+Trace: Update OK
+Trace: ID Found: 138
+Trace: ID Found: 139
+Trace: ID Found: 140
+Trace: Pre-Check. ID: 140
