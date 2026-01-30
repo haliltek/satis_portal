@@ -36,7 +36,10 @@ RUN pecl install redis sqlsrv pdo_sqlsrv \
 # 5. Enable Apache Modules
 RUN a2enmod rewrite headers
 
-# 5.1 Configure Apache to Allow .htaccess
+# 5.1 Copy Custom Apache VirtualHost Configuration
+COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
+
+# 5.2 Configure Apache to Allow .htaccess
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
 # 6. Copy Custom PHP Configuration
