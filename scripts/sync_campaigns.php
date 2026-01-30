@@ -33,7 +33,7 @@ function sync_campaigns()
     if (defined('PDO::SQLSRV_ATTR_ENCODING') && defined('PDO::SQLSRV_ENCODING_UTF8')) {
         $options[PDO::SQLSRV_ATTR_ENCODING] = PDO::SQLSRV_ENCODING_UTF8;
     }
-    $mssql = new PDO("sqlsrv:Server={$logo['host']};Database={$logo['db']};TrustServerCertificate=yes;ConnectionTimeout=5", $logo['user'], $logo['pass'], $options);
+    $mssql = new PDO("sqlsrv:Server={$logo['host']};Database={$logo['db']};TrustServerCertificate=yes;LoginTimeout=5", $logo['user'], $logo['pass'], $options);
     $dbManager = new DatabaseManager($config['db']);
 
     // Example query - adjust according to actual LOGO schema

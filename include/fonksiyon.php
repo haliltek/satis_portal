@@ -66,10 +66,11 @@ function gemas_logo_veritabani()
 	$mssql_password = "12621262";
 
 	try {
-		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname;TrustServerCertificate=yes;ConnectionTimeout=5";
+		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname;TrustServerCertificate=yes;LoginTimeout=5";
 		// Add timeout
 		$options = [
-			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+			PDO::ATTR_TIMEOUT => 5
 		];
 
 		if (defined('PDO::SQLSRV_ATTR_ENCODING') && defined('PDO::SQLSRV_ENCODING_UTF8')) {
@@ -92,10 +93,11 @@ function gempa_logo_veritabani()
 	$mssql_password = "12621262";
 
 	try {
-		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname;TrustServerCertificate=yes;ConnectionTimeout=5";
+		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname;TrustServerCertificate=yes;LoginTimeout=5";
 		// Add timeout
 		$options = [
-			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+			PDO::ATTR_TIMEOUT => 5
 		];
 
 		if (defined('PDO::SQLSRV_ATTR_ENCODING') && defined('PDO::SQLSRV_ENCODING_UTF8')) {
