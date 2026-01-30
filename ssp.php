@@ -341,8 +341,12 @@ class SSP
 	static function sql_connect($sql_details)
 	{
 		try {
+			// Port desteği ekle
+			$port = isset($sql_details['port']) ? $sql_details['port'] : 3306;
+			$dsn = "mysql:host={$sql_details['host']};port={$port};dbname={$sql_details['db']};charset=utf8mb4";
+			
 			$db = @new PDO(
-				"mysql:host={$sql_details['host']};dbname={$sql_details['db']}",
+				$dsn,
 				$sql_details['user'],
 				$sql_details['pass'],
 				array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
