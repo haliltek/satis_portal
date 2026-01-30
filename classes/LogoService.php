@@ -918,6 +918,13 @@ class LogoService
         // $this->logDebug("SQL Query", 0, $oneLineSql);
 
         global $gempa_logo_db;
+        
+        // MSSQL bağlantısı yoksa boş array döndür
+        if ($gempa_logo_db === null) {
+            $this->logError("MSSQL connection not available, skipping query", 0);
+            return [];
+        }
+        
         try {
             $stmt = $gempa_logo_db->prepare($oneLineSql);
             $stmt->execute();
