@@ -54,7 +54,7 @@ function karakterTr($text)
 
 // PDO bağlantıları
 try {
-  $dsnGEMPA = "sqlsrv:Server=$mssqlHost;Database=GEMPA2026;TrustServerCertificate=yes;LoginTimeout=5";
+  $dsnGEMPA = "sqlsrv:Server=$mssqlHost;Database=GEMPA2026;TrustServerCertificate=yes;LoginTimeout=5;Encrypt=no";
   $optionsGEMPA = [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
       PDO::ATTR_TIMEOUT => 5
@@ -72,7 +72,7 @@ try {
 }
 
 try {
-  $dsnGEMAS = "sqlsrv:Server=$mssqlHost;Database=GEMAS2026;TrustServerCertificate=yes;LoginTimeout=5";
+  $dsnGEMAS = "sqlsrv:Server=$mssqlHost;Database=GEMAS2026;TrustServerCertificate=yes;LoginTimeout=5;Encrypt=no";
   $optionsGEMAS = [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
       PDO::ATTR_TIMEOUT => 5

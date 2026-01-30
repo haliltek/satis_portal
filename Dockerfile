@@ -24,6 +24,10 @@ RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor
     && echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc \
     && rm -rf /var/lib/apt/lists/*
 
+# 2.1 Fix for MSSQL Error 0x2746 (OpenSSL 3.0 vs Legacy SQL Server)
+# Lower security level to allow legacy algorithms/handshakes
+RUN sed -i 's/SECLEVEL=2/SECLEVEL=0/g' /etc/ssl/openssl.cnf || true
+
 # 3. Install PHP Extensions
 # Core: mysqli (for App), pdo_mysql (for App), gd, zip, intl, soap
 RUN docker-php-ext-install mysqli pdo_mysql gd zip intl soap opcache
