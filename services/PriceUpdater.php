@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../src/repositories/LogoPriceUpsertRepository.php';
+require_once __DIR__ . '/../src/Repositories/LogoPriceUpsertRepository.php';
 
 use App\Repositories\LogoPriceUpsertRepository;
 
@@ -868,3 +868,4 @@ class PriceUpdater
         return ['status' => 'error', 'message' => $message];
     }
 }
+
