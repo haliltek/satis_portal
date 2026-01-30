@@ -66,7 +66,7 @@ function gemas_logo_veritabani()
 	$mssql_password = "12621262";
 
 	try {
-		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname";
+		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname;TrustServerCertificate=yes;ConnectionTimeout=5";
 		// Add timeout
 		$options = [
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -92,7 +92,7 @@ function gempa_logo_veritabani()
 	$mssql_password = "12621262";
 
 	try {
-		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname";
+		$dsn = "sqlsrv:Server=$mssql_hostname;Database=$mssql_dbname;TrustServerCertificate=yes;ConnectionTimeout=5";
 		// Add timeout
 		$options = [
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
