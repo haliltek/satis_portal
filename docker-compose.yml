@@ -9,7 +9,9 @@ services:
     ports:
       - "8081:80"
     volumes:
-      - .:/var/www/html
+      # Note: For Coolify deployment, we don't mount the source code as a volume
+      # The code is copied into the image via Dockerfile COPY command
+      # Only persistent data directories are mounted as volumes
       - uploads:/var/www/html/uploads
       - pdfs:/var/www/html/pdfs
     environment:
