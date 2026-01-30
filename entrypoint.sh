@@ -21,19 +21,39 @@ do
 done
 echo "✅ Redis is ready!"
 
-# 3. Set Permissions
-echo "🔐 Setting file permissions..."
-chown -R www-data:www-data /var/www/html
-chmod -R 755 /var/www/html
+# 3. Set Permissions - AGGRESSIVE MODE
+echo "🔐 Setting file permissions (aggressive mode)..."
+
+# First, ensure www-data owns everything
+chown -R www-data:www-data /var/www/html || true
+
+# Set base permissions
+find /var/www/html -type d -exec chmod 755 {} \; || true
+find /var/www/html -type f -exec chmod 644 {} \; || true
+
+# Make PHP files executable by Apache
+find /var/www/html -type f -name "*.php" -exec chmod 644 {} \; || true
 
 # Ensure writable directories
-for dir in uploads pdfs temp cache; do
+for dir in uploads pdfs temp cache logs; do
     if [ -d "/var/www/html/$dir" ]; then
         chmod -R 777 "/var/www/html/$dir"
+        chown -R www-data:www-data "/var/www/html/$dir"
         echo "✅ $dir directory is writable"
     fi
 done
 
+# Ensure index.php is readable
+if [ -f "/var/www/html/index.php" ]; then
+    chmod 644 /var/www/html/index.php
+    chown www-data:www-data /var/www/html/index.php
+    echo "✅ index.php is readable"
+fi
+
+# Debug: List permissions
+echo "📋 Checking /var/www/html permissions:"
+ls -la /var/www/html/ | head -20
+
 # 4. Start Apache
-echo "🌐 Starting Apache..."
+echo "🌐 Starting Apache as www-data..."
 exec apache2-foreground

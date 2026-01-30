@@ -42,6 +42,9 @@ COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
 # 5.2 Configure Apache to Allow .htaccess
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
+# 5.3 Ensure /var/www/html has proper access in apache2.conf
+RUN echo '\n<Directory /var/www/html>\n    Options -Indexes +FollowSymLinks\n    AllowOverride All\n    Require all granted\n</Directory>' >> /etc/apache2/apache2.conf
+
 # 6. Copy Custom PHP Configuration
 COPY php.ini $PHP_INI_DIR/conf.d/custom.ini
 
