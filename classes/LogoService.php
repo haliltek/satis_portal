@@ -13,6 +13,8 @@ class LogoService
     private TokenManager $tokenManager;
     private RestClient $restClient;
     private array $config;
+    private RedisCache $cache;
+    private RateLimiter $rateLimiter;
 
     public function __construct(
         private DatabaseManager $db,
@@ -23,6 +25,10 @@ class LogoService
         $this->config = $configArray;
         $this->tokenManager = new TokenManager(config: $this->configArray);
         $this->restClient = new RestClient(tokenManager: $this->tokenManager, config: $this->configArray);
+        
+        // Redis cache ve rate limiter
+        $this->cache = new RedisCache();
+        $this->rateLimiter = new RateLimiter($this->cache);
     }
 
     /**
@@ -978,58 +984,25 @@ class LogoService
 
     /**
      * Cache helper: Returns cached data if valid, otherwise calls $fetcher and saves result.
+     * Now using Redis instead of file-based cache for better performance.
      */
     private function getCachedResult(string $key, callable $fetcher, int $ttl = 86400): array
     {
-        // Cache directory
-        $cacheDir = __DIR__ . '/../cache';
-        if (!is_dir($cacheDir)) {
-            if (!@mkdir($cacheDir, 0777, true) && !is_dir($cacheDir)) {
-                // Cannot create dir, fallback to direct fetch
-                return $fetcher();
-            }
-        }
-
-        $cacheFile = $cacheDir . '/logo_metadata_' . md5($key) . '.json';
+        // Redis cache kullan
+        $cacheKey = "logo:metadata:{$key}";
         
-        // Check if valid cache exists
-        if (file_exists($cacheFile)) {
-            $mtime = filemtime($cacheFile);
-            if ($mtime && (time() - $mtime < $ttl)) {
-                $json = file_get_contents($cacheFile);
-                if ($json) {
-                    $decoded = json_decode($json, true);
-                    if (json_last_error() === JSON_ERROR_NONE) {
-                        return $decoded;
-                    }
-                }
-            }
-        }
-
-        // Fetch fresh data
-        $data = $fetcher();
-
-        // Save to cache
-        file_put_contents($cacheFile, json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
-
-        return $data;
+        return $this->cache->remember($cacheKey, function() use ($fetcher) {
+            return $fetcher();
+        }, $ttl) ?? [];
     }
 
     /**
-     * Clears cache files matching a pattern.
+     * Clears all Logo metadata cache in Redis.
      */
     private function clearCache(string $pattern = '*'): void
     {
-        $cacheDir = __DIR__ . '/../cache';
-        if (!is_dir($cacheDir)) {
-            return;
-        }
-        $files = glob($cacheDir . '/logo_metadata_' . $pattern . '.json');
-        if ($files) {
-            foreach ($files as $file) {
-                @unlink($file);
-            }
-        }
+        // Redis'teki tüm logo metadata cache'ini temizle
+        $this->cache->flush();
     }
 
     public function getAuthCodes(int $firmNr): array
