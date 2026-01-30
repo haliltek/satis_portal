@@ -59,6 +59,12 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 # Note: In development/Coolify, this might be overridden by volume mounts or git pulls
 COPY . /var/www/html
 
+# 8.1 Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# 8.2 Install PHP Dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction || true
+
 # 9. Permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
