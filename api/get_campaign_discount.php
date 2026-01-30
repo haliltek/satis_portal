@@ -92,7 +92,7 @@ try {
     $logo = $config['logo'];
 
     // Ana Logo bağlantısı (GEMPA2026 için kampanya tablosu)
-    $dsn = "sqlsrv:Server={$logo['host']};Database={$logo['db']}";
+    $dsn = "sqlsrv:Server={$logo['host']};Database={$logo['db']};TrustServerCertificate=yes;ConnectionTimeout=5";
     $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::SQLSRV_ATTR_ENCODING => PDO::SQLSRV_ENCODING_UTF8
@@ -100,7 +100,7 @@ try {
     $pdo = new PDO($dsn, $logo['user'], $logo['pass'], $options);
 
     // Tiger bağlantısı (MEG filtre tabloları için)
-    $dsnTiger = "sqlsrv:Server={$logo['host']};Database=Tiger";
+    $dsnTiger = "sqlsrv:Server={$logo['host']};Database=Tiger;TrustServerCertificate=yes;ConnectionTimeout=5";
     $pdoTiger = new PDO($dsnTiger, $logo['user'], $logo['pass'], $options);
 
 

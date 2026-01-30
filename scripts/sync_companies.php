@@ -76,7 +76,7 @@ if (defined('PDO::SQLSRV_ATTR_ENCODING') && defined('PDO::SQLSRV_ENCODING_UTF8')
 }
 
 try {
-    $mssqlGempa = new PDO("sqlsrv:Server=$mssqlHost;Database=$mssqlDbGempa", $mssqlUser, $mssqlPass, $options);
+    $mssqlGempa = new PDO("sqlsrv:Server=$mssqlHost;Database=$mssqlDbGempa;TrustServerCertificate=yes;ConnectionTimeout=5", $mssqlUser, $mssqlPass, $options);
 } catch (PDOException $e) {
     fwrite(STDERR, "MSSQL connection failed: " . $e->getMessage() . "\n");
     exit(1);
