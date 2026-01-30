@@ -54,8 +54,11 @@ function karakterTr($text)
 
 // PDO bağlantıları
 try {
-  $dsnGEMPA = "sqlsrv:Server=$mssqlHost;Database=GEMPA2026";
-  $optionsGEMPA = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+  $dsnGEMPA = "sqlsrv:Server=$mssqlHost;Database=GEMPA2026;TrustServerCertificate=yes;ConnectionTimeout=5";
+  $optionsGEMPA = [
+      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+      PDO::ATTR_TIMEOUT => 5
+  ];
   if (
     extension_loaded('pdo_sqlsrv')
     && defined('PDO::SQLSRV_ATTR_ENCODING')
@@ -69,8 +72,11 @@ try {
 }
 
 try {
-  $dsnGEMAS = "sqlsrv:Server=$mssqlHost;Database=GEMAS2026";
-  $optionsGEMAS = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+  $dsnGEMAS = "sqlsrv:Server=$mssqlHost;Database=GEMAS2026;TrustServerCertificate=yes;ConnectionTimeout=5";
+  $optionsGEMAS = [
+      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+      PDO::ATTR_TIMEOUT => 5
+  ];
   if (defined('PDO::SQLSRV_ATTR_ENCODING') && defined('PDO::SQLSRV_ENCODING_UTF8')) {
     $optionsGEMAS[PDO::SQLSRV_ATTR_ENCODING] = PDO::SQLSRV_ENCODING_UTF8;
   }
