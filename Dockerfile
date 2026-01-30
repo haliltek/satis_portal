@@ -25,8 +25,9 @@ RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor
     && rm -rf /var/lib/apt/lists/*
 
 # 2.1 Fix for MSSQL Error 0x2746 (OpenSSL 3.0 vs Legacy SQL Server)
-# Lower security level to allow legacy algorithms/handshakes
-RUN sed -i 's/SECLEVEL=2/SECLEVEL=0/g' /etc/ssl/openssl.cnf || true
+# Aggressively lower security settings in openssl.cnf
+RUN sed -i 's/^CipherString = .*/CipherString = DEFAULT:@SECLEVEL=0/g' /etc/ssl/openssl.cnf || echo "CipherString = DEFAULT:@SECLEVEL=0" >> /etc/ssl/openssl.cnf \
+    && sed -i 's/^MinProtocol = .*/MinProtocol = TLSv1.0/g' /etc/ssl/openssl.cnf || echo "MinProtocol = TLSv1.0" >> /etc/ssl/openssl.cnf
 
 # 3. Install PHP Extensions
 # Core: mysqli (for App), pdo_mysql (for App), gd, zip, intl, soap
